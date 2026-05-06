@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mycelium Portfolio | Debugged</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #0d0d0d; }
+        canvas { display: block; }
+        .overlay {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            pointer-events: none; text-align: center; z-index: 10;
+        }
+        h1 {
+            font-family: 'Roboto Mono', monospace; color: rgba(255, 255, 255, 0.6);
+            font-weight: 300; letter-spacing: 0.6em; text-transform: lowercase;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"><h1>greetings. explore.</h1></div>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let tips = []; 
+        let mouse = { x: -1000, y: -1000 };
+        
+        const MAX_TIPS = 600; 
+        const GROWTH_SPEED = 0.8; 
+        const FRICTION = 0.98;
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            ctx.fillStyle = '#0d0d0d';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            if (tips.length < MAX_TIPS) {
+                tips.push(new MyceliumTip(mouse.x, mouse.y, true));
+            }
+        });
+
+        class MyceliumTip {
+            constructor(x, y, active = false) {
+                this.x = x;
+                this.y = y;
+                this.prevX = x;
+                this.prevY = y;
+                this.angle = Math.random() * Math.PI * 2;
+                this.velocity = GROWTH_SPEED + Math.random() * 0.5;
+                this.life = Math.random() * 400 + 300; 
+                this.active = active; 
+                this.age = 0;
+            }
+
+            update() {
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let dist = Math.sqrt(dx*dx + dy*dy);
+                
+                // --- DEBUG 核心修正处 ---
+                // 只有当距离大于 10 像素时才受鼠标吸引，防止 atan2(0,0) 导致的向右偏移
+                if (dist < 350 && dist > 10) {
+                    let angleToMouse = Math.atan2(dy, dx);
+                    let diff = angleToMouse - this.angle;
+                    
+                    // 确保旋转路径是最短的（防止出现突然转圈的情况）
+                    while (diff < -Math.PI) diff += Math.PI * 2;
+                    while (diff > Math.PI) diff -= Math.PI * 2;
+
+                    this.angle += diff * 0.06;
+                    this.velocity *= 1.02; 
+                }
+
+                // 增加一点混乱度，让生长更自然
+                this.angle += (Math.random() - 0.5) * 0.25;
+                
+                this.prevX = this.x;
+                this.prevY = this.y;
+                this.x += Math.cos(this.angle) * this.velocity;
+                this.y += Math.sin(this.angle) * this.velocity;
+                
+                this.velocity *= FRICTION;
+                if (this.velocity < 0.3) this.velocity = 0.6; 
+
+                this.age++;
+                
+                if (Math.random() < 0.02 && tips.length < MAX_TIPS && this.age < this.life * 0.8) {
+                    let newTip = new MyceliumTip(this.x, this.y, dist < 350);
+                    newTip.angle = this.angle + (Math.random() - 0.5) * 0.8;
+                    tips.push(newTip);
+                }
+            }
+
+            draw() {
+                let alpha = 1.0 - (this.age / this.life);
+                ctx.beginPath();
+                // 颜色微调：稍微降低亮度，让重叠的部分更有层次
+                ctx.strokeStyle = `rgba(240, 235, 215, ${alpha * 0.35})`;
+                ctx.lineWidth = Math.max(0.1, 1.0 * alpha);
+                ctx.moveTo(this.prevX, this.prevY);
+                ctx.lineTo(this.x, this.y);
+                ctx.stroke();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < 50; i++) {
+                tips.push(new MyceliumTip(Math.random() * canvas.width, Math.random() * canvas.height));
+            }
+        }
+        init();
+
+        function loop() {
+            // 极低刷新率保持路径累积
+            ctx.fillStyle = 'rgba(13, 13, 13, 0.006)'; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = tips.length - 1; i >= 0; i--) {
+                tips[i].update();
+                tips[i].draw();
+
+                if (tips[i].age > tips[i].life || 
+                    tips[i].x < -50 || tips[i].x > canvas.width + 50 || 
+                    tips[i].y < -50 || tips[i].y > canvas.height + 50) {
+                    tips.splice(i, 1);
+                }
+            }
+
+            if (tips.length < 60) {
+                tips.push(new MyceliumTip(Math.random() * canvas.width, Math.random() * canvas.height));
+            }
+
+            requestAnimationFrame(loop);
+        }
+
+        loop();
+    </script>
+</body>
+</html>
