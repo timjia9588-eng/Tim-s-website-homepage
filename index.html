@@ -6,8 +6,8 @@
     <title>Tim Jia | Portfolio Entry</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
     <style>
-        /* 背景色过渡设置：3秒平滑渐变到白色 */
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #0d0d0d; transition: background-color 3s ease; }
+        /* 背景色过渡设置：修改为 0s 实现瞬时切换 */
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #0d0d0d; transition: background-color 0s ease; }
         canvas { display: block; }
         
         .overlay {
@@ -45,7 +45,6 @@
             50% { opacity: 0.7; transform: scale(1); }
         }
 
-        /* 触发变白过渡的 CSS 类 */
         .fade-to-white {
             background-color: white !important;
         }
@@ -92,7 +91,6 @@
             }
         });
 
-        // 点击事件触发
         enterButton.addEventListener('click', (e) => {
             e.preventDefault();
             if (!isExploding) {
@@ -107,7 +105,6 @@
                 this.prevX = x;
                 this.prevY = y;
                 this.angle = Math.random() * Math.PI * 2;
-                // 爆炸 tip 初速度极快，迅速布满屏幕
                 this.velocity = isExplosion ? (15 + Math.random() * 8) : (GROWTH_SPEED + Math.random() * 0.5);
                 this.life = isExplosion ? (Math.random() * 150 + 100) : (Math.random() * 400 + 300); 
                 this.active = active; 
@@ -181,27 +178,23 @@
             }
         }
 
-        // 核心爆发逻辑修复：坐标强制居中
         function triggerExplosion() {
             isExploding = true;
             
-            // 1. 获取屏幕正中心的精确坐标
             const startX = canvas.width / 2;
             const startY = canvas.height / 2;
 
-            // 2. 隐藏文字，触发背景过渡
             enterButton.style.display = 'none'; 
             document.body.classList.add('fade-to-white'); 
 
-            // 3. 在中心点生成爆发的白色菌丝
             for (let i = 0; i < EXPLOSION_TIPS; i++) {
                 tips.push(new MyceliumTip(startX, startY, true, true));
             }
 
-            // 4. 精确等待 3 秒（匹配 CSS 动画和渐变），然后跳转
+            /* 修改：将延迟时间设为 0ms 实现瞬时跳转 */
             setTimeout(() => {
                 window.location.href = jumpUrl;
-            }, 3000); 
+            }, 0); 
         }
 
         function init() {
@@ -213,8 +206,8 @@
 
         function loop() {
             if (isExploding) {
-                // 每帧推进变白进度，200帧左右（约3秒）达到完全白
-                whiteTransitionProgress += 0.005; 
+                /* 修改：将进度增量设为 1，使 Canvas 瞬间变白 */
+                whiteTransitionProgress += 1; 
                 if (whiteTransitionProgress > 1) whiteTransitionProgress = 1;
                 
                 ctx.fillStyle = `rgba(255, 255, 255, ${whiteTransitionProgress})`;
