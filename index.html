@@ -6,8 +6,8 @@
     <title>Tim Jia | Portfolio Entry</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
     <style>
-        /* 背景色过渡设置：修改为 0s 实现瞬时切换 */
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #0d0d0d; transition: background-color 0s ease; }
+        /* 核心修改：移除所有 transition，确保颜色切换是 0 延迟的瞬间动作 */
+        html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #0d0d0d; }
         canvas { display: block; }
         
         .overlay {
@@ -28,7 +28,6 @@
             text-transform: uppercase;
             font-size: 0.85rem;
             text-decoration: none;
-            transition: all 0.8s ease;
             display: inline-block;
             animation: breathe 4s infinite ease-in-out; 
             pointer-events: auto; 
@@ -37,16 +36,11 @@
         .enter-link:hover {
             color: rgba(255, 255, 255, 1);
             letter-spacing: 0.5em;
-            animation-play-state: paused; 
         }
 
         @keyframes breathe {
             0%, 100% { opacity: 0.4; transform: scale(0.98); }
             50% { opacity: 0.7; transform: scale(1); }
-        }
-
-        .fade-to-white {
-            background-color: white !important;
         }
     </style>
 </head>
@@ -66,11 +60,10 @@
         let tips = []; 
         let mouse = { x: -1000, y: -1000 };
         let isExploding = false; 
-        let whiteTransitionProgress = 0; 
         const jumpUrl = 'https://work.timjia.com';
 
         const MAX_TIPS = 600; 
-        const EXPLOSION_TIPS = 300; 
+        const EXPLOSION_TIPS = 400; 
         const GROWTH_SPEED = 0.8; 
         const FRICTION = 0.98;
 
@@ -87,87 +80,46 @@
             mouse.x = e.clientX;
             mouse.y = e.clientY;
             if (!isExploding && tips.length < MAX_TIPS) {
-                tips.push(new MyceliumTip(mouse.x, mouse.y, true));
+                tips.push(new MyceliumTip(mouse.x, mouse.y));
             }
         });
 
         enterButton.addEventListener('click', (e) => {
             e.preventDefault();
-            if (!isExploding) {
-                triggerExplosion();
-            }
+            if (!isExploding) triggerExplosion();
         });
 
         class MyceliumTip {
-            constructor(x, y, active = false, isExplosion = false) {
+            constructor(x, y, isExplosion = false) {
                 this.x = x;
                 this.y = y;
                 this.prevX = x;
                 this.prevY = y;
                 this.angle = Math.random() * Math.PI * 2;
-                this.velocity = isExplosion ? (15 + Math.random() * 8) : (GROWTH_SPEED + Math.random() * 0.5);
-                this.life = isExplosion ? (Math.random() * 150 + 100) : (Math.random() * 400 + 300); 
-                this.active = active; 
+                // 提高烟花爆发的速度感
+                this.velocity = isExplosion ? (30 + Math.random() * 20) : (GROWTH_SPEED + Math.random() * 0.5);
+                this.life = isExplosion ? 40 : (Math.random() * 400 + 300); 
                 this.isExplosion = isExplosion;
                 this.age = 0;
             }
 
             update() {
-                if (isExploding && !this.isExplosion) {
-                    this.angle += (Math.random() - 0.5) * 0.1;
-                    this.velocity *= 0.95; 
-                    if (this.velocity < 0.2) this.velocity = 0.4;
-                } else if (!this.isExplosion) {
-                    let dx = mouse.x - this.x;
-                    let dy = mouse.y - this.y;
-                    let dist = Math.sqrt(dx*dx + dy*dy);
-                    
-                    if (dist < 350 && dist > 10) {
-                        let angleToMouse = Math.atan2(dy, dx);
-                        let diff = angleToMouse - this.angle;
-                        
-                        while (diff < -Math.PI) diff += Math.PI * 2;
-                        while (diff > Math.PI) diff -= Math.PI * 2;
-
-                        this.angle += diff * 0.06;
-                        this.velocity *= 1.02; 
-                    }
-                }
-
-                if (this.isExplosion) {
-                    this.angle += (Math.random() - 0.5) * 0.2; 
-                } else {
-                    this.angle += (Math.random() - 0.5) * 0.25;
-                }
-                
+                this.angle += (Math.random() - 0.5) * 0.3;
                 this.prevX = this.x;
                 this.prevY = this.y;
                 this.x += Math.cos(this.angle) * this.velocity;
                 this.y += Math.sin(this.angle) * this.velocity;
-                
                 this.velocity *= FRICTION;
-                if (this.velocity < 0.3) this.velocity = 0.6; 
-
                 this.age++;
-                
-                if (Math.random() < 0.02 && tips.length < (MAX_TIPS + EXPLOSION_TIPS) && this.age < this.life * 0.8) {
-                    let newTip = new MyceliumTip(this.x, this.y, true, isExploding);
-                    if (!isExploding) {
-                        newTip.angle = this.angle + (Math.random() - 0.5) * 0.8;
-                    } else {
-                        newTip.angle = this.angle + (Math.random() - 0.5) * 1.5; 
-                        newTip.velocity = this.velocity * (0.8 + Math.random() * 0.4);
-                    }
-                    tips.push(newTip);
-                }
             }
 
             draw() {
                 let alpha = 1.0 - (this.age / this.life);
                 ctx.beginPath();
                 if (isExploding) {
-                    ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
-                    ctx.lineWidth = Math.max(0.1, 2.5 * alpha); 
+                    // 烟花颜色改为稍微带一点点灰度，在纯白背景上更有质感
+                    ctx.strokeStyle = `rgba(30, 30, 30, ${alpha * 0.8})`; 
+                    ctx.lineWidth = 2 * alpha; 
                 } else {
                     ctx.strokeStyle = `rgba(240, 235, 215, ${alpha * 0.35})`;
                     ctx.lineWidth = Math.max(0.1, 1.0 * alpha);
@@ -181,66 +133,51 @@
         function triggerExplosion() {
             isExploding = true;
             
+            // 1. 彻底消灭黑色闪烁：同时强制 HTML 和 BODY 瞬间转白
+            document.documentElement.style.backgroundColor = 'white';
+            document.body.style.backgroundColor = 'white';
+            enterButton.style.display = 'none'; 
+
             const startX = canvas.width / 2;
             const startY = canvas.height / 2;
 
-            enterButton.style.display = 'none'; 
-            document.body.classList.add('fade-to-white'); 
+            // 2. 瞬间清空画布为白色，为烟花准备底色
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+            // 3. 注入烟花粒子
             for (let i = 0; i < EXPLOSION_TIPS; i++) {
-                tips.push(new MyceliumTip(startX, startY, true, true));
+                tips.push(new MyceliumTip(startX, startY, true));
             }
 
-            /* 修改：将延迟时间设为 0ms 实现瞬时跳转 */
+            // 4. 跳转延迟：150ms。
+            // 既能保证烟花“炸开”的画面被眼睛捕捉到，又不会让你感到等待。
             setTimeout(() => {
                 window.location.href = jumpUrl;
-            }, 0); 
+            }, 150); 
         }
-
-        function init() {
-            for (let i = 0; i < 50; i++) {
-                tips.push(new MyceliumTip(Math.random() * canvas.width, Math.random() * canvas.height));
-            }
-        }
-        init();
 
         function loop() {
-            if (isExploding) {
-                /* 修改：将进度增量设为 1，使 Canvas 瞬间变白 */
-                whiteTransitionProgress += 1; 
-                if (whiteTransitionProgress > 1) whiteTransitionProgress = 1;
-                
-                ctx.fillStyle = `rgba(255, 255, 255, ${whiteTransitionProgress})`;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                if (whiteTransitionProgress === 1) {
-                    ctx.fillStyle = 'white';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                }
-            } else {
+            if (!isExploding) {
                 ctx.fillStyle = 'rgba(13, 13, 13, 0.006)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            } else {
+                // 爆炸时保持背景纯白，不再使用半透明覆盖
+                ctx.fillStyle = 'white';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
 
             for (let i = tips.length - 1; i >= 0; i--) {
                 tips[i].update();
                 tips[i].draw();
-
-                if ((!isExploding && tips[i].age > tips[i].life) ||
-                    (isExploding && tips[i].age > tips[i].life * 1.5) || 
-                    tips[i].x < -100 || tips[i].x > canvas.width + 100 || 
-                    tips[i].y < -100 || tips[i].y > canvas.height + 100) {
-                    tips.splice(i, 1);
-                }
+                if (tips[i].age > tips[i].life) tips.splice(i, 1);
             }
 
             if (!isExploding && tips.length < 60) {
                 tips.push(new MyceliumTip(Math.random() * canvas.width, Math.random() * canvas.height));
             }
-
             requestAnimationFrame(loop);
         }
-
         loop();
     </script>
 </body>
