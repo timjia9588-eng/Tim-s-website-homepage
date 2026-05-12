@@ -19,47 +19,74 @@
         .title { font-size: 1.2rem; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 10px; }
         .tagline { font-size: 0.7rem; opacity: 0.5; letter-spacing: 0.1em; }
 
-        /* --- 新增：左下角返回旧版链接样式 --- */
         .alt-version-link {
-            position: absolute;
-            bottom: 40px;
-            left: 40px;
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.65rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            text-decoration: none;
-            z-index: 10;
-            transition: color 0.4s ease;
-            pointer-events: auto; /* 确保可点击 */
+            position: absolute; bottom: 40px; left: 40px; color: rgba(255, 255, 255, 0.4);
+            font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+            text-decoration: none; z-index: 10; transition: color 0.4s ease; pointer-events: auto;
         }
-        .alt-version-link:hover {
-            color: rgba(255, 255, 255, 0.95);
-        }
+        .alt-version-link:hover { color: rgba(255, 255, 255, 0.95); }
 
         .marker-label {
-            color: #fff;
-            font-family: 'Roboto Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 0.1em;
-            pointer-events: auto;
-            background: rgba(0, 0, 0, 0.72);
-            padding: 4px 8px;
-            border-left: 2px solid rgba(255, 255, 255, 0.85);
-            white-space: nowrap;
-            text-transform: uppercase;
-            cursor: pointer;
+            color: #fff; font-family: 'Roboto Mono', monospace; font-size: 10px; letter-spacing: 0.1em;
+            pointer-events: auto; background: rgba(0, 0, 0, 0.72); padding: 4px 8px;
+            border-left: 2px solid rgba(255, 255, 255, 0.85); white-space: nowrap;
+            text-transform: uppercase; cursor: pointer;
             transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), background 0.45s ease, color 0.45s ease, border-left 0.45s ease;
-            transform-origin: left center;
-            will-change: transform;
+            transform-origin: left center; will-change: transform;
         }
 
         .marker-label:hover {
+            background: rgba(255, 255, 255, 0.95); color: #000;
+            transform: translate3d(10px, 0, 0) scale(1.12); border-left: 4px solid #fff; z-index: 100;
+        }
+
+        .marker-label.marker-label--menu {
+            position: relative;
+            display: inline-flex;
+            flex-direction: row;
+            align-items: center;
+            z-index: 120;
+        }
+        .marker-label.marker-label--menu:hover { z-index: 250; }
+        .marker-inline-menu {
+            position: absolute;
+            left: calc(100% + 10px);
+            top: 50%;
+            transform: translateY(-50%);
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 220px;
+            max-width: min(320px, 42vw);
+            padding: 8px;
+            background: rgba(10, 10, 10, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-left: 3px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
+            pointer-events: auto;
+        }
+        .marker-inline-menu.is-open { display: flex; }
+        .marker-inline-menu-btn {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.07em;
+            line-height: 1.35;
+            text-transform: uppercase;
+            text-align: left;
+            cursor: pointer;
+            width: 100%;
+            padding: 10px 10px;
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-left: 2px solid rgba(255, 255, 255, 0.45);
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .marker-inline-menu-btn:hover {
             background: rgba(255, 255, 255, 0.95);
             color: #000;
-            transform: translate3d(10px, 0, 0) scale(1.12);
-            border-left: 4px solid #fff;
-            z-index: 100;
+            border-left-color: #fff;
+            transform: translateX(3px);
         }
 
         .project-panel {
@@ -67,7 +94,7 @@
             background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border-left: 1px solid rgba(255, 255, 255, 0.1); color: #fff;
             padding: 60px 40px; box-sizing: border-box;
-            transform: translateX(100%); transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateX(100%); transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 200; overflow-y: auto; display: flex; flex-direction: column;
         }
 
@@ -78,7 +105,77 @@
 
         .proj-title { font-size: 1.5rem; letter-spacing: 0.1em; margin-bottom: 20px; font-weight: 400; text-transform: uppercase; }
         .proj-meta { font-size: 0.7rem; line-height: 1.6; color: rgba(255, 255, 255, 0.6); margin-bottom: 40px; padding-left: 15px; border-left: 1px solid rgba(255, 255, 255, 0.3); }
-        .proj-desc { font-size: 0.8rem; line-height: 1.8; color: rgba(255, 255, 255, 0.8); text-align: justify; }
+        .proj-desc { font-size: 0.8rem; line-height: 1.8; color: rgba(255, 255, 255, 0.8); text-align: justify; margin-bottom: 30px; }
+
+        .proj-image {
+            width: 100%;
+            height: auto;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .proj-image:hover {
+            transform: scale(1.03); 
+        }
+
+        /* 悬停项目图时，在左侧地球区域展示边缘略渐隐的预览 */
+        .globe-image-preview {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: min(780px, 64vw);
+            height: 100vh;
+            z-index: 15;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8vh 2vw 8vh 4vw;
+            box-sizing: border-box;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .globe-image-preview.is-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .globe-image-preview__inner {
+            position: relative;
+            max-width: 100%;
+            max-height: 78vh;
+            -webkit-mask-image: radial-gradient(
+                ellipse 78% 74% at 50% 50%,
+                #000 0%,
+                #000 72%,
+                rgba(0, 0, 0, 0.88) 82%,
+                rgba(0, 0, 0, 0.35) 93%,
+                transparent 100%
+            );
+            mask-image: radial-gradient(
+                ellipse 78% 74% at 50% 50%,
+                #000 0%,
+                #000 72%,
+                rgba(0, 0, 0, 0.88) 82%,
+                rgba(0, 0, 0, 0.35) 93%,
+                transparent 100%
+            );
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: 100% 100%;
+            mask-size: 100% 100%;
+        }
+        .globe-image-preview__inner img {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 78vh;
+            object-fit: contain;
+            filter: drop-shadow(0 28px 48px rgba(0, 0, 0, 0.55));
+        }
 
         .project-panel::-webkit-scrollbar { width: 4px; }
         .project-panel::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); }
@@ -93,11 +190,17 @@
 
     <a href="https://work.timjia.com" class="alt-version-link">Switch to Simplistic Version ↗</a>
 
+    <div id="globe-image-preview" class="globe-image-preview" aria-hidden="true">
+        <div class="globe-image-preview__inner">
+            <img id="globe-image-preview-img" alt="" decoding="async" />
+        </div>
+    </div>
+
     <div id="project-panel" class="project-panel">
         <div id="close-btn" class="close-btn">← Return to Globe</div>
         <div id="proj-title" class="proj-title"></div>
         <div id="proj-meta" class="proj-meta"></div>
-        <div id="proj-desc" class="proj-desc"></div>
+        <div id="proj-content-container"></div>
     </div>
 
     <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
@@ -122,19 +225,17 @@
         let scene, camera, renderer, labelRenderer, controls, earthGroup;
         let globeMaterial; 
 
-        // --- 动画时间轴架构 ---
         let appState = 'NORMAL'; 
         let animProgress = 0;    
-        
         let savedCameraPos = new THREE.Vector3();
         let camStartPos = new THREE.Vector3();
         let camTargetPos = new THREE.Vector3();
-        
         let viewOffsetStart = 0;
         let targetViewOffsetX = 0;
         let currentViewOffsetX = 0;
-        
         let timeOffset = 0;
+
+        let activeMarkerMenuRoot = null;
 
         const clock = new THREE.Clock();
         const FOCUS_CAMERA_Z = 120; 
@@ -147,7 +248,36 @@
 
         const resumeLocations = [
             { name: "Harvard GSD", lat: 42.37, lon: -71.11 },
-            { name: "Cornell Univ", lat: 42.44, lon: -76.50 },
+            {
+                name: "Cornell Univ", lat: 42.44, lon: -76.50,
+                hasProjectMenu: true,
+                projectMenu: [
+                    {
+                        label: "Territorial Sequestration",
+                        project: {
+                            title: "Territorial Sequestration",
+                            meta: "\"Landscapes for Climate Mitigation in Ithaca and Beyond\"\nDepartment of Landscape Architecture, Cornell University\nRegional Research and Workshop Series (January 2022 to May 2022)\nGIS based spatial modeling of carbon sequestration and regional biomass\nAdvised by Jamie Vanucchi",
+                            desc: "This research evaluates the regional landscape as a functional carbon sink by examining the sequestration and storage capacity of public and private lands in Ithaca. Utilizing GIS based spatial modeling, I analyzed forest composition and land cover data to establish a comprehensive baseline for biomass storage across various ecosystem types. The project investigates how physical infrastructures such as trail corridors and floodplains can be managed as active metabolic agents for carbon extraction. By integrating empirical data with landscape planning, this study proposes a quantitative framework for climate governance that prioritizes the metabolic health of the built environment.",
+                            images: [
+                                "https://cdn.myportfolio.com/5e559fe7-32e9-4772-b759-e7d03e3bafab/cea5f8ca-d9cc-4876-8b82-847d2137304d_rw_1200.jpg?h=6fec72b57fa633a483cfab380097a5e4",
+                                "https://cdn.myportfolio.com/5e559fe7-32e9-4772-b759-e7d03e3bafab/777bf1c5-3a62-4356-81d5-119ccfe71151_rw_1200.jpg?h=4ec7add979a10d7b3423ff4ec13590c7"
+                            ]
+                        }
+                    },
+                    {
+                        label: "Salinity & Symbiosis",
+                        project: {
+                            title: "Salinity & Symbiosis",
+                            meta: "\"Seasonal dynamics of ectomycorrhizal rhizomorphs and mycelium structures along a soil salinity gradient\"\nDepartment of Natural Resources and the Environment, Cornell University, Honors Thesis (2021–2023)\nPoster presented at the 8th International Symposium on Physiological Processes in Roots of Woody Plants\nCollaborators: Dominika Thiem, Marcin Gołębiewski, Katarzyna Hrynkiewicz, Marc Goebel",
+                            desc: "This research explores the metabolic thresholds of subsurface ectomycorrhizal networks along a soil salinity gradient. Using high-resolution Minirhizotron (MR) imagery, I tracked the seasonal dynamics of rhizomorphs and mycelium to understand how environmental stressors disrupt ecological connectivity.\n\nA central innovation of this work was the systematic visual tagging and manual quantification of fungal structures across nearly 540 images. This rigorous process involved the manual identification of individual hyphal structures to categorize mycelial density into distinct tiers—approximately 10, 100, and 1000+ hyphae per area. By translating these visual observations into a precise model of aggregate hyphae length, I was able to quantify the specific impact of soil salinity on fungal abundance over time.\n\nThe results demonstrated that increasing soil salinity significantly hinders the structural growth of these networks, which has direct implications for the health and resilience of the visible landscape. This foundational understanding of biological connectivity now informs my professional work in urban planning, where I treat the built environment as a living, responsive system.",
+                            images: [
+                                "https://cdn.myportfolio.com/5e559fe7-32e9-4772-b759-e7d03e3bafab/1d54845a-9997-4be8-a8fc-86c6a87d86f0_rw_600.jpg?h=19e959547d3ffac15841626d2eabcce1",
+                                "https://cdn.myportfolio.com/5e559fe7-32e9-4772-b759-e7d03e3bafab/cba22702-24b4-4588-9f95-0037b20ecad0_rw_1920.jpg?h=015bd03ee08c4f150965f1fa74ea4999"
+                            ]
+                        }
+                    }
+                ]
+            },
             { name: "Urban Alchemy (TX)", lat: 29.42, lon: -98.49 },
             { name: "Design Workshop", lat: 39.19, lon: -106.81 },
             { name: "Waggonner & Ball", lat: 29.95, lon: -90.07 },
@@ -158,7 +288,13 @@
                 project: {
                     title: "Xiaozhou Village",
                     meta: "\"Discussion on the construction of environmental and cultural tourism in Xiaozhou Village.\"\nTsinghua University School of Architecture Term Paper (2021)\nIndividually researched under the advisement of Dr. Jian Liu\nSelected as the Excellent Paper for the course",
-                    desc: "This research examines the systemic decline of Xiaozhou Village (小洲村), a historical and cultural protection area in Guangzhou. Through field surveys and interviews, I analyzed the ways in which environmental stressors such as water pollution and waste accumulation directly impact local economic stability and cultural inheritance. Utilizing a demand analysis model, the study evaluates the conflicting spatial requirements of residents, artists, and visitors within the context of heritage preservation. By developing a zoning strategy and an environmental improvement framework, I proposed a planning model that prioritizes ecological restoration as a prerequisite for sustainable tourism. This project serves as an early exploration of place-based inquiry, demonstrating the inextricable link between architectural preservation and the agency of the local population."
+                    desc: "This research examines the systemic decline of Xiaozhou Village (小洲村), a historical and cultural protection area in Guangzhou. Through field surveys and interviews, I analyzed the ways in which environmental stressors such as water pollution and waste accumulation directly impact local economic stability and cultural inheritance. Utilizing a demand analysis model, the study evaluates the conflicting spatial requirements of residents, artists, and visitors within the context of heritage preservation. By developing a zoning strategy and an environmental improvement framework, I proposed a planning model that prioritizes ecological restoration as a prerequisite for sustainable tourism. This project serves as an early exploration of place-based inquiry, demonstrating the inextricable link between architectural preservation and the agency of the local population.",
+                    images: [
+                        "https://cdn.myportfolio.com/5e559fe7-32e9-4772-b759-e7d03e3bafab/a79e4a04-d3d6-43f7-ba00-29d622fab673.jpg?h=c413408a60a1c295a870330bdeee0f6e",
+                        "https://cdn.myportfolio.com/5e559fe7-32e9-4772-b759-e7d03e3bafab/089f2408-6690-47f3-b987-68898eca8d8d.jpg?h=65fb376bfbfca74b3563392d4d48d174",
+                        "https://cdn.myportfolio.com/5e559fe7-32e9-4772-b759-e7d03e3bafab/3b5916ee-5fa0-4976-8856-f1dc2b95794b.jpg?h=740255425e251d875ec7ba5f6e78786f",
+                        "https://cdn.myportfolio.com/5e559fe7-32e9-4772-b759-e7d03e3bafab/7d5aea8e-0543-4590-8117-2e1e7ba50dfc.jpg?h=522012651fbbb9b5889c17eef9a3e6d9"
+                    ]
                 }
             },
             { name: "Shenzhen (SZLA)", lat: 22.54, lon: 114.05 },
@@ -176,6 +312,32 @@
         }
 
         function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+        function bindGlobeImagePreview() {
+            const preview = document.getElementById('globe-image-preview');
+            const previewImg = document.getElementById('globe-image-preview-img');
+            if (!preview || !previewImg) return;
+
+            document.querySelectorAll('#proj-content-container .proj-image').forEach((el) => {
+                el.addEventListener('mouseenter', () => {
+                    previewImg.src = el.currentSrc || el.src;
+                    previewImg.alt = el.alt || '';
+                    preview.classList.add('is-visible');
+                    preview.setAttribute('aria-hidden', 'false');
+                });
+                el.addEventListener('mouseleave', () => {
+                    preview.classList.remove('is-visible');
+                    preview.setAttribute('aria-hidden', 'true');
+                });
+            });
+        }
+
+        function hideGlobeImagePreview() {
+            const preview = document.getElementById('globe-image-preview');
+            if (!preview) return;
+            preview.classList.remove('is-visible');
+            preview.setAttribute('aria-hidden', 'true');
+        }
 
         function init() {
             scene = new THREE.Scene();
@@ -219,6 +381,16 @@
                 if (appState === 'FOCUSED' || appState === 'FOCUSING') {
                     closeProjectPanel();
                 }
+            });
+
+            document.addEventListener('mousedown', (e) => {
+                if (!activeMarkerMenuRoot) return;
+                if (activeMarkerMenuRoot.contains(e.target)) return;
+                closeMarkerInlineMenu();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key !== 'Escape') return;
+                closeMarkerInlineMenu();
             });
 
             animate();
@@ -308,6 +480,21 @@
             earthGroup.add(dots);
         }
 
+        function closeMarkerInlineMenu(options = {}) {
+            const restoreRotate = options.restoreRotate !== false;
+            if (!activeMarkerMenuRoot) return;
+            const menu = activeMarkerMenuRoot.querySelector('.marker-inline-menu');
+            if (menu) {
+                menu.classList.remove('is-open');
+                menu.setAttribute('aria-hidden', 'true');
+            }
+            activeMarkerMenuRoot = null;
+            if (restoreRotate && appState === 'NORMAL' && controls) {
+                controls.autoRotate = true;
+                controls.autoRotateSpeed = 0.8;
+            }
+        }
+
         function addResumeMarkers() {
             const dotGeo = new THREE.SphereGeometry(0.6, 12, 12);
             const dotMat = new THREE.MeshBasicMaterial({ color: 0xffffff, depthTest: true, depthWrite: true });
@@ -326,24 +513,79 @@
                 earthGroup.add(line);
 
                 const div = document.createElement('div');
-                div.className = 'marker-label';
-                div.textContent = loc.name;
 
-                div.addEventListener('mouseenter', () => { 
-                    if (appState === 'NORMAL') controls.autoRotateSpeed = 0.05; 
-                });
-                div.addEventListener('mouseleave', () => { 
-                    if (appState === 'NORMAL') controls.autoRotateSpeed = 0.8;  
-                });
+                if (loc.hasProjectMenu && loc.projectMenu) {
+                    div.className = 'marker-label marker-label--menu';
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = 'marker-label-name';
+                    nameSpan.textContent = loc.name;
+                    const menu = document.createElement('div');
+                    menu.className = 'marker-inline-menu';
+                    menu.setAttribute('aria-hidden', 'true');
+                    loc.projectMenu.forEach((item) => {
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'marker-inline-menu-btn';
+                        btn.textContent = item.label;
+                        btn.addEventListener('click', (ev) => {
+                            ev.stopPropagation();
+                            if (appState !== 'NORMAL') return;
+                            const worldPos = new THREE.Vector3();
+                            dot.getWorldPosition(worldPos);
+                            closeMarkerInlineMenu({ restoreRotate: false });
+                            openProjectPanel(item.project, localPos, worldPos);
+                        });
+                        menu.appendChild(btn);
+                    });
+                    div.appendChild(nameSpan);
+                    div.appendChild(menu);
 
-                div.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                    if (loc.hasProject && appState === 'NORMAL') {
+                    nameSpan.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        if (appState !== 'NORMAL') return;
+                        const wasOpen = menu.classList.contains('is-open');
+                        closeMarkerInlineMenu();
+                        if (!wasOpen) {
+                            menu.classList.add('is-open');
+                            menu.setAttribute('aria-hidden', 'false');
+                            activeMarkerMenuRoot = div;
+                            if (controls) {
+                                controls.autoRotate = false;
+                            }
+                        }
+                    });
+                } else {
+                    div.className = 'marker-label';
+                    div.textContent = loc.name;
+                    div.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        if (appState !== 'NORMAL') return;
+                        if (!loc.hasProject || !loc.project) return;
                         const worldPos = new THREE.Vector3();
-                        dot.getWorldPosition(worldPos); 
-                        openProjectPanel(loc, localPos, worldPos);
-                    }
-                });
+                        dot.getWorldPosition(worldPos);
+                        openProjectPanel(loc.project, localPos, worldPos);
+                    });
+                }
+
+                if (loc.hasProjectMenu && loc.projectMenu) {
+                    div.addEventListener('mouseenter', () => {
+                        if (appState !== 'NORMAL') return;
+                        if (activeMarkerMenuRoot === div) return;
+                        controls.autoRotateSpeed = 0.05;
+                    });
+                    div.addEventListener('mouseleave', () => {
+                        if (appState !== 'NORMAL') return;
+                        if (activeMarkerMenuRoot === div) return;
+                        controls.autoRotateSpeed = 0.8;
+                    });
+                } else {
+                    div.addEventListener('mouseenter', () => {
+                        if (appState === 'NORMAL') controls.autoRotateSpeed = 0.05;
+                    });
+                    div.addEventListener('mouseleave', () => {
+                        if (appState === 'NORMAL') controls.autoRotateSpeed = 0.8;
+                    });
+                }
 
                 const label = new CSS2DObject(div);
                 label.position.copy(endPos);
@@ -351,10 +593,20 @@
             });
         }
 
-        function openProjectPanel(loc, localPos, worldPos) {
-            document.getElementById('proj-title').innerText = loc.project.title;
-            document.getElementById('proj-meta').innerHTML = loc.project.meta.replace(/\n/g, '<br>');
-            document.getElementById('proj-desc').innerText = loc.project.desc;
+        function openProjectPanel(project, localPos, worldPos) {
+            document.getElementById('proj-title').innerText = project.title;
+            document.getElementById('proj-meta').innerHTML = project.meta.replace(/\n/g, '<br>');
+
+            const descParts = project.desc.split(/\n\n+/).map((s) => s.trim()).filter(Boolean);
+            let contentHTML = descParts.map((p) => `<div class="proj-desc">${p}</div>`).join('');
+            if (project.images && project.images.length > 0) {
+                project.images.forEach((imgUrl) => {
+                    contentHTML += `<img src="${imgUrl}" class="proj-image" alt="Project Documentation" />`;
+                });
+            }
+            document.getElementById('proj-content-container').innerHTML = contentHTML;
+            bindGlobeImagePreview();
+
             document.getElementById('project-panel').classList.add('active');
 
             savedCameraPos.copy(camera.position);
@@ -377,6 +629,8 @@
         }
 
         function closeProjectPanel() {
+            hideGlobeImagePreview();
+            closeMarkerInlineMenu();
             document.getElementById('project-panel').classList.remove('active');
             
             camStartPos.copy(camera.position);
