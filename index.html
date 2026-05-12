@@ -12,12 +12,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
 
     <style>
-        body { margin: 0; background-color: #000; overflow: hidden; font-family: 'Roboto Mono', monospace; }
+        body { margin: 0; background-color: #222222; overflow: hidden; font-family: 'Roboto Mono', monospace; }
         canvas { display: block; }
 
         .ui-overlay { position: absolute; top: 40px; left: 40px; color: rgba(255, 255, 255, 0.7); z-index: 10; pointer-events: none; }
         .title { font-size: 1.2rem; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 10px; }
         .tagline { font-size: 0.7rem; opacity: 0.5; letter-spacing: 0.1em; }
+
+        /* --- 新增：左下角返回旧版链接样式 --- */
+        .alt-version-link {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            z-index: 10;
+            transition: color 0.4s ease;
+            pointer-events: auto; /* 确保可点击 */
+        }
+        .alt-version-link:hover {
+            color: rgba(255, 255, 255, 0.95);
+        }
 
         .marker-label {
             color: #fff;
@@ -49,7 +67,7 @@
             background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border-left: 1px solid rgba(255, 255, 255, 0.1); color: #fff;
             padding: 60px 40px; box-sizing: border-box;
-            transform: translateX(100%); transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateX(100%); transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 200; overflow-y: auto; display: flex; flex-direction: column;
         }
 
@@ -72,6 +90,8 @@
         <div class="title">Tim Jia</div>
         <div class="tagline">Systems / Networks / Landscapes</div>
     </div>
+
+    <a href="https://work.timjia.com" class="alt-version-link">Switch to Simplistic Version ↗</a>
 
     <div id="project-panel" class="project-panel">
         <div id="close-btn" class="close-btn">← Return to Globe</div>
@@ -294,14 +314,14 @@
             const lineMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.24, depthTest: true, depthWrite: false });
 
             resumeLocations.forEach((loc) => {
-                const pos = getSphereCoords(loc.lat, loc.lon, EARTH_RADIUS + 0.5);
+                const localPos = getSphereCoords(loc.lat, loc.lon, EARTH_RADIUS + 0.5);
                 const dot = new THREE.Mesh(dotGeo, dotMat);
-                dot.position.copy(pos);
+                dot.position.copy(localPos);
                 earthGroup.add(dot);
 
                 const lineLength = 10 + Math.random() * 6;
-                const endPos = pos.clone().normalize().multiplyScalar(EARTH_RADIUS + lineLength);
-                const lineGeo = new THREE.BufferGeometry().setFromPoints([pos, endPos]);
+                const endPos = localPos.clone().normalize().multiplyScalar(EARTH_RADIUS + lineLength);
+                const lineGeo = new THREE.BufferGeometry().setFromPoints([localPos, endPos]);
                 const line = new THREE.Line(lineGeo, lineMat);
                 earthGroup.add(line);
 
@@ -321,7 +341,7 @@
                     if (loc.hasProject && appState === 'NORMAL') {
                         const worldPos = new THREE.Vector3();
                         dot.getWorldPosition(worldPos); 
-                        openProjectPanel(loc, pos, worldPos);
+                        openProjectPanel(loc, localPos, worldPos);
                     }
                 });
 
@@ -473,7 +493,6 @@
 
                     let ease = easeOutCubic(animProgress);
 
-                    // 核心修复：纯血 Lerp，彻底避开会导致系统崩溃的 Slerp
                     const curDir = camStartPos.clone().normalize();
                     const targetDir = camTargetPos.clone().normalize();
                     curDir.lerp(targetDir, ease).normalize(); 
@@ -510,7 +529,6 @@
 
                     let ease = easeOutCubic(animProgress);
 
-                    // 核心修复：同理，退出时也使用绝对安全的 Lerp 向量插值
                     const curDir = camStartPos.clone().normalize();
                     const targetDir = savedCameraPos.clone().normalize();
                     curDir.lerp(targetDir, ease).normalize(); 
