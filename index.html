@@ -179,6 +179,388 @@
 
         .project-panel::-webkit-scrollbar { width: 4px; }
         .project-panel::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); }
+
+        .globe-renderer,
+        .globe-labels,
+        .ui-overlay,
+        .alt-version-link {
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        body.pig-party-active .globe-renderer,
+        body.pig-party-active .globe-labels,
+        body.pig-party-active .ui-overlay,
+        body.pig-party-active .alt-version-link {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .pig-party {
+            position: fixed;
+            inset: 0;
+            z-index: 320;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            background:
+                linear-gradient(110deg, rgba(255, 50, 154, 0.18), transparent 32%),
+                linear-gradient(250deg, rgba(42, 231, 255, 0.2), transparent 38%),
+                radial-gradient(circle at 50% 118%, rgba(255, 211, 74, 0.18), transparent 36%),
+                #080812;
+            transition: opacity 0.45s ease, visibility 0.45s ease;
+        }
+        .pig-party.is-active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .pig-party::before {
+            content: "";
+            position: absolute;
+            inset: -20%;
+            background:
+                repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.055) 0 1px, transparent 1px 86px),
+                repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 86px);
+            transform: perspective(620px) rotateX(58deg) translateY(19%);
+            transform-origin: bottom center;
+            opacity: 0.5;
+            animation: danceGrid 1.35s linear infinite;
+        }
+        .pig-party-close {
+            position: absolute;
+            top: 26px;
+            right: 28px;
+            z-index: 5;
+            width: 42px;
+            height: 42px;
+            color: rgba(255, 255, 255, 0.78);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            border-radius: 50%;
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            line-height: 1;
+            cursor: pointer;
+            transition: transform 0.25s ease, color 0.25s ease, background 0.25s ease;
+        }
+        .pig-party-close:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.16);
+            transform: scale(1.08);
+        }
+        .dj-beam {
+            position: absolute;
+            top: -14vh;
+            width: 18vw;
+            min-width: 160px;
+            height: 118vh;
+            opacity: 0.72;
+            filter: blur(10px);
+            mix-blend-mode: screen;
+            transform-origin: top center;
+            clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
+        }
+        .dj-beam--a {
+            left: 6vw;
+            background: linear-gradient(to bottom, rgba(255, 47, 141, 0.7), transparent 78%);
+            animation: beamSweepA 1.8s ease-in-out infinite alternate;
+        }
+        .dj-beam--b {
+            right: 9vw;
+            background: linear-gradient(to bottom, rgba(43, 220, 255, 0.72), transparent 78%);
+            animation: beamSweepB 1.55s ease-in-out infinite alternate;
+        }
+        .dj-beam--c {
+            left: 38vw;
+            background: linear-gradient(to bottom, rgba(255, 231, 91, 0.6), transparent 76%);
+            animation: beamSweepC 1.25s ease-in-out infinite alternate;
+        }
+        .disco-ball {
+            position: absolute;
+            top: 8vh;
+            left: 50%;
+            width: clamp(62px, 8vw, 98px);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background:
+                linear-gradient(90deg, transparent 48%, rgba(0, 0, 0, 0.16) 49% 51%, transparent 52%),
+                linear-gradient(0deg, transparent 48%, rgba(0, 0, 0, 0.12) 49% 51%, transparent 52%),
+                repeating-linear-gradient(45deg, #f8f7ff 0 9px, #8fe9ff 9px 18px, #ff7cc6 18px 27px, #ffe05d 27px 36px);
+            box-shadow: 0 0 34px rgba(255, 255, 255, 0.42);
+            transform: translateX(-50%);
+            animation: discoSpin 2s linear infinite;
+        }
+        .pig-stage {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            place-items: center;
+            width: min(92vw, 720px);
+            min-height: min(72vh, 620px);
+        }
+        .pulse-ring {
+            position: absolute;
+            width: clamp(260px, 46vw, 560px);
+            aspect-ratio: 1;
+            border: 2px solid rgba(255, 255, 255, 0.16);
+            border-radius: 50%;
+            transform: rotateX(70deg);
+            animation: pulseRing 1s ease-out infinite;
+        }
+        .pulse-ring--two {
+            animation-delay: 0.35s;
+        }
+        .emoji-pig {
+            position: relative;
+            width: clamp(190px, 30vw, 330px);
+            aspect-ratio: 1;
+            border-radius: 49% 49% 45% 45%;
+            background:
+                radial-gradient(circle at 38% 32%, rgba(255, 255, 255, 0.72) 0 9%, transparent 10%),
+                radial-gradient(circle at 65% 36%, rgba(255, 216, 226, 0.9) 0 18%, transparent 19%),
+                linear-gradient(145deg, #ffd3dc 0%, #ff9fb5 55%, #ed7791 100%);
+            box-shadow:
+                inset -22px -26px 0 rgba(217, 91, 119, 0.22),
+                inset 18px 22px 0 rgba(255, 255, 255, 0.22),
+                0 26px 55px rgba(0, 0, 0, 0.42);
+            transform-origin: 50% 82%;
+            animation: pigDance 0.56s cubic-bezier(0.42, 0, 0.2, 1) infinite alternate;
+        }
+        .pig-ear {
+            position: absolute;
+            top: 4%;
+            width: 29%;
+            height: 32%;
+            border-radius: 54% 54% 44% 44%;
+            background: linear-gradient(145deg, #ffb4c5 0%, #ed7894 100%);
+            box-shadow: inset -8px -10px 0 rgba(202, 79, 106, 0.18);
+            z-index: -1;
+        }
+        .pig-ear::after {
+            content: "";
+            position: absolute;
+            inset: 20% 22% 18%;
+            border-radius: inherit;
+            background: rgba(255, 126, 154, 0.68);
+        }
+        .pig-ear--left {
+            left: 6%;
+            transform: rotate(-30deg);
+            animation: earBounceLeft 0.56s ease-in-out infinite alternate;
+        }
+        .pig-ear--right {
+            right: 6%;
+            transform: rotate(30deg);
+            animation: earBounceRight 0.56s ease-in-out infinite alternate;
+        }
+        .pig-eye {
+            position: absolute;
+            top: 39%;
+            width: 8.6%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: #302329;
+            box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.32);
+            animation: eyeGroove 1.12s steps(2, end) infinite;
+        }
+        .pig-eye--left { left: 32%; }
+        .pig-eye--right { right: 32%; }
+        .pig-snout {
+            position: absolute;
+            left: 50%;
+            top: 51%;
+            width: 38%;
+            height: 28%;
+            border-radius: 48% 48% 46% 46%;
+            background: linear-gradient(160deg, #ffa4b8 0%, #e97491 100%);
+            box-shadow:
+                inset 9px 9px 0 rgba(255, 255, 255, 0.25),
+                inset -10px -11px 0 rgba(190, 61, 92, 0.18);
+            transform: translateX(-50%);
+        }
+        .pig-nostril {
+            position: absolute;
+            top: 45%;
+            width: 14%;
+            height: 30%;
+            border-radius: 50%;
+            background: #844257;
+        }
+        .pig-nostril--left { left: 27%; }
+        .pig-nostril--right { right: 27%; }
+        .pig-mouth {
+            position: absolute;
+            left: 50%;
+            bottom: 13%;
+            width: 18%;
+            height: 8%;
+            border-bottom: 5px solid #873c51;
+            border-radius: 0 0 50% 50%;
+            transform: translateX(-50%);
+        }
+        .pig-arm,
+        .pig-leg {
+            position: absolute;
+            background: #ff9db4;
+            box-shadow: inset -6px -6px 0 rgba(199, 69, 99, 0.16);
+        }
+        .pig-arm {
+            top: 56%;
+            width: 20%;
+            height: 10%;
+            border-radius: 999px;
+            z-index: -1;
+        }
+        .pig-arm--left {
+            left: -8%;
+            transform-origin: right center;
+            animation: armWaveLeft 0.56s ease-in-out infinite alternate;
+        }
+        .pig-arm--right {
+            right: -8%;
+            transform-origin: left center;
+            animation: armWaveRight 0.56s ease-in-out infinite alternate;
+        }
+        .pig-leg {
+            bottom: -7%;
+            width: 15%;
+            height: 18%;
+            border-radius: 999px 999px 45% 45%;
+            z-index: -1;
+        }
+        .pig-leg--left {
+            left: 31%;
+            animation: legHopLeft 0.56s ease-in-out infinite alternate;
+        }
+        .pig-leg--right {
+            right: 31%;
+            animation: legHopRight 0.56s ease-in-out infinite alternate;
+        }
+        .pig-shadow {
+            position: absolute;
+            bottom: 10%;
+            width: clamp(190px, 34vw, 420px);
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.4);
+            filter: blur(6px);
+            animation: shadowBounce 0.56s ease-in-out infinite alternate;
+        }
+        .speaker {
+            position: absolute;
+            bottom: 8vh;
+            width: clamp(74px, 10vw, 122px);
+            height: clamp(118px, 17vw, 190px);
+            border-radius: 8px;
+            background: linear-gradient(145deg, #171722, #06060b);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: 0 20px 38px rgba(0, 0, 0, 0.35);
+        }
+        .speaker::before,
+        .speaker::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            background: radial-gradient(circle, #2bf1ff 0 16%, #252536 17% 54%, #050509 55%);
+            animation: speakerThump 0.5s ease-in-out infinite alternate;
+        }
+        .speaker::before {
+            top: 13%;
+            width: 48%;
+            aspect-ratio: 1;
+        }
+        .speaker::after {
+            bottom: 12%;
+            width: 66%;
+            aspect-ratio: 1;
+            background: radial-gradient(circle, #ff3b9d 0 14%, #29283a 15% 55%, #050509 56%);
+            animation-delay: 0.13s;
+        }
+        .speaker--left { left: min(7vw, 90px); }
+        .speaker--right { right: min(7vw, 90px); }
+
+        @keyframes pigDance {
+            0% { transform: translateY(0) rotate(-6deg) scaleX(1.02); }
+            100% { transform: translateY(-22px) rotate(7deg) scaleX(0.98); }
+        }
+        @keyframes earBounceLeft {
+            0% { transform: rotate(-37deg) translateY(3px); }
+            100% { transform: rotate(-18deg) translateY(-7px); }
+        }
+        @keyframes earBounceRight {
+            0% { transform: rotate(22deg) translateY(-5px); }
+            100% { transform: rotate(39deg) translateY(4px); }
+        }
+        @keyframes armWaveLeft {
+            0% { transform: rotate(25deg); }
+            100% { transform: rotate(-38deg); }
+        }
+        @keyframes armWaveRight {
+            0% { transform: rotate(-28deg); }
+            100% { transform: rotate(40deg); }
+        }
+        @keyframes legHopLeft {
+            0% { transform: rotate(7deg) translateY(4px); }
+            100% { transform: rotate(-12deg) translateY(-4px); }
+        }
+        @keyframes legHopRight {
+            0% { transform: rotate(12deg) translateY(-5px); }
+            100% { transform: rotate(-7deg) translateY(4px); }
+        }
+        @keyframes eyeGroove {
+            0%, 85% { transform: scaleY(1); }
+            100% { transform: scaleY(0.18); }
+        }
+        @keyframes shadowBounce {
+            0% { transform: scaleX(0.9); opacity: 0.48; }
+            100% { transform: scaleX(1.08); opacity: 0.3; }
+        }
+        @keyframes beamSweepA {
+            0% { transform: rotate(-25deg) translateX(-8vw); }
+            100% { transform: rotate(24deg) translateX(13vw); }
+        }
+        @keyframes beamSweepB {
+            0% { transform: rotate(24deg) translateX(8vw); }
+            100% { transform: rotate(-23deg) translateX(-12vw); }
+        }
+        @keyframes beamSweepC {
+            0% { transform: rotate(-10deg) translateX(-5vw); opacity: 0.4; }
+            100% { transform: rotate(13deg) translateX(5vw); opacity: 0.8; }
+        }
+        @keyframes danceGrid {
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 86px 0, 0 86px; }
+        }
+        @keyframes discoSpin {
+            0% { transform: translateX(-50%) rotate(0deg); }
+            100% { transform: translateX(-50%) rotate(360deg); }
+        }
+        @keyframes pulseRing {
+            0% { opacity: 0.65; transform: rotateX(70deg) scale(0.5); }
+            100% { opacity: 0; transform: rotateX(70deg) scale(1.2); }
+        }
+        @keyframes speakerThump {
+            0% { transform: translateX(-50%) scale(0.93); }
+            100% { transform: translateX(-50%) scale(1.06); }
+        }
+
+        @media (max-width: 720px) {
+            .speaker { display: none; }
+            .disco-ball { top: 7vh; }
+            .pig-stage { min-height: 68vh; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .pig-party *,
+            .pig-party::before {
+                animation-duration: 2.8s !important;
+            }
+        }
     </style>
 </head>
 
@@ -201,6 +583,36 @@
         <div id="proj-title" class="proj-title"></div>
         <div id="proj-meta" class="proj-meta"></div>
         <div id="proj-content-container"></div>
+    </div>
+
+    <div id="pig-party" class="pig-party" aria-hidden="true">
+        <button id="pig-party-close" class="pig-party-close" type="button" aria-label="Return to globe">x</button>
+        <div class="dj-beam dj-beam--a"></div>
+        <div class="dj-beam dj-beam--b"></div>
+        <div class="dj-beam dj-beam--c"></div>
+        <div class="disco-ball"></div>
+        <div class="speaker speaker--left"></div>
+        <div class="speaker speaker--right"></div>
+        <div class="pig-stage">
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring pulse-ring--two"></div>
+            <div class="pig-shadow"></div>
+            <div class="emoji-pig" role="img" aria-label="Dancing pig">
+                <div class="pig-ear pig-ear--left"></div>
+                <div class="pig-ear pig-ear--right"></div>
+                <div class="pig-arm pig-arm--left"></div>
+                <div class="pig-arm pig-arm--right"></div>
+                <div class="pig-leg pig-leg--left"></div>
+                <div class="pig-leg pig-leg--right"></div>
+                <div class="pig-eye pig-eye--left"></div>
+                <div class="pig-eye pig-eye--right"></div>
+                <div class="pig-snout">
+                    <div class="pig-nostril pig-nostril--left"></div>
+                    <div class="pig-nostril pig-nostril--right"></div>
+                </div>
+                <div class="pig-mouth"></div>
+            </div>
+        </div>
     </div>
 
     <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
@@ -236,6 +648,13 @@
         let timeOffset = 0;
 
         let activeMarkerMenuRoot = null;
+        let pigPartyActive = false;
+        let earthHoldTimer = null;
+        let earthHoldPointerId = null;
+        let earthHoldStartX = 0;
+        let earthHoldStartY = 0;
+        let savedAutoRotate = true;
+        let partyAudio = { ctx: null, master: null, timer: null, step: 0 };
 
         const clock = new THREE.Clock();
         const FOCUS_CAMERA_Z = 120; 
@@ -245,6 +664,8 @@
         const WORLD_ATLAS_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json';
         const DETAIL_STEP = 0.45; 
         const EARTH_RADIUS = 80;
+        const EARTH_HOLD_MS = 900;
+        const EARTH_HOLD_MOVE_TOLERANCE = 14;
 
         const resumeLocations = [
             { name: "Harvard GSD", lat: 42.37, lon: -71.11 },
@@ -348,6 +769,7 @@
             renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.domElement.classList.add('globe-renderer');
             document.body.appendChild(renderer.domElement);
 
             labelRenderer = new CSS2DRenderer();
@@ -356,6 +778,7 @@
             labelRenderer.domElement.style.top = '0px';
             labelRenderer.domElement.style.left = '0px';
             labelRenderer.domElement.style.pointerEvents = 'none';
+            labelRenderer.domElement.classList.add('globe-labels');
             document.body.appendChild(labelRenderer.domElement);
 
             earthGroup = new THREE.Group();
@@ -390,11 +813,288 @@
             });
             document.addEventListener('keydown', (e) => {
                 if (e.key !== 'Escape') return;
+                if (pigPartyActive) {
+                    stopPigParty();
+                    return;
+                }
                 closeMarkerInlineMenu();
             });
+            setupPigParty();
 
             animate();
             loadWorldMap();
+        }
+
+        function setupPigParty() {
+            const party = document.getElementById('pig-party');
+            const closeBtn = document.getElementById('pig-party-close');
+            if (!party || !closeBtn || !renderer) return;
+
+            renderer.domElement.addEventListener('pointerdown', startEarthHold);
+            renderer.domElement.addEventListener('pointermove', trackEarthHold);
+            renderer.domElement.addEventListener('pointerup', cancelEarthHold);
+            renderer.domElement.addEventListener('pointerleave', cancelEarthHold);
+            renderer.domElement.addEventListener('pointercancel', cancelEarthHold);
+
+            closeBtn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                stopPigParty();
+            });
+            party.addEventListener('click', (event) => {
+                if (event.target === party) {
+                    stopPigParty();
+                }
+            });
+        }
+
+        function startEarthHold(event) {
+            if (event.button !== undefined && event.button !== 0) return;
+            if (appState !== 'NORMAL' || pigPartyActive) return;
+
+            earthHoldPointerId = event.pointerId;
+            earthHoldStartX = event.clientX;
+            earthHoldStartY = event.clientY;
+            primePigAudio();
+
+            if (renderer.domElement.setPointerCapture) {
+                renderer.domElement.setPointerCapture(event.pointerId);
+            }
+
+            clearEarthHoldTimer();
+            earthHoldTimer = window.setTimeout(() => {
+                earthHoldTimer = null;
+                startPigParty();
+            }, EARTH_HOLD_MS);
+        }
+
+        function trackEarthHold(event) {
+            if (earthHoldPointerId === null || event.pointerId !== earthHoldPointerId) return;
+            const dx = event.clientX - earthHoldStartX;
+            const dy = event.clientY - earthHoldStartY;
+            if (Math.hypot(dx, dy) > EARTH_HOLD_MOVE_TOLERANCE) {
+                cancelEarthHold(event);
+            }
+        }
+
+        function cancelEarthHold(event) {
+            if (event && earthHoldPointerId !== null && event.pointerId !== earthHoldPointerId) return;
+            const pointerId = event ? event.pointerId : earthHoldPointerId;
+            if (pointerId !== null && renderer.domElement.releasePointerCapture && renderer.domElement.hasPointerCapture(pointerId)) {
+                renderer.domElement.releasePointerCapture(pointerId);
+            }
+            clearEarthHoldTimer();
+            earthHoldPointerId = null;
+        }
+
+        function clearEarthHoldTimer() {
+            if (!earthHoldTimer) return;
+            window.clearTimeout(earthHoldTimer);
+            earthHoldTimer = null;
+        }
+
+        function startPigParty() {
+            const party = document.getElementById('pig-party');
+            if (!party || pigPartyActive || appState !== 'NORMAL') return;
+
+            cancelEarthHold();
+            closeMarkerInlineMenu();
+            hideGlobeImagePreview();
+            pigPartyActive = true;
+            savedAutoRotate = controls ? controls.autoRotate : true;
+
+            if (controls) {
+                controls.enabled = false;
+                controls.autoRotate = false;
+            }
+            if (earthGroup) {
+                earthGroup.visible = false;
+            }
+
+            document.body.classList.add('pig-party-active');
+            party.classList.add('is-active');
+            party.setAttribute('aria-hidden', 'false');
+            startPigBeat();
+        }
+
+        function stopPigParty() {
+            const party = document.getElementById('pig-party');
+            if (!pigPartyActive) return;
+
+            pigPartyActive = false;
+            document.body.classList.remove('pig-party-active');
+            if (party) {
+                party.classList.remove('is-active');
+                party.setAttribute('aria-hidden', 'true');
+            }
+
+            if (earthGroup) {
+                earthGroup.visible = true;
+            }
+            if (controls) {
+                controls.enabled = true;
+                controls.autoRotate = savedAutoRotate;
+                controls.update();
+            }
+            stopPigBeat();
+        }
+
+        function startPigBeat() {
+            try {
+                if (partyAudio.timer) return;
+                primePigAudio();
+                if (!partyAudio.ctx) return;
+
+                partyAudio.ctx.resume();
+                partyAudio.master = partyAudio.ctx.createGain();
+                partyAudio.master.gain.setValueAtTime(0.16, partyAudio.ctx.currentTime);
+                partyAudio.master.connect(partyAudio.ctx.destination);
+                partyAudio.step = 0;
+                playDjStep();
+                partyAudio.timer = window.setInterval(playDjStep, 125);
+            } catch (error) {
+                console.warn('Pig party audio unavailable:', error);
+            }
+        }
+
+        function primePigAudio() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                if (!partyAudio.ctx) {
+                    partyAudio.ctx = new AudioContext();
+                }
+                partyAudio.ctx.resume();
+            } catch (error) {
+                console.warn('Pig party audio could not start:', error);
+            }
+        }
+
+        function stopPigBeat() {
+            if (partyAudio.timer) {
+                window.clearInterval(partyAudio.timer);
+                partyAudio.timer = null;
+            }
+            if (partyAudio.master) {
+                try {
+                    partyAudio.master.gain.cancelScheduledValues(partyAudio.ctx.currentTime);
+                    partyAudio.master.gain.setTargetAtTime(0.0001, partyAudio.ctx.currentTime, 0.03);
+                    window.setTimeout(() => {
+                        if (partyAudio.master) {
+                            partyAudio.master.disconnect();
+                            partyAudio.master = null;
+                        }
+                    }, 140);
+                } catch (error) {
+                    partyAudio.master = null;
+                }
+            }
+        }
+
+        function playDjStep() {
+            if (!partyAudio.ctx || !partyAudio.master) return;
+
+            const step = partyAudio.step % 16;
+            if (step % 4 === 0) playKick();
+            if (step === 4 || step === 12) playSnare();
+            if (step % 2 === 0) playHat();
+            if (step === 0 || step === 3 || step === 8 || step === 10) {
+                playBass(step === 8 ? 98 : 82);
+            }
+            if (step === 6 || step === 14) {
+                playPigSqueal();
+            }
+            partyAudio.step += 1;
+        }
+
+        function playKick() {
+            const ctx = partyAudio.ctx;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const now = ctx.currentTime;
+
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(145, now);
+            osc.frequency.exponentialRampToValueAtTime(45, now + 0.14);
+            gain.gain.setValueAtTime(0.95, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+
+            osc.connect(gain).connect(partyAudio.master);
+            osc.start(now);
+            osc.stop(now + 0.19);
+        }
+
+        function playSnare() {
+            playNoise(0.13, 0.35, 1800, 'bandpass');
+            playTone(188, 'triangle', 0.09, 0.18);
+        }
+
+        function playHat() {
+            playNoise(0.045, 0.16, 7600, 'highpass');
+        }
+
+        function playBass(freq) {
+            playTone(freq, 'sawtooth', 0.18, 0.22);
+        }
+
+        function playPigSqueal() {
+            const ctx = partyAudio.ctx;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const now = ctx.currentTime;
+
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(640, now);
+            osc.frequency.exponentialRampToValueAtTime(980, now + 0.06);
+            osc.frequency.exponentialRampToValueAtTime(520, now + 0.15);
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.exponentialRampToValueAtTime(0.16, now + 0.015);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+
+            osc.connect(gain).connect(partyAudio.master);
+            osc.start(now);
+            osc.stop(now + 0.17);
+        }
+
+        function playTone(freq, type, duration, gainValue) {
+            const ctx = partyAudio.ctx;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const now = ctx.currentTime;
+
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, now);
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.exponentialRampToValueAtTime(gainValue, now + 0.01);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+            osc.connect(gain).connect(partyAudio.master);
+            osc.start(now);
+            osc.stop(now + duration + 0.02);
+        }
+
+        function playNoise(duration, gainValue, frequency, filterType) {
+            const ctx = partyAudio.ctx;
+            const buffer = ctx.createBuffer(1, Math.floor(ctx.sampleRate * duration), ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < data.length; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+
+            const source = ctx.createBufferSource();
+            const filter = ctx.createBiquadFilter();
+            const gain = ctx.createGain();
+            const now = ctx.currentTime;
+
+            source.buffer = buffer;
+            filter.type = filterType;
+            filter.frequency.setValueAtTime(frequency, now);
+            filter.Q.setValueAtTime(1.8, now);
+            gain.gain.setValueAtTime(gainValue, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+            source.connect(filter).connect(gain).connect(partyAudio.master);
+            source.start(now);
+            source.stop(now + duration);
         }
 
         async function loadWorldMap() {
