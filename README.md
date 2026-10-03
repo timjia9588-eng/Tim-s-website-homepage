@@ -2,9 +2,11 @@
 
 React, TypeScript, Vite, Framer Motion, and a lazy-loaded Three.js globe.
 
-The default home page is an immersive dotted globe with geographic place markers. The bottom-left “Simplistic version” link opens the self-hosted portfolio at `/#simple`. Both views share local images and project details. There is no Adobe Portfolio dependency.
+The default home page is a lit, dotted globe with a permanently visible place selector and project previews. The bottom-left “Simplistic version” link opens the self-hosted project overview at `/#simple`. Both views share local images and project details. There is no Adobe Portfolio dependency.
 
-Systems / Networks / Landscapes connect the personal narrative. Professional practice, Studies & personal work, and Research & publications provide clear browsing contexts. Resume opens a readable website section at `/#resume`; no document download is required.
+The overview defaults to all 19 projects and two working papers. Optional category filters show Professional practice, Academic & independent, or Research & writing; a search finds projects, places and papers. Four selected projects cycle in the hero, with direct selection, pause and previous/next controls. Resume opens a separate browser tab at `/#resume`, rather than a section occupying the portfolio. Papers have their own introductions at `/#paper/place-of-learning` and `/#paper/places-of-agency`.
+
+Systems / Networks / Landscapes remain the underlying narrative, expressed through concrete questions about ecology, learning and public space. They are no longer abstract navigation filters. Research introductions explain why the work matters, how it was approached, and how it connects to design, with links to the original Project Zero working papers.
 
 ## Run locally
 
@@ -36,8 +38,8 @@ Changes are on `feat/react-portfolio`. Do not merge to `main` or deploy to the p
 - Gallery captions and links live in `src/data/visuals.json`.
 - `content-audit.md` records public evidence, removed material, and award/publication status.
 
-Projects have shareable URLs such as `/#project/phillips`. The image viewer supports keyboard navigation, zoom, and Escape. Dialogs manage focus and lock background scrolling. Motion respects the device’s reduced-motion preference. The globe is lazy loaded, pauses while hovered or being dragged, and resumes 2.4 seconds after leaving. A Places menu provides keyboard access and a WebGL fallback.
+Projects have shareable URLs such as `/#project/phillips`. The image viewer supports keyboard navigation, zoom, and Escape. Dialogs manage focus and lock background scrolling. Motion respects the device’s reduced-motion preference. The globe is lazy loaded, pauses while hovered or being dragged, and resumes 2.4 seconds after leaving. The visible place selector provides keyboard access and a WebGL fallback. The slideshow pauses on hover/focus, when off-screen, or in a hidden tab; reduced motion disables automatic playback.
 
-Professional images remain credited to their firms and collaborators and link to the public source. Professional entries without verified public project evidence are removed. EDSA project images and full portfolio sheets are excluded from this build. Earlier Git commits remain recoverable.
+Professional images remain credited to their firms and collaborators and link to the public source. Gentilly displays only Tim’s explicitly requested portfolio illustration, with the firm link retained for project context. Kyle is text-only without external government links. EDSA project images and full portfolio sheets remain excluded. The independent Bajo la Sombra competition board is shown in full at Tim’s request, extracted at its actual 1122×1402 source resolution rather than enlarged crops. Earlier Git commits remain recoverable.
 
 The previous HTML site remains recoverable through Git history. The original Adobe site’s HTML was backed up locally before migration; deleting or unpublishing the Adobe site requires access to its Portfolio dashboard.

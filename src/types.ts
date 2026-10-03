@@ -21,6 +21,7 @@ export interface Project {
   description: string[];
   cover?: string;
   coverAlt?: string;
+  detailCover?: string;
   images: ProjectImage[];
   source?: string;
   collaborators?: string;

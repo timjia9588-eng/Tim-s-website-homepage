@@ -30,51 +30,6 @@
     "originalUrl": null
   },
   {
-    "path": "/images/bajo-la-sombra/cover.webp",
-    "width": 1978,
-    "height": 1185,
-    "source": "Bajo la Sombra_Tianzhen Jia.pdf",
-    "page": 1,
-    "crop": [
-      0.28,
-      0.5,
-      0.985,
-      0.838
-    ],
-    "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
-  },
-  {
-    "path": "/images/bajo-la-sombra/masterplan.webp",
-    "width": 1739,
-    "height": 1619,
-    "source": "Bajo la Sombra_Tianzhen Jia.pdf",
-    "page": 1,
-    "crop": [
-      0.365,
-      0.015,
-      0.985,
-      0.477
-    ],
-    "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
-  },
-  {
-    "path": "/images/bajo-la-sombra/materials.webp",
-    "width": 1487,
-    "height": 420,
-    "source": "Bajo la Sombra_Tianzhen Jia.pdf",
-    "page": 1,
-    "crop": [
-      0.02,
-      0.845,
-      0.55,
-      0.965
-    ],
-    "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
-  },
-  {
     "path": "/images/bamboo/cover.webp",
     "width": 664,
     "height": 410,
@@ -163,26 +118,6 @@
     ],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null
-  },
-  {
-    "path": "/images/gentilly/cover.webp",
-    "width": 1280,
-    "height": 718,
-    "source": "https://www.wbae.com/project/gentilly-resilience-district-planning",
-    "page": null,
-    "crop": null,
-    "credit": "Waggonner & Ball",
-    "originalUrl": "https://cdn.prod.website-files.com/69af3efa65e00f084fcf825a/69c1e9a9ae593ebae549d9ec_GRD-Drainage-Diagrams3-1280x718.jpg"
-  },
-  {
-    "path": "/images/gentilly/plan.webp",
-    "width": 1280,
-    "height": 874,
-    "source": "https://www.wbae.com/project/gentilly-resilience-district-planning",
-    "page": null,
-    "crop": null,
-    "credit": "Waggonner & Ball",
-    "originalUrl": "https://cdn.prod.website-files.com/69af3efa65e00f084fcf825a/69c1ea3772b13b903da8a89a_GRD-Website-Images12-1280x874.jpg"
   },
   {
     "path": "/images/melissa/cover.webp",
@@ -570,6 +505,41 @@
       0.7,
       0.949,
       0.899
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/gentilly/cover.webp",
+    "width": 1280,
+    "height": 718,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 13,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia · Waggonner & Ball internship",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/bajo-la-sombra/board.webp",
+    "width": 1122,
+    "height": 1402,
+    "source": "Bajo la Sombra_Tianzhen Jia.pdf",
+    "page": 1,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/bajo-la-sombra/cover.webp",
+    "width": 791,
+    "height": 474,
+    "source": "Bajo la Sombra_Tianzhen Jia.pdf",
+    "page": 1,
+    "crop": [
+      0.28,
+      0.5,
+      0.985,
+      0.838
     ],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null

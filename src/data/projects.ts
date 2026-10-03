@@ -133,17 +133,18 @@ export const projects: Project[] = [
     connection:
       "Regional water systems connect environmental research with the decisions that shape a neighborhood’s public space.",
     cover: "/images/gentilly/cover.webp",
-    coverAlt: "Public diagram of Gentilly drainage networks and water systems",
+    coverAlt:
+      "My Pontchartrain lakefront landscape illustration from the Waggonner & Ball internship",
     description: [
       "Working with Waggonner & Ball’s Living with Water approach, I supported flood-resilience studies and early landscape proposals in New Orleans. At the Pontchartrain lakefront, the work explored how public space can accommodate water and change over time.",
-      "My contributions included concept drawings, hand drawings, Rhino modeling, Photoshop renderings, site surveys, and presentation support. The illustrations shown here are from the firm’s publicly published project gallery and credit the wider project team.",
+      "My contributions included concept drawings, hand drawings, Rhino modeling, Photoshop renderings, site surveys, and presentation support. The illustration shown here is my own portfolio work from this internship.",
     ],
     collaborators:
       "Waggonner & Ball team; Collin Moosbrugger; John Kleinschmidt. Internship coordination included Moffatt & Nichol.",
     images: visuals["gentilly"] || [],
     source:
       "https://www.wbae.com/project/gentilly-resilience-district-planning",
-    note: "Public project imagery represents the firm’s collective work; it does not identify individual authorship. My internship contribution is described separately above.",
+    note: "The project link provides background on the firm’s broader district work. Only my portfolio illustration is displayed here.",
     tags: ["Flood adaptation", "Public space", "Concept design"],
   },
   {
@@ -335,8 +336,6 @@ export const projects: Project[] = [
       "Responsibilities include AutoCAD drawings, illustrative graphics and renderings, research into planting and materials, and coordination supporting design revisions and quality review.",
     ],
     images: visuals["kyle"] || [],
-    source: "https://kyletx.new.swagit.com/videos/353081",
-    note: "The city’s public council record documents the project and design agreement. Unpublished design imagery is omitted.",
     tags: ["Sports facilities", "Documentation", "Public recreation"],
   },
   {
@@ -437,6 +436,7 @@ export const projects: Project[] = [
   },
   {
     id: "bajo-la-sombra",
+    detailCover: "/images/bajo-la-sombra/board.webp",
     title: "Bajo la Sombra",
     subtitle: "Shade as a foundation for play and community.",
     category: "Personal",

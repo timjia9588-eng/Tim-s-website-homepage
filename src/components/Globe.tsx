@@ -60,7 +60,7 @@ export default function Globe({
       100,
     );
     camera.position.copy(
-      spherePoint(25, 65, 8 * Math.max(1, 0.95 / camera.aspect)),
+      spherePoint(28, -88, 7.8 * Math.max(1, 0.95 / camera.aspect)),
     );
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
     renderer.setSize(host.clientWidth, host.clientHeight);
@@ -70,9 +70,30 @@ export default function Globe({
     scene.add(globe);
     const surface = new THREE.Mesh(
       new THREE.SphereGeometry(2.48, 48, 32),
-      new THREE.MeshBasicMaterial({ color: 0x202020 }),
+      new THREE.MeshPhongMaterial({
+        color: 0x152b22,
+        emissive: 0x07140e,
+        specular: 0x29443c,
+        shininess: 24,
+      }),
     );
     globe.add(surface);
+    scene.add(new THREE.AmbientLight(0xcbd6c7, 1.4));
+    const light = new THREE.DirectionalLight(0xe2f1df, 2.3);
+    light.position.set(-4, 3, 6);
+    scene.add(light);
+    globe.add(
+      new THREE.Mesh(
+        new THREE.SphereGeometry(2.55, 64, 48),
+        new THREE.ShaderMaterial({
+          vertexShader: `varying vec3 vNormal; varying vec3 vView; void main(){ vec4 p=modelViewMatrix*vec4(position,1.0); vNormal=normalize(normalMatrix*normal); vView=-p.xyz; gl_Position=projectionMatrix*p; }`,
+          fragmentShader: `varying vec3 vNormal; varying vec3 vView; void main(){ float rim=pow(1.0-abs(dot(normalize(vNormal),normalize(vView))),3.0); gl_FragColor=vec4(0.58,0.73,0.63,rim*0.32); }`,
+          transparent: true,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+        }),
+      ),
+    );
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.055;
@@ -143,14 +164,64 @@ export default function Globe({
           new THREE.Points(
             geometry,
             new THREE.PointsMaterial({
-              color: 0xaaaaa6,
-              size: 0.011,
+              color: 0xc4d3b6,
+              size: 0.017,
               transparent: true,
-              opacity: 0.62,
+              opacity: 0.8,
               sizeAttenuation: true,
             }),
           ),
         );
+        const coast: number[] = [];
+        type LandGeometry = {
+          type: string;
+          coordinates: number[][][] | number[][][][];
+        };
+        const geoLand = land as unknown as {
+          type: string;
+          geometry?: LandGeometry;
+          features?: { geometry: LandGeometry }[];
+        };
+        const landGeometries =
+          geoLand.type === "FeatureCollection"
+            ? geoLand.features!.map((f) => f.geometry)
+            : geoLand.geometry
+              ? [geoLand.geometry]
+              : [];
+        for (const landGeometry of landGeometries)
+          if (
+            landGeometry.type === "MultiPolygon" ||
+            landGeometry.type === "Polygon"
+          ) {
+            const polygons: number[][][][] =
+              landGeometry.type === "MultiPolygon"
+                ? (landGeometry.coordinates as number[][][][])
+                : [landGeometry.coordinates as number[][][]];
+            for (const polygon of polygons)
+              for (const ring of polygon)
+                for (let i = 1; i < ring.length; i++) {
+                  const a = spherePoint(ring[i - 1][1], ring[i - 1][0], 2.516),
+                    b = spherePoint(ring[i][1], ring[i][0], 2.516);
+                  coast.push(a.x, a.y, a.z, b.x, b.y, b.z);
+                }
+          }
+        if (coast.length) {
+          const outline = new THREE.BufferGeometry();
+          outline.setAttribute(
+            "position",
+            new THREE.Float32BufferAttribute(coast, 3),
+          );
+          globe.add(
+            new THREE.LineSegments(
+              outline,
+              new THREE.LineBasicMaterial({
+                color: 0x94b399,
+                transparent: true,
+                opacity: 0.2,
+              }),
+            ),
+          );
+        }
       } catch (error) {
         if (
           !cancelled &&
@@ -163,7 +234,7 @@ export default function Globe({
     const resize = new ResizeObserver(() => {
       if (!host.clientWidth || !host.clientHeight) return;
       camera.aspect = host.clientWidth / host.clientHeight;
-      const distance = 8 * Math.max(1, 0.95 / camera.aspect);
+      const distance = 7.8 * Math.max(1, 0.95 / camera.aspect);
       camera.position.normalize().multiplyScalar(distance);
       camera.updateProjectionMatrix();
       renderer.setSize(host.clientWidth, host.clientHeight);
@@ -342,7 +413,11 @@ export default function Globe({
       host.removeEventListener("focusout", focusOut);
       controls.dispose();
       scene.traverse((object) => {
-        if (object instanceof THREE.Mesh || object instanceof THREE.Points) {
+        if (
+          object instanceof THREE.Mesh ||
+          object instanceof THREE.Points ||
+          object instanceof THREE.Line
+        ) {
           object.geometry.dispose();
           const materials = Array.isArray(object.material)
             ? object.material

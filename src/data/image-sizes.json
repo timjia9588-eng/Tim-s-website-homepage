@@ -7,18 +7,6 @@
     "width": 1370,
     "height": 621
   },
-  "/images/bajo-la-sombra/cover.webp": {
-    "width": 1978,
-    "height": 1185
-  },
-  "/images/bajo-la-sombra/masterplan.webp": {
-    "width": 1739,
-    "height": 1619
-  },
-  "/images/bajo-la-sombra/materials.webp": {
-    "width": 1487,
-    "height": 420
-  },
   "/images/bamboo/cover.webp": {
     "width": 664,
     "height": 410
@@ -42,14 +30,6 @@
   "/images/carbon/sections.webp": {
     "width": 619,
     "height": 190
-  },
-  "/images/gentilly/cover.webp": {
-    "width": 1280,
-    "height": 718
-  },
-  "/images/gentilly/plan.webp": {
-    "width": 1280,
-    "height": 874
   },
   "/images/melissa/cover.webp": {
     "width": 1920,
@@ -166,5 +146,17 @@
   "/images/xiaozhou/strategy.webp": {
     "width": 1238,
     "height": 418
+  },
+  "/images/gentilly/cover.webp": {
+    "width": 1280,
+    "height": 718
+  },
+  "/images/bajo-la-sombra/board.webp": {
+    "width": 1122,
+    "height": 1402
+  },
+  "/images/bajo-la-sombra/cover.webp": {
+    "width": 791,
+    "height": 474
   }
 }

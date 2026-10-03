@@ -38,8 +38,12 @@ export default function ProjectDetail({
       ]
     : project.images;
   const galleryImages = project.images.filter(
-    (image) => image.src !== project.cover,
+    (image) => image.src !== (project.detailCover || project.cover),
   );
+  const detailCover = project.detailCover || project.cover;
+  const detailCoverAlt =
+    project.images.find((image) => image.src === detailCover)?.alt ||
+    project.coverAlt;
   useEffect(() => {
     setLightbox(null);
     ref.current?.scrollTo({ top: 0 });
@@ -54,7 +58,7 @@ export default function ProjectDetail({
         aria-modal="true"
         aria-labelledby="detail-title"
         tabIndex={-1}
-        className="project-dialog"
+        className={`project-dialog ${project.detailCover ? "project-dialog--board" : ""}`}
         initial={{ opacity: 0, y: reduced ? 0 : 60 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: reduced ? 0 : 40 }}
@@ -95,27 +99,31 @@ export default function ProjectDetail({
             </div>
           </div>
         </div>
-        {project.cover ? (
+        {detailCover ? (
           <div className="detail-cover page-width">
             <button
               onClick={() =>
                 setLightbox(
-                  viewerImages.findIndex(
-                    (image) => image.src === project.cover,
-                  ),
+                  viewerImages.findIndex((image) => image.src === detailCover),
                 )
               }
               aria-label={`Enlarge ${project.title} image`}
             >
               <img
-                src={project.cover}
-                alt={project.coverAlt}
+                src={detailCover}
+                alt={detailCoverAlt}
                 fetchPriority="high"
               />
               <span className="image-enlarge" aria-hidden="true">
                 +
               </span>
             </button>
+            {project.detailCover && (
+              <p className="presentation-note">
+                Complete competition board · Select to enlarge, then use Zoom in
+                for details
+              </p>
+            )}
           </div>
         ) : null}
         <div className="detail-story page-width">
@@ -235,7 +243,7 @@ export default function ProjectDetail({
           className="detail-connections page-width"
           aria-label="Connections across my work"
         >
-          <p className="eyebrow">{project.themes.join(" / ")}</p>
+          <p className="eyebrow">Related work</p>
           <h2>How this connects.</h2>
           <p>{project.connection}</p>
           <div>

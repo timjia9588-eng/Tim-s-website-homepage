@@ -32,6 +32,9 @@ export const chapters: {
 
 export const publications = [
   {
+    id: "place-of-learning",
+    shortTitle: "The Place of Learning",
+    question: "What changes when learning belongs to a place?",
     title: "The Place of Learning: Why Where We Learn Matters",
     date: "February 2024",
     authors:
@@ -41,8 +44,31 @@ export const publications = [
       "An interdisciplinary exploration of how physical environments shape learning, drawing connections across education, psychology and spatial design.",
     url: "https://pz.harvard.edu/resources/place-learning-why-where-we-learn-matters",
     pdf: "https://pz.harvard.edu/sites/default/files/2024-10/The%20Place%20of%20Learning.pdf",
+    why: "Learning can feel detached from the places students live. This paper asks how local environments and community life can become meaningful parts of education.",
+    approach:
+      "A literature-based synthesis brings together place-based education, geography and environmental learning, with examples of learning beyond conventional classrooms.",
+    insights: [
+      {
+        title: "Learning in context",
+        text: "A neighborhood, garden or workshop can connect curriculum with everyday experience.",
+      },
+      {
+        title: "Ecological awareness",
+        text: "Nearby environments offer opportunities to notice living systems and practice stewardship.",
+      },
+      {
+        title: "Community & well-being",
+        text: "Learning places can support relationships, movement and a sense of belonging.",
+      },
+    ],
+    relevance:
+      "For my design practice, this opens a question: how can a public landscape offer opportunities to learn, as well as somewhere to gather?",
+    related: ["weaving", "nepal", "bajo-la-sombra"],
   },
   {
+    id: "places-of-agency",
+    shortTitle: "Places of Agency",
+    question: "How can a place give learners more choice?",
     title:
       "Places of Agency: How Where We Learn Supports Student Empowerment, Choice, and Freedom",
     date: "March 2024",
@@ -53,8 +79,30 @@ export const publications = [
       "Examines how the places students inhabit can offer opportunities for choice, participation and agency in their learning.",
     url: "https://pz.harvard.edu/resources/places-agency-how-where-we-learn-supports-student-empowerment-choice-and-freedom",
     pdf: "https://pz.harvard.edu/sites/default/files/2024-10/Places%20of%20Agency.pdf",
+    why: "Student agency depends partly on whether people can choose, use and adapt their surroundings. This paper investigates the spatial conditions that support those possibilities.",
+    approach:
+      "An interdisciplinary literature review compares work from education, architecture, psychology, sociology and urban design to identify recurring qualities of supportive learning places.",
+    insights: [
+      {
+        title: "Access & choice",
+        text: "Visible resources and open routes help learners decide where to go and what to use.",
+      },
+      {
+        title: "Adaptable surroundings",
+        text: "Movable objects and flexible settings make room for different activities and needs.",
+      },
+      {
+        title: "Place & pedagogy",
+        text: "Spatial possibilities matter when teaching practices also invite students to exercise choice.",
+      },
+    ],
+    relevance:
+      "I carry this question into landscapes for learning and play: does the design prescribe a single use, or invite people to shape their own experience?",
+    related: ["bajo-la-sombra", "weaving", "melissa"],
   },
 ];
+
+export type Publication = (typeof publications)[number];
 
 export const connections: Record<string, string[]> = {
   phillips: ["carbon", "parking", "bajo-la-sombra"],

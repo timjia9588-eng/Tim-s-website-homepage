@@ -201,21 +201,15 @@
   ],
   "bajo-la-sombra": [
     {
+      "src": "/images/bajo-la-sombra/board.webp",
+      "alt": "Complete Bajo la Sombra competition board showing the master plan, shade analysis, play program, perspective and material strategies",
+      "caption": "Complete competition board — from existing trees to shade, play and materials",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
       "src": "/images/bajo-la-sombra/cover.webp",
-      "alt": "Shade, flexible play and a place to gather",
-      "caption": "Shade, flexible play and a place to gather",
-      "credit": "Tianzhen (Tim) Jia"
-    },
-    {
-      "src": "/images/bajo-la-sombra/masterplan.webp",
-      "alt": "Playground master plan — trees, shade and open-ended play",
-      "caption": "Playground master plan — trees, shade and open-ended play",
-      "credit": "Tianzhen (Tim) Jia"
-    },
-    {
-      "src": "/images/bajo-la-sombra/materials.webp",
-      "alt": "Material palette — bamboo, shade fabric, reused tires and planting",
-      "caption": "Material palette — bamboo, shade fabric, reused tires and planting",
+      "alt": "Playground perspective showing shade structures, existing trees and reused tires",
+      "caption": "A shared place in the shade",
       "credit": "Tianzhen (Tim) Jia"
     }
   ],
@@ -275,17 +269,9 @@
   "gentilly": [
     {
       "src": "/images/gentilly/cover.webp",
-      "alt": "Drainage systems — living with water",
-      "caption": "Drainage systems — living with water",
-      "credit": "Waggonner & Ball",
-      "source": "https://www.wbae.com/project/gentilly-resilience-district-planning"
-    },
-    {
-      "src": "/images/gentilly/plan.webp",
-      "alt": "District planning — public landscape framework",
-      "caption": "District planning — public landscape framework",
-      "credit": "Waggonner & Ball",
-      "source": "https://www.wbae.com/project/gentilly-resilience-district-planning"
+      "alt": "Pontchartrain lakefront landscape concept developed during my Waggonner & Ball internship",
+      "caption": "Pontchartrain lakefront — my portfolio illustration",
+      "credit": "Tianzhen (Tim) Jia · Waggonner & Ball internship"
     }
   ]
 }
