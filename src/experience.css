@@ -1163,6 +1163,32 @@ body {
     padding-inline: 30px;
   }
 }
+@media (min-width: 701px) and (max-height: 780px) {
+  .atlas-browser {
+    top: 110px;
+    bottom: 84px;
+    padding: 18px;
+  }
+  .atlas-place-step {
+    padding: 10px 0 14px;
+  }
+  .atlas-place-context {
+    margin-top: 14px;
+  }
+  .atlas-place-story {
+    margin: 10px 0 16px;
+    line-height: 1.65;
+  }
+  .atlas-project-list > a {
+    padding-top: 12px;
+  }
+  .atlas-project-list img {
+    margin-bottom: 10px;
+  }
+  .atlas-project-list a > div > span {
+    margin-top: 8px;
+  }
+}
 @media (max-width: 700px) {
   .page-width,
   .nav-inner {
