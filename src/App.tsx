@@ -2,7 +2,6 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
-  useInView,
   useReducedMotion,
   useScroll,
   useTransform,
@@ -25,6 +24,10 @@ const getProjectId = () =>
   window.location.hash.startsWith("#project/")
     ? decodeURIComponent(window.location.hash.slice(9))
     : null;
+const getView = () =>
+  ["#simple", "#top", "#work", "#about", "#contact"].includes(window.location.hash)
+    ? "simple"
+    : "globe";
 
 function Header() {
   const [menu, setMenu] = useState(false);
@@ -42,7 +45,7 @@ function Header() {
         <div className="desktop-links">
           <a href="#work">Work</a>
           <a href="#about">About</a>
-          <a href="#explore">Explore</a>
+          <a href="#globe">Globe</a>
           <a href="#contact">Contact</a>
         </div>
         <a
@@ -73,7 +76,7 @@ function Header() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
           >
-            {["Work", "About", "Explore", "Contact"].map((label) => (
+            {["Work", "About", "Globe", "Contact"].map((label) => (
               <a
                 key={label}
                 href={`#${label.toLowerCase()}`}
@@ -359,23 +362,28 @@ function About() {
   );
 }
 
-function Explorer() {
+function Portal() {
   const [selected, setSelected] = useState("uac");
-  const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: "300px" });
   const place = places.find((p) => p.id === selected)!;
   const work = projects.filter((p) => p.place === selected);
   return (
-    <section id="explore" ref={ref} className="explore-section">
+    <main id="globe" className="explore-section globe-portal">
+      <header className="portal-header">
+        <a className="wordmark" href="#globe" aria-label="Tim Jia globe home">tim jia.</a>
+        <span>Landscape designer & researcher</span>
+        <nav aria-label="Globe navigation">
+          <a href="#about">About</a>
+          <a href="/downloads/Tim-Jia-Resume.docx" download>Resume ↗</a>
+        </nav>
+      </header>
       <div className="page-width">
         <Reveal className="explore-heading">
           <p className="eyebrow">A practice across places</p>
-          <h2>Follow the connections.</h2>
-          <p>Explore the places that have shaped my work.</p>
+          <h1>A world of connections.</h1>
+          <p>Follow the places that have shaped my work.</p>
         </Reveal>
         <div className="explore-layout">
           <div className="globe-container">
-            {inView ? (
               <Suspense
                 fallback={
                   <div className="globe-loading">Preparing the globe…</div>
@@ -383,7 +391,6 @@ function Explorer() {
               >
                 <Globe selected={selected} onSelect={setSelected} />
               </Suspense>
-            ) : null}
             <p className="globe-hint">
               Drag to rotate · Scroll to zoom · Select a place
             </p>
@@ -424,7 +431,9 @@ function Explorer() {
           </div>
         </div>
       </div>
-    </section>
+      <a className="simplistic-link" href="#simple">Simplistic version <span aria-hidden="true">↗</span></a>
+      <span className="portal-signature">Tianzhen (Tim) Jia · Harvard GSD / Cornell</span>
+    </main>
   );
 }
 
@@ -469,8 +478,12 @@ function Contact() {
 
 export default function App() {
   const [projectId, setProjectId] = useState(getProjectId);
+  const [view, setView] = useState(getView);
   useEffect(() => {
-    const update = () => setProjectId(getProjectId());
+    const update = () => {
+      setProjectId(getProjectId());
+      if (!window.location.hash.startsWith("#project/")) setView(getView());
+    };
     window.addEventListener("hashchange", update);
     window.addEventListener("popstate", update);
     return () => {
@@ -478,6 +491,14 @@ export default function App() {
       window.removeEventListener("popstate", update);
     };
   }, []);
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      const target = document.getElementById(window.location.hash.slice(1));
+      if (target) target.scrollIntoView();
+      else window.scrollTo(0, 0);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [view]);
   const active = projects.find((p) => p.id === projectId);
   useEffect(() => {
     document.title = active
@@ -488,7 +509,7 @@ export default function App() {
     window.history.replaceState(
       null,
       "",
-      window.location.pathname + window.location.search + "#work",
+      window.location.pathname + window.location.search + (view === "globe" ? "#globe" : "#work"),
     );
     setProjectId(null);
   };
@@ -498,14 +519,15 @@ export default function App() {
         <a className="skip-link" href="#work">
           Skip to selected work
         </a>
-        <Header />
-        <main>
-          <Hero />
-          <Work />
-          <About />
-          <Explorer />
-        </main>
-        <Contact />
+        {view === "globe" ? <Portal /> : <>
+          <Header />
+          <main>
+            <Hero />
+            <Work />
+            <About />
+          </main>
+          <Contact />
+        </>}
       </div>
       <AnimatePresence>
         {active ? (

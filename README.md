@@ -2,6 +2,8 @@
 
 React, TypeScript, Vite, Framer Motion, and a lazy-loaded Three.js globe.
 
+The default home page is the interactive globe portal. The bottom-left “Simplistic version” link opens the self-hosted portfolio at `/#simple`; its Globe navigation returns to `/#globe`. Both views share the same local images, project details, and downloads. The portal has no Adobe Portfolio link.
+
 ## Run locally
 
 ```sh
@@ -13,6 +15,14 @@ pnpm preview
 
 Use Node.js 22.12 or later. The production build is written to `dist/`.
 `vercel.json` sets the Vite framework, build command, and output directory for the existing Vercel project.
+
+After building, double-click `Preview.cmd` on Windows or run `node scripts/preview.mjs`.
+This dependency-free preview serves the built site on localhost (normally port 4174), with all images and downloads included.
+The portable review folder includes `dist/`, `scripts/preview.mjs`, and `Preview.cmd`; it needs no package installation.
+
+## Review before publishing
+
+Changes are on `feat/react-portfolio`. Do not merge to `main` or deploy to the production domain until Tim has reviewed and approved the local preview.
 
 ## Update content
 
