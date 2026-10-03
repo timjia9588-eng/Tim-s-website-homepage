@@ -1,0 +1,258 @@
+{
+  "/images/alumni/cover.webp": {
+    "width": 837,
+    "height": 521
+  },
+  "/images/alumni/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/archive/089f2408-6690-47f3-b987-68898eca8d8d.webp": {
+    "width": 880,
+    "height": 880
+  },
+  "/images/archive/1d54845a-9997-4be8-a8fc-86c6a87d86f0.webp": {
+    "width": 486,
+    "height": 892
+  },
+  "/images/archive/3b5916ee-5fa0-4976-8856-f1dc2b95794b.webp": {
+    "width": 910,
+    "height": 773
+  },
+  "/images/archive/777bf1c5-3a62-4356-81d5-119ccfe71151.webp": {
+    "width": 979,
+    "height": 642
+  },
+  "/images/archive/7d5aea8e-0543-4590-8117-2e1e7ba50dfc.webp": {
+    "width": 1716,
+    "height": 639
+  },
+  "/images/archive/a79e4a04-d3d6-43f7-ba00-29d622fab673.webp": {
+    "width": 1713,
+    "height": 780
+  },
+  "/images/archive/cba22702-24b4-4588-9f95-0037b20ecad0.webp": {
+    "width": 1345,
+    "height": 648
+  },
+  "/images/archive/cea5f8ca-d9cc-4876-8b82-847d2137304d.webp": {
+    "width": 776,
+    "height": 842
+  },
+  "/images/bamboo/cover.webp": {
+    "width": 571,
+    "height": 749
+  },
+  "/images/bamboo/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/carbon/cover.webp": {
+    "width": 709,
+    "height": 617
+  },
+  "/images/carbon/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/district-one/cover.webp": {
+    "width": 1419,
+    "height": 798
+  },
+  "/images/district-one/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/duffy/cover.webp": {
+    "width": 1246,
+    "height": 1177
+  },
+  "/images/duffy/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/gentilly/cover.webp": {
+    "width": 1255,
+    "height": 753
+  },
+  "/images/gentilly/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/hongfa/cover.webp": {
+    "width": 1246,
+    "height": 1184
+  },
+  "/images/hongfa/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/huidong/cover.webp": {
+    "width": 1264,
+    "height": 746
+  },
+  "/images/huidong/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/laheq/cover.webp": {
+    "width": 609,
+    "height": 585
+  },
+  "/images/laheq/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/melissa/cover.webp": {
+    "width": 1920,
+    "height": 1084
+  },
+  "/images/melissa/nature-park.webp": {
+    "width": 1920,
+    "height": 1084
+  },
+  "/images/melissa/neighborhood-park.webp": {
+    "width": 1920,
+    "height": 1084
+  },
+  "/images/parking/cover.webp": {
+    "width": 1210,
+    "height": 1171
+  },
+  "/images/parking/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/parking/sheet-2.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/parking/sheet-3.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/phillips/cover.webp": {
+    "width": 1920,
+    "height": 1242
+  },
+  "/images/phillips/masterplan.webp": {
+    "width": 1582,
+    "height": 1122
+  },
+  "/images/phillips/site.webp": {
+    "width": 1920,
+    "height": 1440
+  },
+  "/images/romantic-bay/cover.webp": {
+    "width": 1264,
+    "height": 1184
+  },
+  "/images/romantic-bay/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/salamanca/cover.webp": {
+    "width": 1610,
+    "height": 747
+  },
+  "/images/salamanca/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/salamanca/sheet-2.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/salamanca/sheet-3.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/salinity/cover.webp": {
+    "width": 500,
+    "height": 663
+  },
+  "/images/salinity/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/sketchbook/cover.webp": {
+    "width": 1066,
+    "height": 645
+  },
+  "/images/sketchbook/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/sketchbook/sheet-2.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/spring/cover.webp": {
+    "width": 791,
+    "height": 560
+  },
+  "/images/spring/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/tai-chi/cover.webp": {
+    "width": 1255,
+    "height": 1177
+  },
+  "/images/tai-chi/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/weaving/cover.webp": {
+    "width": 1257,
+    "height": 485
+  },
+  "/images/weaving/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/weaving/sheet-2.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/weaving/sheet-3.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/wetland-utopia/cover.webp": {
+    "width": 1316,
+    "height": 1660
+  },
+  "/images/wetland-utopia/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/wetland-utopia/sheet-2.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/wetland-utopia/sheet-3.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/wetland-utopia/sheet-4.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/wetland-utopia/sheet-5.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/wetland-utopia/sheet-6.webp": {
+    "width": 1819,
+    "height": 1287
+  },
+  "/images/xiaozhou/cover.webp": {
+    "width": 846,
+    "height": 463
+  },
+  "/images/xiaozhou/sheet-1.webp": {
+    "width": 1819,
+    "height": 1287
+  }
+}
