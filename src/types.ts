@@ -1,4 +1,5 @@
 export type Category = "Professional" | "Studio" | "Research" | "Personal";
+export type Theme = "Systems" | "Networks" | "Landscapes";
 
 export interface ProjectImage {
   src: string;
@@ -26,6 +27,9 @@ export interface Project {
   note?: string;
   tags: string[];
   place: string;
+  themes: Theme[];
+  connection: string;
+  links?: { label: string; url: string }[];
 }
 
 export interface Place {
@@ -34,4 +38,7 @@ export interface Place {
   lat: number;
   lon: number;
   description: string;
+  narrative: string;
+  projectIds: string[];
+  themes: Theme[];
 }

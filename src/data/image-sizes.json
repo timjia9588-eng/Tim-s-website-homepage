@@ -1,139 +1,91 @@
 {
   "/images/alumni/cover.webp": {
-    "width": 837,
-    "height": 521
+    "width": 1370,
+    "height": 852
   },
-  "/images/alumni/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/alumni/plan.webp": {
+    "width": 1370,
+    "height": 621
   },
-  "/images/archive/089f2408-6690-47f3-b987-68898eca8d8d.webp": {
-    "width": 880,
-    "height": 880
+  "/images/bajo-la-sombra/cover.webp": {
+    "width": 1978,
+    "height": 1185
   },
-  "/images/archive/1d54845a-9997-4be8-a8fc-86c6a87d86f0.webp": {
-    "width": 486,
-    "height": 892
+  "/images/bajo-la-sombra/masterplan.webp": {
+    "width": 1739,
+    "height": 1619
   },
-  "/images/archive/3b5916ee-5fa0-4976-8856-f1dc2b95794b.webp": {
-    "width": 910,
-    "height": 773
-  },
-  "/images/archive/777bf1c5-3a62-4356-81d5-119ccfe71151.webp": {
-    "width": 979,
-    "height": 642
-  },
-  "/images/archive/7d5aea8e-0543-4590-8117-2e1e7ba50dfc.webp": {
-    "width": 1716,
-    "height": 639
-  },
-  "/images/archive/a79e4a04-d3d6-43f7-ba00-29d622fab673.webp": {
-    "width": 1713,
-    "height": 780
-  },
-  "/images/archive/cba22702-24b4-4588-9f95-0037b20ecad0.webp": {
-    "width": 1345,
-    "height": 648
-  },
-  "/images/archive/cea5f8ca-d9cc-4876-8b82-847d2137304d.webp": {
-    "width": 776,
-    "height": 842
+  "/images/bajo-la-sombra/materials.webp": {
+    "width": 1487,
+    "height": 420
   },
   "/images/bamboo/cover.webp": {
-    "width": 571,
-    "height": 749
+    "width": 664,
+    "height": 410
   },
-  "/images/bamboo/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/bamboo/drawing.webp": {
+    "width": 581,
+    "height": 463
+  },
+  "/images/carbon/biomass.webp": {
+    "width": 438,
+    "height": 474
   },
   "/images/carbon/cover.webp": {
-    "width": 709,
-    "height": 617
+    "width": 956,
+    "height": 1029
   },
-  "/images/carbon/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/carbon/forest.webp": {
+    "width": 622,
+    "height": 550
   },
-  "/images/district-one/cover.webp": {
-    "width": 1419,
-    "height": 798
-  },
-  "/images/district-one/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
-  },
-  "/images/duffy/cover.webp": {
-    "width": 1246,
-    "height": 1177
-  },
-  "/images/duffy/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/carbon/sections.webp": {
+    "width": 619,
+    "height": 190
   },
   "/images/gentilly/cover.webp": {
-    "width": 1255,
-    "height": 753
+    "width": 1280,
+    "height": 718
   },
-  "/images/gentilly/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
-  },
-  "/images/hongfa/cover.webp": {
-    "width": 1246,
-    "height": 1184
-  },
-  "/images/hongfa/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
-  },
-  "/images/huidong/cover.webp": {
-    "width": 1264,
-    "height": 746
-  },
-  "/images/huidong/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
-  },
-  "/images/laheq/cover.webp": {
-    "width": 609,
-    "height": 585
-  },
-  "/images/laheq/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/gentilly/plan.webp": {
+    "width": 1280,
+    "height": 874
   },
   "/images/melissa/cover.webp": {
     "width": 1920,
     "height": 1084
   },
+  "/images/melissa/engagement.webp": {
+    "width": 1280,
+    "height": 1920
+  },
   "/images/melissa/nature-park.webp": {
     "width": 1920,
     "height": 1084
   },
-  "/images/melissa/neighborhood-park.webp": {
-    "width": 1920,
-    "height": 1084
+  "/images/melissa/workshop.webp": {
+    "width": 1393,
+    "height": 1920
   },
   "/images/parking/cover.webp": {
-    "width": 1210,
-    "height": 1171
+    "width": 1965,
+    "height": 1926
   },
-  "/images/parking/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/parking/model.webp": {
+    "width": 721,
+    "height": 863
   },
-  "/images/parking/sheet-2.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/parking/phases.webp": {
+    "width": 655,
+    "height": 484
   },
-  "/images/parking/sheet-3.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/parking/plan.webp": {
+    "width": 849,
+    "height": 617
   },
   "/images/phillips/cover.webp": {
     "width": 1920,
-    "height": 1242
+    "height": 1127
   },
   "/images/phillips/masterplan.webp": {
     "width": 1582,
@@ -143,116 +95,76 @@
     "width": 1920,
     "height": 1440
   },
-  "/images/romantic-bay/cover.webp": {
-    "width": 1264,
-    "height": 1184
-  },
-  "/images/romantic-bay/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/salamanca/bridge.webp": {
+    "width": 2835,
+    "height": 1411
   },
   "/images/salamanca/cover.webp": {
-    "width": 1610,
-    "height": 747
+    "width": 1965,
+    "height": 1200
   },
-  "/images/salamanca/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
-  },
-  "/images/salamanca/sheet-2.webp": {
-    "width": 1819,
-    "height": 1287
-  },
-  "/images/salamanca/sheet-3.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/salamanca/masterplan.webp": {
+    "width": 2838,
+    "height": 1669
   },
   "/images/salinity/cover.webp": {
-    "width": 500,
-    "height": 663
+    "width": 720,
+    "height": 1360
   },
-  "/images/salinity/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/salinity/microscopy.webp": {
+    "width": 497,
+    "height": 358
   },
   "/images/sketchbook/cover.webp": {
-    "width": 1066,
-    "height": 645
+    "width": 1132,
+    "height": 617
   },
-  "/images/sketchbook/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/sketchbook/florence.webp": {
+    "width": 863,
+    "height": 695
   },
-  "/images/sketchbook/sheet-2.webp": {
-    "width": 1819,
-    "height": 1287
-  },
-  "/images/spring/cover.webp": {
-    "width": 791,
-    "height": 560
-  },
-  "/images/spring/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
-  },
-  "/images/tai-chi/cover.webp": {
-    "width": 1255,
-    "height": 1177
-  },
-  "/images/tai-chi/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/sketchbook/london.webp": {
+    "width": 1370,
+    "height": 1727
   },
   "/images/weaving/cover.webp": {
-    "width": 1257,
-    "height": 485
+    "width": 1272,
+    "height": 737
   },
-  "/images/weaving/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/weaving/overlook.webp": {
+    "width": 1276,
+    "height": 738
   },
-  "/images/weaving/sheet-2.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/weaving/plan.webp": {
+    "width": 2069,
+    "height": 1357
   },
-  "/images/weaving/sheet-3.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/weaving/section.webp": {
+    "width": 2844,
+    "height": 939
   },
   "/images/wetland-utopia/cover.webp": {
-    "width": 1316,
-    "height": 1660
+    "width": 1443,
+    "height": 1953
   },
-  "/images/wetland-utopia/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/wetland-utopia/restoration.webp": {
+    "width": 1480,
+    "height": 1705
   },
-  "/images/wetland-utopia/sheet-2.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/wetland-utopia/routes.webp": {
+    "width": 1310,
+    "height": 1557
   },
-  "/images/wetland-utopia/sheet-3.webp": {
-    "width": 1819,
-    "height": 1287
-  },
-  "/images/wetland-utopia/sheet-4.webp": {
-    "width": 1819,
-    "height": 1287
-  },
-  "/images/wetland-utopia/sheet-5.webp": {
-    "width": 1819,
-    "height": 1287
-  },
-  "/images/wetland-utopia/sheet-6.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/xiaozhou/community.webp": {
+    "width": 1084,
+    "height": 366
   },
   "/images/xiaozhou/cover.webp": {
-    "width": 846,
-    "height": 463
+    "width": 548,
+    "height": 535
   },
-  "/images/xiaozhou/sheet-1.webp": {
-    "width": 1819,
-    "height": 1287
+  "/images/xiaozhou/strategy.webp": {
+    "width": 1238,
+    "height": 418
   }
 }

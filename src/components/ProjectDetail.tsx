@@ -7,10 +7,12 @@ import Reveal from "./Reveal";
 export default function ProjectDetail({
   project,
   next,
+  related,
   onClose,
 }: {
   project: Project;
   next: Project;
+  related: Project[];
   onClose: () => void;
 }) {
   const ref = useDialog(onClose, "page-content");
@@ -18,7 +20,7 @@ export default function ProjectDetail({
   const reduced = useReducedMotion();
   const extraCover = Boolean(
     project.cover &&
-    !project.images.some((image) => image.src === project.cover),
+      !project.images.some((image) => image.src === project.cover),
   );
   const viewerImages = extraCover
     ? [
@@ -27,13 +29,17 @@ export default function ProjectDetail({
           alt: project.coverAlt!,
           caption: project.title,
           source: project.source,
-          credit: project.source
-            ? "Urban Alchemy Collective"
-            : "Tianzhen (Tim) Jia",
+          credit:
+            project.category === "Professional"
+              ? project.organization
+              : "Tianzhen (Tim) Jia",
         },
         ...project.images,
       ]
     : project.images;
+  const galleryImages = project.images.filter(
+    (image) => image.src !== project.cover,
+  );
   useEffect(() => {
     setLightbox(null);
     ref.current?.scrollTo({ top: 0 });
@@ -92,7 +98,13 @@ export default function ProjectDetail({
         {project.cover ? (
           <div className="detail-cover page-width">
             <button
-              onClick={() => setLightbox(0)}
+              onClick={() =>
+                setLightbox(
+                  viewerImages.findIndex(
+                    (image) => image.src === project.cover,
+                  ),
+                )
+              }
               aria-label={`Enlarge ${project.title} image`}
             >
               <img
@@ -134,15 +146,26 @@ export default function ProjectDetail({
                 target="_blank"
                 rel="noreferrer"
               >
-                View the firm’s original project page
+                View the public project source ↗
               </a>
             ) : null}
+            {project.links?.map((link) => (
+              <a
+                className="source-link"
+                key={link.url}
+                href={link.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {link.label} ↗
+              </a>
+            ))}
             {project.note ? (
               <p className="detail-note">{project.note}</p>
             ) : null}
           </div>
         </div>
-        {project.images.length ? (
+        {galleryImages.length ? (
           <section
             className="detail-gallery page-width"
             aria-label="Project documentation"
@@ -150,17 +173,23 @@ export default function ProjectDetail({
             <div className="gallery-header">
               <h2>Inside the project.</h2>
               <span>
-                {project.images.length}{" "}
-                {project.images.length === 1 ? "image" : "images"} · Select to
+                {galleryImages.length}{" "}
+                {galleryImages.length === 1 ? "image" : "images"} · Select to
                 enlarge
               </span>
             </div>
-            {project.images.map((image, i) => (
+            {galleryImages.map((image, i) => (
               <Reveal key={image.src}>
                 <figure>
                   <button
                     className="gallery-image"
-                    onClick={() => setLightbox(i + (extraCover ? 1 : 0))}
+                    onClick={() =>
+                      setLightbox(
+                        viewerImages.findIndex(
+                          (item) => item.src === image.src,
+                        ),
+                      )
+                    }
                     aria-label={`Enlarge ${image.caption}`}
                   >
                     <img
@@ -202,6 +231,22 @@ export default function ProjectDetail({
             ))}
           </section>
         ) : null}
+        <section
+          className="detail-connections page-width"
+          aria-label="Connections across my work"
+        >
+          <p className="eyebrow">{project.themes.join(" / ")}</p>
+          <h2>How this connects.</h2>
+          <p>{project.connection}</p>
+          <div>
+            {related.map((p) => (
+              <a key={p.id} href={`#project/${p.id}`}>
+                <small>{p.category}</small>
+                <span>{p.title} ↗</span>
+              </a>
+            ))}
+          </div>
+        </section>
         <div className="next-project">
           <p className="eyebrow">Continue exploring</p>
           <a href={`#project/${next.id}`}>

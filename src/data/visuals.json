@@ -1,0 +1,291 @@
+{
+  "salamanca": [
+    {
+      "src": "/images/salamanca/cover.webp",
+      "alt": "Restored wetland and pedestrian crossing",
+      "caption": "Restored wetland and pedestrian crossing",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/salamanca/masterplan.webp",
+      "alt": "Master plan — reconnecting river, railway and community",
+      "caption": "Master plan — reconnecting river, railway and community",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/salamanca/bridge.webp",
+      "alt": "Bridge and planting — responding to changing water levels",
+      "caption": "Bridge and planting — responding to changing water levels",
+      "credit": "Tianzhen (Tim) Jia"
+    }
+  ],
+  "weaving": [
+    {
+      "src": "/images/weaving/plan.webp",
+      "alt": "Master plan — outdoor learning, access and cultural memory",
+      "caption": "Master plan — outdoor learning, access and cultural memory",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/weaving/section.webp",
+      "alt": "Landscape section — everyday use and outdoor learning",
+      "caption": "Landscape section — everyday use and outdoor learning",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/weaving/cover.webp",
+      "alt": "Entrance — access and gathering",
+      "caption": "Entrance — access and gathering",
+      "credit": "Tianzhen (Tim) Jia · Individual Cornell studio work"
+    },
+    {
+      "src": "/images/weaving/overlook.webp",
+      "alt": "Overlook — study, conversation and cultural memory",
+      "caption": "Overlook — study, conversation and cultural memory",
+      "credit": "Tianzhen (Tim) Jia · Individual Cornell studio work"
+    }
+  ],
+  "wetland-utopia": [
+    {
+      "src": "/images/wetland-utopia/cover.webp",
+      "alt": "Reading the Pearl River Delta through water and circulation",
+      "caption": "Reading the Pearl River Delta through water and circulation",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/wetland-utopia/routes.webp",
+      "alt": "Shipping routes and habitat relationships",
+      "caption": "Shipping routes and habitat relationships",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/wetland-utopia/restoration.webp",
+      "alt": "Wetland restoration strategies in section",
+      "caption": "Wetland restoration strategies in section",
+      "credit": "Tianzhen (Tim) Jia"
+    }
+  ],
+  "carbon": [
+    {
+      "src": "/images/carbon/cover.webp",
+      "alt": "Land cover — a regional framework for carbon storage",
+      "caption": "Land cover — a regional framework for carbon storage",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/carbon/biomass.webp",
+      "alt": "Aboveground biomass and carbon baseline",
+      "caption": "Aboveground biomass and carbon baseline",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/carbon/forest.webp",
+      "alt": "Forest types and topography",
+      "caption": "Forest types and topography",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/carbon/sections.webp",
+      "alt": "Maple, beech and birch — forest community in section",
+      "caption": "Maple, beech and birch — forest community in section",
+      "credit": "Tianzhen (Tim) Jia"
+    }
+  ],
+  "xiaozhou": [
+    {
+      "src": "/images/xiaozhou/cover.webp",
+      "alt": "Residents, visitors and heritage — overlapping needs",
+      "caption": "Residents, visitors and heritage — overlapping needs",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/xiaozhou/community.webp",
+      "alt": "Relationships between residents, artists and visitors",
+      "caption": "Relationships between residents, artists and visitors",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/xiaozhou/strategy.webp",
+      "alt": "Environmental improvement and zoning framework",
+      "caption": "Environmental improvement and zoning framework",
+      "credit": "Tianzhen (Tim) Jia"
+    }
+  ],
+  "salinity": [
+    {
+      "src": "/images/salinity/cover.webp",
+      "alt": "Annotated fungal structures in minirhizotron imagery",
+      "caption": "Fungal structures — visual identification in soil imagery",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/salinity/microscopy.webp",
+      "alt": "Rhizomorph abundance over time, 2018–2019",
+      "caption": "Rhizomorph abundance — observations over time",
+      "credit": "Tianzhen (Tim) Jia"
+    }
+  ],
+  "parking": [
+    {
+      "src": "/images/parking/cover.webp",
+      "alt": "Waterfront transformation — site and systems",
+      "caption": "Waterfront transformation — site and systems",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/parking/model.webp",
+      "alt": "Physical model — waterfront topography",
+      "caption": "Physical model — waterfront topography",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/parking/phases.webp",
+      "alt": "Phased adaptation — waterfront sections",
+      "caption": "Phased adaptation — waterfront sections",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/parking/plan.webp",
+      "alt": "Waterfront master plan",
+      "caption": "Waterfront master plan",
+      "credit": "Tianzhen (Tim) Jia"
+    }
+  ],
+  "bamboo": [
+    {
+      "src": "/images/bamboo/cover.webp",
+      "alt": "Completed courtyard garden",
+      "caption": "Completed courtyard garden",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/bamboo/drawing.webp",
+      "alt": "Garden plan — planting, paths and gathering",
+      "caption": "Garden plan — planting, paths and gathering",
+      "credit": "Tianzhen (Tim) Jia"
+    }
+  ],
+  "alumni": [
+    {
+      "src": "/images/alumni/cover.webp",
+      "alt": "Planting section — layered canopy and seasonal color",
+      "caption": "Planting section — layered canopy and seasonal color",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/alumni/plan.webp",
+      "alt": "Planting plan — Alumni Slope",
+      "caption": "Planting plan — Alumni Slope",
+      "credit": "Tianzhen (Tim) Jia"
+    }
+  ],
+  "sketchbook": [
+    {
+      "src": "/images/sketchbook/cover.webp",
+      "alt": "Fallingwater — markers and colored pencil",
+      "caption": "Fallingwater — markers and colored pencil",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/sketchbook/florence.webp",
+      "alt": "Florence — a study in line",
+      "caption": "Florence — a study in line",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/sketchbook/london.webp",
+      "alt": "New York — a city drawing",
+      "caption": "New York — a city drawing",
+      "credit": "Tianzhen (Tim) Jia"
+    }
+  ],
+  "bajo-la-sombra": [
+    {
+      "src": "/images/bajo-la-sombra/cover.webp",
+      "alt": "Shade, flexible play and a place to gather",
+      "caption": "Shade, flexible play and a place to gather",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/bajo-la-sombra/masterplan.webp",
+      "alt": "Playground master plan — trees, shade and open-ended play",
+      "caption": "Playground master plan — trees, shade and open-ended play",
+      "credit": "Tianzhen (Tim) Jia"
+    },
+    {
+      "src": "/images/bajo-la-sombra/materials.webp",
+      "alt": "Material palette — bamboo, shade fabric, reused tires and planting",
+      "caption": "Material palette — bamboo, shade fabric, reused tires and planting",
+      "credit": "Tianzhen (Tim) Jia"
+    }
+  ],
+  "phillips": [
+    {
+      "src": "/images/phillips/cover.webp",
+      "alt": "Quarry lake, boardwalk and public recreation",
+      "caption": "Quarry lake, boardwalk and public recreation",
+      "credit": "Urban Alchemy Collective",
+      "source": "https://urbanalchemycollective.com/projects/phillips-quarry-park/"
+    },
+    {
+      "src": "/images/phillips/masterplan.webp",
+      "alt": "Phase 1 master plan",
+      "caption": "Phase 1 master plan",
+      "credit": "Urban Alchemy Collective",
+      "source": "https://urbanalchemycollective.com/projects/phillips-quarry-park/"
+    },
+    {
+      "src": "/images/phillips/site.webp",
+      "alt": "Existing quarry landscape",
+      "caption": "Existing quarry landscape",
+      "credit": "Urban Alchemy Collective",
+      "source": "https://urbanalchemycollective.com/projects/phillips-quarry-park/"
+    }
+  ],
+  "melissa": [
+    {
+      "src": "/images/melissa/nature-park.webp",
+      "alt": "Nature park concept",
+      "caption": "Nature park concept",
+      "credit": "Urban Alchemy Collective",
+      "source": "https://urbanalchemycollective.com/projects/melissa-parks-recreation-trails-and-open-space-master-plan/"
+    },
+    {
+      "src": "/images/melissa/cover.webp",
+      "alt": "A park concept for play and gathering",
+      "caption": "A park concept for play and gathering",
+      "credit": "Urban Alchemy Collective",
+      "source": "https://urbanalchemycollective.com/projects/melissa-parks-recreation-trails-and-open-space-master-plan/"
+    },
+    {
+      "src": "/images/melissa/engagement.webp",
+      "alt": "Community engagement — listening to residents",
+      "caption": "Community engagement — listening to residents",
+      "credit": "Urban Alchemy Collective",
+      "source": "https://urbanalchemycollective.com/projects/melissa-parks-recreation-trails-and-open-space-master-plan/"
+    },
+    {
+      "src": "/images/melissa/workshop.webp",
+      "alt": "Community workshop — shaping a shared vision",
+      "caption": "Community workshop — shaping a shared vision",
+      "credit": "Urban Alchemy Collective",
+      "source": "https://urbanalchemycollective.com/projects/melissa-parks-recreation-trails-and-open-space-master-plan/"
+    }
+  ],
+  "gentilly": [
+    {
+      "src": "/images/gentilly/cover.webp",
+      "alt": "Drainage systems — living with water",
+      "caption": "Drainage systems — living with water",
+      "credit": "Waggonner & Ball",
+      "source": "https://www.wbae.com/project/gentilly-resilience-district-planning"
+    },
+    {
+      "src": "/images/gentilly/plan.webp",
+      "alt": "District planning — public landscape framework",
+      "caption": "District planning — public landscape framework",
+      "credit": "Waggonner & Ball",
+      "source": "https://www.wbae.com/project/gentilly-resilience-district-planning"
+    }
+  ]
+}

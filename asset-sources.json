@@ -1,8 +1,8 @@
 [
   {
     "path": "/images/alumni/cover.webp",
-    "width": 837,
-    "height": 521,
+    "width": 1370,
+    "height": 852,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 20,
     "crop": [
@@ -10,600 +10,568 @@
       0.025,
       0.97,
       0.43
-    ]
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
-    "path": "/images/alumni/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
+    "path": "/images/alumni/plan.webp",
+    "width": 1370,
+    "height": 621,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 20,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
+    "crop": [
+      0.025,
+      0.455,
+      0.485,
+      0.75
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
-    "path": "/images/archive/089f2408-6690-47f3-b987-68898eca8d8d.webp",
-    "width": 880,
-    "height": 880,
-    "source": "Tim Jia existing portfolio",
-    "originalUrl": "https://cdn.myportfolio.com/5e559fe7-32e9-4772-b759-e7d03e3bafab/089f2408-6690-47f3-b987-68898eca8d8d.jpg?h=65fb376bfbfca74b3563392d4d48d174",
-    "credit": "Tianzhen (Tim) Jia"
+    "path": "/images/bajo-la-sombra/cover.webp",
+    "width": 1978,
+    "height": 1185,
+    "source": "Bajo la Sombra_Tianzhen Jia.pdf",
+    "page": 1,
+    "crop": [
+      0.28,
+      0.5,
+      0.985,
+      0.838
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
-    "path": "/images/archive/1d54845a-9997-4be8-a8fc-86c6a87d86f0.webp",
-    "width": 486,
-    "height": 892,
-    "source": "Tim Jia existing portfolio",
-    "originalUrl": "https://cdn.myportfolio.com/5e559fe7-32e9-4772-b759-e7d03e3bafab/1d54845a-9997-4be8-a8fc-86c6a87d86f0.jpg?h=bf2b3e46073c9a62b8bf3ff409f6a400",
-    "credit": "Tianzhen (Tim) Jia"
+    "path": "/images/bajo-la-sombra/masterplan.webp",
+    "width": 1739,
+    "height": 1619,
+    "source": "Bajo la Sombra_Tianzhen Jia.pdf",
+    "page": 1,
+    "crop": [
+      0.365,
+      0.015,
+      0.985,
+      0.477
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
-    "path": "/images/archive/3b5916ee-5fa0-4976-8856-f1dc2b95794b.webp",
-    "width": 910,
-    "height": 773,
-    "source": "Tim Jia existing portfolio",
-    "originalUrl": "https://cdn.myportfolio.com/5e559fe7-32e9-4772-b759-e7d03e3bafab/3b5916ee-5fa0-4976-8856-f1dc2b95794b.jpg?h=740255425e251d875ec7ba5f6e78786f",
-    "credit": "Tianzhen (Tim) Jia"
-  },
-  {
-    "path": "/images/archive/777bf1c5-3a62-4356-81d5-119ccfe71151.webp",
-    "width": 979,
-    "height": 642,
-    "source": "Tim Jia existing portfolio",
-    "originalUrl": "https://cdn.myportfolio.com/5e559fe7-32e9-4772-b759-e7d03e3bafab/777bf1c5-3a62-4356-81d5-119ccfe71151.jpg?h=d20bfd6e92f7030f145116490104b65a",
-    "credit": "Tianzhen (Tim) Jia"
-  },
-  {
-    "path": "/images/archive/7d5aea8e-0543-4590-8117-2e1e7ba50dfc.webp",
-    "width": 1716,
-    "height": 639,
-    "source": "Tim Jia existing portfolio",
-    "originalUrl": "https://cdn.myportfolio.com/5e559fe7-32e9-4772-b759-e7d03e3bafab/7d5aea8e-0543-4590-8117-2e1e7ba50dfc.jpg?h=522012651fbbb9b5889c17eef9a3e6d9",
-    "credit": "Tianzhen (Tim) Jia"
-  },
-  {
-    "path": "/images/archive/a79e4a04-d3d6-43f7-ba00-29d622fab673.webp",
-    "width": 1713,
-    "height": 780,
-    "source": "Tim Jia existing portfolio",
-    "originalUrl": "https://cdn.myportfolio.com/5e559fe7-32e9-4772-b759-e7d03e3bafab/a79e4a04-d3d6-43f7-ba00-29d622fab673.jpg?h=c413408a60a1c295a870330bdeee0f6e",
-    "credit": "Tianzhen (Tim) Jia"
-  },
-  {
-    "path": "/images/archive/cba22702-24b4-4588-9f95-0037b20ecad0.webp",
-    "width": 1345,
-    "height": 648,
-    "source": "Tim Jia existing portfolio",
-    "originalUrl": "https://cdn.myportfolio.com/5e559fe7-32e9-4772-b759-e7d03e3bafab/cba22702-24b4-4588-9f95-0037b20ecad0.jpg?h=378a708093dd7d86a8ec0775fae53dd4",
-    "credit": "Tianzhen (Tim) Jia"
-  },
-  {
-    "path": "/images/archive/cea5f8ca-d9cc-4876-8b82-847d2137304d.webp",
-    "width": 776,
-    "height": 842,
-    "source": "Tim Jia existing portfolio",
-    "originalUrl": "https://cdn.myportfolio.com/5e559fe7-32e9-4772-b759-e7d03e3bafab/cea5f8ca-d9cc-4876-8b82-847d2137304d.jpg?h=864eb7c0654e4edafad78951e6572bf6",
-    "credit": "Tianzhen (Tim) Jia"
+    "path": "/images/bajo-la-sombra/materials.webp",
+    "width": 1487,
+    "height": 420,
+    "source": "Bajo la Sombra_Tianzhen Jia.pdf",
+    "page": 1,
+    "crop": [
+      0.02,
+      0.845,
+      0.55,
+      0.965
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
     "path": "/images/bamboo/cover.webp",
-    "width": 571,
-    "height": 749,
+    "width": 664,
+    "height": 410,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 19,
     "crop": [
-      0.765,
-      0.557,
-      0.968,
-      0.934
-    ]
+      0.513,
+      0.552,
+      0.736,
+      0.747
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
-    "path": "/images/bamboo/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
+    "path": "/images/bamboo/drawing.webp",
+    "width": 581,
+    "height": 463,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 19,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
+    "crop": [
+      0.29,
+      0.725,
+      0.485,
+      0.945
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/carbon/biomass.webp",
+    "width": 438,
+    "height": 474,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 23,
+    "crop": [
+      0.55,
+      0.118,
+      0.697,
+      0.343
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
     "path": "/images/carbon/cover.webp",
-    "width": 709,
-    "height": 617,
-    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "width": 956,
+    "height": 1029,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 23,
     "crop": [
-      0.59,
-      0.45,
-      0.98,
-      0.93
-    ]
-  },
-  {
-    "path": "/images/carbon/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Portfolio 30 pages_Tianzhen.pdf",
-    "page": 23,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
-  },
-  {
-    "path": "/images/district-one/cover.webp",
-    "width": 1419,
-    "height": 798,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 18,
-    "crop": [
-      0.2,
-      0.28,
-      0.98,
+      0.632,
+      0.411,
+      0.953,
       0.9
-    ]
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
-    "path": "/images/district-one/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 18,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
-  },
-  {
-    "path": "/images/duffy/cover.webp",
-    "width": 1246,
-    "height": 1177,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 17,
+    "path": "/images/carbon/forest.webp",
+    "width": 622,
+    "height": 550,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 23,
     "crop": [
-      0.285,
-      0.025,
-      0.97,
-      0.94
-    ]
+      0.74,
+      0.116,
+      0.949,
+      0.377
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
-    "path": "/images/duffy/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 17,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
+    "path": "/images/carbon/sections.webp",
+    "width": 619,
+    "height": 190,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 23,
+    "crop": [
+      0.282,
+      0.355,
+      0.49,
+      0.445
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
     "path": "/images/gentilly/cover.webp",
-    "width": 1255,
-    "height": 753,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 13,
-    "crop": [
-      0.285,
-      0.075,
-      0.975,
-      0.66
-    ]
+    "width": 1280,
+    "height": 718,
+    "source": "https://www.wbae.com/project/gentilly-resilience-district-planning",
+    "page": null,
+    "crop": null,
+    "credit": "Waggonner & Ball",
+    "originalUrl": "https://cdn.prod.website-files.com/69af3efa65e00f084fcf825a/69c1e9a9ae593ebae549d9ec_GRD-Drainage-Diagrams3-1280x718.jpg"
   },
   {
-    "path": "/images/gentilly/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 13,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
-  },
-  {
-    "path": "/images/hongfa/cover.webp",
-    "width": 1246,
-    "height": 1184,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 14,
-    "crop": [
-      0.285,
-      0.02,
-      0.97,
-      0.94
-    ]
-  },
-  {
-    "path": "/images/hongfa/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 14,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
-  },
-  {
-    "path": "/images/huidong/cover.webp",
-    "width": 1264,
-    "height": 746,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 12,
-    "crop": [
-      0.28,
-      0.36,
-      0.975,
-      0.94
-    ]
-  },
-  {
-    "path": "/images/huidong/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 12,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
-  },
-  {
-    "path": "/images/laheq/cover.webp",
-    "width": 609,
-    "height": 585,
-    "source": "Portfolio 30 pages_Tianzhen.pdf",
-    "page": 29,
-    "crop": [
-      0.64,
-      0.025,
-      0.975,
-      0.48
-    ]
-  },
-  {
-    "path": "/images/laheq/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Portfolio 30 pages_Tianzhen.pdf",
-    "page": 29,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
+    "path": "/images/gentilly/plan.webp",
+    "width": 1280,
+    "height": 874,
+    "source": "https://www.wbae.com/project/gentilly-resilience-district-planning",
+    "page": null,
+    "crop": null,
+    "credit": "Waggonner & Ball",
+    "originalUrl": "https://cdn.prod.website-files.com/69af3efa65e00f084fcf825a/69c1ea3772b13b903da8a89a_GRD-Website-Images12-1280x874.jpg"
   },
   {
     "path": "/images/melissa/cover.webp",
     "width": 1920,
     "height": 1084,
     "source": "https://urbanalchemycollective.com/projects/melissa-parks-recreation-trails-and-open-space-master-plan/",
-    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/08/Presentation2-urban-alchemy-portfolio-1.jpg",
-    "credit": "Urban Alchemy Collective"
+    "page": null,
+    "crop": null,
+    "credit": "Urban Alchemy Collective",
+    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/08/Presentation2-urban-alchemy-portfolio-1.jpg"
+  },
+  {
+    "path": "/images/melissa/engagement.webp",
+    "width": 1280,
+    "height": 1920,
+    "source": "https://urbanalchemycollective.com/projects/melissa-parks-recreation-trails-and-open-space-master-plan/",
+    "page": null,
+    "crop": null,
+    "credit": "Urban Alchemy Collective",
+    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/08/DSC01682-urban-alchemy-portfolio-1.jpg"
   },
   {
     "path": "/images/melissa/nature-park.webp",
     "width": 1920,
     "height": 1084,
     "source": "https://urbanalchemycollective.com/projects/melissa-parks-recreation-trails-and-open-space-master-plan/",
-    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/08/Presentation4-urban-alchemy-portfolio-1.jpg",
-    "credit": "Urban Alchemy Collective"
+    "page": null,
+    "crop": null,
+    "credit": "Urban Alchemy Collective",
+    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/08/Presentation4-urban-alchemy-portfolio-1.jpg"
   },
   {
-    "path": "/images/melissa/neighborhood-park.webp",
-    "width": 1920,
-    "height": 1084,
+    "path": "/images/melissa/workshop.webp",
+    "width": 1393,
+    "height": 1920,
     "source": "https://urbanalchemycollective.com/projects/melissa-parks-recreation-trails-and-open-space-master-plan/",
-    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/08/Presentation10-urban-alchemy-portfolio-1.jpg",
-    "credit": "Urban Alchemy Collective"
+    "page": null,
+    "crop": null,
+    "credit": "Urban Alchemy Collective",
+    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/08/E03A8895-urban-alchemy-portfolio-1.jpg"
   },
   {
     "path": "/images/parking/cover.webp",
-    "width": 1210,
-    "height": 1171,
+    "width": 1965,
+    "height": 1926,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 9,
     "crop": [
-      0.31,
-      0.03,
+      0.315,
+      0.025,
       0.975,
       0.94
-    ]
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
-    "path": "/images/parking/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 9,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
-  },
-  {
-    "path": "/images/parking/sheet-2.webp",
-    "width": 1819,
-    "height": 1287,
+    "path": "/images/parking/model.webp",
+    "width": 721,
+    "height": 863,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 10,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
+    "crop": [
+      0.025,
+      0.045,
+      0.267,
+      0.455
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
-    "path": "/images/parking/sheet-3.webp",
-    "width": 1819,
-    "height": 1287,
+    "path": "/images/parking/phases.webp",
+    "width": 655,
+    "height": 484,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 11,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
+    "crop": [
+      0.025,
+      0.055,
+      0.245,
+      0.285
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/parking/plan.webp",
+    "width": 849,
+    "height": 617,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.515,
+      0.067,
+      0.8,
+      0.36
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
     "path": "/images/phillips/cover.webp",
     "width": 1920,
-    "height": 1242,
+    "height": 1127,
     "source": "https://urbanalchemycollective.com/projects/phillips-quarry-park/",
-    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/09/phillips-quarry-park-6.jpg",
-    "credit": "Urban Alchemy Collective"
+    "page": null,
+    "crop": null,
+    "credit": "Urban Alchemy Collective",
+    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/09/phillips-quarry-park-6.jpg"
   },
   {
     "path": "/images/phillips/masterplan.webp",
     "width": 1582,
     "height": 1122,
     "source": "https://urbanalchemycollective.com/projects/phillips-quarry-park/",
-    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/09/phillips-quarry-park-14.jpg",
-    "credit": "Urban Alchemy Collective"
+    "page": null,
+    "crop": null,
+    "credit": "Urban Alchemy Collective",
+    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/09/phillips-quarry-park-14.jpg"
   },
   {
     "path": "/images/phillips/site.webp",
     "width": 1920,
     "height": 1440,
     "source": "https://urbanalchemycollective.com/projects/phillips-quarry-park/",
-    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/09/phillips-quarry-park-13.jpg",
-    "credit": "Urban Alchemy Collective"
+    "page": null,
+    "crop": null,
+    "credit": "Urban Alchemy Collective",
+    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/09/phillips-quarry-park-13.jpg"
   },
   {
-    "path": "/images/romantic-bay/cover.webp",
-    "width": 1264,
-    "height": 1184,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 15,
+    "path": "/images/salamanca/bridge.webp",
+    "width": 2835,
+    "height": 1411,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 10,
     "crop": [
-      0.28,
-      0.02,
-      0.975,
-      0.94
-    ]
-  },
-  {
-    "path": "/images/romantic-bay/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 15,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
+      0.025,
+      0.29,
+      0.977,
+      0.96
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
     "path": "/images/salamanca/cover.webp",
-    "width": 1610,
-    "height": 747,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 5,
+    "width": 1965,
+    "height": 1200,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 9,
     "crop": [
-      0.015,
-      0.34,
-      0.9,
-      0.92
-    ]
+      0.03,
+      0.37,
+      0.69,
+      0.94
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
-    "path": "/images/salamanca/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 3,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
-  },
-  {
-    "path": "/images/salamanca/sheet-2.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 4,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
-  },
-  {
-    "path": "/images/salamanca/sheet-3.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 5,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
+    "path": "/images/salamanca/masterplan.webp",
+    "width": 2838,
+    "height": 1669,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 8,
+    "crop": [
+      0.024,
+      0.038,
+      0.977,
+      0.831
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
     "path": "/images/salinity/cover.webp",
-    "width": 500,
-    "height": 663,
-    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "width": 720,
+    "height": 1360,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 25,
     "crop": [
-      0.345,
-      0.085,
-      0.62,
-      0.6
-    ]
+      0.524,
+      0.109,
+      0.766,
+      0.755
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
-    "path": "/images/salinity/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "path": "/images/salinity/microscopy.webp",
+    "width": 497,
+    "height": 358,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 25,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
+    "crop": [
+      0.785,
+      0.231,
+      0.952,
+      0.401
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
     "path": "/images/sketchbook/cover.webp",
-    "width": 1066,
-    "height": 645,
+    "width": 1132,
+    "height": 617,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 21,
     "crop": [
-      0.587,
-      0.09,
-      0.966,
-      0.414
-    ]
+      0.59,
+      0.115,
+      0.97,
+      0.408
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
-    "path": "/images/sketchbook/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
+    "path": "/images/sketchbook/florence.webp",
+    "width": 863,
+    "height": 695,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 21,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
+    "crop": [
+      0.355,
+      0.6,
+      0.645,
+      0.93
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
-    "path": "/images/sketchbook/sheet-2.webp",
-    "width": 1819,
-    "height": 1287,
+    "path": "/images/sketchbook/london.webp",
+    "width": 1370,
+    "height": 1727,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 22,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
-  },
-  {
-    "path": "/images/spring/cover.webp",
-    "width": 791,
-    "height": 560,
-    "source": "Portfolio 30 pages_Tianzhen.pdf",
-    "page": 28,
     "crop": [
-      0.54,
       0.025,
-      0.975,
-      0.46
-    ]
-  },
-  {
-    "path": "/images/spring/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Portfolio 30 pages_Tianzhen.pdf",
-    "page": 28,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
-  },
-  {
-    "path": "/images/tai-chi/cover.webp",
-    "width": 1255,
-    "height": 1177,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 16,
-    "crop": [
-      0.285,
-      0.025,
-      0.975,
-      0.94
-    ]
-  },
-  {
-    "path": "/images/tai-chi/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 16,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
+      0.1,
+      0.485,
+      0.92
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
     "path": "/images/weaving/cover.webp",
-    "width": 1257,
-    "height": 485,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 8,
+    "width": 1272,
+    "height": 737,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 16,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia · Individual Cornell studio work",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/weaving/overlook.webp",
+    "width": 1276,
+    "height": 738,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 16,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia · Individual Cornell studio work",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/weaving/plan.webp",
+    "width": 2069,
+    "height": 1357,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 15,
+    "crop": [
+      0.27,
+      0.035,
+      0.965,
+      0.68
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/weaving/section.webp",
+    "width": 2844,
+    "height": 939,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 16,
     "crop": [
       0.023,
-      0.248,
-      0.47,
-      0.492
-    ]
-  },
-  {
-    "path": "/images/weaving/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 6,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
-  },
-  {
-    "path": "/images/weaving/sheet-2.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 7,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
-  },
-  {
-    "path": "/images/weaving/sheet-3.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 8,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
+      0.522,
+      0.978,
+      0.968
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
     "path": "/images/wetland-utopia/cover.webp",
-    "width": 1316,
-    "height": 1660,
-    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "width": 1443,
+    "height": 1953,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 18,
     "crop": [
-      0.027,
-      0.085,
-      0.495,
-      0.92
-    ]
+      0.015,
+      0.035,
+      0.5,
+      0.963
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
-    "path": "/images/wetland-utopia/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Portfolio 30 pages_Tianzhen.pdf",
-    "page": 17,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
-  },
-  {
-    "path": "/images/wetland-utopia/sheet-2.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Portfolio 30 pages_Tianzhen.pdf",
-    "page": 18,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
-  },
-  {
-    "path": "/images/wetland-utopia/sheet-3.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Portfolio 30 pages_Tianzhen.pdf",
-    "page": 19,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
-  },
-  {
-    "path": "/images/wetland-utopia/sheet-4.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Portfolio 30 pages_Tianzhen.pdf",
-    "page": 20,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
-  },
-  {
-    "path": "/images/wetland-utopia/sheet-5.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Portfolio 30 pages_Tianzhen.pdf",
-    "page": 21,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
-  },
-  {
-    "path": "/images/wetland-utopia/sheet-6.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "path": "/images/wetland-utopia/restoration.webp",
+    "width": 1480,
+    "height": 1705,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 22,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
+    "crop": [
+      0.023,
+      0.13,
+      0.52,
+      0.94
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/wetland-utopia/routes.webp",
+    "width": 1310,
+    "height": 1557,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 20,
+    "crop": [
+      0.52,
+      0.12,
+      0.96,
+      0.86
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/xiaozhou/community.webp",
+    "width": 1084,
+    "height": 366,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 24,
+    "crop": [
+      0.557,
+      0.112,
+      0.921,
+      0.286
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
     "path": "/images/xiaozhou/cover.webp",
-    "width": 846,
-    "height": 463,
-    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "width": 548,
+    "height": 535,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 24,
     "crop": [
-      0.025,
-      0.27,
-      0.49,
-      0.63
-    ]
+      0.525,
+      0.364,
+      0.709,
+      0.618
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   },
   {
-    "path": "/images/xiaozhou/sheet-1.webp",
-    "width": 1819,
-    "height": 1287,
-    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "path": "/images/xiaozhou/strategy.webp",
+    "width": 1238,
+    "height": 418,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 24,
-    "credit": "Tianzhen (Tim) Jia portfolio; project collaborators credited in case study"
+    "crop": [
+      0.533,
+      0.7,
+      0.949,
+      0.899
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
   }
 ]

@@ -1,27 +1,9 @@
 import type { Project, ProjectImage, Place } from "../types";
-
+import visualData from "./visuals.json";
+const visuals = visualData as Record<string, ProjectImage[]>;
 const uac = "https://urbanalchemycollective.com";
 const quarrySource = `${uac}/projects/phillips-quarry-park/`;
 const melissaSource = `${uac}/projects/melissa-parks-recreation-trails-and-open-space-master-plan/`;
-const sheets = (id: string, captions: string[]): ProjectImage[] =>
-  captions.map((caption, i) => ({
-    src: `/images/${id}/sheet-${i + 1}.webp`,
-    alt: `${caption} — Tianzhen (Tim) Jia`,
-    caption,
-    credit:
-      "From Tim Jia’s portfolio. Professional work was developed with the credited project team.",
-  }));
-const publicImage = (
-  src: string,
-  caption: string,
-  source: string,
-): ProjectImage => ({
-  src,
-  alt: caption,
-  caption,
-  source,
-  credit: "Urban Alchemy Collective",
-});
 
 export const projects: Project[] = [
   {
@@ -33,7 +15,10 @@ export const projects: Project[] = [
     organization: "Urban Alchemy Collective",
     year: "2025–present",
     role: "Landscape Designer",
-    place: "uac",
+    place: "melissa",
+    themes: ["Landscapes", "Systems"],
+    connection:
+      "From reading geology and water to creating paths, shade and places to gather: an ecological system becomes an everyday public landscape.",
     cover: "/images/phillips/cover.webp",
     coverAlt:
       "Phillips Quarry Park concept rendering with quarry lake, boardwalk, and recreation areas",
@@ -42,23 +27,7 @@ export const projects: Project[] = [
       "As a Landscape Designer at Urban Alchemy Collective, my work supports design development and construction documentation, illustrative plans and renderings, and research into site conditions, planting, materials, and products. Phillips Quarry Park is one of my selected projects at the firm.",
     ],
     collaborators: "Urban Alchemy Collective; WGI Engineering; HVJ Associates",
-    images: [
-      publicImage(
-        "/images/phillips/cover.webp",
-        "Overall perspective — quarry landscape and recreation vision",
-        quarrySource,
-      ),
-      publicImage(
-        "/images/phillips/masterplan.webp",
-        "Phase 1 master plan — trails, picnic areas, and pollinator garden",
-        quarrySource,
-      ),
-      publicImage(
-        "/images/phillips/site.webp",
-        "Existing conditions — limestone outcrops, native trees, and quarry lake",
-        quarrySource,
-      ),
-    ],
+    images: visuals["phillips"] || [],
     source: quarrySource,
     tags: ["Public parks", "Adaptive reuse", "Design development"],
   },
@@ -71,7 +40,10 @@ export const projects: Project[] = [
     organization: "Harvard Graduate School of Design",
     year: "2024",
     role: "Individual studio project",
-    place: "harvard",
+    place: "boston",
+    themes: ["Systems", "Landscapes"],
+    connection:
+      "Ecological observation becomes a design method: test how a waterfront can change with rising water rather than assume a fixed edge.",
     cover: "/images/parking/cover.webp",
     coverAlt:
       "Axonometric study of Boston Autoport and a proposed naturalized waterfront",
@@ -81,23 +53,22 @@ export const projects: Project[] = [
     ],
     collaborators:
       "STU-1212 Landscape Architecture IV · Professor Belinda Tato",
-    images: sheets("parking", [
-      "Site context and waterfront transformation",
-      "Cut-and-fill studies, physical model, and design toolkit",
-      "Phased adaptation, elevations, and master plan",
-    ]),
+    images: visuals["parking"] || [],
     tags: ["Coastal resilience", "Wetlands", "Landscape systems"],
   },
   {
     id: "melissa",
-    title: "Melissa Parks",
+    title: "Melissa in Motion",
     subtitle: "Connecting a growing city through public space.",
     category: "Professional",
     location: "Melissa, Texas",
     organization: "Urban Alchemy Collective",
-    year: "2025–present",
+    year: "2025–2026",
     role: "Landscape Designer",
-    place: "uac",
+    place: "melissa",
+    themes: ["Networks", "Landscapes"],
+    connection:
+      "The question of belonging, explored in my learning-place research, also matters at the scale of a city’s park network.",
     cover: "/images/melissa/cover.webp",
     coverAlt:
       "Community park concept with playground, gathering space, paths, and trees",
@@ -105,24 +76,22 @@ export const projects: Project[] = [
       "The City of Melissa’s parks, recreation, trails, and open space planning connects individual park experiences with a broader network of public landscapes. The firm’s published work includes community, nature, and neighborhood park concepts.",
       "City of Melissa Parks is listed among my selected projects at Urban Alchemy Collective. My practice at the firm includes drawings, illustrative plans, diagrams, renderings, material and planting research, consultant coordination, and design revisions.",
     ],
-    images: [
-      publicImage(
-        "/images/melissa/cover.webp",
-        "Community park concept",
-        melissaSource,
-      ),
-      publicImage(
-        "/images/melissa/nature-park.webp",
-        "Nature park concept",
-        melissaSource,
-      ),
-      publicImage(
-        "/images/melissa/neighborhood-park.webp",
-        "Neighborhood park concept",
-        melissaSource,
-      ),
-    ],
+    images: visuals["melissa"] || [],
     source: melissaSource,
+    links: [
+      {
+        label: "City adoption announcement",
+        url: "https://www.cityofmelissa.com/m/newsflash/home/detail/177",
+      },
+      {
+        label: "Official public master plan",
+        url: "https://www.cityofmelissa.com/DocumentCenter/View/3567/Melissa-Parks-Recreation-and-Open-Space-Master-Plan",
+      },
+      {
+        label: "City of Melissa Instagram",
+        url: "https://www.instagram.com/cityofmelissagov/",
+      },
+    ],
     tags: ["Parks & recreation", "Open space", "Citywide planning"],
   },
   {
@@ -134,7 +103,10 @@ export const projects: Project[] = [
     organization: "Cornell University / Harvard GSD",
     year: "2021 / 2024",
     role: "Individual design project",
-    place: "harvard",
+    place: "salamanca",
+    themes: ["Systems", "Networks"],
+    connection:
+      "Restoration can reconnect both fragmented habitats and the communities that live beside them.",
     cover: "/images/salamanca/cover.webp",
     coverAlt:
       "Wetland restoration perspective with pedestrian bridge and wildlife corridor",
@@ -144,11 +116,7 @@ export const projects: Project[] = [
     ],
     collaborators:
       "Cornell: LA 2020 Medium of the Landscape II, Mitchell J. Glass. Harvard GSD: SES 5409 Climate Justice, Abby Spinak.",
-    images: sheets("salamanca", [
-      "Railroad history and site context",
-      "Master plan — reconnecting water, forest, and community",
-      "Wetland restoration perspective and flood-adaptive bridge sections",
-    ]),
+    images: visuals["salamanca"] || [],
     tags: ["Phytotechnology", "Restoration", "Community landscape"],
   },
   {
@@ -160,19 +128,22 @@ export const projects: Project[] = [
     organization: "Waggonner & Ball",
     year: "2023",
     role: "Design Intern",
-    place: "wb",
+    place: "new-orleans",
+    themes: ["Systems", "Landscapes"],
+    connection:
+      "Regional water systems connect environmental research with the decisions that shape a neighborhood’s public space.",
     cover: "/images/gentilly/cover.webp",
-    coverAlt:
-      "Aerial landscape rendering of New Orleans and the Pontchartrain lakefront",
+    coverAlt: "Public diagram of Gentilly drainage networks and water systems",
     description: [
       "Working with Waggonner & Ball’s Living with Water approach, I supported flood-resilience studies and early landscape proposals in New Orleans. At the Pontchartrain lakefront, the work explored how public space can accommodate water and change over time.",
-      "My contributions included concept drawings, hand drawings, Rhino modeling, Photoshop renderings, site surveys, and presentation support. The portfolio includes an aerial study and a lakefront landscape perspective.",
+      "My contributions included concept drawings, hand drawings, Rhino modeling, Photoshop renderings, site surveys, and presentation support. The illustrations shown here are from the firm’s publicly published project gallery and credit the wider project team.",
     ],
     collaborators:
       "Waggonner & Ball team; Collin Moosbrugger; John Kleinschmidt. Internship coordination included Moffatt & Nichol.",
-    images: sheets("gentilly", [
-      "Gentilly and Pontchartrain lakefront — aerial study and landscape perspective",
-    ]),
+    images: visuals["gentilly"] || [],
+    source:
+      "https://www.wbae.com/project/gentilly-resilience-district-planning",
+    note: "Public project imagery represents the firm’s collective work; it does not identify individual authorship. My internship contribution is described separately above.",
     tags: ["Flood adaptation", "Public space", "Concept design"],
   },
   {
@@ -184,7 +155,10 @@ export const projects: Project[] = [
     organization: "Cornell University",
     year: "2021",
     role: "Individual studio project",
-    place: "cornell",
+    place: "ithaca",
+    themes: ["Networks", "Landscapes"],
+    connection:
+      "This campus study asks how space supports belonging — a question I later explored through Project Zero research.",
     cover: "/images/weaving/cover.webp",
     coverAlt:
       "Proposed entrance landscape for Cornell’s Africana Studies and Research Center",
@@ -194,11 +168,7 @@ export const projects: Project[] = [
     ],
     collaborators:
       "LA 2010 Medium of the Landscape I · Professor Valerie Aymer",
-    images: sheets("weaving", [
-      "Campus context, cultural history, and design opportunities",
-      "Master plan, weaving studies, materials, and planting",
-      "Entrance and overlook perspectives with user-experience sections",
-    ]),
+    images: visuals["weaving"] || [],
     tags: ["Learning environments", "Cultural memory", "Accessibility"],
   },
   {
@@ -210,7 +180,10 @@ export const projects: Project[] = [
     organization: "Cornell University",
     year: "2022",
     role: "GIS research & workshop contribution",
-    place: "cornell",
+    place: "ithaca",
+    themes: ["Systems"],
+    connection:
+      "Regional mapping makes hidden ecological processes legible before design decisions are made.",
     cover: "/images/carbon/cover.webp",
     coverAlt: "Forest biomass and land-cover mapping for Tompkins County",
     description: [
@@ -219,44 +192,8 @@ export const projects: Project[] = [
     ],
     collaborators:
       "Department of Landscape Architecture · Advised by Jamie Vanucchi",
-    images: [
-      {
-        src: "/images/archive/cea5f8ca-d9cc-4876-8b82-847d2137304d.webp",
-        alt: "Regional carbon and forest landscape study",
-        caption: "Regional forest and carbon analysis",
-        credit: "Tianzhen (Tim) Jia",
-      },
-      {
-        src: "/images/archive/777bf1c5-3a62-4356-81d5-119ccfe71151.webp",
-        alt: "GIS mapping of forest biomass and topography",
-        caption: "GIS maps — biomass, forest types, and topography",
-        credit: "Tianzhen (Tim) Jia",
-      },
-      ...sheets("carbon", ["Workshop research overview and regional mapping"]),
-    ],
+    images: visuals["carbon"] || [],
     tags: ["GIS", "Carbon storage", "Regional ecology"],
-  },
-  {
-    id: "tai-chi",
-    title: "Tai-Chi Square",
-    subtitle: "A small park within everyday life.",
-    category: "Professional",
-    location: "Shenzhen, China",
-    organization: "ATAL Architecture & Landscape Design",
-    year: "2021",
-    role: "Design Intern · design & visualization",
-    place: "shenzhen",
-    cover: "/images/tai-chi/cover.webp",
-    coverAlt:
-      "Residential park rendering with trees, flowers, seating, and a Tai-Chi sculpture",
-    description: [
-      "Tai-Chi Square is a compact residential landscape developed through close communication with the client. Seating, planting, a pavilion, and spaces for rest are organized within a rectangular neighborhood park.",
-      "I led visual design and SketchUp modeling, developed aerial renderings, and prepared zoning and land-use graphics for presentations and planning review. Iterative feedback helped bring the design’s spatial character and practical requirements together.",
-    ],
-    images: sheets("tai-chi", [
-      "Tai-Chi Square — landscape perspectives and spatial design",
-    ]),
-    tags: ["Residential landscape", "SketchUp", "Visualization"],
   },
   {
     id: "wetland-utopia",
@@ -267,7 +204,10 @@ export const projects: Project[] = [
     organization: "Cornell University",
     year: "2020 / 2022",
     role: "Individual design project",
-    place: "cornell",
+    place: "guangzhou",
+    themes: ["Systems"],
+    connection:
+      "A journey through the delta connects hydrology, habitat and human movement across a region.",
     cover: "/images/wetland-utopia/cover.webp",
     coverAlt: "Pearl River Delta hydrology and river-channel analysis",
     description: [
@@ -276,36 +216,8 @@ export const projects: Project[] = [
     ],
     collaborators:
       "LA 1410 Grounding in Landscape Architecture I · Professor Kathryn Gleason",
-    images: sheets("wetland-utopia", [
-      "Migration history and regional context",
-      "Pearl River Delta hydrology and channel analysis",
-      "Boat-tour itinerary and points of interest",
-      "Land use, shipping routes, and bird migration",
-      "Water infiltration and habitat studies",
-      "Restoration strategies and before-and-after sections",
-    ]),
+    images: visuals["wetland-utopia"] || [],
     tags: ["Wetland restoration", "Hydrology", "Regional design"],
-  },
-  {
-    id: "romantic-bay",
-    title: "Romantic Bay",
-    subtitle: "A resort between the mountains and the sea.",
-    category: "Professional",
-    location: "Saudi Arabia",
-    organization: "EDSA",
-    year: "2022",
-    role: "Design Intern · rendering & research",
-    place: "edsa",
-    cover: "/images/romantic-bay/cover.webp",
-    coverAlt:
-      "Hotel rendering set against a mountainous Saudi Arabian coastline",
-    description: [
-      "For this planned resort in Saudi Arabia, I created client-facing renderings from drawings supplied by the collaborating architectural team. Research into topography and native vegetation helped situate the architecture within its landscape.",
-      "My work included CAD revisions, visualization, and suggestions for rooftop planting. The rendering was developed as part of a collaborative professional design process.",
-    ],
-    collaborators: "EDSA; Woods Bagot; Ivy Wong",
-    images: sheets("romantic-bay", ["Romantic Bay — resort perspective"]),
-    tags: ["Hospitality", "Rendering", "Planting research"],
   },
   {
     id: "salinity",
@@ -314,34 +226,21 @@ export const projects: Project[] = [
     category: "Research",
     location: "Cornell University · field sites in Poland",
     organization: "Cornell University",
-    year: "2021–2023",
+    year: "2022–2023",
     role: "Honors thesis & research assistant",
-    place: "cornell",
-    cover: "/images/archive/cba22702-24b4-4588-9f95-0037b20ecad0.webp",
-    coverAlt: "Minirhizotron research documentation of fungal structures",
+    place: "ithaca",
+    themes: ["Systems"],
+    connection:
+      "Studying life beneath the surface sharpened my attention to the relationships that sustain a landscape.",
+    cover: "/images/salinity/cover.webp",
+    coverAlt: "Annotated fungal structures in minirhizotron imagery",
     description: [
       "My honors research examined ectomycorrhizal rhizomorphs and mycelium along a soil-salinity gradient. Minirhizotron imagery was used to follow the occurrence, abundance, and turnover of fungal structures in non-saline and saline soils.",
       "The work involved visual identification, sample preparation, data management, and analysis. It was presented at the 8th International Symposium on Physiological Processes in Roots of Woody Plants and informs my interest in ecological relationships beneath the visible landscape.",
     ],
     collaborators:
       "Dominika Thiem; Marcin Gołębiewski; Katarzyna Hrynkiewicz; Marc Goebel",
-    images: [
-      {
-        src: "/images/archive/1d54845a-9997-4be8-a8fc-86c6a87d86f0.webp",
-        alt: "Fungal rhizomorph and mycelium research documentation",
-        caption: "Minirhizotron research documentation",
-        credit: "Tianzhen (Tim) Jia and credited research collaborators",
-      },
-      {
-        src: "/images/archive/cba22702-24b4-4588-9f95-0037b20ecad0.webp",
-        alt: "Salinity and symbiosis research visualization",
-        caption: "Fungal structures and visual analysis",
-        credit: "Tianzhen (Tim) Jia and credited research collaborators",
-      },
-      ...sheets("salinity", [
-        "Honors thesis — methods, imagery, results, and research poster",
-      ]),
-    ],
+    images: visuals["salinity"] || [],
     tags: ["Mycorrhizal networks", "Environmental science", "Honors research"],
   },
   {
@@ -354,6 +253,9 @@ export const projects: Project[] = [
     year: "Built 2021",
     role: "Individual design & construction drawings",
     place: "guangzhou",
+    themes: ["Landscapes"],
+    connection:
+      "At the scale of a courtyard, existing planting, construction details and daily rituals come together.",
     cover: "/images/bamboo/cover.webp",
     coverAlt: "Completed bamboo garden with stone path and seating",
     description: [
@@ -362,9 +264,7 @@ export const projects: Project[] = [
     ],
     collaborators:
       "Also presented for LA4100 Computer Applications in Landscape Architecture · Professor Valerie Aymer",
-    images: sheets("bamboo", [
-      "Bamboo Garden — sketches, construction drawings, and completed garden",
-    ]),
+    images: visuals["bamboo"] || [],
     tags: ["Built work", "Garden design", "Construction drawings"],
   },
   {
@@ -376,83 +276,21 @@ export const projects: Project[] = [
     organization: "Tsinghua University",
     year: "2021",
     role: "Individual field research & term paper",
-    place: "tsinghua",
+    place: "guangzhou",
+    themes: ["Networks", "Systems"],
+    connection:
+      "Fieldwork connects environmental conditions with the different people who depend on a place.",
     cover: "/images/xiaozhou/cover.webp",
     coverAlt:
-      "Field survey photographs of Xiaozhou Village’s buildings and waterways",
+      "Diagram of overlapping community and heritage needs in Xiaozhou Village",
     description: [
       "Field surveys and interviews in Xiaozhou Village explored how environmental conditions affect cultural heritage, tourism, and daily life. Water pollution, waste, and competing demands on public space were considered together.",
       "The research proposes environmental improvements and a zoning framework that connects heritage preservation with the needs of residents, artists, and visitors. The term paper was selected as an Excellent Paper for the course.",
     ],
     collaborators:
       "Tsinghua University School of Architecture · Advised by Dr. Jian Liu",
-    images: [
-      ...[
-        "a79e4a04-d3d6-43f7-ba00-29d622fab673",
-        "089f2408-6690-47f3-b987-68898eca8d8d",
-        "3b5916ee-5fa0-4976-8856-f1dc2b95794b",
-        "7d5aea8e-0543-4590-8117-2e1e7ba50dfc",
-      ].map((id, i) => ({
-        src: `/images/archive/${id}.webp`,
-        alt: `Xiaozhou Village field research and analysis ${i + 1}`,
-        caption: [
-          "Site context and field observations",
-          "Waterways and environmental conditions",
-          "Cultural heritage and spatial demands",
-          "Environmental improvement framework",
-        ][i],
-        credit: "Tianzhen (Tim) Jia",
-      })),
-      ...sheets("xiaozhou", [
-        "Research paper — village conditions, demand analysis, and environmental improvement",
-      ]),
-    ],
+    images: visuals["xiaozhou"] || [],
     tags: ["Field research", "Heritage", "Environmental planning"],
-  },
-  {
-    id: "spring",
-    title: "Project Spring Wadi",
-    subtitle: "A connected landscape at the scale of a region.",
-    category: "Professional",
-    location: "Saudi Arabia",
-    organization: "EDSA",
-    year: "2022",
-    role: "Design Intern · concept & master planning",
-    place: "edsa",
-    cover: "/images/spring/cover.webp",
-    coverAlt:
-      "Organic circulation and landscape master plan for Project Spring",
-    description: [
-      "This resort and community master plan required a new organizing strategy when the client relocated an amusement-park program outside the site. I proposed a decentralized system connected by paths inspired by plant-cell structures.",
-      "Working with the EDSA team, I developed and revised the concept, prepared landscape graphics, and supported the client presentation. The work combines concept design, master planning, and circulation studies.",
-    ],
-    collaborators: "EDSA team · Summer (Qian) Xia",
-    images: sheets("spring", [
-      "Project Spring — master plan and concept study; sheet also includes the separate Huidong project",
-    ]),
-    tags: ["Master planning", "Circulation", "Concept design"],
-  },
-  {
-    id: "laheq",
-    title: "Laheq — The Ring",
-    subtitle: "Hospitality and habitat in an island landscape.",
-    category: "Professional",
-    location: "Laheq, Saudi Arabia",
-    organization: "EDSA",
-    year: "2022",
-    role: "Design Intern · landscape design & visualization",
-    place: "edsa",
-    cover: "/images/laheq/cover.webp",
-    coverAlt: "Landscape model of mangroves, golf, and hospitality areas",
-    description: [
-      "Within a collaborative island-resort concept, I worked on a landscape branch containing mangroves and golf areas. The study considered how mangroves could be integrated with a constructed environment.",
-      "My contributions included mangrove research, CAD revisions, and rendering. The portfolio explores the relationship between habitat, erosion protection, circulation, and hospitality programs.",
-    ],
-    collaborators: "EDSA team · Christopher Gates",
-    images: sheets("laheq", [
-      "Laheq — The Ring, with mangrove and golf landscape model; sheet also includes Romantic Bay",
-    ]),
-    tags: ["Mangroves", "Island landscapes", "Hospitality"],
   },
   {
     id: "alumni",
@@ -463,7 +301,10 @@ export const projects: Project[] = [
     organization: "Cornell University",
     year: "2021",
     role: "Individual planting design",
-    place: "cornell",
+    place: "ithaca",
+    themes: ["Landscapes", "Systems"],
+    connection:
+      "Planting is both a living system and an everyday experience, changing through seasons and years.",
     cover: "/images/alumni/cover.webp",
     coverAlt:
       "Section perspective of layered planting along Cornell’s Alumni Slope",
@@ -473,98 +314,8 @@ export const projects: Project[] = [
     ],
     collaborators:
       "LA4910 Creating the Urban Eden · Professor Nina Lauren Bassuk",
-    images: sheets("alumni", [
-      "Alumni Slope — planting plans, species schedule, and section perspective",
-    ]),
+    images: visuals["alumni"] || [],
     tags: ["Planting design", "Seasonality", "Campus landscape"],
-  },
-  {
-    id: "huidong",
-    title: "Huidong Health Care",
-    subtitle: "A landscape framework for a mixed-use campus.",
-    category: "Professional",
-    location: "Huidong, China",
-    organization: "ATAL Architecture & Landscape Design",
-    year: "2021",
-    role: "Design Intern · concept design & rendering",
-    place: "shenzhen",
-    cover: "/images/huidong/cover.webp",
-    coverAlt:
-      "Aerial rendering of a healthcare and mixed-use campus in Huidong",
-    description: [
-      "The Evergreen Capital Huidong Health Care concept brings medical, residential, hospitality, educational, and public landscape programs together within a large site.",
-      "Starting with the client’s hand-drawn sketches, I developed a bird’s-eye rendering and bubble diagram, then incorporated feedback into the final presentation under a compressed schedule.",
-    ],
-    images: sheets("huidong", [
-      "Huidong Health Care — client sketch and aerial concept rendering",
-    ]),
-    tags: ["Mixed-use planning", "Healthcare", "Aerial rendering"],
-  },
-  {
-    id: "duffy",
-    title: "Duffy Field",
-    subtitle: "A community landscape that makes room for water.",
-    category: "Professional",
-    location: "New Orleans, Louisiana",
-    organization: "Waggonner & Ball",
-    year: "2023",
-    role: "Design Intern · concept studies",
-    place: "wb",
-    cover: "/images/duffy/cover.webp",
-    coverAlt: "Hand-drawn wetland and community park concept for Duffy Field",
-    description: [
-      "The community sought a response to waterlogging that could also improve the experience of its park. The proposal explores a landscape in which water and pedestrian circulation can coexist.",
-      "I communicated with the client and developed hand-drawn concepts through several iterations. The landscape uses wetland character and flood-adaptive circulation to connect recreation and water management.",
-    ],
-    collaborators: "Waggonner & Ball · John Kleinschmidt",
-    images: sheets("duffy", [
-      "Duffy Field — hand-drawn community park and water landscape concept",
-    ]),
-    tags: ["Community design", "Water management", "Hand drawing"],
-  },
-  {
-    id: "district-one",
-    title: "District One",
-    subtitle: "Connecting neighborhood edges and public roads.",
-    category: "Professional",
-    location: "Saudi Arabia",
-    organization: "EDSA",
-    year: "2022",
-    role: "Design Intern · planting & streetscape studies",
-    place: "edsa",
-    cover: "/images/district-one/cover.webp",
-    coverAlt:
-      "Streetscape sections with trees, planting, and roadway configurations",
-    description: [
-      "A residential landscape study reconsidered surrounding roads and the connections between private neighborhood spaces and the wider public realm.",
-      "I researched and selected plants and developed strategies for different road types. Native desert character, paving, and vegetation guide transitions between public circulation and residential edges.",
-    ],
-    collaborators: "EDSA · Summer Xia",
-    images: sheets("district-one", [
-      "District One — streetscape planting and roadway sections",
-    ]),
-    tags: ["Streetscapes", "Planting", "Residential landscape"],
-  },
-  {
-    id: "hongfa",
-    title: "Hongfa Kaiyuan Plaza",
-    subtitle: "Refining a residential landscape in a growing town.",
-    category: "Professional",
-    location: "Dongkeng, Dongguan, China",
-    organization: "ATAL Architecture & Landscape Design",
-    year: "2021",
-    role: "Design support · CAD & Photoshop",
-    place: "shenzhen",
-    cover: "/images/hongfa/cover.webp",
-    coverAlt: "Illustrative site plan for Hongfa Kaiyuan Plaza",
-    description: [
-      "This apartment landscape in Dongkeng responds to a town with a strong cultural identity and rapid development.",
-      "I supported the design team by revising CAD site plans, developing design iterations, and creating Photoshop visuals for concept presentations and refinement.",
-    ],
-    images: sheets("hongfa", [
-      "Hongfa Kaiyuan Plaza — illustrative landscape site plan",
-    ]),
-    tags: ["Residential landscape", "Illustrative plans", "CAD"],
   },
   {
     id: "kyle",
@@ -575,34 +326,18 @@ export const projects: Project[] = [
     organization: "Urban Alchemy Collective",
     year: "2025–present",
     role: "Landscape Designer",
-    place: "uac",
+    place: "kyle",
+    themes: ["Landscapes", "Networks"],
+    connection:
+      "Recreation infrastructure is also a social network: it makes space for people to meet, move and participate.",
     description: [
       "Kyle Sportsplex is one of my selected projects at Urban Alchemy Collective. My work at the firm includes public parks, sports facilities, and urban landscapes, from design development through construction documentation.",
       "Responsibilities include AutoCAD drawings, illustrative graphics and renderings, research into planting and materials, and coordination supporting design revisions and quality review.",
     ],
-    images: [],
+    images: visuals["kyle"] || [],
+    source: "https://kyletx.new.swagit.com/videos/353081",
+    note: "The city’s public council record documents the project and design agreement. Unpublished design imagery is omitted.",
     tags: ["Sports facilities", "Documentation", "Public recreation"],
-  },
-  {
-    id: "design-workshop",
-    title: "Design Workshop",
-    subtitle: "From design development to the details.",
-    category: "Professional",
-    location: "Aspen, Colorado",
-    organization: "Design Workshop",
-    year: "Summer 2024",
-    role: "Design Intern",
-    place: "dw",
-    description: [
-      "At Design Workshop in Aspen, my selected project experience included 132/150 Placer and Taproot Farm. I supported design development and construction documentation through AutoCAD details, Photoshop illustrative plans, drawing revisions, and presentation production.",
-      "I also contributed to material sourcing and supplier coordination, and led the design and editing of a marketing video for the Design Workshop Foundation.",
-    ],
-    images: [],
-    tags: [
-      "Construction details",
-      "Design development",
-      "Visual communication",
-    ],
   },
   {
     id: "carrollton",
@@ -613,12 +348,17 @@ export const projects: Project[] = [
     organization: "Waggonner & Ball",
     year: "2023",
     role: "Design Intern",
-    place: "wb",
+    place: "new-orleans",
+    themes: ["Landscapes"],
+    connection:
+      "Adaptive reuse asks how an existing place can support another stage of community life.",
     description: [
       "I contributed to concept design for Carrollton Courthouse Senior Housing during my internship at Waggonner & Ball.",
       "My internship work combined hand drawing, Rhino and Photoshop visualization, site research, presentations, and coordination. This entry records project experience from my resume.",
     ],
-    images: [],
+    images: visuals["carrollton"] || [],
+    source: "https://www.wbae.com/project/the-carrollton",
+    note: "Project participation is recorded in my resume. The firm’s public project page provides background; no claim of authorship of the completed building or published images is made here.",
     tags: ["Senior housing", "Concept design", "Adaptive reuse"],
   },
   {
@@ -630,12 +370,23 @@ export const projects: Project[] = [
     organization: "Project Zero · Harvard Graduate School of Education",
     year: "2023–2024",
     role: "Research Assistant & publication co-author",
-    place: "harvard",
+    place: "cambridge",
+    themes: ["Networks"],
+    connection:
+      "Places are part of how we learn. This research connects my ecological background with questions of agency and belonging.",
     description: [
       "At Project Zero’s Designing Learning Places Lab, I synthesized research across education, environmental psychology, architecture, geography, and urban design.",
       "The work examines how spatial affordances, materials, and objects shape youth agency, belonging, curiosity, and well-being. I co-authored The Place of Learning: Why Where We Learn Matters and Places of Agency: How Where We Learn Supports Student Empowerment, Choice, and Freedom, published in 2024.",
     ],
-    images: [],
+    images: visuals["learning-places"] || [],
+    source:
+      "https://pz.harvard.edu/resources/place-learning-why-where-we-learn-matters",
+    links: [
+      {
+        label: "Places of Agency · Project Zero",
+        url: "https://pz.harvard.edu/resources/places-agency-how-where-we-learn-supports-student-empowerment-choice-and-freedom",
+      },
+    ],
     tags: [
       "Learning environments",
       "Youth agency",
@@ -649,14 +400,17 @@ export const projects: Project[] = [
     category: "Research",
     location: "Nepal",
     organization: "Cornell University Sustainable Design",
-    year: "During Cornell studies",
+    year: "2022–2023",
     role: "Landscape architecture team leader",
     place: "nepal",
+    themes: ["Networks", "Landscapes"],
+    connection:
+      "School landscapes bring learning environments and collaborative design into the same conversation.",
     description: [
       "I led the landscape architecture team in Cornell’s Sustainable Design initiative, collaborating with an NGO on environmentally sustainable school templates for Nepal.",
       "The project served a program supporting more than 3,000 children. The work connects landscape design, education, and collaboration across disciplines.",
     ],
-    images: [],
+    images: visuals["nepal"] || [],
     tags: ["Education", "Sustainable design", "Team leadership"],
   },
   {
@@ -668,90 +422,209 @@ export const projects: Project[] = [
     organization: "Personal work",
     year: "Selected drawings",
     role: "Hand drawing",
-    place: "personal",
+    place: "travel",
+    themes: ["Landscapes"],
+    connection:
+      "Drawing is a way of slowing down and noticing the details that make one place different from another.",
     cover: "/images/sketchbook/cover.webp",
     coverAlt: "Hand-drawn Fallingwater study in markers and colored pencils",
     description: [
       "Travel and drawing are ways for me to pay attention to place. Working with pencil, fine-point pen, markers, and colored pencils, I record the buildings and landscapes I encounter.",
       "The sketchbook includes Fallingwater, New York, London, Buckingham Palace, Florence Cathedral, and scenes from Spain.",
     ],
-    images: sheets("sketchbook", [
-      "Travel drawings — Fallingwater, New York, Buckingham Palace, Florence, and Spain",
-      "City sketches — London and New York",
-    ]),
+    images: visuals["sketchbook"] || [],
     tags: ["Observation", "Hand drawing", "Travel"],
+  },
+  {
+    id: "bajo-la-sombra",
+    title: "Bajo la Sombra",
+    subtitle: "Shade as a foundation for play and community.",
+    category: "Personal",
+    location: "Dominican Republic",
+    organization: "LEA Park & Play × Kids Around the World",
+    year: "2026",
+    role: "Individual competition entry",
+    place: "dominican-republic",
+    themes: ["Landscapes", "Networks"],
+    connection:
+      "The question of agency becomes tangible in a playground: shade, familiar materials and open-ended spaces let children make the place their own.",
+    cover: "/images/bajo-la-sombra/cover.webp",
+    coverAlt:
+      "Playground proposal organized around trees, shade and flexible play",
+    description: [
+      "In a hot climate, shade makes room for play, rest and everyday neighborhood life. Bajo la Sombra organizes a playground around existing trees, shared gathering spaces and flexible activities for children.",
+      "Bamboo, tensioned shade fabric, reused tires, compacted earth and planting support a proposal grounded in local materials and collective care.",
+    ],
+    images: visuals["bajo-la-sombra"] || [],
+    source: "https://leaparkandplay.com/katw/",
+    note: "Third place — confirmed to me by the organizer. The public results announcement is pending. The linked page documents the competition, rather than the award result.",
+    tags: ["Play environments", "Shade", "Community care"],
+  },
+  {
+    id: "waste-research",
+    title: "Construction Waste & Climate Action",
+    subtitle: "Connecting technical evidence with environmental decisions.",
+    category: "Research",
+    location: "Ithaca, New York / China-focused research",
+    organization: "Cornell University · Natural Resources",
+    year: "2022",
+    role: "Research Coordinator",
+    place: "ithaca",
+    themes: ["Systems"],
+    connection:
+      "Environmental decisions depend on evidence. This work extended my interest in ecological systems to the material flows of construction.",
+    description: [
+      "With Xin Yu, I researched construction and demolition waste technologies and contributed to technical reports for China Champions for Climate Action.",
+      "The work involved gathering and organizing technical evidence across approaches to waste management and climate action.",
+    ],
+    collaborators: "Xin Yu · Cornell Department of Natural Resources",
+    images: [],
+    tags: ["Material flows", "Technical research", "Climate action"],
   },
 ];
 
 export const places: Place[] = [
   {
-    id: "uac",
-    label: "Urban Alchemy Collective",
-    lat: 29.42,
-    lon: -98.49,
-    description: "San Antonio, TX · Landscape Designer · 2025–present",
-  },
-  {
-    id: "harvard",
-    label: "Harvard",
-    lat: 42.37,
-    lon: -71.11,
-    description: "Cambridge, MA · MLA I AP, 2025 · Project Zero research",
-  },
-  {
-    id: "cornell",
-    label: "Cornell",
+    id: "ithaca",
+    label: "Ithaca",
     lat: 42.44,
     lon: -76.5,
-    description: "Ithaca, NY · Environment & Sustainability, 2023",
+    description:
+      "Cornell · Environmental science, landscape studies and teaching · 2020–2023",
+    narrative:
+      "Here I learned to read landscapes as living systems — from fungal structures in soil to forests across a region. Design and teaching expanded that attention to the places people share.",
+    projectIds: ["carbon", "salinity", "weaving", "alumni", "waste-research"],
+    themes: ["Systems", "Networks"],
   },
   {
-    id: "dw",
-    label: "Design Workshop",
-    lat: 39.19,
-    lon: -106.81,
-    description: "Aspen, CO · Design Intern · Summer 2024",
+    id: "cambridge",
+    label: "Cambridge",
+    lat: 42.37,
+    lon: -71.11,
+    description: "Harvard GSD / Harvard Project Zero · 2023–2025",
+    narrative:
+      "At Harvard, landscape design met a new question: how does the place where we learn shape curiosity, agency and belonging?",
+    projectIds: ["learning-places"],
+    themes: ["Networks"],
   },
   {
-    id: "wb",
-    label: "Waggonner & Ball",
+    id: "boston",
+    label: "Charlestown",
+    lat: 42.38,
+    lon: -71.055,
+    description: "Boston waterfront · Harvard GSD studio · 2024",
+    narrative:
+      "An industrial shoreline became a test of how ecological systems and public access can adapt together over time.",
+    projectIds: ["parking"],
+    themes: ["Systems"],
+  },
+  {
+    id: "salamanca",
+    label: "Salamanca",
+    lat: 42.16,
+    lon: -78.71,
+    description: "New York · Cornell / Harvard design study · 2021 / 2024",
+    narrative:
+      "A former railway landscape offered a way to reconnect river ecology, community memory and access.",
+    projectIds: ["salamanca"],
+    themes: ["Systems", "Networks"],
+  },
+  {
+    id: "new-orleans",
+    label: "New Orleans",
     lat: 29.95,
     lon: -90.07,
-    description: "New Orleans, LA · Design Intern · Summer 2023",
+    description: "Waggonner & Ball · Design internship · 2023",
+    narrative:
+      "Living with water brought regional environmental questions into the daily spaces of a city.",
+    projectIds: ["gentilly", "carrollton"],
+    themes: ["Systems", "Landscapes"],
   },
   {
-    id: "edsa",
-    label: "EDSA",
-    lat: 26.12,
-    lon: -80.14,
-    description: "Fort Lauderdale, FL / New York, NY · Design Intern · 2022",
+    id: "melissa",
+    label: "Melissa",
+    lat: 33.286,
+    lon: -96.573,
+    description: "Texas · Urban Alchemy Collective project sites",
+    narrative:
+      "Public parks connect geology, growth and community priorities. These projects bring systems thinking into paths, planting and places to gather.",
+    projectIds: ["phillips", "melissa"],
+    themes: ["Landscapes", "Networks"],
   },
   {
-    id: "tsinghua",
-    label: "Tsinghua",
+    id: "kyle",
+    label: "Kyle",
+    lat: 29.99,
+    lon: -97.88,
+    description: "Texas · Urban Alchemy Collective project site",
+    narrative: "Recreation is a way for a growing community to come together.",
+    projectIds: ["kyle"],
+    themes: ["Landscapes", "Networks"],
+  },
+  {
+    id: "san-antonio",
+    label: "San Antonio",
+    lat: 29.42,
+    lon: -98.49,
+    description: "Urban Alchemy Collective · Landscape Designer · 2025–present",
+    narrative:
+      "My current practice connects research and design with the technical work of making public landscapes. The projects below are located in other Texas cities.",
+    projectIds: ["phillips", "melissa", "kyle"],
+    themes: ["Landscapes"],
+  },
+  {
+    id: "aspen",
+    label: "Aspen",
+    lat: 39.19,
+    lon: -106.81,
+    description: "Design Workshop · Design internship · 2024",
+    narrative:
+      "Working through construction details and materials taught me how broad design ideas depend on precise decisions.",
+    projectIds: [],
+    themes: ["Landscapes"],
+  },
+  {
+    id: "beijing",
+    label: "Beijing",
     lat: 39.9,
     lon: 116.4,
-    description: "Beijing, China · Study-away coursework & research",
-  },
-  {
-    id: "shenzhen",
-    label: "Shenzhen",
-    lat: 22.54,
-    lon: 114.05,
-    description: "China · ATAL, SZLA, and early design experience",
+    description: "Tsinghua University · Study away · 2020–2021",
+    narrative:
+      "Study at Tsinghua connected environmental planning with questions of cultural heritage and everyday urban life. My field research took place in Guangzhou.",
+    projectIds: ["xiaozhou"],
+    themes: ["Networks"],
   },
   {
     id: "guangzhou",
     label: "Guangzhou",
     lat: 23.12,
     lon: 113.26,
-    description: "China · Built garden & place-based research",
+    description: "China · Field research, regional studies and built garden",
+    narrative:
+      "From delta waterways to a village and a small courtyard, these works explore the relationships between ecological change and daily life.",
+    projectIds: ["wetland-utopia", "xiaozhou", "bamboo"],
+    themes: ["Systems", "Landscapes"],
   },
   {
     id: "nepal",
     label: "Nepal",
     lat: 28.39,
     lon: 84.12,
-    description: "Cornell Sustainable Design · School templates",
+    description: "Cornell Sustainable Design · School templates · 2022–2023",
+    narrative:
+      "An interdisciplinary collaboration brought landscape and education together in sustainable school templates.",
+    projectIds: ["nepal"],
+    themes: ["Networks"],
+  },
+  {
+    id: "dominican-republic",
+    label: "Dominican Republic",
+    lat: 18.73,
+    lon: -70.16,
+    description: "LEA Park & Play × Kids Around the World · Competition · 2026",
+    narrative:
+      "Shade, existing trees and adaptable play create a proposal for a shared neighborhood place. The marker indicates the country; a specific site city is not identified.",
+    projectIds: ["bajo-la-sombra"],
+    themes: ["Landscapes", "Networks"],
   },
 ];

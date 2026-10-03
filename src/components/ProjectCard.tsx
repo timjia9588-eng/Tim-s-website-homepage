@@ -10,6 +10,9 @@ export default function ProjectCard({
 }) {
   const reduced = useReducedMotion();
   const size = imageSizes[project.cover as keyof typeof imageSizes];
+  const smallWidth = size
+    ? Math.round(size.width * Math.min(1, 800 / size.width, 800 / size.height))
+    : 0;
   return (
     <motion.article
       className="project-card"
@@ -30,7 +33,7 @@ export default function ProjectCard({
             src={project.cover}
             srcSet={
               size && size.width > 800
-                ? `${project.cover?.replace(".webp", "-small.webp")} 800w, ${project.cover} ${size.width}w`
+                ? `${project.cover?.replace(".webp", "-small.webp")} ${smallWidth}w, ${project.cover} ${size.width}w`
                 : undefined
             }
             sizes="(max-width: 700px) 92vw, (max-width: 1200px) 46vw, 570px"
