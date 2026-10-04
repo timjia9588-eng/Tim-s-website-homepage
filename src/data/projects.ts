@@ -496,7 +496,7 @@ export const projects: Project[] = [
   },
 ];
 
-export const places: Place[] = [
+const placeEntries: Omit<Place, "projectIds">[] = [
   {
     id: "ithaca",
     label: "Ithaca",
@@ -506,7 +506,6 @@ export const places: Place[] = [
       "Cornell · Environmental science, landscape studies and teaching · 2020–2023",
     narrative:
       "Here I learned to read landscapes as living systems — from fungal structures in soil to forests across a region. Design and teaching expanded that attention to the places people share.",
-    projectIds: ["carbon", "salinity", "weaving", "alumni", "waste-research"],
     themes: ["Systems", "Networks"],
   },
   {
@@ -517,7 +516,6 @@ export const places: Place[] = [
     description: "Harvard GSD / Harvard Project Zero · 2023–2025",
     narrative:
       "At Harvard, landscape design met a new question: how does the place where we learn shape curiosity, agency and belonging?",
-    projectIds: ["learning-places"],
     themes: ["Networks"],
   },
   {
@@ -528,7 +526,6 @@ export const places: Place[] = [
     description: "Boston waterfront · Harvard GSD studio · 2024",
     narrative:
       "An industrial shoreline became a test of how ecological systems and public access can adapt together over time.",
-    projectIds: ["parking"],
     themes: ["Systems"],
   },
   {
@@ -539,7 +536,6 @@ export const places: Place[] = [
     description: "New York · Cornell / Harvard design study · 2021 / 2024",
     narrative:
       "A former railway landscape offered a way to reconnect river ecology, community memory and access.",
-    projectIds: ["salamanca"],
     themes: ["Systems", "Networks"],
   },
   {
@@ -550,7 +546,6 @@ export const places: Place[] = [
     description: "Waggonner & Ball · Design internship · 2023",
     narrative:
       "Living with water brought regional environmental questions into the daily spaces of a city.",
-    projectIds: ["gentilly", "carrollton"],
     themes: ["Systems", "Landscapes"],
   },
   {
@@ -561,7 +556,6 @@ export const places: Place[] = [
     description: "Texas · Urban Alchemy Collective project sites",
     narrative:
       "Public parks connect geology, growth and community priorities. These projects bring systems thinking into paths, planting and places to gather.",
-    projectIds: ["phillips", "melissa"],
     themes: ["Landscapes", "Networks"],
   },
   {
@@ -571,7 +565,6 @@ export const places: Place[] = [
     lon: -97.88,
     description: "Texas · Urban Alchemy Collective project site",
     narrative: "Recreation is a way for a growing community to come together.",
-    projectIds: ["kyle"],
     themes: ["Landscapes", "Networks"],
   },
   {
@@ -581,8 +574,7 @@ export const places: Place[] = [
     lon: -98.49,
     description: "Urban Alchemy Collective · Landscape Designer · 2025–present",
     narrative:
-      "My current practice connects research and design with the technical work of making public landscapes. The projects below are located in other Texas cities.",
-    projectIds: ["phillips", "melissa", "kyle"],
+      "My current practice connects research and design with the technical work of making public landscapes. This is my practice base; project sites appear at their own locations in the atlas.",
     themes: ["Landscapes"],
   },
   {
@@ -593,7 +585,6 @@ export const places: Place[] = [
     description: "Design Workshop · Design internship · 2024",
     narrative:
       "Working through construction details and materials taught me how broad design ideas depend on precise decisions.",
-    projectIds: [],
     themes: ["Landscapes"],
   },
   {
@@ -604,7 +595,6 @@ export const places: Place[] = [
     description: "Tsinghua University · Study away · 2020–2021",
     narrative:
       "Study at Tsinghua connected environmental planning with questions of cultural heritage and everyday urban life. My field research took place in Guangzhou.",
-    projectIds: ["xiaozhou"],
     themes: ["Networks"],
   },
   {
@@ -615,7 +605,6 @@ export const places: Place[] = [
     description: "China · Field research, regional studies and built garden",
     narrative:
       "From delta waterways to a village and a small courtyard, these works explore the relationships between ecological change and daily life.",
-    projectIds: ["wetland-utopia", "xiaozhou", "bamboo"],
     themes: ["Systems", "Landscapes"],
   },
   {
@@ -626,7 +615,6 @@ export const places: Place[] = [
     description: "Cornell Sustainable Design · School templates · 2022–2023",
     narrative:
       "An interdisciplinary collaboration brought landscape and education together in sustainable school templates.",
-    projectIds: ["nepal"],
     themes: ["Networks"],
   },
   {
@@ -637,7 +625,14 @@ export const places: Place[] = [
     description: "LEA Park & Play × Kids Around the World · Competition · 2026",
     narrative:
       "Shade, existing trees and adaptable play create a proposal for a shared neighborhood place. The marker indicates the country; a specific site city is not identified.",
-    projectIds: ["bajo-la-sombra"],
     themes: ["Landscapes", "Networks"],
   },
 ];
+
+// A project belongs to its geographic site, not the office or school where it was developed.
+export const places: Place[] = placeEntries.map((place) => ({
+  ...place,
+  projectIds: projects
+    .filter((project) => project.place === place.id)
+    .map((project) => project.id),
+}));

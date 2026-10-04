@@ -174,14 +174,14 @@ body {
     transform: none;
   }
 }
-.featured-slide img {
+.featured-visual img {
   height: 100%;
   width: 100%;
   object-fit: cover;
   animation: perspective-drift 18s ease-in-out both;
   animation-play-state: paused;
 }
-.featured-projects[data-moving="true"] .featured-slide img {
+.featured-projects[data-moving="true"] .featured-visual--incoming img {
   animation-play-state: running;
 }
 @keyframes perspective-drift {
@@ -1704,7 +1704,7 @@ body {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .featured-slide img,
+  .featured-visual img,
   .atlas-portal::before,
   .atlas-scroll-link span {
     animation: none;
@@ -2027,6 +2027,111 @@ body {
   }
   .atlas-project-list .project-preview {
     aspect-ratio: 1.65;
+  }
+}
+
+/* Keep interaction surfaces still; motion belongs to the artwork inside them. */
+html.lenis {
+  scroll-behavior: auto;
+}
+html {
+  scrollbar-gutter: stable;
+}
+.atlas-portal {
+  isolation: isolate;
+}
+.atlas-contour-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.atlas-contour-field svg {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.atlas-contours {
+  fill: none;
+  stroke: #c6d3ad;
+  stroke-width: 0.7;
+  opacity: 0.09;
+}
+.atlas-flow-line {
+  stroke-width: 1.1;
+  stroke-dasharray: 2 14;
+  animation: atlas-current 36s linear infinite;
+}
+@keyframes atlas-current {
+  to {
+    stroke-dashoffset: -320;
+  }
+}
+.featured-stage {
+  isolation: isolate;
+}
+.featured-visual {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.featured-visual--outgoing {
+  z-index: 0;
+}
+.featured-visual--outgoing img {
+  animation: none;
+  transform: scale(1.02);
+}
+.featured-visual--incoming {
+  z-index: 1;
+}
+.featured-slide {
+  z-index: 2;
+}
+.featured-arrows {
+  z-index: 3;
+}
+.featured-timeline,
+.featured-status {
+  z-index: 4;
+}
+.preview-art {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.project-card,
+.paper-card {
+  transform: none;
+}
+.atlas-project-list .project-preview img {
+  filter: saturate(0.68) brightness(0.94);
+}
+.atlas-project-list a:is(:hover, :focus-visible) .project-preview img {
+  filter: saturate(0.78) brightness(0.96);
+}
+.atlas-project-list a:is(:hover, :focus-visible) .project-preview::after {
+  opacity: 0.15;
+}
+.atlas-globe .globe-marker {
+  transition:
+    background-color 0.25s,
+    border-color 0.25s,
+    color 0.25s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .atlas-flow-line,
+  .featured-visual img {
+    animation: none;
+  }
+  .project-preview img {
+    transition: none;
+  }
+  .project-card-link:hover .project-preview img,
+  .atlas-project-list a:is(:hover, :focus-visible) .project-preview img {
+    transform: none;
   }
 }
 @media (prefers-reduced-motion: reduce) {

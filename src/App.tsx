@@ -6,6 +6,10 @@ import Portfolio from "./components/Portfolio";
 import ProjectDetail from "./components/ProjectDetail";
 import PaperDetail from "./components/PaperDetail";
 import ResumePage from "./components/ResumePage";
+import useSmoothScroll, {
+  scrollToPosition,
+  scrollToSection,
+} from "./hooks/useSmoothScroll";
 
 const getProjectId = () =>
   window.location.hash.startsWith("#project/")
@@ -27,6 +31,7 @@ const sectionTarget = (hash: string) =>
             : hash.slice(1) || "globe";
 
 export default function App() {
+  useSmoothScroll();
   const [projectId, setProjectId] = useState(getProjectId);
   const [paperId, setPaperId] = useState(() =>
     window.location.hash.startsWith("#paper/")
@@ -67,15 +72,8 @@ export default function App() {
         setView(getView());
         cancelAnimationFrame(frame);
         frame = requestAnimationFrame(() => {
-          if (restoringDetail)
-            window.scrollTo({
-              top: returnScroll.current!,
-              behavior: "instant",
-            });
-          else
-            document
-              .getElementById(sectionTarget(window.location.hash))
-              ?.scrollIntoView();
+          if (restoringDetail) scrollToPosition(returnScroll.current!, true);
+          else scrollToSection(sectionTarget(window.location.hash));
         });
       }
     };
@@ -88,11 +86,10 @@ export default function App() {
   }, []);
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
-      const target = document.getElementById(
-        sectionTarget(window.location.hash),
+      scrollToSection(
+        view === "resume" ? "resume" : sectionTarget(window.location.hash),
+        true,
       );
-      if (target) target.scrollIntoView({ behavior: "instant" });
-      else window.scrollTo(0, 0);
     });
     return () => cancelAnimationFrame(frame);
   }, [view]);
@@ -125,8 +122,6 @@ export default function App() {
         onClickCapture={(event) => {
           const link = (event.target as HTMLElement).closest("a");
           const href = link?.getAttribute("href");
-          if (href?.startsWith("#") && href === window.location.hash)
-            document.getElementById(sectionTarget(href))?.scrollIntoView();
           if (link?.getAttribute("href") === "#work")
             window.dispatchEvent(new Event("show-all-work"));
           if (
@@ -135,6 +130,24 @@ export default function App() {
           ) {
             returnHash.current = window.location.hash || "#globe";
             returnScroll.current = window.scrollY;
+          }
+          // Own in-page navigation so the browser's anchor jump does not race the smooth scroll.
+          if (
+            href?.startsWith("#") &&
+            link?.target !== "_blank" &&
+            !event.ctrlKey &&
+            !event.metaKey &&
+            !event.shiftKey &&
+            !event.altKey
+          ) {
+            event.preventDefault();
+            if (href === window.location.hash) {
+              if (!href.startsWith("#project/") && !href.startsWith("#paper/"))
+                scrollToSection(sectionTarget(href));
+            } else {
+              window.history.pushState(null, "", href);
+              window.dispatchEvent(new HashChangeEvent("hashchange"));
+            }
           }
         }}
       >

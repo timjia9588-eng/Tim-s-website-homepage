@@ -10,6 +10,7 @@ import { places, projects } from "../data/projects";
 import { publications } from "../data/story";
 import PlacePicker from "./PlacePicker";
 import ProjectPreview from "./ProjectPreview";
+import AtlasContours from "./AtlasContours";
 const Globe = lazy(() => import("./Globe"));
 
 export default function Portal() {
@@ -43,6 +44,7 @@ export default function Portal() {
       className="globe-portal atlas-portal"
       aria-label="An atlas of design and inquiry"
     >
+      <AtlasContours />
       <header className="atlas-header">
         <a href="#globe" className="atlas-wordmark">
           tim jia<span>.</span>
@@ -99,7 +101,11 @@ export default function Portal() {
           Discover the research →
         </a>
       </div>
-      <aside className="atlas-browser" aria-label="Browse projects by place">
+      <aside
+        className="atlas-browser"
+        aria-label="Browse projects by place"
+        data-lenis-prevent
+      >
         <div className="atlas-place-selector">
           <PlacePicker selected={selected} onSelect={setSelected} />
         </div>
@@ -107,8 +113,8 @@ export default function Portal() {
           <motion.div
             className="atlas-place-content"
             key={selected}
-            initial={{ opacity: 0, y: reduced ? 0 : 10 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
           >

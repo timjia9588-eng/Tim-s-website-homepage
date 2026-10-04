@@ -1,29 +1,8 @@
-import { motion, useReducedMotion } from "framer-motion";
 import type { Project } from "../types";
 import ProjectPreview from "./ProjectPreview";
-export default function ProjectCard({
-  project,
-  index,
-}: {
-  project: Project;
-  index: number;
-}) {
-  const reduced = useReducedMotion();
+export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <motion.article
-      className="project-card"
-      initial={reduced ? false : { opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      whileHover={
-        reduced ? undefined : { y: -4, transition: { duration: 0.3, delay: 0 } }
-      }
-      viewport={{ once: true }}
-      transition={{
-        duration: reduced ? 0 : 0.75,
-        delay: reduced ? 0 : (index % 2) * 0.06,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-    >
+    <article className="project-card">
       <a
         href={`#project/${project.id}`}
         className="project-card-link"
@@ -62,6 +41,6 @@ export default function ProjectCard({
           </span>
         </div>
       </a>
-    </motion.article>
+    </article>
   );
 }

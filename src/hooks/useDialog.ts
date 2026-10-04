@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { setScrollLocked } from "./useSmoothScroll";
 const focusable =
   'a[href],button:not([disabled]),input,select,textarea,[tabindex="0"]';
 let scrollLocks = 0;
@@ -13,6 +14,7 @@ export function useDialog(onClose: () => void, backgroundId: string) {
     const priorInert = background?.inert ?? false;
     if (scrollLocks === 0) originalOverflow = document.body.style.overflow;
     scrollLocks += 1;
+    setScrollLocked(true);
     document.body.style.overflow = "hidden";
     if (background) background.inert = true;
     const frame = requestAnimationFrame(() => {
@@ -56,7 +58,10 @@ export function useDialog(onClose: () => void, backgroundId: string) {
       cancelAnimationFrame(frame);
       document.removeEventListener("keydown", handleKey);
       scrollLocks -= 1;
-      if (scrollLocks === 0) document.body.style.overflow = originalOverflow;
+      if (scrollLocks === 0) {
+        document.body.style.overflow = originalOverflow;
+        setScrollLocked(false);
+      }
       if (background) background.inert = priorInert;
       if (previousFocus?.isConnected)
         previousFocus.focus({ preventScroll: true });

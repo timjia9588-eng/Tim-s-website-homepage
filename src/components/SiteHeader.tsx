@@ -53,7 +53,7 @@ export default function SiteHeader() {
           if ((event.target as HTMLElement).closest("a")) setMenu(false);
         }}
       >
-        <a className="wordmark" href="#simple" aria-label="Tim Jia home">
+        <a className="wordmark" href="#globe" aria-label="Tim Jia home">
           tim jia<span className="wordmark-period">.</span>
         </a>
         <div className="desktop-links">

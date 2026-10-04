@@ -6,8 +6,6 @@ import Reveal from "./Reveal";
 import ProjectCard from "./ProjectCard";
 import FeaturedProjects from "./FeaturedProjects";
 import Portal from "./Portal";
-import ScrollScene from "./ScrollScene";
-import { motion, useReducedMotion } from "framer-motion";
 
 type Filter = "all" | "practice" | "studies" | "research";
 const filters: { id: Filter; label: string; hash: string }[] = [
@@ -78,16 +76,8 @@ function PaperCard({
   paper: Publication;
   featured?: boolean;
 }) {
-  const reduced = useReducedMotion();
   return (
-    <motion.article
-      className={`paper-card ${featured ? "paper-card--featured" : ""}`}
-      initial={reduced ? false : { opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      whileHover={reduced ? undefined : { y: -4 }}
-      transition={{ duration: reduced ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] }}
-    >
+    <article className={`paper-card ${featured ? "paper-card--featured" : ""}`}>
       <a
         href={`#paper/${paper.id}`}
         aria-label={`Read introduction to ${paper.shortTitle}`}
@@ -104,7 +94,7 @@ function PaperCard({
           <strong>Explore the research →</strong>
         </div>
       </a>
-    </motion.article>
+    </article>
   );
 }
 function Work() {
@@ -140,7 +130,7 @@ function Work() {
   return (
     <section className="work-section section-space" id="work">
       <div className="page-width">
-        <ScrollScene className="work-heading">
+        <div className="work-heading">
           <div>
             <h2>Work, in perspective.</h2>
           </div>
@@ -149,7 +139,7 @@ function Work() {
             <br />
             Explore the work that shapes my practice.
           </p>
-        </ScrollScene>
+        </div>
         <div className="work-browser">
           <div
             className="work-filters"
@@ -201,9 +191,9 @@ function Work() {
           )}
         </div>
         <div className="project-grid">
-          {work.map((entry, i) =>
+          {work.map((entry) =>
             entry.type === "project" ? (
-              <ProjectCard key={entry.id} project={entry.project} index={i} />
+              <ProjectCard key={entry.id} project={entry.project} />
             ) : (
               <PaperCard key={entry.id} paper={entry.paper} />
             ),
@@ -232,7 +222,7 @@ function Research() {
   return (
     <section className="research-feature section-space" id="research">
       <div className="page-width">
-        <ScrollScene className="research-heading">
+        <div className="research-heading">
           <div>
             <p className="eyebrow">Research & writing</p>
             <h2>
@@ -246,7 +236,7 @@ function Research() {
             ways people learn, belong and act within it. At Harvard Project
             Zero, that inquiry became two collaborative working papers.
           </p>
-        </ScrollScene>
+        </div>
         <div className="research-paper-grid">
           {publications.map((p) => (
             <PaperCard key={p.id} paper={p} featured />
@@ -268,7 +258,7 @@ function About() {
   return (
     <section className="about-practice section-space" id="about">
       <div className="page-width">
-        <ScrollScene className="about-practice-intro">
+        <div className="about-practice-intro">
           <div>
             <p className="eyebrow">About my practice</p>
             <h2>
@@ -293,7 +283,7 @@ function About() {
               Read my resume →
             </a>
           </div>
-        </ScrollScene>
+        </div>
         <div className="practice-notes">
           {chapters.map((c, i) => (
             <Reveal key={c.theme}>
@@ -315,7 +305,7 @@ export default function Portfolio() {
         <div className="atlas-transition" aria-hidden="true" />
         <SiteHeader />
         <section className="portfolio-hero" id="top">
-          <ScrollScene className="portfolio-hero-intro page-width">
+          <div className="portfolio-hero-intro page-width">
             <div>
               <h2 className="portfolio-headline">
                 Places for people.
@@ -332,11 +322,11 @@ export default function Portfolio() {
                 Explore all work →
               </a>
             </div>
-          </ScrollScene>
+          </div>
           <div className="page-width">
-            <ScrollScene expand>
+            <div>
               <FeaturedProjects />
-            </ScrollScene>
+            </div>
           </div>
         </section>
         <Work />
@@ -346,7 +336,7 @@ export default function Portfolio() {
       <footer className="portfolio-footer">
         <div className="page-width">
           <div>
-            <a className="wordmark" href="#simple">
+            <a className="wordmark" href="#globe">
               tim jia.
             </a>
             <p>Landscape design, research & the possibilities of place.</p>

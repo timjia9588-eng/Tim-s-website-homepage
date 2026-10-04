@@ -88,6 +88,7 @@ export default function PlacePicker({
           aria-labelledby={labelId}
           aria-activedescendant={`${prefix}-${active}`}
           className="place-picker-menu"
+          data-lenis-prevent
           onKeyDown={(event) => {
             if (["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) {
               event.preventDefault();

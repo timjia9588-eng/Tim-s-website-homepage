@@ -115,6 +115,17 @@ export default function Globe({
       globe.add(mesh);
       return { id: p.id, position, mesh, themes: p.themes };
     });
+    const locatorMaterial = new THREE.MeshBasicMaterial({
+      color: 0xd8e3bf,
+      transparent: true,
+      opacity: 0.3,
+      depthWrite: false,
+    });
+    const locator = new THREE.Mesh(
+      new THREE.RingGeometry(0.075, 0.082, 48),
+      locatorMaterial,
+    );
+    globe.add(locator);
     let cancelled = false,
       frame = 0,
       lastTime = 0,
@@ -233,6 +244,10 @@ export default function Globe({
       }
     }
     addLand();
+    const labelSizes = new Map<string, { width: number; height: number }>();
+    document.fonts.ready.then(() => {
+      if (!cancelled) labelSizes.clear();
+    });
     const resize = new ResizeObserver(() => {
       if (!host.clientWidth || !host.clientHeight) return;
       camera.aspect = host.clientWidth / host.clientHeight;
@@ -240,6 +255,7 @@ export default function Globe({
       camera.position.normalize().multiplyScalar(distance);
       camera.updateProjectionMatrix();
       renderer.setSize(host.clientWidth, host.clientHeight);
+      labelSizes.clear();
     });
     resize.observe(host);
     const observer = new IntersectionObserver(
@@ -260,7 +276,10 @@ export default function Globe({
       const radius =
         ((2.5 / Math.sqrt(camera.position.lengthSq() - 6.25)) * rect.height) /
         (2 * Math.tan((20 * Math.PI) / 180));
-      const next = x * x + y * y < radius * radius;
+      // Labels can extend outside the sphere. Keep them still while they are being pointed at.
+      const next =
+        Boolean((event.target as HTMLElement).closest(".globe-marker")) ||
+        x * x + y * y < radius * radius;
       if (hovering && !next) resumeAt = performance.now() + 2400;
       hovering = next;
     };
@@ -341,6 +360,17 @@ export default function Globe({
         width: number;
         height: number;
       }[] = [];
+      const selectedDot = dots.find((dot) => dot.id === selection.current);
+      if (selectedDot) {
+        locator.position.copy(selectedDot.position).multiplyScalar(1.003);
+        locator.lookAt(selectedDot.position.clone().multiplyScalar(2));
+        locator.scale.setScalar(
+          pausedRef.current ? 1 : 1.15 + Math.sin(time * 0.0014) * 0.18,
+        );
+        locatorMaterial.opacity = pausedRef.current
+          ? 0.35
+          : 0.28 + Math.sin(time * 0.0014) * 0.1;
+      }
       const orderedDots = [...dots].sort(
         (a, b) =>
           Number(b.id === selection.current) -
@@ -368,8 +398,13 @@ export default function Globe({
           y > host.clientHeight;
         if (button.hidden) continue;
         button.style.opacity = relevant ? "1" : ".3";
-        const width = button.offsetWidth,
-          height = button.offsetHeight;
+        // Font/viewport changes invalidate measurements; rotation does not force layout every frame.
+        let size = labelSizes.get(dot.id);
+        if (!size) {
+          size = { width: button.offsetWidth, height: button.offsetHeight };
+          labelSizes.set(dot.id, size);
+        }
+        const { width, height } = size;
         const left = Math.max(
           6,
           Math.min(host.clientWidth - width - 6, x + ox),

@@ -4,6 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#101b18" />
+    <script>
+      // Set this before the browser restores a previous scroll position.
+      history.scrollRestoration = "manual";
+      if (["#top", "#simple"].includes(location.hash)) {
+        history.replaceState(
+          null,
+          "",
+          location.pathname + location.search + "#globe",
+        );
+      }
+      if (!location.hash || location.hash === "#globe") {
+        scrollTo({ top: 0, behavior: "instant" });
+      }
+    </script>
     <title>Tim Jia — Landscape Designer & Researcher</title>
     <meta
       name="description"

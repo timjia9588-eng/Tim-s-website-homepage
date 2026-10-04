@@ -1,10 +1,15 @@
 import type { Project } from "../types";
 import dimensions from "../data/image-sizes.json";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
 
 const sizes = dimensions as Record<string, { width: number; height: number }>;
 
 /** A reading-size preview; complete research figures stay on the project page. */
 export default function ProjectPreview({ project }: { project: Project }) {
+  const reduced = useReducedMotion();
+  const preview = useRef<HTMLDivElement>(null);
+  const inView = useInView(preview, { once: true, amount: 0.15 });
   if (project.id === "xiaozhou") {
     return (
       <div
@@ -35,22 +40,33 @@ export default function ProjectPreview({ project }: { project: Project }) {
   );
   return (
     <div
+      ref={preview}
       className={`project-preview ${drawing ? "project-preview--drawing" : ""}`}
     >
-      <img
-        src={src}
-        srcSet={
-          size && smallWidth < size.width
-            ? `${src.replace(".webp", "-small.webp")} ${smallWidth}w, ${src} ${size.width}w`
-            : undefined
-        }
-        sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1100px) 44vw, 430px"
-        width={size?.width}
-        height={size?.height}
-        alt={project.preview?.alt || project.coverAlt}
-        loading="lazy"
-        decoding="async"
-      />
+      <motion.div
+        className="preview-art"
+        initial={reduced ? false : { clipPath: "inset(0% 0% 100% 0%)" }}
+        animate={{
+          clipPath:
+            reduced || inView ? "inset(0% 0% 0% 0%)" : "inset(0% 0% 100% 0%)",
+        }}
+        transition={{ duration: reduced ? 0 : 0.85, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <img
+          src={src}
+          srcSet={
+            size && smallWidth < size.width
+              ? `${src.replace(".webp", "-small.webp")} ${smallWidth}w, ${src} ${size.width}w`
+              : undefined
+          }
+          sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1100px) 44vw, 430px"
+          width={size?.width}
+          height={size?.height}
+          alt={project.preview?.alt || project.coverAlt}
+          loading="lazy"
+          decoding="async"
+        />
+      </motion.div>
     </div>
   );
 }

@@ -1,15 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useIsPresent,
-  useReducedMotion,
-} from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { preload } from "react-dom";
 import { projects } from "../data/projects";
-import type { Category, Project } from "../types";
+import type { Category } from "../types";
 
-// Large covers are chosen separately from the complete project galleries.
+// One perspective per project; large covers are chosen separately from galleries.
 const featured = [
   ["weaving", "/images/weaving/cover.webp", "Entrance"],
   ["phillips", "/images/phillips/cover.webp", "Quarry landscape"],
@@ -21,7 +16,7 @@ const featured = [
   project: projects.find((p) => p.id === id)!,
   image,
   perspective,
-  key: `${id}-${perspective}`,
+  key: id,
 }));
 const duration = 4500;
 const context: Record<Category, string> = {
@@ -30,75 +25,69 @@ const context: Record<Category, string> = {
   Personal: "Independent work",
   Research: "Research",
 };
-
-function FeaturedSlide({
-  project,
-  image,
-  reduced,
-  first,
-}: {
-  project: Project;
-  image: string;
-  reduced: boolean;
-  first: boolean;
-}) {
-  const present = useIsPresent();
-  return (
-    <motion.a
-      className="featured-slide"
-      href={`#project/${project.id}`}
-      aria-label={`View ${project.title}`}
-      aria-hidden={!present}
-      tabIndex={present ? 0 : -1}
-      style={{ pointerEvents: present ? "auto" : "none" }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: reduced ? 0 : 0.8 }}
-    >
-      <img
-        src={image}
-        alt={
-          project.images.find((figure) => figure.src === image)?.alt ||
-          project.coverAlt
-        }
-        fetchPriority={first ? "high" : "auto"}
-      />
-      <div className="featured-shade" />
-      <motion.div
-        className="featured-caption"
-        initial={{ opacity: 0, y: reduced ? 0 : 14 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: reduced ? 0 : 0.65, delay: reduced ? 0 : 0.12 }}
-      >
-        <p>
-          {context[project.category]} · {project.location}
-        </p>
-        <h2>{project.title}</h2>
-        <span>View project →</span>
-      </motion.div>
-    </motion.a>
-  );
-}
+const wrap = (index: number) => (index + featured.length) % featured.length;
 
 export default function FeaturedProjects() {
   const reduced = useReducedMotion();
-  const [index, setIndex] = useState(0);
+  const [requested, setRequested] = useState({ index: 0, direction: 1 });
+  const [slide, setSlide] = useState({
+    index: 0,
+    previous: null as number | null,
+    direction: 1,
+    serial: 0,
+  });
+  const [transitioning, setTransitioning] = useState(false);
   const [keyboardFocused, setKeyboardFocused] = useState(false);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [pageVisible, setPageVisible] = useState(!document.hidden);
   const ref = useRef<HTMLDivElement>(null);
   const autoActive = !keyboardFocused && !reduced && visible && pageVisible;
+  const index = slide.index;
+  const step = (amount: number) =>
+    setRequested((current) => ({
+      index: wrap(current.index + amount),
+      direction: amount,
+    }));
+
   useEffect(() => {
-    preload(featured[(index + 1) % featured.length].image, {
-      as: "image",
-      fetchPriority: "low",
-    });
+    for (const offset of [-1, 1])
+      preload(featured[wrap(index + offset)].image, {
+        as: "image",
+        fetchPriority: "low",
+      });
   }, [index]);
+
+  useEffect(() => {
+    if (requested.index === index || transitioning) return;
+    let cancelled = false;
+    const image = new Image();
+    image.src = featured[requested.index].image;
+    // Retain the outgoing image until its replacement is decoded. No blank frames on a slow connection.
+    image
+      .decode()
+      .then(() => {
+        if (cancelled) return;
+        setTransitioning(!reduced);
+        setSlide((current) => ({
+          index: requested.index,
+          previous: reduced ? null : current.index,
+          direction: requested.direction,
+          serial: current.serial + 1,
+        }));
+      })
+      .catch(() => {
+        if (!cancelled) setRequested({ index, direction: 1 });
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [requested, index, transitioning, reduced]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([e]) => setVisible(e.isIntersecting),
-      { threshold: 0.2 },
+      ([entry]) =>
+        setVisible(entry.isIntersecting && entry.intersectionRatio >= 0.2),
+      { threshold: [0, 0.2] },
     );
     if (ref.current) observer.observe(ref.current);
     const change = () => setPageVisible(!document.hidden);
@@ -108,14 +97,16 @@ export default function FeaturedProjects() {
       document.removeEventListener("visibilitychange", change);
     };
   }, []);
+
   useEffect(() => {
     if (!autoActive) return;
     const timer = window.setTimeout(
-      () => setIndex((i) => (i + 1) % featured.length),
+      () => setRequested({ index: wrap(index + 1), direction: 1 }),
       duration,
     );
     return () => window.clearTimeout(timer);
   }, [index, autoActive]);
+
   const entry = featured[index];
   const p = entry.project;
   const coverImage = p.images.find((image) => image.src === entry.image);
@@ -127,49 +118,97 @@ export default function FeaturedProjects() {
       aria-roledescription="carousel"
       aria-label="Featured projects"
       data-moving={autoActive}
-      onFocusCapture={(e) =>
-        setKeyboardFocused(e.target.matches(":focus-visible"))
+      data-transitioning={transitioning}
+      onFocusCapture={(event) =>
+        setKeyboardFocused(event.target.matches(":focus-visible"))
       }
       onKeyDownCapture={(event) => {
         setKeyboardFocused(true);
         if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
           event.preventDefault();
-          setIndex(
-            (i) =>
-              (i + (event.key === "ArrowRight" ? 1 : -1) + featured.length) %
-              featured.length,
-          );
-          // Keep focus on a stable progress control when the image link changes.
+          const next = event.key === "ArrowRight";
+          step(next ? 1 : -1);
           ref.current
             ?.querySelector<HTMLButtonElement>(
-              ".featured-timeline button[aria-current]",
+              `.featured-arrow--${next ? "next" : "previous"}`,
             )
             ?.focus();
         }
       }}
       onPointerDownCapture={() => setKeyboardFocused(false)}
-      onBlurCapture={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget))
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget))
           setKeyboardFocused(false);
       }}
     >
       <div className="featured-stage" aria-live={autoActive ? "off" : "polite"}>
-        <AnimatePresence initial={false}>
-          <FeaturedSlide
-            key={entry.key}
-            project={p}
-            image={entry.image}
-            reduced={Boolean(reduced)}
-            first={index === 0}
+        {slide.previous !== null && (
+          <div
+            className="featured-visual featured-visual--outgoing"
+            aria-hidden="true"
+          >
+            <img src={featured[slide.previous].image} alt="" />
+          </div>
+        )}
+        <motion.div
+          key={slide.serial}
+          className="featured-visual featured-visual--incoming"
+          aria-hidden="true"
+          initial={
+            reduced || slide.serial === 0
+              ? false
+              : {
+                  clipPath:
+                    slide.direction > 0
+                      ? "inset(0% 100% 0% 0%)"
+                      : "inset(0% 0% 0% 100%)",
+                }
+          }
+          animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
+          transition={{ duration: reduced ? 0 : 0.9, ease: [0.76, 0, 0.24, 1] }}
+          onAnimationComplete={() => {
+            setTransitioning(false);
+            setSlide((current) =>
+              current.serial === slide.serial
+                ? { ...current, previous: null }
+                : current,
+            );
+          }}
+        >
+          <img
+            src={entry.image}
+            alt=""
+            fetchPriority={index === 0 ? "high" : "auto"}
           />
-        </AnimatePresence>
+        </motion.div>
+        <a
+          className="featured-slide"
+          href={`#project/${p.id}`}
+          aria-label={`View ${p.title}`}
+        >
+          <div className="featured-shade" />
+          <motion.div
+            key={p.id}
+            className="featured-caption"
+            initial={reduced ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{
+              duration: reduced ? 0 : 0.4,
+              delay: reduced ? 0 : 0.2,
+            }}
+          >
+            <p>
+              {context[p.category]} · {p.location}
+            </p>
+            <h2>{p.title}</h2>
+            <span>View project →</span>
+          </motion.div>
+        </a>
         <div className="featured-arrows">
           <button
             className="featured-arrow featured-arrow--previous"
             aria-label="Previous featured project"
-            onClick={() =>
-              setIndex((i) => (i - 1 + featured.length) % featured.length)
-            }
+            onClick={() => step(-1)}
           >
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="m14 6-6 6 6 6" />
@@ -178,7 +217,7 @@ export default function FeaturedProjects() {
           <button
             className="featured-arrow featured-arrow--next"
             aria-label="Next featured project"
-            onClick={() => setIndex((i) => (i + 1) % featured.length)}
+            onClick={() => step(1)}
           >
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="m10 6 6 6-6 6" />
@@ -194,7 +233,9 @@ export default function FeaturedProjects() {
               key={key}
               aria-label={`Show ${project.title} — ${perspective}`}
               aria-current={i === index ? "true" : undefined}
-              onClick={() => setIndex(i)}
+              onClick={() =>
+                setRequested({ index: i, direction: i >= index ? 1 : -1 })
+              }
             >
               <span className="featured-track">
                 {i === index && (
