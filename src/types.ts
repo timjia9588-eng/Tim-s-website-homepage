@@ -7,6 +7,10 @@ export interface ProjectImage {
   caption: string;
   source?: string;
   credit?: string;
+  description?: string;
+  group?: string;
+  groupDescription?: string;
+  legend?: { key: string; name: string }[];
 }
 
 export interface Project {

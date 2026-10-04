@@ -1,9 +1,87 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import type { Project } from "../types";
+import type { Project, ProjectImage } from "../types";
+import dimensions from "../data/image-sizes.json";
 import { useDialog } from "../hooks/useDialog";
 import Lightbox from "./Lightbox";
 import Reveal from "./Reveal";
+const imageSizes = dimensions as Record<
+  string,
+  { width: number; height: number }
+>;
+function GalleryFigure({
+  image,
+  number,
+  onEnlarge,
+}: {
+  image: ProjectImage;
+  number: number;
+  onEnlarge: () => void;
+}) {
+  const size = imageSizes[image.src];
+  return (
+    <figure>
+      <button
+        className="gallery-image"
+        onClick={onEnlarge}
+        aria-label={`Enlarge ${image.caption}`}
+      >
+        <img
+          src={image.src}
+          alt={image.alt}
+          loading="lazy"
+          decoding="async"
+          {...size}
+          style={{
+            width: size?.width,
+            aspectRatio: size ? `${size.width} / ${size.height}` : undefined,
+          }}
+        />
+        <span className="image-enlarge" aria-hidden="true">
+          +
+        </span>
+      </button>
+      <figcaption>
+        <div className="figure-caption-text">
+          <p>
+            <span className="figure-index">
+              {String(number).padStart(2, "0")}
+            </span>
+            {image.caption}
+          </p>
+          {image.description && (
+            <p className="figure-description">{image.description}</p>
+          )}
+        </div>
+        <span className="figure-credit">
+          {image.credit}
+          {image.source && (
+            <>
+              {" "}
+              ·{" "}
+              <a href={image.source} target="_blank" rel="noreferrer">
+                Original source
+              </a>
+            </>
+          )}
+        </span>
+      </figcaption>
+      {image.legend && (
+        <details className="figure-legend">
+          <summary>Planting key · {image.legend.length} species</summary>
+          <dl>
+            {image.legend.map((entry) => (
+              <div key={entry.key}>
+                <dt>{entry.key}</dt>
+                <dd>{entry.name}</dd>
+              </div>
+            ))}
+          </dl>
+        </details>
+      )}
+    </figure>
+  );
+}
 export default function ProjectDetail({
   project,
   next,
@@ -40,7 +118,28 @@ export default function ProjectDetail({
   const galleryImages = project.images.filter(
     (image) => image.src !== (project.detailCover || project.cover),
   );
+  const galleryGroups = galleryImages.reduce<
+    {
+      name?: string;
+      description?: string;
+      images: ProjectImage[];
+      start: number;
+    }[]
+  >((groups, image, index) => {
+    const previous = groups.at(-1);
+    if (image.group && previous?.name === image.group)
+      previous.images.push(image);
+    else
+      groups.push({
+        name: image.group,
+        description: image.groupDescription,
+        images: [image],
+        start: index,
+      });
+    return groups;
+  }, []);
   const detailCover = project.detailCover || project.cover;
+  const detailCoverSize = detailCover ? imageSizes[detailCover] : undefined;
   const detailCoverAlt =
     project.images.find((image) => image.src === detailCover)?.alt ||
     project.coverAlt;
@@ -113,6 +212,8 @@ export default function ProjectDetail({
                 src={detailCover}
                 alt={detailCoverAlt}
                 fetchPriority="high"
+                {...detailCoverSize}
+                style={{ width: detailCoverSize?.width }}
               />
               <span className="image-enlarge" aria-hidden="true">
                 +
@@ -186,56 +287,41 @@ export default function ProjectDetail({
                 enlarge
               </span>
             </div>
-            {galleryImages.map((image, i) => (
-              <Reveal key={image.src}>
-                <figure>
-                  <button
-                    className="gallery-image"
-                    onClick={() =>
-                      setLightbox(
-                        viewerImages.findIndex(
-                          (item) => item.src === image.src,
-                        ),
-                      )
-                    }
-                    aria-label={`Enlarge ${image.caption}`}
-                  >
-                    <img
-                      src={image.src}
-                      alt={image.alt}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <span className="image-enlarge" aria-hidden="true">
-                      +
-                    </span>
-                  </button>
-                  <figcaption>
-                    <div>
-                      <span className="figure-index">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      {image.caption}
-                    </div>
-                    <span>
-                      {image.credit}
-                      {image.source ? (
-                        <>
-                          {" "}
-                          ·{" "}
-                          <a
-                            href={image.source}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            Original source
-                          </a>
-                        </>
-                      ) : null}
-                    </span>
-                  </figcaption>
-                </figure>
-              </Reveal>
+            {galleryGroups.map((group) => (
+              <div
+                key={group.images[0].src}
+                className={group.name ? "gallery-group" : undefined}
+              >
+                {group.name && (
+                  <div className="gallery-group-intro">
+                    <h3>{group.name}</h3>
+                    {group.description && <p>{group.description}</p>}
+                  </div>
+                )}
+                <div
+                  className={
+                    group.name
+                      ? `gallery-comparison ${group.images.length > 4 ? "gallery-comparison--three" : ""}`
+                      : undefined
+                  }
+                >
+                  {group.images.map((image, i) => (
+                    <Reveal key={image.src}>
+                      <GalleryFigure
+                        image={image}
+                        number={group.start + i + 1}
+                        onEnlarge={() =>
+                          setLightbox(
+                            viewerImages.findIndex(
+                              (item) => item.src === image.src,
+                            ),
+                          )
+                        }
+                      />
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
             ))}
           </section>
         ) : null}

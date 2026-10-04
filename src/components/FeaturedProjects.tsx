@@ -1,21 +1,83 @@
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useIsPresent,
+  useReducedMotion,
+} from "framer-motion";
 import { preload } from "react-dom";
 import { projects } from "../data/projects";
-const featured = ["weaving", "salamanca", "phillips", "melissa"].map(
-  (id) => projects.find((p) => p.id === id)!,
-);
+import type { Category, Project } from "../types";
+
+const featured = [
+  "weaving",
+  "phillips",
+  "salamanca",
+  "bajo-la-sombra",
+  "melissa",
+  "gentilly",
+  "bamboo",
+  "alumni",
+  "sketchbook",
+].map((id) => projects.find((p) => p.id === id)!);
+const duration = 7500;
+const context: Record<Category, string> = {
+  Professional: "Professional practice",
+  Studio: "Academic design",
+  Personal: "Independent work",
+  Research: "Research",
+};
+
+function FeaturedSlide({
+  project,
+  reduced,
+  first,
+}: {
+  project: Project;
+  reduced: boolean;
+  first: boolean;
+}) {
+  const present = useIsPresent();
+  return (
+    <motion.a
+      className="featured-slide"
+      href={`#project/${project.id}`}
+      aria-label={`View ${project.title}`}
+      aria-hidden={!present}
+      tabIndex={present ? 0 : -1}
+      style={{ pointerEvents: present ? "auto" : "none" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: reduced ? 0 : 1 }}
+    >
+      <img
+        src={project.cover}
+        alt={project.coverAlt}
+        fetchPriority={first ? "high" : "auto"}
+      />
+      <div className="featured-shade" />
+      <div className="featured-caption">
+        <p>
+          {context[project.category]} · {project.location}
+        </p>
+        <h2>{project.title}</h2>
+        <span>View project →</span>
+      </div>
+    </motion.a>
+  );
+}
 
 export default function FeaturedProjects() {
   const reduced = useReducedMotion();
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
-  const [hovered, setHovered] = useState(false);
-  const [focused, setFocused] = useState(false);
-  const interacting = hovered || focused;
+  const [keyboardFocused, setKeyboardFocused] = useState(false);
   const [visible, setVisible] = useState(true);
   const [pageVisible, setPageVisible] = useState(!document.hidden);
   const ref = useRef<HTMLDivElement>(null);
+  const autoActive =
+    playing && !keyboardFocused && !reduced && visible && pageVisible;
   useEffect(() => {
     preload(featured[(index + 1) % featured.length].cover!, {
       as: "image",
@@ -36,14 +98,15 @@ export default function FeaturedProjects() {
     };
   }, []);
   useEffect(() => {
-    if (!playing || interacting || reduced || !visible || !pageVisible) return;
+    if (!autoActive) return;
     const timer = window.setTimeout(
       () => setIndex((i) => (i + 1) % featured.length),
-      6500,
+      duration,
     );
     return () => window.clearTimeout(timer);
-  }, [index, playing, interacting, reduced, visible, pageVisible]);
+  }, [index, autoActive]);
   const p = featured[index];
+  const coverImage = p.images.find((image) => image.src === p.cover);
   return (
     <div
       ref={ref}
@@ -51,46 +114,50 @@ export default function FeaturedProjects() {
       role="region"
       aria-roledescription="carousel"
       aria-label="Featured projects"
-      onPointerEnter={() => setHovered(true)}
-      onPointerLeave={() => setHovered(false)}
-      onFocusCapture={() => setFocused(true)}
+      data-moving={autoActive}
+      onFocusCapture={(e) =>
+        setKeyboardFocused(e.target.matches(":focus-visible"))
+      }
+      onKeyDownCapture={() => setKeyboardFocused(true)}
+      onPointerDownCapture={() => setKeyboardFocused(false)}
       onBlurCapture={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget)) setFocused(false);
+        if (!e.currentTarget.contains(e.relatedTarget))
+          setKeyboardFocused(false);
       }}
     >
-      <div className="featured-stage">
+      <div className="featured-stage" aria-live={autoActive ? "off" : "polite"}>
         <AnimatePresence initial={false}>
-          <motion.a
+          <FeaturedSlide
             key={p.id}
-            className="featured-slide"
-            href={`#project/${p.id}`}
-            aria-label={`View ${p.title}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reduced ? 0 : 0.8 }}
-          >
-            <img
-              src={p.cover}
-              alt={p.coverAlt}
-              fetchPriority={index === 0 ? "high" : "auto"}
-            />
-            <div className="featured-shade" />
-            <div className="featured-caption">
-              <p>
-                {p.category === "Professional"
-                  ? "Professional practice"
-                  : "Academic design"}{" "}
-                · {p.location}
-              </p>
-              <h2>{p.title}</h2>
-              <span>View project →</span>
-            </div>
-          </motion.a>
+            project={p}
+            reduced={Boolean(reduced)}
+            first={index === 0}
+          />
         </AnimatePresence>
+        <div className="featured-progress" aria-hidden="true">
+          {autoActive && (
+            <motion.div
+              key={index}
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: duration / 1000, ease: "linear" }}
+            />
+          )}
+        </div>
       </div>
       <div className="featured-controls">
-        <span className="featured-label">Selected perspectives</span>
+        <span className="featured-label">
+          Selected perspectives
+          <small>
+            {reduced
+              ? "Choose a project"
+              : keyboardFocused
+                ? "Paused for reading"
+                : playing
+                  ? "Auto play · 9 projects"
+                  : "Paused"}
+          </small>
+        </span>
         <div className="slide-selectors">
           {featured.map((f, i) => (
             <button
@@ -99,7 +166,7 @@ export default function FeaturedProjects() {
               aria-pressed={i === index}
               onClick={() => setIndex(i)}
             >
-              0{i + 1}
+              {String(i + 1).padStart(2, "0")}
             </button>
           ))}
         </div>
@@ -131,9 +198,13 @@ export default function FeaturedProjects() {
       <p className="featured-credit">
         {p.category === "Professional" ? (
           <>
-            <span>Image © {p.organization}</span>
-            <a href={p.source} target="_blank" rel="noreferrer">
-              Original source ↗
+            <span>Image · {coverImage?.credit || p.organization}</span>
+            <a
+              href={coverImage?.source || p.source}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {coverImage?.source ? "Original source ↗" : "Project context ↗"}
             </a>
           </>
         ) : (

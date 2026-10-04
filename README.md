@@ -4,7 +4,7 @@ React, TypeScript, Vite, Framer Motion, and a lazy-loaded Three.js globe.
 
 The default home page is a lit, dotted globe with a permanently visible place selector and project previews. The bottom-left “Simplistic version” link opens the self-hosted project overview at `/#simple`. Both views share local images and project details. There is no Adobe Portfolio dependency.
 
-The overview defaults to all 19 projects and two working papers. Optional category filters show Professional practice, Academic & independent, or Research & writing; a search finds projects, places and papers. Four selected projects cycle in the hero, with direct selection, pause and previous/next controls. Resume opens a separate browser tab at `/#resume`, rather than a section occupying the portfolio. Papers have their own introductions at `/#paper/place-of-learning` and `/#paper/places-of-agency`.
+The overview defaults to all 19 projects and two working papers. Optional category filters show Professional practice, Academic & independent, or Research & writing; a search finds projects, places and papers. Nine selected projects cycle in the hero every 7.5 seconds, with direct selection, pause and previous/next controls. Resume opens a separate browser tab at `/#resume`, rather than a section occupying the portfolio. Papers have their own introductions at `/#paper/place-of-learning` and `/#paper/places-of-agency`.
 
 Systems / Networks / Landscapes remain the underlying narrative, expressed through concrete questions about ecology, learning and public space. They are no longer abstract navigation filters. Research introductions explain why the work matters, how it was approached, and how it connects to design, with links to the original Project Zero working papers.
 
@@ -35,10 +35,14 @@ Changes are on `feat/react-portfolio`. Do not merge to `main` or deploy to the p
 - Each image has a full-size WebP and a smaller variant. Dimensions are listed in `src/data/image-sizes.json`.
 - `asset-sources.json` records the source portfolio page or public project URL for every exported asset.
 - Narrative chapters, related-project connections, publications and resume experience live in `src/data/story.ts`.
-- Gallery captions and links live in `src/data/visuals.json`.
+- Gallery captions, descriptions, comparison groups, species keys and links live in `src/data/visuals.json`.
 - `content-audit.md` records public evidence, removed material, and award/publication status.
 
-Projects have shareable URLs such as `/#project/phillips`. The image viewer supports keyboard navigation, zoom, and Escape. Dialogs manage focus and lock background scrolling. Motion respects the device’s reduced-motion preference. The globe is lazy loaded, pauses while hovered or being dragged, and resumes 2.4 seconds after leaving. The visible place selector provides keyboard access and a WebGL fallback. The slideshow pauses on hover/focus, when off-screen, or in a hidden tab; reduced motion disables automatic playback.
+Projects have shareable URLs such as `/#project/phillips`. The image viewer supports keyboard navigation, zoom, and Escape. Dialogs manage focus and lock background scrolling. Motion respects the device’s reduced-motion preference. The globe is lazy loaded, pauses while hovered or being dragged, and resumes 2.4 seconds after leaving. The visible place selector provides keyboard access and a WebGL fallback. The slideshow keeps playing during mouse hover and mouse selection, but pauses for keyboard focus, when off-screen, or in a hidden tab; reduced motion disables automatic playback and ambient image movement. Explicit Pause/Play controls are always available when automatic playback is enabled. Only decorative hero images move; project documentation remains still and complete.
+
+The atlas uses charcoal backgrounds and neutral panels, with green concentrated on the globe and selected accents. Gallery figures preserve their complete individual composition and intrinsic size. PARK-ing Parking separates the four adaptation phases and the nine 2050/2070/2100 scenarios into labeled comparison groups. Figure captions and explanations are website text, rather than embedded fragments of portfolio headings. Technical labels and scales that belong to the drawings remain intact.
+
+Gallery dimensions reserve space before lazy-loaded images arrive, avoiding jumps while scrolling. Small-screen slideshow controls have 44px height and wrap at narrow widths. Image attribution follows each cover's credit; a firm page used only for project background is labeled “Project context,” distinct from an original image source.
 
 Professional images remain credited to their firms and collaborators and link to the public source. Gentilly displays only Tim’s explicitly requested portfolio illustration, with the firm link retained for project context. Kyle is text-only without external government links. EDSA project images and full portfolio sheets remain excluded. The independent Bajo la Sombra competition board is shown in full at Tim’s request, extracted at its actual 1122×1402 source resolution rather than enlarged crops. Earlier Git commits remain recoverable.
 

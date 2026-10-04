@@ -109,6 +109,31 @@ body {
   height: 100%;
   width: 100%;
   object-fit: cover;
+  animation: perspective-drift 18s ease-in-out both;
+  animation-play-state: paused;
+}
+.featured-projects[data-moving="true"] .featured-slide img {
+  animation-play-state: running;
+}
+@keyframes perspective-drift {
+  from {
+    transform: scale(1.005) translateX(0);
+  }
+  to {
+    transform: scale(1.04) translateX(-0.35%);
+  }
+}
+.featured-progress {
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: #ffffff18;
+  pointer-events: none;
+}
+.featured-progress > div {
+  height: 100%;
+  background: #e1e9d4;
+  transform-origin: left;
 }
 .featured-shade {
   position: absolute;
@@ -151,6 +176,12 @@ body {
   color: var(--muted);
   margin-right: auto;
 }
+.featured-label small {
+  display: block;
+  margin-top: 5px;
+  font-size: 10px;
+  color: #859082;
+}
 .slide-selectors {
   display: flex;
   gap: 9px;
@@ -162,6 +193,7 @@ body {
   padding: 10px;
   font-size: 12px;
   color: #65736a;
+  min-height: 44px;
 }
 .slide-selectors button {
   border-bottom: 2px solid transparent;
@@ -626,6 +658,108 @@ body {
 .detail-gallery figure {
   margin-bottom: 60px;
 }
+.figure-caption-text {
+  max-width: 850px;
+}
+.figure-caption-text p {
+  margin: 0;
+}
+.figure-caption-text .figure-description {
+  max-width: 740px;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+.figure-credit {
+  flex-shrink: 0;
+}
+.gallery-group {
+  padding-top: 30px;
+  margin-bottom: 65px;
+  border-top: 1px solid var(--line);
+}
+.gallery-group-intro {
+  margin-bottom: 35px;
+}
+.gallery-group-intro h3 {
+  font-size: clamp(25px, 3vw, 36px);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+.gallery-group-intro > p {
+  max-width: 780px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+  margin-top: 15px;
+}
+.gallery-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px 28px;
+  align-items: start;
+}
+.gallery-comparison--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.gallery-comparison figure {
+  margin: 0;
+}
+.gallery-comparison figcaption {
+  display: block;
+}
+.gallery-comparison .figure-credit {
+  display: block;
+  text-align: left;
+  margin-top: 8px;
+  font-size: 10px;
+}
+.gallery-comparison .image-enlarge {
+  height: 32px;
+  width: 32px;
+  bottom: 8px;
+  right: 8px;
+  font-size: 20px;
+}
+.figure-legend {
+  margin-top: 20px;
+  padding: 15px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+}
+.figure-legend summary {
+  cursor: pointer;
+  color: var(--accent);
+}
+.figure-legend dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px 25px;
+  margin-top: 22px;
+}
+.figure-legend dl > div {
+  display: flex;
+  gap: 12px;
+}
+.figure-legend dt {
+  width: 22px;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+.figure-legend dd {
+  margin: 0;
+  font-style: italic;
+  color: var(--muted);
+}
+.lightbox-footer .lightbox-description {
+  font-size: 12px;
+  color: #adafa9;
+  line-height: 1.6;
+  max-width: 740px;
+  margin: 6px auto;
+}
 .detail-connections {
   margin-top: 15px;
 }
@@ -796,13 +930,31 @@ body {
   position: relative;
   padding: 0;
   overflow: hidden;
-  color: #e5eadf;
+  color: #eeede7;
   background: radial-gradient(
     ellipse at 48% 45%,
-    #22332b 0,
-    #14211d 36%,
-    #101b18 74%
+    #292e2c 0,
+    #1a1d1c 36%,
+    #111313 74%
   );
+}
+.atlas-portal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 40% 44%, #c5cfc31f 0, transparent 55%);
+  pointer-events: none;
+  animation: atlas-atmosphere 26s ease-in-out infinite alternate;
+}
+@keyframes atlas-atmosphere {
+  from {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0.6;
+    transform: scale(1.06) translateX(2%);
+  }
 }
 .atlas-header {
   position: absolute;
@@ -827,7 +979,7 @@ body {
 .atlas-wordmark small {
   display: block;
   font-size: 11px;
-  color: #91a491;
+  color: #a1a6a0;
   font-weight: 400;
   letter-spacing: 0.02em;
   margin-top: 12px;
@@ -848,7 +1000,7 @@ body {
   border-radius: 3px;
   font-size: 9px;
   margin-left: 6px;
-  color: #b7c5ae;
+  color: #babeb7;
 }
 .atlas-globe {
   position: absolute;
@@ -864,7 +1016,7 @@ body {
 .atlas-globe .globe-fallback {
   position: absolute;
   inset: 0;
-  background: #13251ee0;
+  background: #191d1ae0;
   z-index: 3;
   justify-content: center;
 }
@@ -873,8 +1025,8 @@ body {
   border: 1px solid #9dac952f;
   border-radius: 2px;
   padding: 5px 9px;
-  color: #cbd6c2;
-  background: #182b21c9;
+  color: #d5d9d0;
+  background: #202423d9;
   backdrop-filter: blur(5px);
   letter-spacing: 0.02em;
 }
@@ -896,7 +1048,7 @@ body {
   pointer-events: none;
 }
 .atlas-intro .eyebrow {
-  color: #91aa8c;
+  color: #a6b29e;
   font-size: 10px;
 }
 .atlas-intro h1 {
@@ -905,18 +1057,18 @@ body {
   line-height: 1.02;
   letter-spacing: -0.045em;
   margin-top: 24px;
-  text-shadow: 0 2px 30px #0e1918;
+  text-shadow: 0 2px 30px #121514;
 }
 .atlas-intro h1 em {
   font-family: Georgia, serif;
   font-weight: 400;
   letter-spacing: -0.04em;
-  color: #cddbbd;
+  color: #c9d6ba;
 }
 .atlas-intro > p:not(.eyebrow) {
   font-size: 14px;
   line-height: 1.9;
-  color: #a2b49b;
+  color: #a9ada6;
   margin-top: 30px;
 }
 .atlas-primary {
@@ -927,8 +1079,8 @@ body {
   margin-top: 36px;
   padding: 16px 20px;
   border-radius: 3px;
-  background: #e2e9d5;
-  color: #263824;
+  background: #edece3;
+  color: #2b352c;
   font-size: 13px;
   pointer-events: auto;
 }
@@ -942,7 +1094,7 @@ body {
   display: inline-block;
   margin-top: 20px;
   font-size: 12px;
-  color: #b5c6ac;
+  color: #c0c7ba;
   pointer-events: auto;
 }
 .atlas-browser {
@@ -955,9 +1107,9 @@ body {
   padding: 24px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #627563 #1e2d25;
-  background: #1e2d25b0;
-  border: 1px solid #a1b29325;
+  scrollbar-color: #697068 #232625;
+  background: #252827c7;
+  border: 1px solid #b6c0af25;
   border-radius: 5px;
   backdrop-filter: blur(22px);
 }
@@ -965,23 +1117,23 @@ body {
   width: 5px;
 }
 .atlas-browser::-webkit-scrollbar-track {
-  background: #1e2d25;
+  background: #232625;
 }
 .atlas-browser::-webkit-scrollbar-thumb {
-  background: #627563;
+  background: #697068;
   border-radius: 4px;
 }
 .atlas-place-selector label {
   font-size: 11px;
-  color: #a8bc9c;
+  color: #b6bcb0;
   display: block;
   margin-bottom: 11px;
 }
 .atlas-place-selector select {
   width: 100%;
-  background: #2a3b2de3;
-  color: #e7eddf;
-  border: 1px solid #879d722f;
+  background: #343936;
+  color: #edece5;
+  border: 1px solid #a4afa02f;
   border-radius: 3px;
   font-size: 19px;
   padding: 12px 10px;
@@ -993,17 +1145,17 @@ body {
   padding: 14px 0 20px;
   border-bottom: 1px solid #ffffff14;
   font-size: 10px;
-  color: #829d75;
+  color: #a3b196;
 }
 .atlas-place-step button {
   background: none;
   border: 0;
-  color: #b5c6ab;
+  color: #bec4b7;
   font-size: 10px;
   padding: 3px 0;
 }
 .atlas-place-context {
-  color: #839c77;
+  color: #a0a997;
   font-size: 10px;
   line-height: 1.7;
   margin-top: 20px;
@@ -1011,7 +1163,7 @@ body {
 .atlas-place-story {
   font-size: 12px;
   line-height: 1.8;
-  color: #b5c5a9;
+  color: #c0c3b9;
   margin: 12px 0 23px;
 }
 .atlas-project-list {
@@ -1033,7 +1185,7 @@ body {
 .atlas-project-list small {
   display: block;
   font-size: 9px;
-  color: #8faa83;
+  color: #a5af9b;
   margin-bottom: 6px;
 }
 .atlas-project-list h2 {
@@ -1045,7 +1197,7 @@ body {
 .atlas-project-list a > div > span {
   display: block;
   font-size: 10px;
-  color: #bdcdaa;
+  color: #c4cbbc;
   margin-top: 12px;
 }
 .atlas-project-list a:hover h2 {
@@ -1067,13 +1219,13 @@ body {
   align-items: center;
   gap: 25px;
   padding: 25px 48px;
-  color: #7a9472;
+  color: #9aa18f;
   font-size: 10px;
 }
 .atlas-bottom .simplistic-link {
   position: static;
   padding: 11px 16px;
-  background: #213426;
+  background: #292e2a;
   border: 1px solid #8ea77c44;
   border-radius: 3px;
   font-size: 11px;
@@ -1081,7 +1233,7 @@ body {
   gap: 22px;
 }
 .atlas-bottom .simplistic-link:hover {
-  background: #2f4934;
+  background: #354037;
 }
 .atlas-bottom > p {
   font-size: 10px;
@@ -1110,6 +1262,16 @@ body {
   }
 }
 @media (max-width: 1100px) {
+  .featured-controls {
+    flex-wrap: wrap;
+    gap: 12px 25px;
+  }
+  .featured-label {
+    flex-basis: 100%;
+  }
+  .slide-selectors {
+    margin-right: auto;
+  }
   .page-width {
     width: calc(100% - 60px);
   }
@@ -1243,19 +1405,30 @@ body {
     padding: 8px 0;
   }
   .featured-label {
-    display: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .featured-label small {
+    margin: 0;
   }
   .slide-selectors {
     gap: 2px;
     margin-right: auto;
+    flex-wrap: wrap;
+    max-width: 100%;
   }
   .featured-controls button {
     padding: 8px 6px;
     font-size: 10px;
     min-width: 26px;
   }
+  .slide-selectors button {
+    min-width: 34px;
+  }
   .slideshow-actions {
     gap: 2px;
+    margin-left: auto;
   }
   .featured-credit {
     font-size: 9px;
@@ -1444,11 +1617,11 @@ body {
   .atlas-portal {
     height: auto;
     min-height: 100svh;
-    overflow: visible;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     padding: 0;
-    background: radial-gradient(ellipse at 50% 36%, #24362c, #101b18 70%);
+    background: radial-gradient(ellipse at 50% 36%, #282d2b, #151716 70%);
   }
   .atlas-header {
     position: static;
@@ -1538,8 +1711,39 @@ body {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .featured-slide img,
+  .atlas-portal::before {
+    animation: none;
+  }
   .card-image img {
     transition: none;
+  }
+}
+@media (max-width: 700px) {
+  .gallery-comparison,
+  .gallery-comparison--three,
+  .figure-legend dl {
+    grid-template-columns: 1fr;
+  }
+  .gallery-comparison {
+    gap: 30px;
+  }
+  .detail-gallery figcaption {
+    display: block;
+  }
+  .detail-gallery .figure-credit {
+    display: block;
+    text-align: left;
+    margin-top: 10px;
+  }
+  .figure-caption-text .figure-description {
+    font-size: 13px;
+  }
+  .gallery-group-intro > p {
+    font-size: 14px;
+  }
+  .lightbox-footer .lightbox-description {
+    font-size: 11px;
   }
 }
 @media (min-width: 1101px) {

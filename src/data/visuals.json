@@ -9,28 +9,32 @@
     {
       "src": "/images/salamanca/masterplan.webp",
       "alt": "Master plan — reconnecting river, railway and community",
-      "caption": "Master plan — reconnecting river, railway and community",
-      "credit": "Tianzhen (Tim) Jia"
+      "caption": "Master plan — reconnecting river, habitat and community",
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "Bridges, wetlands, restored woodland, viewing mounds and community gardens form a connected landscape across the former railway site."
     },
     {
       "src": "/images/salamanca/bridge.webp",
       "alt": "Bridge and planting — responding to changing water levels",
-      "caption": "Bridge and planting — responding to changing water levels",
-      "credit": "Tianzhen (Tim) Jia"
+      "caption": "Bringing bonds to the community",
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "Community gardens reuse treated ground; a terraced ridgeline organizes movement; a permeable plaza supports gathering; and capped soil forms a viewing mound. The bridge connects these spaces across the site."
     }
   ],
   "weaving": [
     {
       "src": "/images/weaving/plan.webp",
       "alt": "Master plan — outdoor learning, access and cultural memory",
-      "caption": "Master plan — outdoor learning, access and cultural memory",
-      "credit": "Tianzhen (Tim) Jia"
+      "caption": "Master plan — weaving cultural memory into everyday use",
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "Platforms, ramps, planting and a commemorative wall connect places to study, gather and hold outdoor classes."
     },
     {
       "src": "/images/weaving/section.webp",
       "alt": "Landscape section — everyday use and outdoor learning",
-      "caption": "Landscape section — everyday use and outdoor learning",
-      "credit": "Tianzhen (Tim) Jia"
+      "caption": "A section through learning and gathering",
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "Changes in level create places for individual study, conversation and outdoor learning. The section relates these activities to the planting and the campus edge."
     },
     {
       "src": "/images/weaving/cover.webp",
@@ -55,8 +59,9 @@
     {
       "src": "/images/wetland-utopia/routes.webp",
       "alt": "Shipping routes and habitat relationships",
-      "caption": "Shipping routes and habitat relationships",
-      "credit": "Tianzhen (Tim) Jia"
+      "caption": "Ship-route study — moving through the Pearl River delta",
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "The route study compares the large river channel with its smaller tributaries. Passenger boats, cargo ships, fishing boats and pleasure craft use different parts of this network; these movements inform the proposed tour route."
     },
     {
       "src": "/images/wetland-utopia/restoration.webp",
@@ -134,21 +139,117 @@
     },
     {
       "src": "/images/parking/model.webp",
-      "alt": "Physical model — waterfront topography",
-      "caption": "Physical model — waterfront topography",
-      "credit": "Tianzhen (Tim) Jia"
+      "alt": "Physical model — testing the waterfront topography",
+      "caption": "Physical model — testing the waterfront topography",
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "A layered terrain model studies the relationship between the existing industrial edge and the proposed waterfront landform."
     },
     {
-      "src": "/images/parking/phases.webp",
-      "alt": "Phased adaptation — waterfront sections",
-      "caption": "Phased adaptation — waterfront sections",
-      "credit": "Tianzhen (Tim) Jia"
+      "src": "/images/parking/cut-and-fill.webp",
+      "alt": "Cut & fill — from industrial ground to a living shoreline",
+      "caption": "Cut & fill — from industrial ground to a living shoreline",
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "Depressions collect water while raised landforms create new habitat. The study brings wetland pockets, planting and a gradually naturalized Autoport into one continuous waterfront."
     },
     {
       "src": "/images/parking/plan.webp",
-      "alt": "Waterfront master plan",
-      "caption": "Waterfront master plan",
-      "credit": "Tianzhen (Tim) Jia"
+      "alt": "Master plan — a connected, adaptive waterfront",
+      "caption": "Master plan — a connected, adaptive waterfront",
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "Swamp pockets, wetland depressions, a wildlife observatory and the naturalized Autoport connect along the waterfront. The plan brings public access and ecological adaptation together."
+    },
+    {
+      "src": "/images/parking/phase-1.webp",
+      "alt": "Phase 1 — Planning and preparation",
+      "caption": "Phase 1 — Planning and preparation",
+      "credit": "Tianzhen (Tim) Jia",
+      "group": "A waterfront that changes in stages",
+      "groupDescription": "Read the four phases in order: preparation, relocation, construction, then ecological restoration. These are design scenarios for the proposal."
+    },
+    {
+      "src": "/images/parking/phase-2.webp",
+      "alt": "Phase 2 — Relocation of critical neighborhoods",
+      "caption": "Phase 2 — Relocation of critical neighborhoods",
+      "credit": "Tianzhen (Tim) Jia",
+      "group": "A waterfront that changes in stages"
+    },
+    {
+      "src": "/images/parking/phase-3.webp",
+      "alt": "Phase 3 — Construction of resilient landscapes",
+      "caption": "Phase 3 — Construction of resilient landscapes",
+      "credit": "Tianzhen (Tim) Jia",
+      "group": "A waterfront that changes in stages"
+    },
+    {
+      "src": "/images/parking/phase-4.webp",
+      "alt": "Phase 4 — Restored nature and ecosystems",
+      "caption": "Phase 4 — Restored nature and ecosystems",
+      "credit": "Tianzhen (Tim) Jia",
+      "group": "A waterfront that changes in stages"
+    },
+    {
+      "src": "/images/parking/wetland-depression-2050.webp",
+      "alt": "2050 · Wetland depression",
+      "caption": "2050 · Wetland depression",
+      "credit": "Tianzhen (Tim) Jia",
+      "group": "Three landscapes, three future scenarios",
+      "groupDescription": "Follow each landscape through 2050, 2070 and 2100 to see the proposed changes in water, vegetation and access. Compare the three dated views for each place. These drawings explore possible futures rather than predict outcomes."
+    },
+    {
+      "src": "/images/parking/wetland-depression-2070.webp",
+      "alt": "2070 · Wetland depression",
+      "caption": "2070 · Wetland depression",
+      "credit": "Tianzhen (Tim) Jia",
+      "group": "Three landscapes, three future scenarios"
+    },
+    {
+      "src": "/images/parking/wetland-depression-2100.webp",
+      "alt": "2100 · Wetland depression",
+      "caption": "2100 · Wetland depression",
+      "credit": "Tianzhen (Tim) Jia",
+      "group": "Three landscapes, three future scenarios"
+    },
+    {
+      "src": "/images/parking/swamp-pocket-2050.webp",
+      "alt": "2050 · Swamp pocket",
+      "caption": "2050 · Swamp pocket",
+      "credit": "Tianzhen (Tim) Jia",
+      "group": "Three landscapes, three future scenarios"
+    },
+    {
+      "src": "/images/parking/swamp-pocket-2070.webp",
+      "alt": "2070 · Swamp pocket",
+      "caption": "2070 · Swamp pocket",
+      "credit": "Tianzhen (Tim) Jia",
+      "group": "Three landscapes, three future scenarios"
+    },
+    {
+      "src": "/images/parking/swamp-pocket-2100.webp",
+      "alt": "2100 · Swamp pocket",
+      "caption": "2100 · Swamp pocket",
+      "credit": "Tianzhen (Tim) Jia",
+      "group": "Three landscapes, three future scenarios"
+    },
+    {
+      "src": "/images/parking/naturalized-autoport-2050.webp",
+      "alt": "2050 · Naturalized Autoport",
+      "caption": "2050 · Naturalized Autoport",
+      "credit": "Tianzhen (Tim) Jia",
+      "group": "Three landscapes, three future scenarios"
+    },
+    {
+      "src": "/images/parking/naturalized-autoport-2070.webp",
+      "alt": "2070 · Naturalized Autoport",
+      "caption": "2070 · Naturalized Autoport",
+      "credit": "Tianzhen (Tim) Jia",
+      "group": "Three landscapes, three future scenarios"
+    },
+    {
+      "src": "/images/parking/naturalized-autoport-2100.webp",
+      "alt": "2100 · Naturalized Autoport",
+      "caption": "2100 · Naturalized Autoport",
+      "credit": "Tianzhen (Tim) Jia",
+      "group": "Three landscapes, three future scenarios"
     }
   ],
   "bamboo": [
@@ -162,7 +263,8 @@
       "src": "/images/bamboo/drawing.webp",
       "alt": "Garden plan — planting, paths and gathering",
       "caption": "Garden plan — planting, paths and gathering",
-      "credit": "Tianzhen (Tim) Jia"
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "The sketch connects a bamboo edge and planting with a deck, gathering spaces and a stone-and-grass path. It shows the complete garden rather than a fragment of the portfolio layout."
     }
   ],
   "alumni": [
@@ -175,8 +277,70 @@
     {
       "src": "/images/alumni/plan.webp",
       "alt": "Planting plan — Alumni Slope",
-      "caption": "Planting plan — Alumni Slope",
-      "credit": "Tianzhen (Tim) Jia"
+      "caption": "Planting plan — the complete Alumni Slope",
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "The plan uses plant height, layering and seasonal color to screen the parking area. Letter codes identify species; the number below each code records the quantity in that planting group.",
+      "legend": [
+        {
+          "key": "Bh",
+          "name": "Baccharis halimifolia"
+        },
+        {
+          "key": "Sv",
+          "name": "Syringa vulgaris"
+        },
+        {
+          "key": "Af",
+          "name": "Amorpha fruticosa"
+        },
+        {
+          "key": "Hr",
+          "name": "Hippophae rhamnoides"
+        },
+        {
+          "key": "Sr",
+          "name": "Sambucus racemosa"
+        },
+        {
+          "key": "Cs",
+          "name": "Cornus sanguinea"
+        },
+        {
+          "key": "Bd",
+          "name": "Buddleja davidii"
+        },
+        {
+          "key": "Cd",
+          "name": "Callicarpa dichotoma"
+        },
+        {
+          "key": "Hp",
+          "name": "Hypericum prolificum"
+        },
+        {
+          "key": "Ca",
+          "name": "Calamagrostis × acutiflora"
+        },
+        {
+          "key": "Ms",
+          "name": "Miscanthus sinensis"
+        },
+        {
+          "key": "Fg",
+          "name": "Festuca glauca"
+        },
+        {
+          "key": "Pa",
+          "name": "Perovskia atriplicifolia"
+        }
+      ]
+    },
+    {
+      "src": "/images/alumni/planting-layout.webp",
+      "alt": "Planting layout — structure, quantities and spacing",
+      "caption": "Planting layout — structure, quantities and spacing",
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "A second view of the same planting plan makes the arrangement of shrubs, grasses and perennials easier to read. The species codes correspond to the key above."
     }
   ],
   "sketchbook": [

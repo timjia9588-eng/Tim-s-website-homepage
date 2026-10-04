@@ -16,15 +16,57 @@
   },
   {
     "path": "/images/alumni/plan.webp",
-    "width": 1370,
-    "height": 621,
+    "width": 2844,
+    "height": 425,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 20,
     "crop": [
-      0.025,
-      0.455,
-      0.485,
-      0.75
+      0.022,
+      0.457,
+      0.977,
+      0.659
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete full-width vector planting plan rendered at 180 dpi; page heading excluded; plant codes retained."
+  },
+  {
+    "path": "/images/alumni/planting-layout.webp",
+    "width": 2844,
+    "height": 507,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 20,
+    "crop": [
+      0.022,
+      0.716,
+      0.977,
+      0.957
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete full-width black-and-white vector planting layout with scale; portfolio heading excluded."
+  },
+  {
+    "path": "/images/bajo-la-sombra/board.webp",
+    "width": 1122,
+    "height": 1402,
+    "source": "Bajo la Sombra_Tianzhen Jia.pdf",
+    "page": 1,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/bajo-la-sombra/cover.webp",
+    "width": 791,
+    "height": 474,
+    "source": "Bajo la Sombra_Tianzhen Jia.pdf",
+    "page": 1,
+    "crop": [
+      0.28,
+      0.5,
+      0.985,
+      0.838
     ],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null
@@ -46,18 +88,14 @@
   },
   {
     "path": "/images/bamboo/drawing.webp",
-    "width": 581,
-    "height": 463,
+    "width": 497,
+    "height": 509,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 19,
-    "crop": [
-      0.29,
-      0.725,
-      0.485,
-      0.945
-    ],
+    "crop": null,
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Whole embedded hand-drawn garden plan image 7, with no adjacent drawing or portfolio caption."
   },
   {
     "path": "/images/carbon/biomass.webp",
@@ -120,6 +158,16 @@
     "originalUrl": null
   },
   {
+    "path": "/images/gentilly/cover.webp",
+    "width": 1280,
+    "height": 718,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 13,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia Â· Waggonner & Ball internship",
+    "originalUrl": null
+  },
+  {
     "path": "/images/melissa/cover.webp",
     "width": 1920,
     "height": 1084,
@@ -175,49 +223,235 @@
     "originalUrl": null
   },
   {
-    "path": "/images/parking/model.webp",
-    "width": 721,
-    "height": 863,
+    "path": "/images/parking/cut-and-fill.webp",
+    "width": 2209,
+    "height": 484,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 10,
     "crop": [
-      0.025,
-      0.045,
-      0.267,
-      0.455
+      0,
+      0,
+      1,
+      0.715
     ],
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Complete cut-and-fill diagram and ecological section, extracted from embedded image 2. Text table is separate."
   },
   {
-    "path": "/images/parking/phases.webp",
-    "width": 655,
-    "height": 484,
+    "path": "/images/parking/model.webp",
+    "width": 592,
+    "height": 683,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 10,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Embedded photograph 0, rotated to match PDF orientation; portfolio heading excluded."
+  },
+  {
+    "path": "/images/parking/naturalized-autoport-2050.webp",
+    "width": 309,
+    "height": 212,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 11,
     "crop": [
-      0.025,
-      0.055,
-      0.245,
-      0.285
+      0.0380952380952381,
+      0.6354319180087847,
+      0.3323809523809524,
+      0.9458272327964861
     ],
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
+  },
+  {
+    "path": "/images/parking/naturalized-autoport-2070.webp",
+    "width": 307,
+    "height": 212,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.35619047619047617,
+      0.6354319180087847,
+      0.6485714285714286,
+      0.9458272327964861
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
+  },
+  {
+    "path": "/images/parking/naturalized-autoport-2100.webp",
+    "width": 303,
+    "height": 212,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.6723809523809524,
+      0.6354319180087847,
+      0.960952380952381,
+      0.9458272327964861
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
+  },
+  {
+    "path": "/images/parking/phase-1.webp",
+    "width": 473,
+    "height": 284,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Whole embedded phase diagram 4; caption extracted as website text."
+  },
+  {
+    "path": "/images/parking/phase-2.webp",
+    "width": 478,
+    "height": 284,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Whole embedded phase diagram 3; caption extracted as website text."
+  },
+  {
+    "path": "/images/parking/phase-3.webp",
+    "width": 474,
+    "height": 284,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Whole embedded phase diagram 2; caption extracted as website text."
+  },
+  {
+    "path": "/images/parking/phase-4.webp",
+    "width": 478,
+    "height": 284,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Whole embedded phase diagram 1; caption extracted as website text."
   },
   {
     "path": "/images/parking/plan.webp",
-    "width": 849,
-    "height": 617,
+    "width": 831,
+    "height": 598,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 11,
     "crop": [
-      0.515,
-      0.067,
-      0.8,
-      0.36
+      0.603,
+      0.07,
+      0.979,
+      0.952
     ],
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Complete master plan from embedded image 0; neighboring detail figures and PDF headings excluded."
+  },
+  {
+    "path": "/images/parking/swamp-pocket-2050.webp",
+    "width": 309,
+    "height": 145,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.0380952380952381,
+      0.3923865300146413,
+      0.3323809523809524,
+      0.6046852122986823
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
+  },
+  {
+    "path": "/images/parking/swamp-pocket-2070.webp",
+    "width": 307,
+    "height": 145,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.35619047619047617,
+      0.3923865300146413,
+      0.6485714285714286,
+      0.6046852122986823
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
+  },
+  {
+    "path": "/images/parking/swamp-pocket-2100.webp",
+    "width": 303,
+    "height": 145,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.6723809523809524,
+      0.3923865300146413,
+      0.960952380952381,
+      0.6046852122986823
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
+  },
+  {
+    "path": "/images/parking/wetland-depression-2050.webp",
+    "width": 309,
+    "height": 141,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.0380952380952381,
+      0.0849194729136164,
+      0.3323809523809524,
+      0.2913616398243045
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
+  },
+  {
+    "path": "/images/parking/wetland-depression-2070.webp",
+    "width": 307,
+    "height": 141,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.35619047619047617,
+      0.0849194729136164,
+      0.6485714285714286,
+      0.2913616398243045
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
+  },
+  {
+    "path": "/images/parking/wetland-depression-2100.webp",
+    "width": 303,
+    "height": 141,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.6723809523809524,
+      0.0849194729136164,
+      0.960952380952381,
+      0.2913616398243045
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
   },
   {
     "path": "/images/phillips/cover.webp",
@@ -251,18 +485,19 @@
   },
   {
     "path": "/images/salamanca/bridge.webp",
-    "width": 2835,
-    "height": 1411,
+    "width": 2812,
+    "height": 1220,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 10,
     "crop": [
-      0.025,
-      0.29,
-      0.977,
-      0.96
+      0,
+      0.347,
+      1,
+      0.961
     ],
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Complete main perspective within the raster page. Upper heading, bridge section and body paragraphs excluded."
   },
   {
     "path": "/images/salamanca/cover.webp",
@@ -281,18 +516,14 @@
   },
   {
     "path": "/images/salamanca/masterplan.webp",
-    "width": 2838,
-    "height": 1669,
+    "width": 2679,
+    "height": 1578,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 8,
-    "crop": [
-      0.024,
-      0.038,
-      0.977,
-      0.831
-    ],
+    "crop": null,
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Whole embedded master plan image 1, preserving its scale. Portfolio heading and paragraphs are separate text."
   },
   {
     "path": "/images/salinity/cover.webp",
@@ -376,7 +607,7 @@
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 16,
     "crop": null,
-    "credit": "Tianzhen (Tim) Jia · Individual Cornell studio work",
+    "credit": "Tianzhen (Tim) Jia Â· Individual Cornell studio work",
     "originalUrl": null
   },
   {
@@ -386,38 +617,35 @@
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 16,
     "crop": null,
-    "credit": "Tianzhen (Tim) Jia · Individual Cornell studio work",
+    "credit": "Tianzhen (Tim) Jia Â· Individual Cornell studio work",
     "originalUrl": null
   },
   {
     "path": "/images/weaving/plan.webp",
-    "width": 2069,
-    "height": 1357,
+    "width": 2812,
+    "height": 1455,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 15,
-    "crop": [
-      0.27,
-      0.035,
-      0.965,
-      0.68
-    ],
+    "crop": null,
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Whole embedded master plan image 4; surrounding PDF text excluded."
   },
   {
     "path": "/images/weaving/section.webp",
-    "width": 2844,
-    "height": 939,
+    "width": 2685,
+    "height": 416,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 16,
     "crop": [
-      0.023,
-      0.522,
-      0.978,
-      0.968
+      0,
+      0.53,
+      1,
+      1
     ],
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Complete lower landscape section in embedded image 0. The separate illustrated interview collage above is excluded."
   },
   {
     "path": "/images/wetland-utopia/cover.webp",
@@ -451,18 +679,19 @@
   },
   {
     "path": "/images/wetland-utopia/routes.webp",
-    "width": 1310,
-    "height": 1557,
+    "width": 604,
+    "height": 831,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 20,
     "crop": [
-      0.52,
-      0.12,
-      0.96,
-      0.86
+      0.523,
+      0.087,
+      0.738,
+      0.505
     ],
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Whole ship-route study map from the raster page; neighboring diagrams, headings and paragraphs excluded."
   },
   {
     "path": "/images/xiaozhou/community.webp",
@@ -505,41 +734,6 @@
       0.7,
       0.949,
       0.899
-    ],
-    "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
-  },
-  {
-    "path": "/images/gentilly/cover.webp",
-    "width": 1280,
-    "height": 718,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 13,
-    "crop": null,
-    "credit": "Tianzhen (Tim) Jia · Waggonner & Ball internship",
-    "originalUrl": null
-  },
-  {
-    "path": "/images/bajo-la-sombra/board.webp",
-    "width": 1122,
-    "height": 1402,
-    "source": "Bajo la Sombra_Tianzhen Jia.pdf",
-    "page": 1,
-    "crop": null,
-    "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
-  },
-  {
-    "path": "/images/bajo-la-sombra/cover.webp",
-    "width": 791,
-    "height": 474,
-    "source": "Bajo la Sombra_Tianzhen Jia.pdf",
-    "page": 1,
-    "crop": [
-      0.28,
-      0.5,
-      0.985,
-      0.838
     ],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null

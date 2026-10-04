@@ -94,6 +94,9 @@ export default function Lightbox({
         </button>
         <div>
           <p>{image.caption}</p>
+          {image.description && (
+            <p className="lightbox-description">{image.description}</p>
+          )}
           <span>
             {image.credit}
             {image.source ? (
