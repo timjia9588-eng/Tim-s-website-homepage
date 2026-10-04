@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { projects } from "../data/projects";
-import { chapters, publications, type Publication } from "../data/story";
+import { publications, type Publication } from "../data/story";
 import SiteHeader from "./SiteHeader";
 import Reveal from "./Reveal";
 import ProjectCard from "./ProjectCard";
@@ -21,7 +21,8 @@ const initialFilter = (): Filter =>
     ? "practice"
     : window.location.hash === "#studies"
       ? "studies"
-      : window.location.hash === "#research-work"
+      : ["#research-work", "#research"].includes(window.location.hash) ||
+          window.location.hash.startsWith("#paper/")
         ? "research"
         : "all";
 const order = [
@@ -67,26 +68,30 @@ const entries = [
     paper,
     category: "research",
     search:
-      `${paper.title} ${paper.question} Harvard Project Zero education learning Cambridge`.toLowerCase(),
+      `${paper.title} ${paper.question} ${paper.authors} ${paper.kind} Harvard Project Zero education learning Cambridge`.toLowerCase(),
   })),
 ].sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
 
-function PaperCard({
-  paper,
-  featured = false,
-}: {
-  paper: Publication;
-  featured?: boolean;
-}) {
+function PaperCard({ paper }: { paper: Publication }) {
   return (
-    <article className={`paper-card ${featured ? "paper-card--featured" : ""}`}>
+    <article className="paper-card paper-card--image">
       <a
         href={`#paper/${paper.id}`}
         aria-label={`Read introduction to ${paper.shortTitle}`}
       >
-        <p className="paper-card-lab">Harvard Project Zero · Working paper</p>
-        <h3>{paper.shortTitle}</h3>
-        <p>{paper.question}</p>
+        <img
+          src={paper.image.src}
+          width={paper.image.width}
+          height={paper.image.height}
+          alt={paper.image.alt}
+          loading="lazy"
+          decoding="async"
+        />
+        <div className="paper-card-caption">
+          <p className="paper-card-lab">Harvard Project Zero · Working paper</p>
+          <h3>{paper.shortTitle}</h3>
+          <p>{paper.question}</p>
+        </div>
       </a>
     </article>
   );
@@ -98,9 +103,13 @@ function Work() {
   useEffect(() => {
     const update = () => {
       if (
-        ["#work", "#practice", "#studies", "#research-work"].includes(
-          window.location.hash,
-        )
+        [
+          "#work",
+          "#practice",
+          "#studies",
+          "#research-work",
+          "#research",
+        ].includes(window.location.hash)
       ) {
         setFilter(initialFilter());
         setQuery("");
@@ -143,6 +152,7 @@ function Work() {
                 onClick={() => {
                   setFilter(f.id);
                   window.history.replaceState(null, "", f.hash);
+                  window.dispatchEvent(new Event("work-filter-change"));
                 }}
               >
                 {filter === f.id && (
@@ -179,6 +189,7 @@ function Work() {
                 setFilter("all");
                 setQuery("");
                 window.history.replaceState(null, "", "#work");
+                window.dispatchEvent(new Event("work-filter-change"));
               }}
             >
               Show everything
@@ -187,7 +198,40 @@ function Work() {
         </div>
         <div className="project-grid">
           <AnimatePresence mode="popLayout">
-            {work.map((entry, i) => (
+            {work.flatMap((entry, i) => [
+              ...(filter === "all" &&
+              !query.trim() &&
+              ["place-of-learning", "alumni"].includes(entry.id)
+                ? [
+                    <motion.div
+                      key={`story-${entry.id}`}
+                      className="work-story"
+                      layout="position"
+                      initial={reduced ? false : { opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      exit={{
+                        opacity: 0,
+                        transition: { duration: reduced ? 0 : 0.3 },
+                      }}
+                      transition={{
+                        ...revealTransition,
+                        duration: reduced ? 0 : 1.05,
+                      }}
+                    >
+                      <h3>
+                        {entry.id === "place-of-learning"
+                          ? "Places can teach."
+                          : "Look beneath the surface."}
+                      </h3>
+                      <p>
+                        {entry.id === "place-of-learning"
+                          ? "At Harvard Project Zero, my questions about ecology grew into questions about learning and belonging. I carry them into the spaces people share."
+                          : "At Cornell, forests, carbon and fungal networks taught me to read the living relationships within a landscape—an attention I bring to every design."}
+                      </p>
+                    </motion.div>,
+                  ]
+                : []),
               <motion.div
                 key={entry.id}
                 className="work-entry"
@@ -211,8 +255,8 @@ function Work() {
                 ) : (
                   <PaperCard paper={entry.paper} />
                 )}
-              </motion.div>
-            ))}
+              </motion.div>,
+            ])}
           </AnimatePresence>
         </div>
         {!work.length && (
@@ -234,87 +278,6 @@ function Work() {
     </section>
   );
 }
-function Research() {
-  return (
-    <section className="research-feature section-space" id="research">
-      <div className="page-width">
-        <Reveal className="research-heading">
-          <div>
-            <p className="eyebrow">Research & writing</p>
-            <h2>
-              Places teach us.
-              <br />
-              <em>What can we learn?</em>
-            </h2>
-          </div>
-          <p>
-            My research connects the living systems beneath a landscape with the
-            ways people learn, belong and act within it. At Harvard Project
-            Zero, that inquiry became two collaborative working papers.
-          </p>
-        </Reveal>
-        <div className="research-paper-grid">
-          {publications.map((p) => (
-            <Reveal key={p.id}>
-              <PaperCard paper={p} featured />
-            </Reveal>
-          ))}
-        </div>
-        <a className="text-link" href="#research-work">
-          View all research projects & papers →
-        </a>
-      </div>
-    </section>
-  );
-}
-function About() {
-  const labels = [
-    "Ecology & climate",
-    "Learning & belonging",
-    "Public space & play",
-  ];
-  return (
-    <section className="about-practice section-space" id="about">
-      <div className="page-width">
-        <Reveal className="about-practice-intro">
-          <div>
-            <p className="eyebrow">About my practice</p>
-            <h2>
-              Looking closely.
-              <br />
-              <em>Thinking across scales.</em>
-            </h2>
-          </div>
-          <div>
-            <p>
-              I’m Tianzhen (Tim) Jia, a landscape designer and researcher in San
-              Antonio. My path through Cornell, Harvard and professional
-              practice connects environmental science with the spaces people
-              inhabit every day.
-            </p>
-            <a
-              className="text-link"
-              href="#resume"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Read my resume →
-            </a>
-          </div>
-        </Reveal>
-        <div className="practice-notes">
-          {chapters.map((c, i) => (
-            <Reveal key={c.theme}>
-              <span>0{i + 1}</span>
-              <h3>{labels[i]}</h3>
-              <p>{c.text}</p>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 export default function Portfolio() {
   return (
     <>
@@ -332,8 +295,9 @@ export default function Portfolio() {
             </div>
             <div className="portfolio-hero-copy">
               <p>
-                I study what sustains a place, how it connects us, and how
-                design makes those connections tangible.
+                I’m Tim Jia, a landscape designer and researcher. My work moves
+                between ecology, learning and public life—finding possibilities
+                in the places we share.
               </p>
             </div>
           </Reveal>
@@ -344,8 +308,6 @@ export default function Portfolio() {
           </div>
         </section>
         <Work />
-        <Research />
-        <About />
       </main>
       <footer className="portfolio-footer">
         <div className="page-width">

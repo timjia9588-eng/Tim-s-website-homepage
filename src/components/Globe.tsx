@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { geoEquirectangular, geoPath } from "d3-geo";
 import { feature } from "topojson-client";
 import { cancelFrame, frame, useReducedMotion } from "framer-motion";
-import { places } from "../data/projects";
-import type { Theme } from "../types";
+import { atlasPlaces as places } from "../data/atlas-tour";
+import { scrollEase } from "../motion";
 
 const spherePoint = (lat: number, lon: number, radius: number) => {
   const a = (lat * Math.PI) / 180,
@@ -20,31 +20,43 @@ const spherePoint = (lat: number, lon: number, radius: number) => {
 export default function Globe({
   selected,
   onSelect,
-  theme,
+  spotlight,
+  settled,
+  enabled,
+  onArrive,
+  onTourAvailable,
 }: {
   selected: string;
   onSelect: (id: string) => void;
-  theme: Theme | null;
+  spotlight: ReactNode;
+  settled: boolean;
+  enabled: boolean;
+  onArrive: (id: string) => void;
+  onTourAvailable: (available: boolean) => void;
 }) {
   const container = useRef<HTMLDivElement>(null);
   const markers = useRef(new Map<string, HTMLButtonElement>());
+  const callout = useRef<HTMLDivElement>(null);
+  const callbacks = useRef({ onArrive, onTourAvailable });
+  callbacks.current = { onArrive, onTourAvailable };
+  const enabledRef = useRef(enabled);
+  enabledRef.current = enabled;
   const selection = useRef(selected);
   selection.current = selected;
-  const target = useRef<THREE.Vector3 | null>(null);
+  const target = useRef<{ id: string; goal: THREE.Vector3 } | null>(null);
   const pausedRef = useRef(false);
-  const themeRef = useRef(theme);
-  themeRef.current = theme;
   const [failed, setFailed] = useState(false);
   const reduced = useReducedMotion();
   pausedRef.current = Boolean(reduced);
   useEffect(() => {
     const p = places.find((place) => place.id === selected);
-    if (p) target.current = spherePoint(p.lat, p.lon, 1);
+    if (p) target.current = { id: p.id, goal: spherePoint(p.lat, p.lon, 1) };
   }, [selected]);
 
   useEffect(() => {
     const host = container.current!;
     if (!host) return;
+    const pageContent = document.getElementById("page-content");
     let renderer: THREE.WebGLRenderer;
     try {
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -103,7 +115,7 @@ export default function Globe({
     renderer.domElement.style.touchAction = "pan-y";
     controls.minDistance = 6.3;
     controls.maxDistance = 23;
-    controls.autoRotateSpeed = 0.28;
+    controls.autoRotateSpeed = 0.16;
     controls.rotateSpeed = 0.65;
     const dots = places.map((p) => {
       const position = spherePoint(p.lat, p.lon, 2.535);
@@ -113,7 +125,7 @@ export default function Globe({
       );
       mesh.position.copy(position);
       globe.add(mesh);
-      return { id: p.id, position, mesh, themes: p.themes };
+      return { id: p.id, position, mesh };
     });
     const locatorMaterial = new THREE.MeshBasicMaterial({
       color: 0xd8e3bf,
@@ -131,6 +143,7 @@ export default function Globe({
       inView = true;
     let width = host.clientWidth,
       height = host.clientHeight;
+    let compact = window.matchMedia("(max-width: 700px)").matches;
     const abort = new AbortController();
     async function addLand() {
       try {
@@ -248,6 +261,7 @@ export default function Globe({
     const resize = new ResizeObserver(() => {
       width = host.clientWidth;
       height = host.clientHeight;
+      compact = window.matchMedia("(max-width: 700px)").matches;
       if (!width || !height) return;
       camera.aspect = width / height;
       const distance = 7.8 * Math.max(1, 0.95 / camera.aspect);
@@ -268,16 +282,9 @@ export default function Globe({
       dragging = false,
       resumeAt = 0;
     const move = (event: PointerEvent) => {
-      const rect = host.getBoundingClientRect();
-      const x = event.clientX - rect.left - rect.width / 2;
-      const y = event.clientY - rect.top - rect.height / 2;
-      const radius =
-        ((2.5 / Math.sqrt(camera.position.lengthSq() - 6.25)) * rect.height) /
-        (2 * Math.tan((20 * Math.PI) / 180));
-      // Labels can extend outside the sphere. Keep them still while they are being pointed at.
-      const next =
-        Boolean((event.target as HTMLElement).closest(".globe-marker")) ||
-        x * x + y * y < radius * radius;
+      const next = Boolean(
+        (event.target as HTMLElement).closest(".globe-marker, .globe-callout"),
+      );
       if (hovering && !next) resumeAt = performance.now() + 2400;
       hovering = next;
     };
@@ -309,10 +316,33 @@ export default function Globe({
     const projected = new THREE.Vector3(),
       normal = new THREE.Vector3();
     const direction = new THREE.Vector3();
-    const orderedDots = [...dots];
-    let lastSelection = "";
+    let lastAvailable: boolean | undefined;
+    let flight: {
+      request: NonNullable<typeof target.current>;
+      start: THREE.Vector3;
+      turn: THREE.Quaternion;
+      elapsed: number;
+    } | null = null;
+    const turn = new THREE.Quaternion();
+    const identity = new THREE.Quaternion();
     function animate({ timestamp: time }: { timestamp: number }) {
-      if (!inView || document.hidden) {
+      const available =
+        inView &&
+        !document.hidden &&
+        enabledRef.current &&
+        !host.closest("[inert]") &&
+        !pausedRef.current &&
+        !hovering &&
+        !focused &&
+        !dragging &&
+        time > resumeAt;
+      if (lastAvailable !== available) {
+        lastAvailable = available;
+        callbacks.current.onTourAvailable(available);
+      }
+      if (!inView || document.hidden || pageContent?.inert) {
+        if (host.dataset.rotation !== "paused")
+          host.dataset.rotation = "paused";
         lastTime = time;
         return;
       }
@@ -320,31 +350,43 @@ export default function Globe({
       lastTime = time;
       if (target.current) {
         const distance = camera.position.length();
-        if (pausedRef.current) {
-          camera.position.copy(target.current).multiplyScalar(distance);
-          target.current = null;
-        } else {
-          camera.position
-            .normalize()
-            .lerp(target.current, 1 - Math.exp(-dt * 4))
-            .normalize()
-            .multiplyScalar(distance);
-          if (
-            direction
-              .copy(camera.position)
-              .normalize()
-              .distanceTo(target.current) < 0.005
-          )
-            target.current = null;
+        if (flight?.request !== target.current) {
+          const start = camera.position.clone().normalize();
+          flight = {
+            request: target.current,
+            start,
+            turn: new THREE.Quaternion().setFromUnitVectors(
+              start,
+              target.current.goal,
+            ),
+            elapsed: 0,
+          };
+          // Clear residual orbit damping once before a guided camera move.
+          controls.autoRotate = false;
+          controls.enableDamping = false;
+          controls.update(0);
         }
+        flight.elapsed += dt;
+        const fraction = pausedRef.current
+          ? 1
+          : Math.min(1, flight.elapsed / 2.4);
+        turn.copy(identity).slerp(flight.turn, scrollEase(fraction));
+        camera.position
+          .copy(flight.start)
+          .applyQuaternion(turn)
+          .multiplyScalar(distance);
+        if (fraction === 1) {
+          const arrived = target.current.id;
+          target.current = null;
+          flight = null;
+          controls.enableDamping = true;
+          callbacks.current.onArrive(arrived);
+        }
+      } else if (flight) {
+        flight = null;
+        controls.enableDamping = true;
       }
-      controls.autoRotate =
-        !pausedRef.current &&
-        !target.current &&
-        !hovering &&
-        !focused &&
-        !dragging &&
-        time > resumeAt;
+      controls.autoRotate = available && !target.current && !dragging;
       const rotation = controls.autoRotate ? "running" : "paused";
       if (host.dataset.rotation !== rotation) host.dataset.rotation = rotation;
       controls.update(dt);
@@ -361,20 +403,8 @@ export default function Globe({
           ? 0.35
           : 0.28 + Math.sin(time * 0.0014) * 0.1;
       }
-      if (lastSelection !== selection.current) {
-        lastSelection = selection.current;
-        orderedDots.sort(
-          (a, b) =>
-            Number(b.id === lastSelection) - Number(a.id === lastSelection),
-        );
-      }
-      for (const dot of orderedDots) {
+      for (const dot of dots) {
         dot.mesh.scale.setScalar(dot.id === selection.current ? 1.8 : 1);
-        const relevant =
-          !themeRef.current || dot.themes.includes(themeRef.current);
-        (dot.mesh.material as THREE.MeshBasicMaterial).color.setHex(
-          relevant ? 0xe4e3df : 0x63635f,
-        );
         const button = markers.current.get(dot.id);
         if (!button) continue;
         const facing =
@@ -384,13 +414,41 @@ export default function Globe({
           y = (-projected.y * 0.5 + 0.5) * height;
         button.hidden = !facing || x < 0 || x > width || y < 0 || y > height;
         if (button.hidden) continue;
-        button.style.opacity = relevant ? "1" : ".3";
         // Transparent 44px targets align with the visible geographic points.
         // No text boxes or per-frame layout measurements are needed.
         button.style.transform = `translate3d(${(x - 22).toFixed(2)}px,${(y - 22).toFixed(2)}px,0)`;
+        if (
+          dot.id === selection.current &&
+          callout.current &&
+          !target.current
+        ) {
+          const cardWidth = compact ? Math.min(260, width - 40) : 318;
+          const cardX = compact
+            ? Math.max(20, Math.min(width - cardWidth - 20, x - cardWidth / 2))
+            : Math.max(24, Math.min(width - cardWidth - 24, x + 48));
+          const cardY = compact
+            ? Math.max(20, Math.min(height - 236, y + 28))
+            : Math.max(24, Math.min(height - 270, y - 128));
+          callout.current.style.transform = `translate3d(${cardX.toFixed(2)}px,${cardY.toFixed(2)}px,0)`;
+          callout.current.hidden = button.hidden;
+        }
       }
+      if (
+        selectedDot &&
+        callout.current &&
+        !target.current &&
+        markers.current.get(selectedDot.id)?.hidden
+      )
+        callout.current.hidden = true;
       renderer.render(scene, camera);
     }
+    const visibility = () => {
+      if (document.hidden) {
+        lastAvailable = false;
+        callbacks.current.onTourAvailable(false);
+      }
+    };
+    document.addEventListener("visibilitychange", visibility);
     frame.update(animate, true);
     return () => {
       cancelled = true;
@@ -398,6 +456,7 @@ export default function Globe({
       cancelFrame(animate);
       resize.disconnect();
       observer.disconnect();
+      document.removeEventListener("visibilitychange", visibility);
       host.removeEventListener("pointermove", move);
       host.removeEventListener("pointerleave", leave);
       host.removeEventListener("focusin", focusIn);
@@ -424,12 +483,12 @@ export default function Globe({
     <div
       ref={container}
       className="globe-surface"
-      aria-label="Interactive globe of Tim Jia’s education and professional experience"
+      aria-label="Interactive globe of Tim Jia’s projects and research"
     >
       {failed ? (
         <div className="globe-fallback">
-          The globe is unavailable on this device. Explore every place using the
-          Places menu.
+          The globe is unavailable on this device.{" "}
+          <a href="#work">Browse the projects below.</a>
         </div>
       ) : (
         <>
@@ -448,6 +507,9 @@ export default function Globe({
               <span className="sr-only">{place.label}</span>
             </button>
           ))}
+          <div ref={callout} className="globe-callout" hidden inert={!settled}>
+            {spotlight}
+          </div>
         </>
       )}
     </div>

@@ -55,7 +55,7 @@ export default function SiteHeader({
           threshold: 0,
         },
       );
-      ["globe", "top", "work", "research", "about"].forEach((id) => {
+      ["globe", "top", "work"].forEach((id) => {
         const element = document.getElementById(id);
         if (element) observer.observe(element);
       });
@@ -74,12 +74,15 @@ export default function SiteHeader({
       setHash(window.location.hash);
     };
     window.addEventListener("hashchange", close);
-    return () => window.removeEventListener("hashchange", close);
+    window.addEventListener("work-filter-change", close);
+    return () => {
+      window.removeEventListener("hashchange", close);
+      window.removeEventListener("work-filter-change", close);
+    };
   }, []);
   const links = [
     { label: "All work", href: "#work" },
-    { label: "Research", href: "#research" },
-    { label: "About", href: "#about" },
+    { label: "Research", href: "#research-work" },
   ];
   return (
     <header
@@ -107,7 +110,14 @@ export default function SiteHeader({
             <a
               key={l.label}
               href={l.href}
-              aria-current={section === l.href ? "location" : undefined}
+              aria-current={
+                section === "#work" &&
+                (l.href === "#research-work"
+                  ? ["#research-work", "#research"].includes(hash)
+                  : !["#research-work", "#research"].includes(hash))
+                  ? "location"
+                  : undefined
+              }
             >
               {l.label}
             </a>

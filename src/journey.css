@@ -1294,3 +1294,292 @@
     transform: none;
   }
 }
+
+/* A single geographic spotlight replaces the competing place browser. */
+.atlas-portal--tour .atlas-globe {
+  inset: 84px var(--page-edge) 40px;
+  transform-origin: 50% 16%;
+}
+.atlas-portal--tour .atlas-atmosphere {
+  background: radial-gradient(
+    ellipse at 50% 46%,
+    #345844 0,
+    #1b382b 48%,
+    #10241d 100%
+  );
+}
+.globe-callout {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 318px;
+  z-index: 8;
+  pointer-events: none;
+}
+.globe-callout[hidden] {
+  display: none;
+}
+.atlas-callout-link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #f0f0e8;
+  pointer-events: auto;
+  text-decoration: none;
+}
+.atlas-callout-link::before {
+  content: "";
+  position: absolute;
+  left: -44px;
+  top: 128px;
+  width: 32px;
+  height: 1px;
+  background: #e3e8d370;
+}
+.atlas-callout-place {
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+.atlas-callout-link img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid #e3e8d330;
+  filter: saturate(0.7);
+  transition: filter 0.8s var(--ease-content);
+}
+.atlas-callout-link:is(:hover, :focus-visible) img {
+  filter: saturate(1);
+}
+.atlas-callout-link[data-image-fit="contain"] img {
+  object-fit: contain;
+  background: #e7ebe1;
+}
+.atlas-callout-title {
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 450;
+  letter-spacing: -0.02em;
+}
+.atlas-callout-context {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #d2dacb;
+}
+.atlas-callout-link:focus-visible {
+  outline: 1px solid #e3ebd5;
+  outline-offset: 8px;
+  border-radius: 3px;
+}
+.atlas-callout-link--record {
+  background: #17372ce6;
+  padding: 24px;
+  border: 1px solid #e3e8d330;
+  border-radius: 3px;
+}
+.atlas-portal[data-pinned="true"]:not([data-phase="opening"]) .globe-callout {
+  visibility: hidden;
+}
+.work-story {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 32px;
+  padding: 48px 0;
+}
+.work-story h3 {
+  font-size: clamp(28px, 3vw, 42px);
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--accent);
+  margin: 0;
+}
+.work-story p {
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 510px;
+  color: var(--muted);
+  margin: 0;
+}
+.paper-card--image {
+  border-radius: 4px;
+  overflow: hidden;
+  contain: layout paint;
+}
+.paper-card--image > a {
+  display: block;
+  position: relative;
+  aspect-ratio: 1.42;
+  padding: 0;
+  min-height: 0;
+  isolation: isolate;
+}
+.paper-card--image > a > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s var(--ease-content);
+}
+.paper-card--image > a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(transparent 25%, #0d211be6);
+  opacity: 0;
+  transition: opacity 0.8s var(--ease-content);
+}
+.paper-card-caption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 64px 32px 32px;
+  z-index: 1;
+  color: #fffdf4;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s var(--ease-content),
+    transform 0.8s var(--ease-content);
+  pointer-events: none;
+}
+.paper-card-caption .paper-card-lab {
+  color: #e1e8dc;
+  margin: 0 0 8px;
+}
+.paper-card-caption h3 {
+  font-family: inherit;
+  font-size: clamp(26px, 2.8vw, 38px);
+  line-height: 1.1;
+  margin: 0;
+  color: inherit;
+}
+.paper-card-caption > p:last-child {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 16px 0 0;
+  color: #e1e8dc;
+}
+.paper-card--image > a:is(:hover, :focus-visible)::after,
+.paper-card--image > a:is(:hover, :focus-visible) .paper-card-caption {
+  opacity: 1;
+}
+.paper-card--image > a:is(:hover, :focus-visible) .paper-card-caption {
+  transform: none;
+}
+.paper-card--image > a:is(:hover, :focus-visible) > img {
+  transform: scale(1.025);
+}
+.paper-case-figure {
+  max-width: 808px;
+  margin: 0 auto 80px;
+}
+.paper-case-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.paper-case-figure figcaption {
+  display: grid;
+  gap: 8px;
+  margin-top: 24px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.paper-case-figure figcaption p {
+  margin: 0;
+  color: var(--ink);
+}
+.paper-case-figure figcaption > span {
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: none;
+  text-align: left;
+}
+.paper-case-figure figcaption a {
+  justify-self: start;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+@media (max-width: 700px) {
+  .atlas-portal--tour .atlas-globe {
+    inset: auto;
+    height: max(520px, 70svh);
+    width: 100%;
+  }
+  .atlas-portal--tour .atlas-scene {
+    padding-top: 72px;
+    padding-bottom: 130px;
+  }
+  .globe-callout {
+    width: min(260px, calc(100% - 40px));
+  }
+  .atlas-callout-link {
+    gap: 8px;
+  }
+  .atlas-callout-link img {
+    height: 136px;
+  }
+  .atlas-callout-link::before {
+    top: -22px;
+    left: 50%;
+    height: 14px;
+    width: 1px;
+  }
+  .atlas-callout-place,
+  .atlas-callout-context {
+    font-size: 14px;
+  }
+  .atlas-callout-title {
+    font-size: 20px;
+  }
+  .work-story {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 32px 0;
+  }
+  .paper-card-caption {
+    padding: 44px 20px 20px;
+    opacity: 1;
+    transform: none;
+  }
+  .paper-card-caption h3 {
+    font-size: 26px;
+  }
+  .paper-card-caption > p:last-child {
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  .paper-card-caption .paper-card-lab {
+    display: none;
+  }
+  .paper-card--image > a::after {
+    opacity: 1;
+  }
+  .paper-case-figure {
+    margin-bottom: 48px;
+  }
+}
+@media (hover: none) {
+  .paper-card--image > a::after,
+  .paper-card-caption {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .atlas-callout-link img,
+  .paper-card--image > a::after,
+  .paper-card--image > a > img,
+  .paper-card-caption {
+    transition: none;
+    transform: none;
+  }
+}

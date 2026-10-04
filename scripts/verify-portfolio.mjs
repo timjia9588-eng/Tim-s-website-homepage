@@ -69,6 +69,28 @@ assert.equal(
   0,
 );
 assert.ok(placesText.includes("project.place === place.id"));
+const tour = [
+  ...read("src/data/atlas-tour.ts").matchAll(
+    /\{ place: "([^"]+)", (project|paper): "([^"]+)" \}/g,
+  ),
+].map(([, place, kind, id]) => ({ place, kind, id }));
+assert.equal(tour.length, 9);
+assert.equal(new Set(tour.map((stop) => stop.id)).size, tour.length);
+for (const stop of tour) {
+  assert.ok(places.includes(stop.place), `Tour site: ${stop.place}`);
+  if (stop.kind === "project")
+    assert.equal(
+      assignments.find((project) => project.id === stop.id)?.place,
+      stop.place,
+      `Tour project: ${stop.id}`,
+    );
+  else
+    assert.equal(
+      stop.place,
+      "cambridge",
+      "The lab's research belongs at Cambridge; photographed case studies are not project sites.",
+    );
+}
 console.log(
-  "PASS: early entry policy for 8 URL forms; 19 canonical project locations; 18 atlas projects each assigned once; office/study contexts have no duplicate project cards.",
+  "PASS: early entry policy for 8 URL forms; 19 canonical project locations; 9 unique tour stops match actual sites; research is anchored at its lab; office/study contexts have no duplicate project cards.",
 );

@@ -632,5 +632,27 @@
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null,
     "extraction": "Complete embedded second garden concept sketch Im6.jpg, image index 8, exported at native size without portfolio headings or upscaling."
+  },
+  {
+    "path": "/images/research-papers/learning.webp",
+    "width": 717,
+    "height": 561,
+    "source": "https://pz.harvard.edu/sites/default/files/2024-10/The%20Place%20of%20Learning.pdf",
+    "page": 1,
+    "crop": [0.05672, 0.05757, 0.94081, 0.98026],
+    "credit": "Atelier XI · Peach Hut. Image reproduced in The Place of Learning, p. 1; photographer not identified in the paper.",
+    "originalUrl": "https://pz.harvard.edu/sites/default/files/2024-10/The%20Place%20of%20Learning.pdf",
+    "extraction": "Native embedded PDF photograph, without upscaling. Scan border and unrelated number fragment removed; photograph kept intact."
+  },
+  {
+    "path": "/images/research-papers/agency.webp",
+    "width": 808,
+    "height": 550,
+    "source": "https://pz.harvard.edu/sites/default/files/2024-10/Places%20of%20Agency.pdf",
+    "page": 1,
+    "crop": null,
+    "credit": "Ela Ben-Ur · Olin College engineering class. Image reproduced in Places of Agency, p. 1.",
+    "originalUrl": "https://pz.harvard.edu/sites/default/files/2024-10/Places%20of%20Agency.pdf",
+    "extraction": "Native embedded PDF photograph, without upscaling. Complete photograph, separate from PDF typography."
   }
 ]

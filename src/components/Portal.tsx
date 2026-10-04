@@ -1,4 +1,11 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import {
+  lazy,
+  Suspense,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   AnimatePresence,
   motion,
@@ -7,16 +14,21 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { places, projects } from "../data/projects";
-import { publications } from "../data/story";
-import PlacePicker from "./PlacePicker";
-import ProjectPreview from "./ProjectPreview";
+import { places } from "../data/projects";
+import { atlasSpotlight, atlasTour } from "../data/atlas-tour";
 import AtlasContours from "./AtlasContours";
-import { contentTransition, easyEase, scrollEase } from "../motion";
+import { easyEase, scrollEase } from "../motion";
 const Globe = lazy(() => import("./Globe"));
 
 export default function Portal() {
-  const [selected, setSelected] = useState("melissa");
+  const [tourIndex, setTourIndex] = useState(0);
+  const [selected, setSelected] = useState(atlasTour[0].place);
+  const [arrived, setArrived] = useState<string | null>(null);
+  const [available, setAvailable] = useState(false);
+  const [imageState, setImageState] = useState<{
+    src: string;
+    loaded: boolean;
+  } | null>(null);
   const reduced = useReducedMotion();
   const [wide, setWide] = useState(
     () => window.matchMedia("(min-width: 701px)").matches,
@@ -24,6 +36,7 @@ export default function Portal() {
   const [phase, setPhase] = useState("opening");
   const phaseRef = useRef("opening");
   const pinned = wide && !reduced;
+  const tourEnabled = !pinned || phase === "opening";
   useEffect(() => {
     const media = window.matchMedia("(min-width: 701px)");
     const update = () => setWide(media.matches);
@@ -35,7 +48,6 @@ export default function Portal() {
     target: section,
     offset: ["start start", "end end"],
   });
-  // One measured timeline keeps the pinned WebGL scene and its hand-off in sync.
   const progress = useTransform(() => scrollYProgress.get());
   const globeY = useTransform(progress, [0, 0.18, 1], [0, 0, -120], {
     ease: scrollEase,
@@ -56,29 +68,108 @@ export default function Portal() {
   const atmosphereOpacity = useTransform(progress, [0, 0.3, 0.9], [1, 1, 0], {
     ease: scrollEase,
   });
-  const browserOpacity = useTransform(progress, [0, 0.16, 0.5], [1, 1, 0], {
+  const calloutOpacity = useTransform(progress, [0, 0.12, 0.42], [1, 1, 0], {
     ease: scrollEase,
   });
   useMotionValueEvent(scrollYProgress, "change", (value) => {
-    const next = value < 0.5 ? "opening" : "handoff";
+    const next = value < 0.42 ? "opening" : "handoff";
     if (next !== phaseRef.current) {
       phaseRef.current = next;
       setPhase(next);
     }
   });
-  const place = places.find((p) => p.id === selected)!;
-  const work = place.projectIds.flatMap((id) => {
-    const p = projects.find((p) => p.id === id);
-    return p ? [p] : [];
-  });
+  const choosePlace = useCallback(
+    (id: string) => {
+      if (id !== selected) setArrived(null);
+      setSelected(id);
+      const index = atlasTour.findIndex((stop) => stop.place === id);
+      if (index !== -1) setTourIndex(index);
+    },
+    [selected],
+  );
+  const place = places.find((place) => place.id === selected)!;
+  const work = atlasSpotlight(selected, atlasTour[tourIndex]);
+  const ready = !work.src || imageState?.src === work.src;
+  const showImage = Boolean(work.src && ready && imageState?.loaded);
+  // A held image and a guided camera move are one tour stop. Pointer/focus, a dialog,
+  // the scroll hand-off and hidden tabs suspend it; no per-frame React updates.
+  useEffect(() => {
+    if (!available || arrived !== selected || !ready || reduced || !tourEnabled)
+      return;
+    const timer = window.setTimeout(() => {
+      const next = (tourIndex + 1) % atlasTour.length;
+      setArrived(null);
+      setTourIndex(next);
+      setSelected(atlasTour[next].place);
+    }, 5200);
+    return () => window.clearTimeout(timer);
+  }, [available, arrived, selected, ready, tourIndex, reduced, tourEnabled]);
+  useEffect(() => {
+    if (!work.src) return;
+    const src = work.src;
+    let active = true;
+    const image = new Image();
+    image.src = src.replace(".webp", "-small.webp");
+    image
+      .decode()
+      .then(() => {
+        if (active) setImageState({ src, loaded: true });
+      })
+      .catch(() => {
+        if (active) setImageState({ src, loaded: false });
+      });
+    return () => {
+      active = false;
+    };
+  }, [work.src]);
+  const spotlight = (
+    <motion.div style={{ opacity: pinned ? calloutOpacity : 1 }}>
+      <AnimatePresence mode="wait">
+        {arrived === selected && ready && (
+          <motion.a
+            key={`${selected}/${work.href}`}
+            className={`atlas-callout-link ${showImage ? "" : "atlas-callout-link--record"}`}
+            href={work.href}
+            aria-label={`${work.title} · ${place.label}`}
+            data-image-fit={work.fit}
+            initial={reduced ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{
+              opacity: 0,
+              y: reduced ? 0 : -6,
+              transition: { duration: reduced ? 0 : 0.45, ease: easyEase },
+            }}
+            transition={{ duration: reduced ? 0 : 1, ease: easyEase }}
+          >
+            <span className="atlas-callout-place">
+              {place.label}
+              {work.context.startsWith("Research") ? " · Research" : ""}
+            </span>
+            {showImage && work.src && (
+              <img
+                src={work.src.replace(".webp", "-small.webp")}
+                alt={work.alt}
+                decoding="async"
+              />
+            )}
+            <span className="atlas-callout-title">{work.title}</span>
+            {!showImage && (
+              <span className="atlas-callout-context">{work.context}</span>
+            )}
+          </motion.a>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
   return (
     <section
       ref={section}
       id="globe"
-      className="globe-portal atlas-portal"
+      className="globe-portal atlas-portal atlas-portal--tour"
       aria-label="An atlas of design and inquiry"
-      data-phase={phase}
+      data-phase={pinned ? phase : "opening"}
       data-pinned={pinned}
+      data-tour-place={selected}
     >
       <h1 className="sr-only">
         Tim Jia — Landscape design and research across places
@@ -107,75 +198,17 @@ export default function Portal() {
               <div className="globe-loading">Bringing the world into view…</div>
             }
           >
-            <Globe selected={selected} onSelect={setSelected} theme={null} />
+            <Globe
+              selected={selected}
+              onSelect={choosePlace}
+              spotlight={spotlight}
+              settled={arrived === selected && ready}
+              enabled={tourEnabled}
+              onArrive={setArrived}
+              onTourAvailable={setAvailable}
+            />
           </Suspense>
         </motion.div>
-        <motion.aside
-          className="atlas-browser"
-          aria-label="Browse projects by place"
-          style={pinned ? { opacity: browserOpacity } : undefined}
-          inert={pinned && phase !== "opening"}
-          aria-hidden={pinned && phase !== "opening" ? true : undefined}
-        >
-          <PlacePicker selected={selected} onSelect={setSelected} />
-          <AnimatePresence mode="wait">
-            <motion.div
-              className="atlas-place-content"
-              key={selected}
-              initial={reduced ? false : { opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{
-                opacity: 0,
-                y: reduced ? 0 : -8,
-                transition: { duration: reduced ? 0 : 0.35, ease: easyEase },
-              }}
-              transition={{
-                ...contentTransition,
-                duration: reduced ? 0 : 0.95,
-              }}
-            >
-              <div className="atlas-project-list">
-                {work.map((p, index) => (
-                  <a
-                    href={`#project/${p.id}`}
-                    key={p.id}
-                    aria-label={p.title}
-                    className={
-                      index
-                        ? "atlas-related-project"
-                        : `atlas-spotlight ${p.cover ? "atlas-spotlight--image" : ""}`
-                    }
-                  >
-                    {index === 0 && <ProjectPreview project={p} />}
-                    <div className="atlas-project-copy">
-                      <h2>{p.title}</h2>
-                    </div>
-                  </a>
-                ))}
-                {place.id === "cambridge" &&
-                  publications.map((p) => (
-                    <a
-                      className="atlas-paper-link"
-                      key={p.id}
-                      href={`#paper/${p.id}`}
-                    >
-                      <h2>{p.shortTitle}</h2>
-                    </a>
-                  ))}
-              </div>
-              {!work.length && (
-                <a
-                  className="atlas-experience-link"
-                  href="#resume"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Professional experience
-                </a>
-              )}
-            </motion.div>
-          </AnimatePresence>
-        </motion.aside>
       </motion.div>
     </section>
   );

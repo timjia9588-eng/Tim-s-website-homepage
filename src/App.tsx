@@ -18,17 +18,22 @@ const getProjectId = () =>
 const getView = () =>
   window.location.hash === "#resume" ? "resume" : "portfolio";
 const sectionTarget = (hash: string) =>
-  ["#practice", "#studies", "#research-work"].includes(hash)
+  [
+    "#practice",
+    "#studies",
+    "#research-work",
+    "#research",
+    "#about",
+    "#story",
+  ].includes(hash)
     ? "work"
-    : hash === "#story"
-      ? "about"
-      : hash === "#simple"
-        ? "top"
-        : hash.startsWith("#project/")
+    : hash === "#simple"
+      ? "top"
+      : hash.startsWith("#project/")
+        ? "work"
+        : hash.startsWith("#paper/")
           ? "work"
-          : hash.startsWith("#paper/")
-            ? "research"
-            : hash.slice(1) || "globe";
+          : hash.slice(1) || "globe";
 
 export default function App() {
   useSmoothScroll();
@@ -46,7 +51,7 @@ export default function App() {
     window.location.hash.startsWith("#project/")
       ? "#work"
       : window.location.hash.startsWith("#paper/")
-        ? "#research"
+        ? "#research-work"
         : window.location.hash || "#globe",
   );
   useEffect(() => {
@@ -106,6 +111,7 @@ export default function App() {
   }, [active, activePaper, view]);
   const close = () => {
     window.history.replaceState(null, "", returnHash.current);
+    window.dispatchEvent(new Event("work-filter-change"));
     setProjectId(null);
     setPaperId(null);
   };

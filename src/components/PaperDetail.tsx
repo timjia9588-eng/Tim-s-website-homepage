@@ -47,6 +47,25 @@ export default function PaperDetail({
             <span>Designing Learning Places Lab</span>
           </div>
         </div>
+        <figure
+          className="paper-case-figure"
+          style={{ maxWidth: paper.image.width }}
+        >
+          <img
+            src={paper.image.src}
+            width={paper.image.width}
+            height={paper.image.height}
+            alt={paper.image.alt}
+            decoding="async"
+          />
+          <figcaption>
+            <p>{paper.image.caption}</p>
+            <span>{paper.image.credit}</span>
+            <a href={paper.pdf} target="_blank" rel="noreferrer">
+              Source: original working paper ↗
+            </a>
+          </figcaption>
+        </figure>
         <div className="paper-reading">
           <aside>
             <p className="eyebrow">In this article</p>

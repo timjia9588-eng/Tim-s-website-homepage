@@ -44,6 +44,16 @@ export const publications = [
       "An interdisciplinary exploration of how physical environments shape learning, drawing connections across education, psychology and spatial design.",
     url: "https://pz.harvard.edu/resources/place-learning-why-where-we-learn-matters",
     pdf: "https://pz.harvard.edu/sites/default/files/2024-10/The%20Place%20of%20Learning.pdf",
+    image: {
+      src: "/images/research-papers/learning.webp",
+      width: 717,
+      height: 561,
+      alt: "Atelier XI’s orange Peach Hut among the trees of a peach farm in Jiaozuo, China",
+      caption:
+        "A learning place within everyday life: Atelier XI’s Peach Hut in Jiaozuo, China, discussed in the paper.",
+      credit:
+        "Atelier XI · Image reproduced in The Place of Learning, p. 1. Photographer not identified in the paper.",
+    },
     why: "Learning can feel detached from the places students live. This paper asks how local environments and community life can become meaningful parts of education.",
     approach:
       "A literature-based synthesis brings together place-based education, geography and environmental learning, with examples of learning beyond conventional classrooms.",
@@ -79,6 +89,15 @@ export const publications = [
       "Examines how the places students inhabit can offer opportunities for choice, participation and agency in their learning.",
     url: "https://pz.harvard.edu/resources/places-agency-how-where-we-learn-supports-student-empowerment-choice-and-freedom",
     pdf: "https://pz.harvard.edu/sites/default/files/2024-10/Places%20of%20Agency.pdf",
+    image: {
+      src: "/images/research-papers/agency.webp",
+      width: 808,
+      height: 550,
+      alt: "Students working in an open engineering studio at Olin College, surrounded by accessible materials and movable furniture",
+      caption:
+        "A setting for choice and collaboration: an engineering class at Olin College, discussed in the paper.",
+      credit: "Photo: Ela Ben-Ur · Image reproduced in Places of Agency, p. 1.",
+    },
     why: "Student agency depends partly on whether people can choose, use and adapt their surroundings. This paper investigates the spatial conditions that support those possibilities.",
     approach:
       "An interdisciplinary literature review compares work from education, architecture, psychology, sociology and urban design to identify recurring qualities of supportive learning places.",
