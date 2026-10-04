@@ -1,7 +1,8 @@
-import { lazy, Suspense, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
+  useMotionValueEvent,
   useReducedMotion,
   useScroll,
   useTransform,
@@ -11,29 +12,81 @@ import { publications } from "../data/story";
 import PlacePicker from "./PlacePicker";
 import ProjectPreview from "./ProjectPreview";
 import AtlasContours from "./AtlasContours";
+import {
+  contentTransition,
+  easyEase,
+  revealTransition,
+  scrollEase,
+} from "../motion";
 const Globe = lazy(() => import("./Globe"));
 
 export default function Portal() {
   const [selected, setSelected] = useState("melissa");
   const reduced = useReducedMotion();
+  const [wide, setWide] = useState(
+    () => window.matchMedia("(min-width: 701px)").matches,
+  );
+  const [phase, setPhase] = useState("opening");
+  const phaseRef = useRef("opening");
+  const pinned = wide && !reduced;
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 701px)");
+    const update = () => setWide(media.matches);
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
   const section = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: section,
-    offset: ["start start", "end start"],
+    offset: ["start start", "end end"],
   });
-  const globeY = useTransform(scrollYProgress, [0, 1], [0, -160]);
-  const globeScale = useTransform(scrollYProgress, [0, 0.6, 1], [1, 0.78, 0.6]);
+  // Use one measured timeline for the pinned scene and its focus phases.
+  // A computed value keeps sticky-layout visuals in sync with the JS reading position.
+  const sceneProgress = useTransform(() => scrollYProgress.get());
+  // The scene remains pinned. Only the foreground changes until the final hand-off.
+  const globeY = useTransform(sceneProgress, [0, 0.5, 1], [0, 0, -190], {
+    ease: scrollEase,
+  });
+  const globeScale = useTransform(sceneProgress, [0, 0.5, 1], [1, 1, 0.64], {
+    ease: scrollEase,
+  });
   const globeOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.55, 1],
-    [1, 0.85, 0],
+    sceneProgress,
+    [0, 0.36, 0.8, 1],
+    [1, 1, 0.25, 0],
   );
-  const atmosphere = useTransform(scrollYProgress, [0, 0.45, 1], [1, 1, 0]);
-  const contentOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.5, 0.85],
+  const paperOpacity = useTransform(sceneProgress, [0.55, 1], [0, 1], {
+    ease: scrollEase,
+  });
+  const introOpacity = useTransform(sceneProgress, [0, 0.1, 0.26], [1, 1, 0]);
+  const browserOpacity = useTransform(
+    sceneProgress,
+    [0, 0.12, 0.28],
     [1, 1, 0],
   );
+  const bridgeOpacity = useTransform(sceneProgress, [0.32, 0.52], [0, 1], {
+    ease: scrollEase,
+  });
+  const bridgeY = useTransform(sceneProgress, [0.32, 0.52], [24, 0], {
+    ease: scrollEase,
+  });
+  const bridgeColor = useTransform(
+    sceneProgress,
+    [0.62, 0.94],
+    ["#eeede7", "#242c27"],
+  );
+  const bridgeAccent = useTransform(
+    sceneProgress,
+    [0.62, 0.94],
+    ["#c9d6ba", "#4d6657"],
+  );
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    const next = value < 0.28 ? "opening" : value < 0.58 ? "story" : "handoff";
+    if (next !== phaseRef.current) {
+      phaseRef.current = next;
+      setPhase(next);
+    }
+  });
   const place = places.find((p) => p.id === selected)!;
   const work = place.projectIds.flatMap((id) => {
     const p = projects.find((p) => p.id === id);
@@ -45,21 +98,25 @@ export default function Portal() {
       id="globe"
       className="globe-portal atlas-portal"
       aria-label="An atlas of design and inquiry"
+      data-phase={phase}
+      data-pinned={pinned}
     >
       <div className="atlas-scene">
-        <motion.div
-          className="atlas-atmosphere"
-          aria-hidden="true"
-          style={reduced ? undefined : { opacity: atmosphere }}
-        />
+        <div className="atlas-atmosphere" aria-hidden="true" />
         <AtlasContours />
+        <motion.div
+          className="atlas-paper"
+          aria-hidden="true"
+          style={pinned ? { opacity: paperOpacity } : { opacity: 0 }}
+        />
         <motion.div
           className="atlas-globe"
           style={
-            reduced
+            !pinned
               ? undefined
               : { y: globeY, scale: globeScale, opacity: globeOpacity }
           }
+          inert={pinned && phase !== "opening"}
         >
           <Suspense
             fallback={
@@ -71,31 +128,47 @@ export default function Portal() {
         </motion.div>
         <motion.div
           className="atlas-intro"
-          style={reduced ? undefined : { opacity: contentOpacity }}
+          style={pinned ? { opacity: introOpacity } : undefined}
+          inert={pinned && phase !== "opening"}
+          aria-hidden={pinned && phase !== "opening" ? true : undefined}
         >
-          <h1>
+          <motion.p
+            className="atlas-identity"
+            initial={reduced ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={revealTransition}
+          >
+            Tim Jia · Landscape designer & researcher
+          </motion.p>
+          <motion.h1
+            initial={reduced ? false : { opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ...revealTransition, delay: reduced ? 0 : 0.12 }}
+          >
             A practice
             <br />
             <em>across places.</em>
-          </h1>
-          <p>
-            Reading landscapes.
-            <br />
-            Following relationships.
-            <br />
-            Making room for everyday life.
-          </p>
-          <a className="atlas-primary" href="#work">
-            Explore all work <span>→</span>
-          </a>
-          <a className="atlas-research-link" href="#research">
-            Discover the research →
-          </a>
+          </motion.h1>
+          <motion.div
+            initial={reduced ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ...revealTransition, delay: reduced ? 0 : 0.28 }}
+            className="atlas-intro-actions"
+          >
+            <a className="atlas-primary" href="#work">
+              Explore all work <span>→</span>
+            </a>
+            <a className="atlas-research-link" href="#research">
+              Discover the research →
+            </a>
+          </motion.div>
         </motion.div>
         <motion.aside
           className="atlas-browser"
           aria-label="Browse projects by place"
-          style={reduced ? undefined : { opacity: contentOpacity }}
+          style={pinned ? { opacity: browserOpacity } : undefined}
+          inert={pinned && phase !== "opening"}
+          aria-hidden={pinned && phase !== "opening" ? true : undefined}
         >
           <div className="atlas-place-selector">
             <PlacePicker selected={selected} onSelect={setSelected} />
@@ -104,13 +177,19 @@ export default function Portal() {
             <motion.div
               className="atlas-place-content"
               key={selected}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
+              initial={reduced ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{
+                opacity: 0,
+                y: reduced ? 0 : -8,
+                transition: { duration: reduced ? 0 : 0.35, ease: easyEase },
+              }}
+              transition={{
+                ...contentTransition,
+                duration: reduced ? 0 : 0.95,
+              }}
             >
               <p className="atlas-place-context">{place.description}</p>
-              <p className="atlas-place-story">{place.narrative}</p>
               <div className="atlas-project-list">
                 {work.map((p, index) => (
                   <a
@@ -164,6 +243,31 @@ export default function Portal() {
             </motion.div>
           </AnimatePresence>
         </motion.aside>
+        <motion.div
+          className="atlas-bridge"
+          aria-hidden={!pinned || phase === "opening" ? true : undefined}
+          inert={!pinned || phase === "opening"}
+          style={
+            pinned
+              ? { opacity: bridgeOpacity, y: bridgeY, color: bridgeColor }
+              : { opacity: 0 }
+          }
+        >
+          <h2>
+            Places for people.
+            <br />
+            <motion.em style={{ color: bridgeAccent }}>
+              Room for possibility.
+            </motion.em>
+          </h2>
+          <p>
+            I study what sustains a place, how it connects us, and how design
+            makes those connections tangible.
+          </p>
+          <a className="text-link" href="#work">
+            Explore all work <span aria-hidden="true">→</span>
+          </a>
+        </motion.div>
         <div className="atlas-bottom">
           <a
             className="atlas-scroll-link"

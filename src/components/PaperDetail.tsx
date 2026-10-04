@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useDialog } from "../hooks/useDialog";
 import { projects } from "../data/projects";
 import type { Publication } from "../data/story";
+import { contentTransition } from "../motion";
 
 export default function PaperDetail({
   paper,
@@ -24,7 +25,7 @@ export default function PaperDetail({
       initial={{ opacity: 0, y: reduced ? 0 : 24 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.35 }}
+      transition={{ ...contentTransition, duration: reduced ? 0 : 0.95 }}
     >
       <header className="detail-nav">
         <button className="detail-back" onClick={onClose}>
@@ -58,11 +59,9 @@ export default function PaperDetail({
               <button
                 key={item.id}
                 onClick={() =>
-                  document
-                    .getElementById(item.id)
-                    ?.scrollIntoView({
-                      behavior: reduced ? "instant" : "smooth",
-                    })
+                  document.getElementById(item.id)?.scrollIntoView({
+                    behavior: reduced ? "instant" : "smooth",
+                  })
                 }
               >
                 {item.label}

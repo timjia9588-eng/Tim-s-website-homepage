@@ -6,6 +6,8 @@ import Reveal from "./Reveal";
 import ProjectCard from "./ProjectCard";
 import FeaturedProjects from "./FeaturedProjects";
 import Portal from "./Portal";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { easyEase, revealTransition } from "../motion";
 
 type Filter = "all" | "practice" | "studies" | "research";
 const filters: { id: Filter; label: string; hash: string }[] = [
@@ -98,6 +100,7 @@ function PaperCard({
   );
 }
 function Work() {
+  const reduced = useReducedMotion();
   const [filter, setFilter] = useState<Filter>(initialFilter);
   const [query, setQuery] = useState("");
   useEffect(() => {
@@ -130,7 +133,7 @@ function Work() {
   return (
     <section className="work-section section-space" id="work">
       <div className="page-width">
-        <div className="work-heading">
+        <Reveal className="work-heading">
           <div>
             <h2>Work, in perspective.</h2>
           </div>
@@ -139,7 +142,7 @@ function Work() {
             <br />
             Explore the work that shapes my practice.
           </p>
-        </div>
+        </Reveal>
         <div className="work-browser">
           <div
             className="work-filters"
@@ -155,6 +158,13 @@ function Work() {
                   window.history.replaceState(null, "", f.hash);
                 }}
               >
+                {filter === f.id && (
+                  <motion.span
+                    className="work-filter-indicator"
+                    layoutId="work-filter-indicator"
+                    transition={{ duration: reduced ? 0 : 0.7, ease: easyEase }}
+                  />
+                )}
                 {f.label}
                 <span>
                   {f.id === "all"
@@ -191,13 +201,34 @@ function Work() {
           )}
         </div>
         <div className="project-grid">
-          {work.map((entry) =>
-            entry.type === "project" ? (
-              <ProjectCard key={entry.id} project={entry.project} />
-            ) : (
-              <PaperCard key={entry.id} paper={entry.paper} />
-            ),
-          )}
+          <AnimatePresence mode="popLayout">
+            {work.map((entry, i) => (
+              <motion.div
+                key={entry.id}
+                className="work-entry"
+                layout="position"
+                initial={reduced ? false : { opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.08 }}
+                exit={{
+                  opacity: 0,
+                  transition: { duration: reduced ? 0 : 0.3, ease: easyEase },
+                }}
+                transition={{
+                  ...revealTransition,
+                  duration: reduced ? 0 : 1.05,
+                  delay: reduced ? 0 : (i % 2) * 0.08,
+                  layout: { duration: reduced ? 0 : 0.95, ease: easyEase },
+                }}
+              >
+                {entry.type === "project" ? (
+                  <ProjectCard project={entry.project} />
+                ) : (
+                  <PaperCard paper={entry.paper} />
+                )}
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
         {!work.length && (
           <div className="work-empty">
@@ -222,7 +253,7 @@ function Research() {
   return (
     <section className="research-feature section-space" id="research">
       <div className="page-width">
-        <div className="research-heading">
+        <Reveal className="research-heading">
           <div>
             <p className="eyebrow">Research & writing</p>
             <h2>
@@ -236,10 +267,12 @@ function Research() {
             ways people learn, belong and act within it. At Harvard Project
             Zero, that inquiry became two collaborative working papers.
           </p>
-        </div>
+        </Reveal>
         <div className="research-paper-grid">
           {publications.map((p) => (
-            <PaperCard key={p.id} paper={p} featured />
+            <Reveal key={p.id}>
+              <PaperCard paper={p} featured />
+            </Reveal>
           ))}
         </div>
         <a className="text-link" href="#research-work">
@@ -258,7 +291,7 @@ function About() {
   return (
     <section className="about-practice section-space" id="about">
       <div className="page-width">
-        <div className="about-practice-intro">
+        <Reveal className="about-practice-intro">
           <div>
             <p className="eyebrow">About my practice</p>
             <h2>
@@ -283,7 +316,7 @@ function About() {
               Read my resume →
             </a>
           </div>
-        </div>
+        </Reveal>
         <div className="practice-notes">
           {chapters.map((c, i) => (
             <Reveal key={c.theme}>
@@ -304,7 +337,7 @@ export default function Portfolio() {
       <main className="portfolio-journey">
         <Portal />
         <section className="portfolio-hero" id="top">
-          <div className="portfolio-hero-intro page-width">
+          <Reveal className="portfolio-hero-intro page-width portfolio-intro-fallback">
             <div>
               <h2 className="portfolio-headline">
                 Places for people.
@@ -321,11 +354,17 @@ export default function Portfolio() {
                 Explore all work →
               </a>
             </div>
-          </div>
+          </Reveal>
           <div className="page-width">
-            <div>
+            <Reveal className="selected-work-heading">
+              <h2>Selected work</h2>
+              <a className="text-link" href="#work">
+                See all projects <span aria-hidden="true">→</span>
+              </a>
+            </Reveal>
+            <Reveal>
               <FeaturedProjects />
-            </div>
+            </Reveal>
           </div>
         </section>
         <Work />

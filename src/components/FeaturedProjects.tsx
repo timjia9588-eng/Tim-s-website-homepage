@@ -8,6 +8,7 @@ import {
 import { preload } from "react-dom";
 import { projects } from "../data/projects";
 import type { Category } from "../types";
+import { easyEase } from "../motion";
 
 // One perspective per project; large covers are chosen separately from galleries.
 const featured = [
@@ -178,8 +179,8 @@ export default function FeaturedProjects() {
             }
             animate={{ opacity: 1, x: "0%" }}
             transition={{
-              duration: reduced ? 0 : 0.85,
-              ease: [0.22, 1, 0.36, 1],
+              duration: reduced ? 0 : 1.25,
+              ease: easyEase,
             }}
             onAnimationComplete={() => {
               setTransitioning(false);
@@ -206,11 +207,12 @@ export default function FeaturedProjects() {
           <motion.div
             key={p.id}
             className="featured-caption"
-            initial={reduced ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={reduced ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{
-              duration: reduced ? 0 : 0.4,
+              duration: reduced ? 0 : 0.95,
               delay: reduced ? 0 : 0.2,
+              ease: easyEase,
             }}
           >
             <p>

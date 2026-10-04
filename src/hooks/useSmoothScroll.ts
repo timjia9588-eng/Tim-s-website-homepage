@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect } from "react";
 import Lenis from "lenis";
 import { cancelFrame, frame } from "framer-motion";
+import { scrollEase } from "../motion";
 
 let scroller: Lenis | null = null;
 let locked = false;
@@ -12,7 +13,13 @@ export function setScrollLocked(next: boolean) {
 }
 
 export function scrollToPosition(top: number, immediate = false) {
-  if (scroller) scroller.scrollTo(top, { immediate, force: immediate });
+  if (scroller)
+    scroller.scrollTo(top, {
+      immediate,
+      force: immediate,
+      duration: 1.3,
+      easing: scrollEase,
+    });
   else window.scrollTo({ top, behavior: immediate ? "instant" : "smooth" });
 }
 

@@ -2,6 +2,7 @@ import type { Project } from "../types";
 import dimensions from "../data/image-sizes.json";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
+import { revealTransition } from "../motion";
 
 const sizes = dimensions as Record<string, { width: number; height: number }>;
 
@@ -50,7 +51,7 @@ export default function ProjectPreview({ project }: { project: Project }) {
           opacity: reduced || inView ? 1 : 0.5,
           y: reduced || inView || drawing ? 0 : 14,
         }}
-        transition={{ duration: reduced ? 0 : 0.65, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ ...revealTransition, duration: reduced ? 0 : 1.05 }}
       >
         <img
           src={src}

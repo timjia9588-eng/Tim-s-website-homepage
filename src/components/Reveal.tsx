@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
+import { revealTransition } from "../motion";
 import type { ReactNode } from "react";
 export default function Reveal({
   children,
@@ -13,13 +14,13 @@ export default function Reveal({
   return (
     <motion.div
       className={className}
-      initial={reduced ? false : { opacity: 0 }}
-      whileInView={{ opacity: 1 }}
+      initial={reduced ? false : { opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "0px 0px -35px 0px" }}
       transition={{
-        duration: reduced ? 0 : 0.8,
+        ...revealTransition,
+        duration: reduced ? 0 : revealTransition.duration,
         delay: reduced ? 0 : delay,
-        ease: [0.22, 1, 0.36, 1],
       }}
     >
       {children}

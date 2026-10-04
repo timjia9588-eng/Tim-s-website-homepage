@@ -5,6 +5,7 @@ import dimensions from "../data/image-sizes.json";
 import { useDialog } from "../hooks/useDialog";
 import Lightbox from "./Lightbox";
 import Reveal from "./Reveal";
+import { contentTransition } from "../motion";
 const imageSizes = dimensions as Record<
   string,
   { width: number; height: number }
@@ -158,10 +159,10 @@ export default function ProjectDetail({
         aria-labelledby="detail-title"
         tabIndex={-1}
         className={`project-dialog ${project.detailCover ? "project-dialog--board" : ""}`}
-        initial={{ opacity: 0, y: reduced ? 0 : 60 }}
+        initial={{ opacity: 0, y: reduced ? 0 : 28 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: reduced ? 0 : 40 }}
-        transition={{ duration: 0.5 }}
+        exit={{ opacity: 0, y: reduced ? 0 : 16 }}
+        transition={{ ...contentTransition, duration: reduced ? 0 : 0.95 }}
       >
         <header className="detail-nav">
           <a

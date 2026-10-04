@@ -245,9 +245,27 @@ export default function Globe({
       }
     }
     addLand();
+    const atlasSection = host.closest<HTMLElement>("#globe");
+    let titleSafeArea: {
+      left: number;
+      top: number;
+      width: number;
+      height: number;
+    } | null = null;
     const labelSizes = new Map<string, { width: number; height: number }>();
     const measureLabels = () => {
       if (cancelled) return;
+      const intro = atlasSection?.querySelector<HTMLElement>(".atlas-intro");
+      if (intro && window.innerWidth > 700) {
+        const bounds = host.getBoundingClientRect();
+        const text = intro.getBoundingClientRect();
+        titleSafeArea = {
+          left: text.left - bounds.left,
+          top: text.top - bounds.top,
+          width: text.width,
+          height: text.height,
+        };
+      } else titleSafeArea = null;
       for (const [id, button] of markers.current) {
         labelSizes.set(id, {
           width: button.offsetWidth,
@@ -383,7 +401,10 @@ export default function Globe({
         top: number;
         width: number;
         height: number;
-      }[] = [];
+      }[] =
+        titleSafeArea && atlasSection?.dataset.phase === "opening"
+          ? [titleSafeArea]
+          : [];
       const selectedDot = dots.find((dot) => dot.id === selection.current);
       if (selectedDot) {
         locator.position.copy(selectedDot.position).multiplyScalar(1.003);

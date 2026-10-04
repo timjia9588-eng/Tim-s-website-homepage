@@ -29,7 +29,11 @@ export default function SiteHeader({
   useEffect(() => {
     const portal = document.getElementById("globe");
     const resize = new ResizeObserver(() => {
-      boundary.current = portal ? portal.offsetHeight * 0.62 : 0;
+      boundary.current = portal
+        ? portal.dataset.pinned === "true"
+          ? (portal.offsetHeight - window.innerHeight) * 0.82
+          : portal.offsetHeight - 130
+        : 0;
       const next = continuous && window.scrollY < boundary.current;
       atlasRef.current = next;
       setAtlas(next);
@@ -76,7 +80,6 @@ export default function SiteHeader({
     { label: "All work", href: "#work" },
     { label: "Research", href: "#research" },
     { label: "About", href: "#about" },
-    { label: "Explore the globe", href: "#globe" },
   ];
   return (
     <header
@@ -110,18 +113,32 @@ export default function SiteHeader({
             </a>
           ))}
         </div>
-        <a
-          className="nav-resume"
-          href="#resume"
-          target={hash === "#resume" ? undefined : "_blank"}
-          rel="noreferrer"
-          aria-label={
-            hash === "#resume" ? "Resume" : "Resume (opens in a new tab)"
-          }
-          aria-current={hash === "#resume" ? "page" : undefined}
-        >
-          Resume ↗
-        </a>
+        <div className="nav-utilities">
+          <a
+            className="nav-globe"
+            href="#globe"
+            aria-label="Explore the globe"
+            aria-current={section === "#globe" ? "location" : undefined}
+          >
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <ellipse cx="12" cy="12" rx="4" ry="9" />
+              <path d="M3 12h18M5 6.5c4 2 10 2 14 0M5 17.5c4-2 10-2 14 0" />
+            </svg>
+          </a>
+          <a
+            className="nav-resume"
+            href="#resume"
+            target={hash === "#resume" ? undefined : "_blank"}
+            rel="noreferrer"
+            aria-label={
+              hash === "#resume" ? "Resume" : "Resume (opens in a new tab)"
+            }
+            aria-current={hash === "#resume" ? "page" : undefined}
+          >
+            Resume ↗
+          </a>
+        </div>
         <button
           className="menu-toggle"
           onClick={() => setMenu((v) => !v)}
@@ -148,6 +165,9 @@ export default function SiteHeader({
                 {l.label}
               </a>
             ))}
+            <a href="#globe" onClick={() => setMenu(false)}>
+              Explore the globe
+            </a>
           </motion.nav>
         )}
       </AnimatePresence>

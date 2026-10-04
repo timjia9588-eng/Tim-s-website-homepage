@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useDialog } from "../hooks/useDialog";
 import type { ProjectImage } from "../types";
+import { contentTransition } from "../motion";
 export default function Lightbox({
   images,
   initial,
@@ -78,7 +79,7 @@ export default function Lightbox({
             initial={{ opacity: 0, x: reduced ? 0 : 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ ...contentTransition, duration: reduced ? 0 : 0.65 }}
             onDoubleClick={() => setZoom((v) => !v)}
           />
         </AnimatePresence>

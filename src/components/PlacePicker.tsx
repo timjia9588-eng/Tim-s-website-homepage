@@ -1,5 +1,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { places } from "../data/projects";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { contentTransition } from "../motion";
 
 export default function PlacePicker({
   selected,
@@ -9,6 +11,7 @@ export default function PlacePicker({
   onSelect: (id: string) => void;
 }) {
   const [open, setOpen] = useState(false);
+  const reduced = useReducedMotion();
   const index = places.findIndex((place) => place.id === selected);
   const [active, setActive] = useState(index);
   const root = useRef<HTMLDivElement>(null);
@@ -54,7 +57,7 @@ export default function PlacePicker({
       }}
     >
       <div className="place-picker-label">
-        <span id={labelId}>Explore a place</span>
+        <span id={labelId}>Work by location</span>
         <span>
           {String(index + 1).padStart(2, "0")} / {places.length}
         </span>
@@ -65,7 +68,7 @@ export default function PlacePicker({
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={open ? listId : undefined}
-        aria-label={`Explore a place: ${places[index].label}`}
+        aria-label={`Work by location: ${places[index].label}`}
         onClick={() => (open ? close() : show())}
         onKeyDown={(event) => {
           if (["ArrowDown", "ArrowUp"].includes(event.key)) {
@@ -79,64 +82,71 @@ export default function PlacePicker({
           <path d="m5 7 5 5 5-5" />
         </svg>
       </button>
-      {open && (
-        <div
-          ref={list}
-          id={listId}
-          role="listbox"
-          tabIndex={-1}
-          aria-labelledby={labelId}
-          aria-activedescendant={`${prefix}-${active}`}
-          className="place-picker-menu"
-          data-lenis-prevent
-          onKeyDown={(event) => {
-            if (["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) {
-              event.preventDefault();
-              setActive((i) =>
-                event.key === "Home"
-                  ? 0
-                  : event.key === "End"
-                    ? places.length - 1
-                    : (i +
-                        (event.key === "ArrowDown" ? 1 : -1) +
-                        places.length) %
-                      places.length,
-              );
-            } else if (event.key === "Enter" || event.key === " ") {
-              event.preventDefault();
-              choose(active);
-            } else if (event.key === "Escape") {
-              event.preventDefault();
-              event.stopPropagation();
-              close(true);
-            } else if (event.key.length === 1 && /[a-z]/i.test(event.key)) {
-              const match = places.findIndex((_, i) =>
-                places[(active + 1 + i) % places.length].label
-                  .toLowerCase()
-                  .startsWith(event.key.toLowerCase()),
-              );
-              if (match !== -1) setActive((active + 1 + match) % places.length);
-            }
-          }}
-        >
-          {places.map((place, i) => (
-            <div
-              key={place.id}
-              id={`${prefix}-${i}`}
-              role="option"
-              aria-selected={place.id === selected}
-              className={`place-picker-option ${i === active ? "is-active" : ""}`}
-              onPointerDown={(event) => event.preventDefault()}
-              onClick={() => choose(i)}
-            >
-              <span>{place.label}</span>
-              <span aria-hidden="true">
-                {place.id === selected ? "✓" : "↗"}
-              </span>
-            </div>
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={reduced ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: reduced ? 0 : 6 }}
+            transition={{ ...contentTransition, duration: reduced ? 0 : 0.6 }}
+            ref={list}
+            id={listId}
+            role="listbox"
+            tabIndex={-1}
+            aria-labelledby={labelId}
+            aria-activedescendant={`${prefix}-${active}`}
+            className="place-picker-menu"
+            data-lenis-prevent
+            onKeyDown={(event) => {
+              if (["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) {
+                event.preventDefault();
+                setActive((i) =>
+                  event.key === "Home"
+                    ? 0
+                    : event.key === "End"
+                      ? places.length - 1
+                      : (i +
+                          (event.key === "ArrowDown" ? 1 : -1) +
+                          places.length) %
+                        places.length,
+                );
+              } else if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                choose(active);
+              } else if (event.key === "Escape") {
+                event.preventDefault();
+                event.stopPropagation();
+                close(true);
+              } else if (event.key.length === 1 && /[a-z]/i.test(event.key)) {
+                const match = places.findIndex((_, i) =>
+                  places[(active + 1 + i) % places.length].label
+                    .toLowerCase()
+                    .startsWith(event.key.toLowerCase()),
+                );
+                if (match !== -1)
+                  setActive((active + 1 + match) % places.length);
+              }
+            }}
+          >
+            {places.map((place, i) => (
+              <div
+                key={place.id}
+                id={`${prefix}-${i}`}
+                role="option"
+                aria-selected={place.id === selected}
+                className={`place-picker-option ${i === active ? "is-active" : ""}`}
+                onPointerDown={(event) => event.preventDefault()}
+                onClick={() => choose(i)}
+              >
+                <span>{place.label}</span>
+                <span aria-hidden="true">
+                  {place.id === selected ? "✓" : "↗"}
+                </span>
+              </div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

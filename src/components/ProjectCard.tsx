@@ -9,6 +9,11 @@ export default function ProjectCard({ project }: { project: Project }) {
         aria-label={`View ${project.title}`}
       >
         <ProjectPreview project={project} />
+        {project.cover && (
+          <span className="project-image-action" aria-hidden="true">
+            View project <span>↗</span>
+          </span>
+        )}
         <div className="card-copy">
           <div className="card-eyebrow">
             <span className="context-label">
@@ -20,7 +25,6 @@ export default function ProjectCard({ project }: { project: Project }) {
                     ? "Professional practice"
                     : "Research"}
             </span>
-            <span>{project.organization}</span>
           </div>
           <h3>{project.title}</h3>
           <p>{project.subtitle}</p>
@@ -31,14 +35,6 @@ export default function ProjectCard({ project }: { project: Project }) {
             <span>{project.location}</span>
             <span>{project.year}</span>
           </div>
-          <span className="card-read">
-            {project.category === "Research"
-              ? "Explore the research"
-              : "View project"}{" "}
-            <span className="link-arrow" aria-hidden="true">
-              →
-            </span>
-          </span>
         </div>
       </a>
     </article>
