@@ -46,8 +46,8 @@ const places = [
   ...placesText.split("export const places")[0].matchAll(/\bid: "([^"]+)"/g),
 ].map((match) => match[1]);
 assert.equal(assignments.length, 20);
-assert.equal(places.length, 15);
-assert.equal(new Set(places).size, 15);
+assert.equal(places.length, 16);
+assert.equal(new Set(places).size, 16);
 for (const { id, place } of assignments)
   assert.ok(
     places.includes(place) || (id === "sketchbook" && place === "travel"),
@@ -58,6 +58,7 @@ for (const [id, place] of Object.entries({
   melissa: "melissa",
   kyle: "kyle",
   xiaozhou: "guangzhou",
+  salinity: "poland",
   gentilly: "new-orleans",
   nepal: "nepal",
   "envision-resilience": "portland",
@@ -75,8 +76,10 @@ const tour = [
     /\{ place: "([^"]+)", (project|paper): "([^"]+)" \}/g,
   ),
 ].map(([, place, kind, id]) => ({ place, kind, id }));
-assert.equal(tour.length, 10);
+assert.equal(tour.length, 12);
 assert.equal(new Set(tour.map((stop) => stop.id)).size, tour.length);
+for (const [id, place] of [["salinity", "poland"], ["xiaozhou", "guangzhou"]])
+  assert.ok(tour.some((stop) => stop.id === id && stop.place === place), `${id} must be visible in the public atlas tour at ${place}`);
 for (const stop of tour) {
   assert.ok(places.includes(stop.place), `Tour site: ${stop.place}`);
   if (stop.kind === "project")
@@ -112,5 +115,5 @@ for (const image of visuals) {
   assert.equal(image.source, "https://www.bslafieldbook.com/envision-resilience");
 }
 console.log(
-  "PASS: 8 entry URLs; 20 canonical project sites; 10 unique public tour stops; 5 image-free professional records at Aspen/Saudi Arabia excluded from the tour; 5 credited public Portland figures.",
+  "PASS: 8 entry URLs; 20 canonical project sites; 12 unique public tour stops including Poland field research and Xiaozhou in Guangzhou; 5 image-free professional records at Aspen/Saudi Arabia excluded from the tour; 5 credited public Portland figures.",
 );

@@ -6,6 +6,7 @@ import { feature } from "topojson-client";
 import { cancelFrame, frame, useReducedMotion } from "framer-motion";
 import { atlasPlaces as places } from "../data/atlas-tour";
 import { participationPlaces } from "../data/participation";
+import { atlasTiming } from "../data/atlas-timing";
 import { scrollEase } from "../motion";
 
 const spherePoint = (lat: number, lon: number, radius: number) => {
@@ -21,6 +22,7 @@ const spherePoint = (lat: number, lon: number, radius: number) => {
 export default function Globe({
   selected,
   focusKey,
+  approachSeconds,
   onSelect,
   spotlight,
   settled,
@@ -30,6 +32,7 @@ export default function Globe({
 }: {
   selected: string;
   focusKey: string;
+  approachSeconds: number;
   onSelect: (id: string) => void;
   spotlight: ReactNode;
   settled: boolean;
@@ -53,15 +56,15 @@ export default function Globe({
   enabledRef.current = enabled;
   const selection = useRef(selected);
   selection.current = selected;
-  const target = useRef<{ id: string; goal: THREE.Vector3 } | null>(null);
+  const target = useRef<{ id: string; goal: THREE.Vector3; duration: number } | null>(null);
   const pausedRef = useRef(false);
   const [failed, setFailed] = useState(false);
   const reduced = useReducedMotion();
   pausedRef.current = Boolean(reduced);
   useEffect(() => {
     const p = places.find((place) => place.id === selected);
-    if (p) target.current = { id: p.id, goal: spherePoint(p.lat, p.lon, 1) };
-  }, [selected, focusKey]);
+    if (p) target.current = { id: p.id, goal: spherePoint(p.lat, p.lon, 1), duration: approachSeconds };
+  }, [selected, focusKey, approachSeconds]);
 
   const choosePoint = (id: string, event: MouseEvent<HTMLButtonElement>) => {
     // Nearby cities share 44px touch targets. Resolve pointer clicks by the
@@ -147,7 +150,7 @@ export default function Globe({
     renderer.domElement.style.touchAction = "pan-y";
     controls.minDistance = 6.3;
     controls.maxDistance = 23;
-    controls.autoRotateSpeed = 0.16;
+    controls.autoRotateSpeed = 0.2;
     controls.rotateSpeed = 0.65;
     const dots = places.map((p) => {
       const participation = participationPlaces.has(p.id);
@@ -329,14 +332,14 @@ export default function Globe({
       const next = Boolean(
         (event.target as HTMLElement).closest(".globe-marker, .globe-callout"),
       );
-      if (hovering && !next) resumeAt = performance.now() + 2400;
+      if (hovering && !next) resumeAt = performance.now() + atlasTiming.interactionResumeMs;
       hovering = next;
       hoveredPlace = (event.target as HTMLElement).closest<HTMLElement>(".globe-marker")?.dataset.place;
     };
     const leave = () => {
       hovering = false;
       hoveredPlace = undefined;
-      resumeAt = performance.now() + 2400;
+      resumeAt = performance.now() + atlasTiming.interactionResumeMs;
     };
     const focusIn = (e: FocusEvent) => {
       focused = (e.target as HTMLElement).matches(":focus-visible");
@@ -344,7 +347,7 @@ export default function Globe({
     const focusOut = (e: FocusEvent) => {
       if (!host.contains(e.relatedTarget as Node)) {
         focused = false;
-        resumeAt = performance.now() + 2400;
+        resumeAt = performance.now() + atlasTiming.interactionResumeMs;
       }
     };
     host.addEventListener("pointermove", move);
@@ -357,7 +360,7 @@ export default function Globe({
     });
     controls.addEventListener("end", () => {
       dragging = false;
-      resumeAt = performance.now() + 2400;
+      resumeAt = performance.now() + atlasTiming.interactionResumeMs;
       // Manual orbiting may interrupt an approach; release must also release the tour's arrival gate.
       callbacks.current.onArrive(selection.current);
     });
@@ -417,7 +420,7 @@ export default function Globe({
         flight.elapsed += dt;
         const fraction = pausedRef.current
           ? 1
-          : Math.min(1, flight.elapsed / 2.4);
+          : Math.min(1, flight.elapsed / flight.request.duration);
         turn.copy(identity).slerp(flight.turn, scrollEase(fraction));
         camera.position
           .copy(flight.start)

@@ -260,11 +260,11 @@ export const projects: Project[] = [
     title: "Salinity & Symbiosis",
     subtitle: "The living networks beneath a landscape.",
     category: "Research",
-    location: "Cornell University · field sites in Poland",
+    location: "Field sites in Poland · Cornell University",
     organization: "Cornell University",
     year: "2022–2023",
     role: "Honors thesis & research assistant",
-    place: "ithaca",
+    place: "poland",
     themes: ["Systems"],
     connection:
       "Studying life beneath the surface sharpened my attention to the relationships that sustain a landscape.",
@@ -276,7 +276,7 @@ export const projects: Project[] = [
       alt: "Close-up of branching white fungal filaments in soil; the complete scan is inside the research page",
     },
     description: [
-      "My honors research examined ectomycorrhizal rhizomorphs and mycelium along a soil-salinity gradient. Minirhizotron imagery was used to follow the occurrence, abundance, and turnover of fungal structures in non-saline and saline soils.",
+      "My Cornell honors research examined ectomycorrhizal rhizomorphs and mycelium along a soil-salinity gradient at field sites in Poland. Minirhizotron imagery was used to follow the occurrence, abundance, and turnover of fungal structures in non-saline and saline soils. The atlas indicates the country rather than a specific sampling site.",
       "The work involved visual identification, sample preparation, data management, and analysis. It was presented at the 8th International Symposium on Physiological Processes in Roots of Woody Plants and informs my interest in ecological relationships beneath the visible landscape.",
     ],
     collaborators:
@@ -528,6 +528,15 @@ export const projects: Project[] = [
 ];
 
 const placeEntries: Omit<Place, "projectIds">[] = [
+  {
+    id: "poland",
+    label: "Poland",
+    lat: 52,
+    lon: 19.1,
+    description: "Field research · Cornell University · 2022–2023 · Country-level marker",
+    narrative: "Salinity & Symbiosis studies ectomycorrhizal rhizomorphs and mycelium at field sites in Poland. This country-level point does not identify a specific sampling location.",
+    themes: ["Systems"],
+  },
   {
     id: "portland",
     label: "Portland, Maine",

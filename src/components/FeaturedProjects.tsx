@@ -26,7 +26,7 @@ const featured = [
   perspective,
   key: id,
 }));
-const duration = 4500;
+const duration = 4000;
 const context: Record<Category, string> = {
   Professional: "Professional practice",
   Studio: "Academic design",

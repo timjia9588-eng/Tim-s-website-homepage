@@ -16,6 +16,7 @@ import {
 } from "framer-motion";
 import { places } from "../data/projects";
 import { atlasSpotlight, atlasTour } from "../data/atlas-tour";
+import { atlasTiming } from "../data/atlas-timing";
 import ResearchCover from "./ResearchCover";
 import { easyEase, scrollEase } from "../motion";
 const Globe = lazy(() => import("./Globe"));
@@ -24,6 +25,7 @@ export default function Portal() {
   const [tourIndex, setTourIndex] = useState(0);
   const [selected, setSelected] = useState(atlasTour[0].place);
   const [arrived, setArrived] = useState<string | null>(null);
+  const [approachSeconds, setApproachSeconds] = useState<number>(atlasTiming.tourApproach);
   const [available, setAvailable] = useState(false);
   const [imageState, setImageState] = useState<{
     src: string;
@@ -81,8 +83,10 @@ export default function Portal() {
   const choosePlace = useCallback(
     (id: string) => {
       const index = atlasTour.findIndex((stop) => stop.place === id);
-      if (id !== selected || (index !== -1 && index !== tourIndex))
+      if (id !== selected || (index !== -1 && index !== tourIndex)) {
         setArrived(null);
+        setApproachSeconds(atlasTiming.manualApproach);
+      }
       setSelected(id);
       if (index !== -1) setTourIndex(index);
     },
@@ -96,6 +100,7 @@ export default function Portal() {
   const playing = tourEnabled && !participation;
   const resumeTour = () => {
     setArrived(null);
+    setApproachSeconds(atlasTiming.tourApproach);
     setSelected(atlasTour[tourIndex].place);
   };
   useEffect(() => {
@@ -103,6 +108,7 @@ export default function Portal() {
     const escape = (event: KeyboardEvent) => {
       if (event.key === "Escape" && !document.getElementById("page-content")?.inert) {
         setArrived(null);
+        setApproachSeconds(atlasTiming.tourApproach);
         setSelected(atlasTour[tourIndex].place);
       }
     };
@@ -119,9 +125,10 @@ export default function Portal() {
     const timer = window.setTimeout(() => {
       const next = (tourIndex + 1) % atlasTour.length;
       setArrived(null);
+      setApproachSeconds(atlasTiming.tourApproach);
       setTourIndex(next);
       setSelected(atlasTour[next].place);
-    }, 5200);
+    }, atlasTiming.viewingHoldMs);
     return () => window.clearTimeout(timer);
   }, [available, arrived, selected, ready, tourIndex, reduced, playing]);
   useEffect(() => {
@@ -154,8 +161,8 @@ export default function Portal() {
             initial={reduced ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: reduced ? 0 : -6,
-              transition: { duration: reduced ? 0 : 0.45, ease: easyEase } }}
-            transition={{ duration: reduced ? 0 : 1, ease: easyEase }}
+              transition: { duration: reduced ? 0 : atlasTiming.calloutExit, ease: easyEase } }}
+            transition={{ duration: reduced ? 0 : atlasTiming.calloutEnter, ease: easyEase }}
           >
             <button className="atlas-participation-close" onClick={resumeTour} aria-label="Close project experience and resume atlas tour">
               <span aria-hidden="true">×</span>
@@ -193,9 +200,9 @@ export default function Portal() {
             exit={{
               opacity: 0,
               y: reduced ? 0 : -6,
-              transition: { duration: reduced ? 0 : 0.45, ease: easyEase },
+              transition: { duration: reduced ? 0 : atlasTiming.calloutExit, ease: easyEase },
             }}
-            transition={{ duration: reduced ? 0 : 1, ease: easyEase }}
+            transition={{ duration: reduced ? 0 : atlasTiming.calloutEnter, ease: easyEase }}
           >
             <span className="atlas-callout-place">
               {place.label}
@@ -258,6 +265,7 @@ export default function Portal() {
             <Globe
               selected={selected}
               focusKey={focusKey}
+              approachSeconds={approachSeconds}
               onSelect={choosePlace}
               spotlight={spotlight}
               settled={arrived === selected && ready}

@@ -2,14 +2,17 @@ import { places, projects } from "./projects";
 import { publications } from "./story";
 import { participationAt, participationPlaces } from "./participation";
 
-// The atlas follows actual sites. Research is anchored at the lab, not at its photographed case studies.
+// The atlas follows project and field-study sites. Working papers stay at their
+// research lab; photographed case-study buildings are not authored project sites.
 export const atlasTour = [
   { place: "melissa", project: "phillips" },
   { place: "ithaca", project: "weaving" },
   { place: "cambridge", paper: "places-of-agency" },
+  { place: "poland", project: "salinity" },
   { place: "new-orleans", project: "gentilly" },
   { place: "dominican-republic", project: "bajo-la-sombra" },
   { place: "guangzhou", project: "bamboo" },
+  { place: "guangzhou", project: "xiaozhou" },
   { place: "salamanca", project: "salamanca" },
   { place: "boston", project: "parking" },
   { place: "portland", project: "envision-resilience" },
