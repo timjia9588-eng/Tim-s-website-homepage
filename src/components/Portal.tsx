@@ -16,7 +16,7 @@ import {
 } from "framer-motion";
 import { places } from "../data/projects";
 import { atlasSpotlight, atlasTour } from "../data/atlas-tour";
-import AtlasContours from "./AtlasContours";
+import ResearchCover from "./ResearchCover";
 import { easyEase, scrollEase } from "../motion";
 const Globe = lazy(() => import("./Globe"));
 
@@ -129,7 +129,7 @@ export default function Portal() {
         {arrived === selected && ready && (
           <motion.a
             key={`${selected}/${work.href}`}
-            className={`atlas-callout-link ${showImage ? "" : "atlas-callout-link--record"}`}
+            className={`atlas-callout-link ${work.paper ? "atlas-callout-link--paper" : showImage ? "" : "atlas-callout-link--record"}`}
             href={work.href}
             aria-label={`${work.title} · ${place.label}`}
             data-image-fit={work.fit}
@@ -146,15 +146,17 @@ export default function Portal() {
               {place.label}
               {work.context.startsWith("Research") ? " · Research" : ""}
             </span>
-            {showImage && work.src && (
+            {work.paper ? (
+              <ResearchCover paper={work.paper} compact />
+            ) : showImage && work.src && (
               <img
                 src={work.src.replace(".webp", "-small.webp")}
                 alt={work.alt}
                 decoding="async"
               />
             )}
-            <span className="atlas-callout-title">{work.title}</span>
-            {!showImage && (
+            {!work.paper && <span className="atlas-callout-title">{work.title}</span>}
+            {!showImage && !work.paper && (
               <span className="atlas-callout-context">{work.context}</span>
             )}
           </motion.a>
@@ -184,7 +186,6 @@ export default function Portal() {
           aria-hidden="true"
           style={{ opacity: pinned ? atmosphereOpacity : 1 }}
         />
-        <AtlasContours />
         <motion.div
           className="atlas-globe"
           style={
@@ -210,6 +211,14 @@ export default function Portal() {
               onTourAvailable={setAvailable}
             />
           </Suspense>
+        </motion.div>
+        <motion.div
+          className="atlas-opening-note"
+          style={{ opacity: pinned ? calloutOpacity : 1 }}
+          inert={pinned && phase !== "opening"}
+        >
+          <span>Landscape design & research</span>
+          <a href="#work">Selected work <span aria-hidden="true">↓</span></a>
         </motion.div>
       </motion.div>
     </section>

@@ -9,6 +9,7 @@ import { preload } from "react-dom";
 import { projects } from "../data/projects";
 import type { Category } from "../types";
 import { easyEase } from "../motion";
+import { projectTreatment } from "../data/presentation";
 
 // One perspective per project; large covers are chosen separately from galleries.
 const featured = [
@@ -125,6 +126,7 @@ export default function FeaturedProjects() {
     <div
       ref={ref}
       className="featured-projects"
+      style={projectTreatment(p.id)}
       role="region"
       aria-roledescription="carousel"
       aria-label="Featured projects"

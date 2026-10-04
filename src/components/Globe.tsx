@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode, type MouseEvent } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { geoEquirectangular, geoPath } from "d3-geo";
@@ -38,7 +38,14 @@ export default function Globe({
 }) {
   const container = useRef<HTMLDivElement>(null);
   const markers = useRef(new Map<string, HTMLButtonElement>());
+  const labels = useRef(new Map<string, HTMLSpanElement>());
+  const leaders = useRef(new Map<string, SVGPathElement>());
+  const connector = useRef<SVGPathElement>(null);
+  const connectorField = useRef<SVGSVGElement>(null);
+  const pointPositions = useRef(new Map<string, { x: number; y: number; visible: boolean }>());
   const callout = useRef<HTMLDivElement>(null);
+  const settledRef = useRef(settled);
+  settledRef.current = settled;
   const callbacks = useRef({ onArrive, onTourAvailable });
   callbacks.current = { onArrive, onTourAvailable };
   const enabledRef = useRef(enabled);
@@ -54,6 +61,28 @@ export default function Globe({
     const p = places.find((place) => place.id === selected);
     if (p) target.current = { id: p.id, goal: spherePoint(p.lat, p.lon, 1) };
   }, [selected, focusKey]);
+
+  const choosePoint = (id: string, event: MouseEvent<HTMLButtonElement>) => {
+    // Nearby cities share 44px touch targets. Resolve pointer clicks by the
+    // nearest actual point; explicit labels and keyboard activation keep their identity.
+    if (event.detail !== 0 && !(event.target as HTMLElement).closest(".globe-marker-label")) {
+      const host = container.current!;
+      const bounds = host.getBoundingClientRect();
+      const x = (event.clientX - bounds.x) * host.clientWidth / bounds.width;
+      const y = (event.clientY - bounds.y) * host.clientHeight / bounds.height;
+      let closest = 22 * 22;
+      for (const [candidateId, point] of pointPositions.current) {
+        if (!point.visible) continue;
+        const distance = (point.x - x) ** 2 + (point.y - y) ** 2;
+        if (distance < closest) {
+          id = candidateId;
+          closest = distance;
+        }
+      }
+      markers.current.get(id)?.focus({ preventScroll: true });
+    }
+    onSelect(id);
+  };
 
   useEffect(() => {
     const host = container.current!;
@@ -127,8 +156,13 @@ export default function Globe({
       );
       mesh.position.copy(position);
       globe.add(mesh);
-      return { id: p.id, position, mesh };
+      return {
+        id: p.id, position, mesh,
+        labelWidth: Math.min(190, p.label.length * 7.6 + 16),
+        x: 0, y: 0, visible: false,
+      };
     });
+    dots.forEach((dot) => pointPositions.current.set(dot.id, dot));
     const locatorMaterial = new THREE.MeshBasicMaterial({
       color: 0xd8e3bf,
       transparent: true,
@@ -270,6 +304,7 @@ export default function Globe({
       camera.position.normalize().multiplyScalar(distance);
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
+      connectorField.current?.setAttribute("viewBox", `0 0 ${width} ${height}`);
     });
     resize.observe(host);
     const observer = new IntersectionObserver(
@@ -283,15 +318,18 @@ export default function Globe({
       focused = false,
       dragging = false,
       resumeAt = 0;
+    let hoveredPlace: string | undefined;
     const move = (event: PointerEvent) => {
       const next = Boolean(
         (event.target as HTMLElement).closest(".globe-marker, .globe-callout"),
       );
       if (hovering && !next) resumeAt = performance.now() + 2400;
       hovering = next;
+      hoveredPlace = (event.target as HTMLElement).closest<HTMLElement>(".globe-marker")?.dataset.place;
     };
     const leave = () => {
       hovering = false;
+      hoveredPlace = undefined;
       resumeAt = performance.now() + 2400;
     };
     const focusIn = (e: FocusEvent) => {
@@ -417,9 +455,12 @@ export default function Globe({
         const x = (projected.x * 0.5 + 0.5) * width,
           y = (-projected.y * 0.5 + 0.5) * height;
         button.hidden = !facing || x < 0 || x > width || y < 0 || y > height;
+        dot.x = x;
+        dot.y = y;
+        dot.visible = !button.hidden;
         if (button.hidden) continue;
         // Transparent 44px targets align with the visible geographic points.
-        // No text boxes or per-frame layout measurements are needed.
+        // No per-frame layout measurements are needed.
         button.style.transform = `translate3d(${(x - 22).toFixed(2)}px,${(y - 22).toFixed(2)}px,0)`;
         if (
           dot.id === selection.current &&
@@ -444,6 +485,107 @@ export default function Globe({
         markers.current.get(selectedDot.id)?.hidden
       )
         callout.current.hidden = true;
+
+      // Labels and their leaders remain readable during camera moves. Lay out a
+      // small number using cached dimensions, with no per-frame layout reads.
+      type Rect = { x: number; y: number; w: number; h: number };
+      type Point = { x: number; y: number };
+      type Segment = { a: Point; b: Point };
+      const occupied: Rect[] = [];
+      const paths: Segment[] = [];
+      const anchors: Point[] = [];
+      const crosses = (a: Segment, b: Segment) => {
+        const turn = (p: Point, q: Point, r: Point) =>
+          (q.x - p.x) * (r.y - p.y) - (q.y - p.y) * (r.x - p.x);
+        return turn(a.a, a.b, b.a) * turn(a.a, a.b, b.b) < 0 &&
+          turn(b.a, b.b, a.a) * turn(b.a, b.b, a.b) < 0;
+      };
+      const through = (line: Segment, r: Rect) => {
+        const corners = [
+          { x: r.x, y: r.y }, { x: r.x + r.w, y: r.y },
+          { x: r.x + r.w, y: r.y + r.h }, { x: r.x, y: r.y + r.h },
+        ];
+        return corners.some((a, i) => crosses(line, { a, b: corners[(i + 1) % 4] }));
+      };
+      const cardVisible = Boolean(selectedDot?.visible && !target.current && settledRef.current);
+      if (connector.current) connector.current.style.display = cardVisible ? "" : "none";
+      if (cardVisible && selectedDot) {
+        const { x, y } = selectedDot;
+        const cardWidth = compact ? Math.min(260, width - 40) : 318;
+        const cardX = compact
+          ? Math.max(20, Math.min(width - cardWidth - 20, x - cardWidth / 2))
+          : Math.max(24, Math.min(width - cardWidth - 24, x + 48));
+        const cardY = compact
+          ? Math.max(20, Math.min(height - 236, y + 28))
+          : Math.max(24, Math.min(height - 270, y - 128));
+        occupied.push({ x: cardX - 12, y: cardY - 12, w: cardWidth + 24, h: compact ? 248 : 282 });
+        const endX = compact ? Math.max(cardX + 16, Math.min(cardX + cardWidth - 16, x)) : cardX - 10;
+        const endY = compact ? cardY - 8 : cardY + 128;
+        paths.push({ a: { x, y }, b: { x: endX, y: endY } });
+        anchors.push({ x, y });
+        connector.current?.setAttribute("d", `M${x.toFixed(1)},${y.toFixed(1)} L${endX.toFixed(1)},${endY.toFixed(1)}`);
+      }
+      const activeElement = document.activeElement;
+      const priority = dots.filter((dot) => dot.visible).sort((a, b) =>
+        Number(b.id === hoveredPlace || markers.current.get(b.id) === activeElement) -
+        Number(a.id === hoveredPlace || markers.current.get(a.id) === activeElement) ||
+        Number(b.id === selection.current) - Number(a.id === selection.current),
+      );
+      const shown = new Set<string>();
+      let labelCount = 0;
+      for (const dot of priority) {
+        if (cardVisible && dot.id === selection.current) continue;
+        if (labelCount >= (compact ? 2 : 3)) break;
+        const explicit = dot.id === selection.current || dot.id === hoveredPlace || markers.current.get(dot.id) === activeElement;
+        if (!explicit && anchors.some((p) => (p.x - dot.x) ** 2 + (p.y - dot.y) ** 2 < 80 ** 2)) continue;
+        const label = labels.current.get(dot.id);
+        const leader = leaders.current.get(dot.id);
+        if (!label || !leader) continue;
+        const preferredSide = dot.x < width / 2 ? -1 : 1;
+        let placed: Rect | undefined;
+        let placedPath: Segment[] = [];
+        for (const side of [preferredSide, -preferredSide]) {
+          for (const offset of [-42, 0, -82, 42, 82, -122, 122]) {
+            const candidate = {
+              x: side > 0 ? dot.x + 58 : dot.x - 58 - dot.labelWidth,
+              y: dot.y + offset - 15,
+              w: dot.labelWidth, h: 30,
+            };
+            if (candidate.x < 12 || candidate.x + candidate.w > width - 12 || candidate.y < 16 || candidate.y + candidate.h > height - 16) continue;
+            if (occupied.some((r) => candidate.x < r.x + r.w + 12 && candidate.x + candidate.w + 12 > r.x && candidate.y < r.y + r.h + 12 && candidate.y + candidate.h + 12 > r.y)) continue;
+            const endX = candidate.x > dot.x ? candidate.x - 6 : candidate.x + candidate.w + 6;
+            const endY = candidate.y + 15;
+            const bend = { x: (dot.x + endX) / 2, y: endY };
+            const line = [
+              { a: { x: dot.x, y: dot.y }, b: bend },
+              { a: bend, b: { x: endX, y: endY } },
+            ];
+            if (paths.some((prior) => through(prior, candidate)) || line.some((part) => paths.some((prior) => crosses(part, prior)) || occupied.some((r) => through(part, r)))) continue;
+            placed = candidate;
+            placedPath = line;
+            break;
+          }
+          if (placed) break;
+        }
+        if (!placed) continue;
+        if (label.hidden) label.hidden = false;
+        label.style.transform = `translate3d(${(placed.x - dot.x + 22).toFixed(1)}px,${(placed.y - dot.y + 22).toFixed(1)}px,0)`;
+        const endX = placed.x > dot.x ? placed.x - 6 : placed.x + placed.w + 6;
+        const endY = placed.y + 15;
+        leader.style.display = "";
+        leader.setAttribute("d", `M${dot.x.toFixed(1)},${dot.y.toFixed(1)} L${((dot.x + endX) / 2).toFixed(1)},${endY.toFixed(1)} L${endX.toFixed(1)},${endY.toFixed(1)}`);
+        occupied.push(placed);
+        paths.push(...placedPath);
+        anchors.push({ x: dot.x, y: dot.y });
+        shown.add(dot.id);
+        labelCount++;
+      }
+      for (const dot of dots) if (!shown.has(dot.id)) {
+        const label = labels.current.get(dot.id);
+        const leader = leaders.current.get(dot.id);
+        if (label && !label.hidden) label.hidden = true;
+        if (leader) leader.style.display = "none";
+      }
       renderer.render(scene, camera);
     }
     const visibility = () => {
@@ -466,6 +608,7 @@ export default function Globe({
       host.removeEventListener("focusin", focusIn);
       host.removeEventListener("focusout", focusOut);
       controls.dispose();
+      pointPositions.current.clear();
       scene.traverse((object) => {
         if (
           object instanceof THREE.Mesh ||
@@ -496,6 +639,15 @@ export default function Globe({
         </div>
       ) : (
         <>
+          <svg ref={connectorField} className="globe-leaders" aria-hidden="true">
+            {places.map((place) => (
+              <path key={place.id} ref={(node) => {
+                if (node) leaders.current.set(place.id, node);
+                else leaders.current.delete(place.id);
+              }} />
+            ))}
+            <path ref={connector} className="globe-spotlight-leader" />
+          </svg>
           {places.map((place) => (
             <button
               key={place.id}
@@ -505,10 +657,15 @@ export default function Globe({
               }}
               hidden
               className={`globe-marker ${selected === place.id ? "active" : ""}`}
-              onClick={() => onSelect(place.id)}
+              data-place={place.id}
+              onClick={(event) => choosePoint(place.id, event)}
               aria-pressed={selected === place.id}
             >
               <span className="sr-only">{place.label}</span>
+              <span hidden aria-hidden="true" className="globe-marker-label" ref={(node) => {
+                if (node) labels.current.set(place.id, node);
+                else labels.current.delete(place.id);
+              }}>{place.label}</span>
             </button>
           ))}
           <div ref={callout} className="globe-callout" hidden inert={!settled}>

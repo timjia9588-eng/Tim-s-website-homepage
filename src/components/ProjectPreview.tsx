@@ -35,7 +35,7 @@ export default function ProjectPreview({ project }: { project: Project }) {
   const smallWidth = size
     ? Math.round(size.width * Math.min(1, 800 / size.width, 800 / size.height))
     : 0;
-  // The document studies keep their full geographic extent in the preview.
+  // Gallery windows use a focused crop; complete drawings remain in the detail gallery.
   const drawing = ["parking", "carbon", "wetland-utopia", "bamboo"].includes(
     project.id,
   );

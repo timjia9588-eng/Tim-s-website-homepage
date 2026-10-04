@@ -28,11 +28,12 @@ export function atlasSpotlight(
   if (paper)
     return {
       title: paper.shortTitle,
-      src: paper.image.src,
-      alt: paper.image.alt,
+      src: undefined,
+      alt: undefined,
       href: `#paper/${paper.id}`,
       context: "Research · Harvard Project Zero",
       fit: "cover",
+      paper,
     };
   const project =
     projects.find(
@@ -45,9 +46,8 @@ export function atlasSpotlight(
     src: project.preview?.src || project.cover,
     alt: project.preview?.alt || project.coverAlt,
     href: `#project/${project.id}`,
-    fit: ["parking", "bamboo", "carbon", "wetland-utopia"].includes(project.id)
-      ? "contain"
-      : "cover",
+    fit: "cover",
+    paper: undefined,
     context:
       project.category === "Professional"
         ? "Professional practice"

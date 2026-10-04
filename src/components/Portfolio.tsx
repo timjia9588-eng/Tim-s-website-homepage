@@ -6,6 +6,7 @@ import Reveal from "./Reveal";
 import ProjectCard from "./ProjectCard";
 import FeaturedProjects from "./FeaturedProjects";
 import Portal from "./Portal";
+import ResearchCover from "./ResearchCover";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { easyEase, revealTransition } from "../motion";
 
@@ -74,24 +75,12 @@ const entries = [
 
 function PaperCard({ paper }: { paper: Publication }) {
   return (
-    <article className="paper-card paper-card--image">
+    <article className="paper-card paper-card--research">
       <a
         href={`#paper/${paper.id}`}
         aria-label={`Read introduction to ${paper.shortTitle}`}
       >
-        <img
-          src={paper.image.src}
-          width={paper.image.width}
-          height={paper.image.height}
-          alt={paper.image.alt}
-          loading="lazy"
-          decoding="async"
-        />
-        <div className="paper-card-caption">
-          <p className="paper-card-lab">Harvard Project Zero · Working paper</p>
-          <h3>{paper.shortTitle}</h3>
-          <p>{paper.question}</p>
-        </div>
+        <ResearchCover paper={paper} />
       </a>
     </article>
   );
