@@ -1,35 +1,69 @@
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useScroll,
+} from "framer-motion";
 
-export default function SiteHeader() {
+export default function SiteHeader({
+  continuous = false,
+}: {
+  continuous?: boolean;
+}) {
   const [menu, setMenu] = useState(false);
   const [hash, setHash] = useState(window.location.hash);
   const [section, setSection] = useState("");
+  const [atlas, setAtlas] = useState(continuous);
+  const boundary = useRef(Infinity);
+  const atlasRef = useRef(continuous);
+  const { scrollY, scrollYProgress } = useScroll();
+  useMotionValueEvent(scrollY, "change", (value) => {
+    if (!continuous) return;
+    const next = value < boundary.current;
+    if (next !== atlasRef.current) {
+      atlasRef.current = next;
+      setAtlas(next);
+    }
+  });
   useEffect(() => {
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      const readingLine = Math.min(180, window.innerHeight * 0.25);
-      const current = ["globe", "work", "research", "about"].find((id) => {
+    const portal = document.getElementById("globe");
+    const resize = new ResizeObserver(() => {
+      boundary.current = portal ? portal.offsetHeight * 0.62 : 0;
+      const next = continuous && window.scrollY < boundary.current;
+      atlasRef.current = next;
+      setAtlas(next);
+    });
+    if (portal) resize.observe(portal);
+    let observer: IntersectionObserver;
+    const observeSections = () => {
+      observer?.disconnect();
+      const line = Math.min(130, window.innerHeight * 0.16);
+      // IO percentages use root width, even for vertical margins; use viewport pixels for a stable reading line.
+      observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) setSection(`#${entry.target.id}`);
+          }
+        },
+        {
+          rootMargin: `-${line}px 0px -${Math.max(0, window.innerHeight - line - 2)}px 0px`,
+          threshold: 0,
+        },
+      );
+      ["globe", "top", "work", "research", "about"].forEach((id) => {
         const element = document.getElementById(id);
-        if (!element) return false;
-        const bounds = element.getBoundingClientRect();
-        return bounds.top <= readingLine && bounds.bottom > readingLine;
+        if (element) observer.observe(element);
       });
-      setSection(current ? `#${current}` : "");
     };
-    const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    observeSections();
+    window.addEventListener("resize", observeSections, { passive: true });
     return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      resize.disconnect();
+      observer.disconnect();
+      window.removeEventListener("resize", observeSections);
     };
-  }, []);
+  }, [continuous]);
   useEffect(() => {
     const close = () => {
       setMenu(false);
@@ -45,7 +79,16 @@ export default function SiteHeader() {
     { label: "Explore the globe", href: "#globe" },
   ];
   return (
-    <header className="site-header">
+    <header
+      className={`site-header ${continuous ? "site-header--continuous" : ""} ${atlas ? "is-atlas" : ""}`}
+    >
+      {continuous && (
+        <motion.div
+          className="journey-progress"
+          aria-hidden="true"
+          style={{ scaleX: scrollYProgress }}
+        />
+      )}
       <nav
         className="nav-inner"
         aria-label="Main navigation"

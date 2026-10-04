@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect } from "react";
 import Lenis from "lenis";
+import { cancelFrame, frame } from "framer-motion";
 
 let scroller: Lenis | null = null;
 let locked = false;
@@ -18,7 +19,10 @@ export function scrollToPosition(top: number, immediate = false) {
 export function scrollToSection(id: string, immediate = false) {
   const element = document.getElementById(id);
   if (!element) return;
-  const margin = parseFloat(getComputedStyle(element).scrollMarginTop) || 0;
+  const margin =
+    parseFloat(getComputedStyle(element).scrollMarginTop) ||
+    parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) ||
+    0;
   scrollToPosition(
     window.scrollY + element.getBoundingClientRect().top - margin,
     immediate,
@@ -56,8 +60,8 @@ export default function useSmoothScroll() {
 
   useEffect(() => {
     const instance = new Lenis({
-      autoRaf: true,
-      lerp: 0.115,
+      autoRaf: false,
+      lerp: 0.085,
       syncTouch: false,
       respectReducedMotion: true,
       prevent: (node) =>
@@ -66,7 +70,12 @@ export default function useSmoothScroll() {
     });
     scroller = instance;
     if (locked) instance.stop();
+    // One clock for scrolling, Motion values and WebGL; never add a second easing layer to scroll-linked values.
+    const tick = ({ timestamp }: { timestamp: number }) =>
+      instance.raf(timestamp);
+    frame.read(tick, true);
     return () => {
+      cancelFrame(tick);
       instance.destroy();
       if (scroller === instance) scroller = null;
     };

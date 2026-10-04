@@ -6,6 +6,7 @@ import "lenis/dist/lenis.css";
 import "./styles.css";
 import "./narrative.css";
 import "./experience.css";
+import "./journey.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

@@ -1,0 +1,344 @@
+/* A single document, shared navigation and a quiet hand-off from atlas to work. */
+.site-header--continuous {
+  position: fixed;
+  inset: 0 0 auto;
+  background: #f7f6f2f5;
+  backdrop-filter: none;
+  transition:
+    color 0.45s,
+    background-color 0.45s,
+    border-color 0.45s;
+}
+.site-header--continuous.is-atlas {
+  color: #eeede7;
+  background: transparent;
+  border-color: transparent;
+}
+.site-header--continuous.is-atlas .wordmark-period {
+  color: #c9d6ba;
+}
+.site-header--continuous.is-atlas .desktop-links a {
+  color: #eeede7;
+}
+.site-header--continuous.is-atlas .nav-resume {
+  color: #eeede7;
+  background: transparent;
+  border-color: #e3e8d32b;
+}
+.site-header--continuous.is-atlas .menu-toggle span {
+  background: #eeede7;
+}
+.site-header--continuous.is-atlas .mobile-menu {
+  background: #183629;
+  color: #eeede7;
+}
+.journey-progress {
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: #739274;
+  transform-origin: left;
+}
+.portfolio-journey .atlas-portal {
+  height: 110svh;
+  min-height: 760px;
+  overflow: clip;
+  background: var(--paper);
+  border: 0;
+}
+.atlas-portal::before,
+.atlas-portal::after {
+  display: none;
+}
+.atlas-scene {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 680px;
+  isolation: isolate;
+  overflow: clip;
+}
+.atlas-atmosphere {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 46% 44%,
+    #345844 0,
+    #1b382b 42%,
+    #10241d 85%
+  );
+  pointer-events: none;
+}
+.atlas-shore {
+  position: absolute;
+  inset: auto 0 0;
+  height: 120px;
+  background: linear-gradient(transparent, #f7f6f2);
+  z-index: 4;
+  pointer-events: none;
+}
+.atlas-globe {
+  inset: 100px 390px 50px 60px;
+  transform-origin: 50% 16%;
+}
+.atlas-globe .globe-marker {
+  left: 0;
+  top: 0;
+  backdrop-filter: none;
+}
+.atlas-globe .globe-marker[hidden] {
+  display: block;
+  visibility: hidden;
+  pointer-events: none;
+}
+.atlas-intro {
+  top: clamp(150px, 22svh, 240px);
+}
+.atlas-browser {
+  top: clamp(100px, 15svh, 155px);
+  right: max(48px, calc((100vw - 1320px) / 2));
+  bottom: auto;
+  width: 340px;
+  padding: 0;
+  overflow: visible;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  backdrop-filter: none;
+}
+.atlas-place-context {
+  display: none;
+}
+.atlas-place-story {
+  margin: 16px 0 20px;
+  color: #d2dacb;
+  font-size: 12px;
+}
+.atlas-project-list {
+  gap: 0;
+}
+.atlas-project-list .atlas-spotlight {
+  border: 0;
+  padding-top: 0;
+}
+.atlas-project-list .project-preview {
+  aspect-ratio: 1.85;
+  margin-bottom: 15px;
+  border: 0;
+}
+.atlas-project-list .project-preview img {
+  filter: none;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.atlas-project-list a:is(:hover, :focus-visible) .project-preview img {
+  filter: none;
+}
+.atlas-project-list .project-preview::after {
+  opacity: 0.17;
+}
+.atlas-project-list .atlas-related-project {
+  margin-top: 18px;
+  padding-top: 14px;
+}
+.atlas-related-project .atlas-project-copy {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 4px 14px;
+}
+.atlas-related-project .atlas-project-copy small {
+  display: none;
+}
+.atlas-project-list .atlas-related-project h2 {
+  font-size: 16px;
+}
+.atlas-related-project .atlas-project-copy > span {
+  margin: 0;
+  font-size: 18px;
+}
+.atlas-bottom {
+  bottom: 38px;
+  padding: 0 48px;
+  z-index: 5;
+}
+.atlas-scroll-link {
+  color: var(--accent);
+}
+.atlas-contour-drift {
+  width: 100%;
+  height: 100%;
+}
+.atlas-flow-line {
+  animation: none;
+}
+.portfolio-hero {
+  position: relative;
+  padding-top: 20px;
+}
+.portfolio-hero-intro {
+  margin-bottom: 44px;
+}
+.portfolio-headline {
+  margin-top: 0;
+}
+.featured-stage {
+  border-radius: 0;
+}
+.project-card {
+  contain: layout paint;
+}
+.featured-image-field {
+  position: absolute;
+  inset: -18px 0;
+  pointer-events: none;
+}
+.featured-visual--incoming {
+  overflow: visible;
+}
+.featured-visual--incoming img {
+  min-width: 106%;
+  margin-left: -3%;
+}
+.featured-arrow {
+  backdrop-filter: none;
+}
+.work-section.section-space {
+  padding-top: 90px;
+  padding-bottom: 80px;
+}
+.research-feature {
+  background: linear-gradient(
+    var(--paper),
+    #eef0e7 32%,
+    #eef0e7 76%,
+    var(--paper)
+  );
+  border: 0;
+  padding-top: 72px;
+  padding-bottom: 80px;
+}
+.about-practice.section-space {
+  padding-top: 64px;
+}
+@media (min-width: 701px) and (max-height: 760px) {
+  .atlas-intro {
+    top: 145px;
+  }
+  .atlas-intro h1 {
+    font-size: 50px;
+  }
+  .atlas-intro > p:not(.eyebrow) {
+    margin-top: 22px;
+  }
+  .atlas-primary {
+    margin-top: 24px;
+  }
+  .atlas-browser {
+    top: 110px;
+    width: 300px;
+  }
+  .atlas-place-story {
+    margin: 12px 0 14px;
+  }
+}
+@media (min-width: 701px) and (max-width: 1100px) {
+  .atlas-browser {
+    right: 30px;
+    width: 290px;
+  }
+  .atlas-intro {
+    left: 30px;
+    width: 280px;
+  }
+  .atlas-intro h1 {
+    font-size: 48px;
+  }
+  .atlas-globe {
+    inset: 120px 340px 90px 0;
+  }
+}
+@media (max-width: 700px) {
+  .site-header--continuous .nav-inner {
+    width: calc(100% - 40px);
+    height: 68px;
+  }
+  .portfolio-journey .atlas-portal {
+    height: auto;
+    min-height: 100svh;
+    display: block;
+  }
+  .atlas-scene {
+    position: relative;
+    height: auto;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    padding: 92px 0 130px;
+  }
+  .atlas-atmosphere {
+    opacity: 1 !important;
+  }
+  .atlas-intro {
+    margin: 0 20px;
+    opacity: 1 !important;
+  }
+  .atlas-intro h1 {
+    font-size: clamp(41px, 11.7vw, 56px);
+    margin-top: 0;
+  }
+  .atlas-globe {
+    inset: auto;
+    height: 340px;
+    margin-top: 12px;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .atlas-browser {
+    margin: 0 20px;
+    width: auto;
+    padding: 0;
+    opacity: 1 !important;
+  }
+  .atlas-project-list .project-preview {
+    aspect-ratio: 1.85;
+  }
+  .atlas-project-list h2 {
+    font-size: 23px;
+  }
+  .atlas-place-story {
+    font-size: 13px;
+  }
+  .atlas-bottom {
+    position: static;
+    margin-top: 24px;
+    padding: 0 20px;
+  }
+  .atlas-scroll-link {
+    color: #e1e8d6;
+  }
+  .atlas-shore {
+    height: 130px;
+  }
+  .portfolio-hero {
+    padding-top: 24px;
+  }
+  .portfolio-hero-intro {
+    margin-bottom: 28px;
+  }
+  .work-section.section-space {
+    padding-top: 62px;
+    padding-bottom: 48px;
+  }
+  .research-feature {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  .about-practice.section-space {
+    padding-top: 45px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header--continuous {
+    transition: none;
+  }
+}

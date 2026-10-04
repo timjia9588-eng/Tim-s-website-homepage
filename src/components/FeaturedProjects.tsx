@@ -1,5 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { preload } from "react-dom";
 import { projects } from "../data/projects";
 import type { Category } from "../types";
@@ -41,6 +46,11 @@ export default function FeaturedProjects() {
   const [visible, setVisible] = useState(false);
   const [pageVisible, setPageVisible] = useState(!document.hidden);
   const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], [-16, 16]);
   const autoActive = !keyboardFocused && !reduced && visible && pageVisible;
   const index = slide.index;
   const step = (amount: number) =>
@@ -142,44 +152,50 @@ export default function FeaturedProjects() {
       }}
     >
       <div className="featured-stage" aria-live={autoActive ? "off" : "polite"}>
-        {slide.previous !== null && (
-          <div
-            className="featured-visual featured-visual--outgoing"
-            aria-hidden="true"
-          >
-            <img src={featured[slide.previous].image} alt="" />
-          </div>
-        )}
         <motion.div
-          key={slide.serial}
-          className="featured-visual featured-visual--incoming"
-          aria-hidden="true"
-          initial={
-            reduced || slide.serial === 0
-              ? false
-              : {
-                  clipPath:
-                    slide.direction > 0
-                      ? "inset(0% 100% 0% 0%)"
-                      : "inset(0% 0% 0% 100%)",
-                }
-          }
-          animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
-          transition={{ duration: reduced ? 0 : 0.9, ease: [0.76, 0, 0.24, 1] }}
-          onAnimationComplete={() => {
-            setTransitioning(false);
-            setSlide((current) =>
-              current.serial === slide.serial
-                ? { ...current, previous: null }
-                : current,
-            );
-          }}
+          className="featured-image-field"
+          style={reduced ? undefined : { y: imageY }}
         >
-          <img
-            src={entry.image}
-            alt=""
-            fetchPriority={index === 0 ? "high" : "auto"}
-          />
+          {slide.previous !== null && (
+            <div
+              className="featured-visual featured-visual--outgoing"
+              aria-hidden="true"
+            >
+              <img src={featured[slide.previous].image} alt="" />
+            </div>
+          )}
+          <motion.div
+            key={slide.serial}
+            className="featured-visual featured-visual--incoming"
+            aria-hidden="true"
+            initial={
+              reduced || slide.serial === 0
+                ? false
+                : {
+                    opacity: 0,
+                    x: slide.direction > 0 ? "3%" : "-3%",
+                  }
+            }
+            animate={{ opacity: 1, x: "0%" }}
+            transition={{
+              duration: reduced ? 0 : 0.85,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            onAnimationComplete={() => {
+              setTransitioning(false);
+              setSlide((current) =>
+                current.serial === slide.serial
+                  ? { ...current, previous: null }
+                  : current,
+              );
+            }}
+          >
+            <img
+              src={entry.image}
+              alt=""
+              fetchPriority={index === 0 ? "high" : "auto"}
+            />
+          </motion.div>
         </motion.div>
         <a
           className="featured-slide"

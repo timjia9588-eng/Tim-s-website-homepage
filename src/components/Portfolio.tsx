@@ -300,10 +300,9 @@ function About() {
 export default function Portfolio() {
   return (
     <>
-      <main>
+      <SiteHeader continuous />
+      <main className="portfolio-journey">
         <Portal />
-        <div className="atlas-transition" aria-hidden="true" />
-        <SiteHeader />
         <section className="portfolio-hero" id="top">
           <div className="portfolio-hero-intro page-width">
             <div>

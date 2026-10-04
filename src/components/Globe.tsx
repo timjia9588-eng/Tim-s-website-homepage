@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { geoEquirectangular, geoPath } from "d3-geo";
 import { feature } from "topojson-client";
-import { useReducedMotion } from "framer-motion";
+import { cancelFrame, frame, useReducedMotion } from "framer-motion";
 import { places } from "../data/projects";
 import type { Theme } from "../types";
 
@@ -62,7 +62,7 @@ export default function Globe({
     camera.position.copy(
       spherePoint(28, -88, 7.8 * Math.max(1, 0.95 / camera.aspect)),
     );
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.setSize(host.clientWidth, host.clientHeight);
     renderer.domElement.setAttribute("aria-hidden", "true");
     host.prepend(renderer.domElement);
@@ -127,9 +127,10 @@ export default function Globe({
     );
     globe.add(locator);
     let cancelled = false,
-      frame = 0,
       lastTime = 0,
       inView = true;
+    let width = host.clientWidth,
+      height = host.clientHeight;
     const abort = new AbortController();
     async function addLand() {
       try {
@@ -245,17 +246,29 @@ export default function Globe({
     }
     addLand();
     const labelSizes = new Map<string, { width: number; height: number }>();
+    const measureLabels = () => {
+      if (cancelled) return;
+      for (const [id, button] of markers.current) {
+        labelSizes.set(id, {
+          width: button.offsetWidth,
+          height: button.offsetHeight,
+        });
+      }
+    };
+    frame.read(measureLabels);
     document.fonts.ready.then(() => {
-      if (!cancelled) labelSizes.clear();
+      if (!cancelled) frame.read(measureLabels);
     });
     const resize = new ResizeObserver(() => {
-      if (!host.clientWidth || !host.clientHeight) return;
-      camera.aspect = host.clientWidth / host.clientHeight;
+      width = host.clientWidth;
+      height = host.clientHeight;
+      if (!width || !height) return;
+      camera.aspect = width / height;
       const distance = 7.8 * Math.max(1, 0.95 / camera.aspect);
       camera.position.normalize().multiplyScalar(distance);
       camera.updateProjectionMatrix();
-      renderer.setSize(host.clientWidth, host.clientHeight);
-      labelSizes.clear();
+      renderer.setSize(width, height);
+      frame.read(measureLabels);
     });
     resize.observe(host);
     const observer = new IntersectionObserver(
@@ -323,8 +336,10 @@ export default function Globe({
       guangzhou: [10, 20],
       nepal: [10, -14],
     };
-    function animate(time: number) {
-      frame = requestAnimationFrame(animate);
+    const direction = new THREE.Vector3();
+    const orderedDots = [...dots];
+    let lastSelection = "";
+    function animate({ timestamp: time }: { timestamp: number }) {
       if (!inView || document.hidden) {
         lastTime = time;
         return;
@@ -333,15 +348,23 @@ export default function Globe({
       lastTime = time;
       if (target.current) {
         const distance = camera.position.length();
-        camera.position
-          .normalize()
-          .lerp(target.current, 1 - Math.exp(-dt * 4))
-          .normalize()
-          .multiplyScalar(distance);
-        if (
-          camera.position.clone().normalize().distanceTo(target.current) < 0.005
-        )
+        if (pausedRef.current) {
+          camera.position.copy(target.current).multiplyScalar(distance);
           target.current = null;
+        } else {
+          camera.position
+            .normalize()
+            .lerp(target.current, 1 - Math.exp(-dt * 4))
+            .normalize()
+            .multiplyScalar(distance);
+          if (
+            direction
+              .copy(camera.position)
+              .normalize()
+              .distanceTo(target.current) < 0.005
+          )
+            target.current = null;
+        }
       }
       controls.autoRotate =
         !pausedRef.current &&
@@ -350,7 +373,8 @@ export default function Globe({
         !focused &&
         !dragging &&
         time > resumeAt;
-      host.dataset.rotation = controls.autoRotate ? "running" : "paused";
+      const rotation = controls.autoRotate ? "running" : "paused";
+      if (host.dataset.rotation !== rotation) host.dataset.rotation = rotation;
       controls.update(dt);
       camera.updateMatrixWorld();
       normal.copy(camera.position).normalize();
@@ -363,7 +387,7 @@ export default function Globe({
       const selectedDot = dots.find((dot) => dot.id === selection.current);
       if (selectedDot) {
         locator.position.copy(selectedDot.position).multiplyScalar(1.003);
-        locator.lookAt(selectedDot.position.clone().multiplyScalar(2));
+        locator.lookAt(direction.copy(selectedDot.position).multiplyScalar(2));
         locator.scale.setScalar(
           pausedRef.current ? 1 : 1.15 + Math.sin(time * 0.0014) * 0.18,
         );
@@ -371,11 +395,13 @@ export default function Globe({
           ? 0.35
           : 0.28 + Math.sin(time * 0.0014) * 0.1;
       }
-      const orderedDots = [...dots].sort(
-        (a, b) =>
-          Number(b.id === selection.current) -
-          Number(a.id === selection.current),
-      );
+      if (lastSelection !== selection.current) {
+        lastSelection = selection.current;
+        orderedDots.sort(
+          (a, b) =>
+            Number(b.id === lastSelection) - Number(a.id === lastSelection),
+        );
+      }
       for (const dot of orderedDots) {
         dot.mesh.scale.setScalar(dot.id === selection.current ? 1.8 : 1);
         const relevant =
@@ -385,63 +411,51 @@ export default function Globe({
         );
         const button = markers.current.get(dot.id);
         if (!button) continue;
-        const facing = dot.position.clone().normalize().dot(normal) > 0.14;
+        const facing =
+          direction.copy(dot.position).normalize().dot(normal) > 0.14;
         projected.copy(dot.position).project(camera);
-        const x = (projected.x * 0.5 + 0.5) * host.clientWidth,
-          y = (-projected.y * 0.5 + 0.5) * host.clientHeight;
+        const x = (projected.x * 0.5 + 0.5) * width,
+          y = (-projected.y * 0.5 + 0.5) * height;
         const [ox, oy] = offsets[dot.id] || [10, -10];
-        button.hidden =
-          !facing ||
-          x < 0 ||
-          x > host.clientWidth ||
-          y < 0 ||
-          y > host.clientHeight;
+        button.hidden = !facing || x < 0 || x > width || y < 0 || y > height;
         if (button.hidden) continue;
         button.style.opacity = relevant ? "1" : ".3";
-        // Font/viewport changes invalidate measurements; rotation does not force layout every frame.
-        let size = labelSizes.get(dot.id);
-        if (!size) {
-          size = { width: button.offsetWidth, height: button.offsetHeight };
-          labelSizes.set(dot.id, size);
-        }
-        const { width, height } = size;
-        const left = Math.max(
-          6,
-          Math.min(host.clientWidth - width - 6, x + ox),
-        );
-        let top = Math.max(
-          6,
-          Math.min(host.clientHeight - height - 45, y + oy),
-        );
+        // All layout measurements happen together in Motion's read phase, never between position writes.
+        const size = labelSizes.get(dot.id);
+        if (!size) continue;
+        const labelWidth = size.width,
+          labelHeight = size.height;
+        const left = Math.max(6, Math.min(width - labelWidth - 6, x + ox));
+        let top = Math.max(6, Math.min(height - labelHeight - 45, y + oy));
         for (let attempt = 0; attempt < 10; attempt++) {
           const collision = occupied.find(
             (rect) =>
               left < rect.left + rect.width + 5 &&
-              left + width + 5 > rect.left &&
+              left + labelWidth + 5 > rect.left &&
               top < rect.top + rect.height + 5 &&
-              top + height + 5 > rect.top,
+              top + labelHeight + 5 > rect.top,
           );
           if (!collision) break;
           top = collision.top + collision.height + 5;
         }
         if (
-          top + height > host.clientHeight - 40 ||
+          top + labelHeight > height - 40 ||
           (top - (y + oy) > 55 && dot.id !== selection.current)
         ) {
           button.hidden = true;
           continue;
         }
-        occupied.push({ left, top, width, height });
-        button.style.left = `${left}px`;
-        button.style.top = `${top}px`;
+        occupied.push({ left, top, width: labelWidth, height: labelHeight });
+        button.style.transform = `translate3d(${left.toFixed(2)}px,${top.toFixed(2)}px,0)`;
       }
       renderer.render(scene, camera);
     }
-    frame = requestAnimationFrame(animate);
+    frame.update(animate, true);
     return () => {
       cancelled = true;
       abort.abort();
-      cancelAnimationFrame(frame);
+      cancelFrame(animate);
+      cancelFrame(measureLabels);
       resize.disconnect();
       observer.disconnect();
       host.removeEventListener("pointermove", move);

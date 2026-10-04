@@ -21,16 +21,18 @@ export default function Portal() {
     target: section,
     offset: ["start start", "end start"],
   });
-  const globeY = useTransform(scrollYProgress, [0, 1], [0, -110]);
-  const globeScale = useTransform(
-    scrollYProgress,
-    [0, 0.75, 1],
-    [1, 0.66, 0.55],
-  );
+  const globeY = useTransform(scrollYProgress, [0, 1], [0, -160]);
+  const globeScale = useTransform(scrollYProgress, [0, 0.6, 1], [1, 0.78, 0.6]);
   const globeOpacity = useTransform(
     scrollYProgress,
-    [0, 0.65, 1],
-    [1, 0.7, 0.15],
+    [0, 0.55, 1],
+    [1, 0.85, 0],
+  );
+  const atmosphere = useTransform(scrollYProgress, [0, 0.45, 1], [1, 1, 0]);
+  const contentOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.5, 0.85],
+    [1, 1, 0],
   );
   const place = places.find((p) => p.id === selected)!;
   const work = place.projectIds.flatMap((id) => {
@@ -44,133 +46,134 @@ export default function Portal() {
       className="globe-portal atlas-portal"
       aria-label="An atlas of design and inquiry"
     >
-      <AtlasContours />
-      <header className="atlas-header">
-        <a href="#globe" className="atlas-wordmark">
-          tim jia<span>.</span>
-          <small>Landscape designer & researcher</small>
-        </a>
-        <nav aria-label="Globe navigation">
-          <a className="atlas-nav-work" href="#work">
-            All work <span>{projects.length + publications.length}</span>
-          </a>
-          <a href="#research">Research</a>
-          <a
-            href="#resume"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Resume (opens in a new tab)"
-          >
-            Resume ↗
-          </a>
-        </nav>
-      </header>
-      <motion.div
-        className="atlas-globe"
-        style={
-          reduced
-            ? undefined
-            : { y: globeY, scale: globeScale, opacity: globeOpacity }
-        }
-      >
-        <Suspense
-          fallback={
-            <div className="globe-loading">Bringing the world into view…</div>
+      <div className="atlas-scene">
+        <motion.div
+          className="atlas-atmosphere"
+          aria-hidden="true"
+          style={reduced ? undefined : { opacity: atmosphere }}
+        />
+        <AtlasContours />
+        <motion.div
+          className="atlas-globe"
+          style={
+            reduced
+              ? undefined
+              : { y: globeY, scale: globeScale, opacity: globeOpacity }
           }
         >
-          <Globe selected={selected} onSelect={setSelected} theme={null} />
-        </Suspense>
-      </motion.div>
-      <div className="atlas-intro">
-        <h1>
-          A practice
-          <br />
-          <em>across places.</em>
-        </h1>
-        <p>
-          Reading landscapes.
-          <br />
-          Following relationships.
-          <br />
-          Making room for everyday life.
-        </p>
-        <a className="atlas-primary" href="#work">
-          Explore all work <span>→</span>
-        </a>
-        <a className="atlas-research-link" href="#research">
-          Discover the research →
-        </a>
-      </div>
-      <aside
-        className="atlas-browser"
-        aria-label="Browse projects by place"
-        data-lenis-prevent
-      >
-        <div className="atlas-place-selector">
-          <PlacePicker selected={selected} onSelect={setSelected} />
-        </div>
-        <AnimatePresence mode="wait">
-          <motion.div
-            className="atlas-place-content"
-            key={selected}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+          <Suspense
+            fallback={
+              <div className="globe-loading">Bringing the world into view…</div>
+            }
           >
-            <p className="atlas-place-context">{place.description}</p>
-            <p className="atlas-place-story">{place.narrative}</p>
-            <div className="atlas-project-list">
-              {work.map((p) => (
-                <a href={`#project/${p.id}`} key={p.id}>
-                  <ProjectPreview project={p} />
-                  <div className="atlas-project-copy">
-                    <small>
-                      {p.category === "Professional"
-                        ? "Professional practice"
-                        : p.category === "Research"
-                          ? "Research"
-                          : p.category === "Studio"
-                            ? "Academic design"
-                            : "Independent work"}
-                    </small>
-                    <h2>{p.title}</h2>
-                    <span>View project →</span>
-                  </div>
-                </a>
-              ))}
-              {place.id === "cambridge" &&
-                publications.map((p) => (
+            <Globe selected={selected} onSelect={setSelected} theme={null} />
+          </Suspense>
+        </motion.div>
+        <motion.div
+          className="atlas-intro"
+          style={reduced ? undefined : { opacity: contentOpacity }}
+        >
+          <h1>
+            A practice
+            <br />
+            <em>across places.</em>
+          </h1>
+          <p>
+            Reading landscapes.
+            <br />
+            Following relationships.
+            <br />
+            Making room for everyday life.
+          </p>
+          <a className="atlas-primary" href="#work">
+            Explore all work <span>→</span>
+          </a>
+          <a className="atlas-research-link" href="#research">
+            Discover the research →
+          </a>
+        </motion.div>
+        <motion.aside
+          className="atlas-browser"
+          aria-label="Browse projects by place"
+          style={reduced ? undefined : { opacity: contentOpacity }}
+        >
+          <div className="atlas-place-selector">
+            <PlacePicker selected={selected} onSelect={setSelected} />
+          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              className="atlas-place-content"
+              key={selected}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <p className="atlas-place-context">{place.description}</p>
+              <p className="atlas-place-story">{place.narrative}</p>
+              <div className="atlas-project-list">
+                {work.map((p, index) => (
                   <a
-                    className="atlas-paper-link"
+                    href={`#project/${p.id}`}
                     key={p.id}
-                    href={`#paper/${p.id}`}
+                    className={
+                      index ? "atlas-related-project" : "atlas-spotlight"
+                    }
                   >
-                    <div>
-                      <small>Harvard Project Zero / Working paper</small>
-                      <h2>{p.shortTitle}</h2>
-                      <span>Explore the research →</span>
+                    {index === 0 && <ProjectPreview project={p} />}
+                    <div className="atlas-project-copy">
+                      <small>
+                        {p.category === "Professional"
+                          ? "Professional practice"
+                          : p.category === "Research"
+                            ? "Research"
+                            : p.category === "Studio"
+                              ? "Academic design"
+                              : "Independent work"}
+                      </small>
+                      <h2>{p.title}</h2>
+                      <span>{index ? "→" : "View project →"}</span>
                     </div>
                   </a>
                 ))}
-            </div>
-            {!work.length && (
-              <a
-                className="atlas-experience-link"
-                href="#resume"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Read about this experience →
-              </a>
-            )}
-          </motion.div>
-        </AnimatePresence>
-      </aside>
-      <div className="atlas-bottom">
-        <a className="atlas-scroll-link" href="#top">
-          Scroll to the work <span aria-hidden="true">↓</span>
-        </a>
+                {place.id === "cambridge" &&
+                  publications.map((p) => (
+                    <a
+                      className="atlas-paper-link"
+                      key={p.id}
+                      href={`#paper/${p.id}`}
+                    >
+                      <div>
+                        <small>Harvard Project Zero / Working paper</small>
+                        <h2>{p.shortTitle}</h2>
+                        <span>Explore the research →</span>
+                      </div>
+                    </a>
+                  ))}
+              </div>
+              {!work.length && (
+                <a
+                  className="atlas-experience-link"
+                  href="#resume"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Read about this experience →
+                </a>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </motion.aside>
+        <div className="atlas-bottom">
+          <a
+            className="atlas-scroll-link"
+            href="#top"
+            aria-label="Continue to selected work"
+          >
+            <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+        <div className="atlas-shore" aria-hidden="true" />
       </div>
     </section>
   );

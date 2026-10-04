@@ -45,12 +45,12 @@ export default function ProjectPreview({ project }: { project: Project }) {
     >
       <motion.div
         className="preview-art"
-        initial={reduced ? false : { clipPath: "inset(0% 0% 100% 0%)" }}
+        initial={reduced ? false : { opacity: 0.5, y: drawing ? 0 : 14 }}
         animate={{
-          clipPath:
-            reduced || inView ? "inset(0% 0% 0% 0%)" : "inset(0% 0% 100% 0%)",
+          opacity: reduced || inView ? 1 : 0.5,
+          y: reduced || inView || drawing ? 0 : 14,
         }}
-        transition={{ duration: reduced ? 0 : 0.85, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: reduced ? 0 : 0.65, ease: [0.22, 1, 0.36, 1] }}
       >
         <img
           src={src}
