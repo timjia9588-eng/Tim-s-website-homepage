@@ -4,6 +4,32 @@ import { AnimatePresence, motion } from "framer-motion";
 export default function SiteHeader() {
   const [menu, setMenu] = useState(false);
   const [hash, setHash] = useState(window.location.hash);
+  const [section, setSection] = useState("");
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const readingLine = Math.min(180, window.innerHeight * 0.25);
+      const current = ["globe", "work", "research", "about"].find((id) => {
+        const element = document.getElementById(id);
+        if (!element) return false;
+        const bounds = element.getBoundingClientRect();
+        return bounds.top <= readingLine && bounds.bottom > readingLine;
+      });
+      setSection(current ? `#${current}` : "");
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
   useEffect(() => {
     const close = () => {
       setMenu(false);
@@ -35,7 +61,7 @@ export default function SiteHeader() {
             <a
               key={l.label}
               href={l.href}
-              aria-current={hash === l.href ? "page" : undefined}
+              aria-current={section === l.href ? "location" : undefined}
             >
               {l.label}
             </a>

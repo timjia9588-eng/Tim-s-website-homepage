@@ -5,6 +5,9 @@ import SiteHeader from "./SiteHeader";
 import Reveal from "./Reveal";
 import ProjectCard from "./ProjectCard";
 import FeaturedProjects from "./FeaturedProjects";
+import Portal from "./Portal";
+import ScrollScene from "./ScrollScene";
+import { motion, useReducedMotion } from "framer-motion";
 
 type Filter = "all" | "practice" | "studies" | "research";
 const filters: { id: Filter; label: string; hash: string }[] = [
@@ -75,8 +78,16 @@ function PaperCard({
   paper: Publication;
   featured?: boolean;
 }) {
+  const reduced = useReducedMotion();
   return (
-    <article className={`paper-card ${featured ? "paper-card--featured" : ""}`}>
+    <motion.article
+      className={`paper-card ${featured ? "paper-card--featured" : ""}`}
+      initial={reduced ? false : { opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      whileHover={reduced ? undefined : { y: -4 }}
+      transition={{ duration: reduced ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] }}
+    >
       <a
         href={`#paper/${paper.id}`}
         aria-label={`Read introduction to ${paper.shortTitle}`}
@@ -93,7 +104,7 @@ function PaperCard({
           <strong>Explore the research →</strong>
         </div>
       </a>
-    </article>
+    </motion.article>
   );
 }
 function Work() {
@@ -129,11 +140,8 @@ function Work() {
   return (
     <section className="work-section section-space" id="work">
       <div className="page-width">
-        <div className="work-heading">
+        <ScrollScene className="work-heading">
           <div>
-            <p className="eyebrow">
-              Projects, research & independent explorations
-            </p>
             <h2>Work, in perspective.</h2>
           </div>
           <p>
@@ -141,7 +149,7 @@ function Work() {
             <br />
             Explore the work that shapes my practice.
           </p>
-        </div>
+        </ScrollScene>
         <div className="work-browser">
           <div
             className="work-filters"
@@ -224,7 +232,7 @@ function Research() {
   return (
     <section className="research-feature section-space" id="research">
       <div className="page-width">
-        <Reveal className="research-heading">
+        <ScrollScene className="research-heading">
           <div>
             <p className="eyebrow">Research & writing</p>
             <h2>
@@ -238,7 +246,7 @@ function Research() {
             ways people learn, belong and act within it. At Harvard Project
             Zero, that inquiry became two collaborative working papers.
           </p>
-        </Reveal>
+        </ScrollScene>
         <div className="research-paper-grid">
           {publications.map((p) => (
             <PaperCard key={p.id} paper={p} featured />
@@ -260,7 +268,7 @@ function About() {
   return (
     <section className="about-practice section-space" id="about">
       <div className="page-width">
-        <div className="about-practice-intro">
+        <ScrollScene className="about-practice-intro">
           <div>
             <p className="eyebrow">About my practice</p>
             <h2>
@@ -285,7 +293,7 @@ function About() {
               Read my resume →
             </a>
           </div>
-        </div>
+        </ScrollScene>
         <div className="practice-notes">
           {chapters.map((c, i) => (
             <Reveal key={c.theme}>
@@ -302,19 +310,18 @@ function About() {
 export default function Portfolio() {
   return (
     <>
-      <SiteHeader />
       <main>
+        <Portal />
+        <div className="atlas-transition" aria-hidden="true" />
+        <SiteHeader />
         <section className="portfolio-hero" id="top">
-          <div className="portfolio-hero-intro page-width">
+          <ScrollScene className="portfolio-hero-intro page-width">
             <div>
-              <p className="eyebrow">
-                Tianzhen (Tim) Jia · Landscape designer & researcher
-              </p>
-              <h1>
+              <h2 className="portfolio-headline">
                 Places for people.
                 <br />
                 <em>Room for possibility.</em>
-              </h1>
+              </h2>
             </div>
             <div className="portfolio-hero-copy">
               <p>
@@ -325,9 +332,11 @@ export default function Portfolio() {
                 Explore all work →
               </a>
             </div>
-          </div>
+          </ScrollScene>
           <div className="page-width">
-            <FeaturedProjects />
+            <ScrollScene expand>
+              <FeaturedProjects />
+            </ScrollScene>
           </div>
         </section>
         <Work />

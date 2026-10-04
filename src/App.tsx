@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { projects } from "./data/projects";
 import { connections, publications } from "./data/story";
-import Portal from "./components/Portal";
 import Portfolio from "./components/Portfolio";
 import ProjectDetail from "./components/ProjectDetail";
 import PaperDetail from "./components/PaperDetail";
@@ -13,11 +12,7 @@ const getProjectId = () =>
     ? decodeURIComponent(window.location.hash.slice(9))
     : null;
 const getView = () =>
-  window.location.hash === "#resume"
-    ? "resume"
-    : !window.location.hash || window.location.hash === "#globe"
-      ? "globe"
-      : "simple";
+  window.location.hash === "#resume" ? "resume" : "portfolio";
 const sectionTarget = (hash: string) =>
   ["#practice", "#studies", "#research-work"].includes(hash)
     ? "work"
@@ -25,7 +20,11 @@ const sectionTarget = (hash: string) =>
       ? "about"
       : hash === "#simple"
         ? "top"
-        : hash.slice(1);
+        : hash.startsWith("#project/")
+          ? "work"
+          : hash.startsWith("#paper/")
+            ? "research"
+            : hash.slice(1) || "globe";
 
 export default function App() {
   const [projectId, setProjectId] = useState(getProjectId);
@@ -35,6 +34,9 @@ export default function App() {
       : null,
   );
   const [view, setView] = useState(getView);
+  const detailOpen = useRef(Boolean(projectId || paperId));
+  detailOpen.current = Boolean(projectId || paperId);
+  const returnScroll = useRef<number | null>(null);
   const returnHash = useRef(
     window.location.hash.startsWith("#project/")
       ? "#work"
@@ -43,6 +45,9 @@ export default function App() {
         : window.location.hash || "#globe",
   );
   useEffect(() => {
+    const originalRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+    let frame = 0;
     const update = () => {
       setProjectId(getProjectId());
       setPaperId(
@@ -54,24 +59,39 @@ export default function App() {
         !window.location.hash.startsWith("#project/") &&
         !window.location.hash.startsWith("#paper/")
       ) {
+        const restoringDetail =
+          detailOpen.current &&
+          (window.location.hash || "#globe") === returnHash.current &&
+          returnScroll.current !== null;
         returnHash.current = window.location.hash || "#globe";
         setView(getView());
-        requestAnimationFrame(() =>
-          document
-            .getElementById(sectionTarget(window.location.hash))
-            ?.scrollIntoView(),
-        );
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => {
+          if (restoringDetail)
+            window.scrollTo({
+              top: returnScroll.current!,
+              behavior: "instant",
+            });
+          else
+            document
+              .getElementById(sectionTarget(window.location.hash))
+              ?.scrollIntoView();
+        });
       }
     };
     window.addEventListener("hashchange", update);
-    return () => window.removeEventListener("hashchange", update);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.history.scrollRestoration = originalRestoration;
+      window.removeEventListener("hashchange", update);
+    };
   }, []);
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
       const target = document.getElementById(
         sectionTarget(window.location.hash),
       );
-      if (target) target.scrollIntoView();
+      if (target) target.scrollIntoView({ behavior: "instant" });
       else window.scrollTo(0, 0);
     });
     return () => cancelAnimationFrame(frame);
@@ -104,27 +124,24 @@ export default function App() {
         id="page-content"
         onClickCapture={(event) => {
           const link = (event.target as HTMLElement).closest("a");
-          if (link?.getAttribute("href") === "#simple")
-            document.getElementById("top")?.scrollIntoView();
+          const href = link?.getAttribute("href");
+          if (href?.startsWith("#") && href === window.location.hash)
+            document.getElementById(sectionTarget(href))?.scrollIntoView();
           if (link?.getAttribute("href") === "#work")
             window.dispatchEvent(new Event("show-all-work"));
           if (
             link?.getAttribute("href")?.startsWith("#project/") ||
             link?.getAttribute("href")?.startsWith("#paper/")
-          )
+          ) {
             returnHash.current = window.location.hash || "#globe";
+            returnScroll.current = window.scrollY;
+          }
         }}
       >
         <a className="skip-link" href="#work">
           Skip to selected work
         </a>
-        {view === "globe" ? (
-          <Portal />
-        ) : view === "resume" ? (
-          <ResumePage />
-        ) : (
-          <Portfolio />
-        )}
+        {view === "resume" ? <ResumePage /> : <Portfolio />}
       </div>
       <AnimatePresence mode="wait">
         {active && (

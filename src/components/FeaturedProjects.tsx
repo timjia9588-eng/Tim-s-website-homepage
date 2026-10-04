@@ -9,18 +9,21 @@ import { preload } from "react-dom";
 import { projects } from "../data/projects";
 import type { Category, Project } from "../types";
 
+// Large covers are chosen separately from the complete project galleries.
 const featured = [
-  "weaving",
-  "phillips",
-  "salamanca",
-  "bajo-la-sombra",
-  "melissa",
-  "gentilly",
-  "bamboo",
-  "alumni",
-  "sketchbook",
-].map((id) => projects.find((p) => p.id === id)!);
-const duration = 7500;
+  ["weaving", "/images/weaving/cover.webp", "Entrance"],
+  ["phillips", "/images/phillips/cover.webp", "Quarry landscape"],
+  ["salamanca", "/images/salamanca/cover.webp", "Restored wetland"],
+  ["melissa", "/images/melissa/cover.webp", "Community park"],
+  ["gentilly", "/images/gentilly/cover.webp", "Living with water"],
+  ["alumni", "/images/alumni/cover.webp", "Planting layers"],
+].map(([id, image, perspective]) => ({
+  project: projects.find((p) => p.id === id)!,
+  image,
+  perspective,
+  key: `${id}-${perspective}`,
+}));
+const duration = 4500;
 const context: Record<Category, string> = {
   Professional: "Professional practice",
   Studio: "Academic design",
@@ -30,10 +33,12 @@ const context: Record<Category, string> = {
 
 function FeaturedSlide({
   project,
+  image,
   reduced,
   first,
 }: {
   project: Project;
+  image: string;
   reduced: boolean;
   first: boolean;
 }) {
@@ -49,21 +54,29 @@ function FeaturedSlide({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: reduced ? 0 : 1 }}
+      transition={{ duration: reduced ? 0 : 0.8 }}
     >
       <img
-        src={project.cover}
-        alt={project.coverAlt}
+        src={image}
+        alt={
+          project.images.find((figure) => figure.src === image)?.alt ||
+          project.coverAlt
+        }
         fetchPriority={first ? "high" : "auto"}
       />
       <div className="featured-shade" />
-      <div className="featured-caption">
+      <motion.div
+        className="featured-caption"
+        initial={{ opacity: 0, y: reduced ? 0 : 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: reduced ? 0 : 0.65, delay: reduced ? 0 : 0.12 }}
+      >
         <p>
           {context[project.category]} · {project.location}
         </p>
         <h2>{project.title}</h2>
         <span>View project →</span>
-      </div>
+      </motion.div>
     </motion.a>
   );
 }
@@ -71,15 +84,13 @@ function FeaturedSlide({
 export default function FeaturedProjects() {
   const reduced = useReducedMotion();
   const [index, setIndex] = useState(0);
-  const [playing, setPlaying] = useState(true);
   const [keyboardFocused, setKeyboardFocused] = useState(false);
   const [visible, setVisible] = useState(true);
   const [pageVisible, setPageVisible] = useState(!document.hidden);
   const ref = useRef<HTMLDivElement>(null);
-  const autoActive =
-    playing && !keyboardFocused && !reduced && visible && pageVisible;
+  const autoActive = !keyboardFocused && !reduced && visible && pageVisible;
   useEffect(() => {
-    preload(featured[(index + 1) % featured.length].cover!, {
+    preload(featured[(index + 1) % featured.length].image, {
       as: "image",
       fetchPriority: "low",
     });
@@ -105,8 +116,9 @@ export default function FeaturedProjects() {
     );
     return () => window.clearTimeout(timer);
   }, [index, autoActive]);
-  const p = featured[index];
-  const coverImage = p.images.find((image) => image.src === p.cover);
+  const entry = featured[index];
+  const p = entry.project;
+  const coverImage = p.images.find((image) => image.src === entry.image);
   return (
     <div
       ref={ref}
@@ -144,20 +156,43 @@ export default function FeaturedProjects() {
       <div className="featured-stage" aria-live={autoActive ? "off" : "polite"}>
         <AnimatePresence initial={false}>
           <FeaturedSlide
-            key={p.id}
+            key={entry.key}
             project={p}
+            image={entry.image}
             reduced={Boolean(reduced)}
             first={index === 0}
           />
         </AnimatePresence>
+        <div className="featured-arrows">
+          <button
+            className="featured-arrow featured-arrow--previous"
+            aria-label="Previous featured project"
+            onClick={() =>
+              setIndex((i) => (i - 1 + featured.length) % featured.length)
+            }
+          >
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="m14 6-6 6 6 6" />
+            </svg>
+          </button>
+          <button
+            className="featured-arrow featured-arrow--next"
+            aria-label="Next featured project"
+            onClick={() => setIndex((i) => (i + 1) % featured.length)}
+          >
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="m10 6 6 6-6 6" />
+            </svg>
+          </button>
+        </div>
         <div
           className="featured-timeline"
           aria-label="Choose a featured project"
         >
-          {featured.map((project, i) => (
+          {featured.map(({ project, key, perspective }, i) => (
             <button
-              key={project.id}
-              aria-label={`Show ${project.title}`}
+              key={key}
+              aria-label={`Show ${project.title} — ${perspective}`}
               aria-current={i === index ? "true" : undefined}
               onClick={() => setIndex(i)}
             >
@@ -179,29 +214,17 @@ export default function FeaturedProjects() {
           ))}
         </div>
         <div className="featured-status">
-          <span aria-label={`Project ${index + 1} of ${featured.length}`}>
+          <span aria-label={`Perspective ${index + 1} of ${featured.length}`}>
             {String(index + 1).padStart(2, "0")}{" "}
             <span>/ {String(featured.length).padStart(2, "0")}</span>
           </span>
-          {!reduced && (
-            <button
-              className="featured-play"
-              onClick={() => setPlaying((v) => !v)}
-              aria-label={playing ? "Pause slideshow" : "Play slideshow"}
-            >
-              <svg viewBox="0 0 20 20" aria-hidden="true">
-                {playing ? (
-                  <path d="M7 5v10M13 5v10" />
-                ) : (
-                  <path d="m7 5 8 5-8 5Z" />
-                )}
-              </svg>
-            </button>
-          )}
         </div>
       </div>
-      <p className="featured-credit">
-        {p.category === "Professional" ? (
+      <p
+        className="featured-credit"
+        aria-hidden={p.category !== "Professional" || undefined}
+      >
+        {p.category === "Professional" && (
           <>
             <span>Image · {coverImage?.credit || p.organization}</span>
             <a
@@ -212,8 +235,6 @@ export default function FeaturedProjects() {
               {coverImage?.source ? "Original source ↗" : "Project context ↗"}
             </a>
           </>
-        ) : (
-          <span>Design & illustration · Tianzhen (Tim) Jia</span>
         )}
       </p>
     </div>

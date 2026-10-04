@@ -30,7 +30,9 @@ export default function ProjectPreview({ project }: { project: Project }) {
     ? Math.round(size.width * Math.min(1, 800 / size.width, 800 / size.height))
     : 0;
   // The document studies keep their full geographic extent in the preview.
-  const drawing = ["parking", "carbon", "wetland-utopia"].includes(project.id);
+  const drawing = ["parking", "carbon", "wetland-utopia", "bamboo"].includes(
+    project.id,
+  );
   return (
     <div
       className={`project-preview ${drawing ? "project-preview--drawing" : ""}`}

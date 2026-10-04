@@ -1,5 +1,11 @@
-import { lazy, Suspense, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { lazy, Suspense, useRef, useState } from "react";
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { places, projects } from "../data/projects";
 import { publications } from "../data/story";
 import PlacePicker from "./PlacePicker";
@@ -9,13 +15,34 @@ const Globe = lazy(() => import("./Globe"));
 export default function Portal() {
   const [selected, setSelected] = useState("melissa");
   const reduced = useReducedMotion();
+  const section = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: section,
+    offset: ["start start", "end start"],
+  });
+  const globeY = useTransform(scrollYProgress, [0, 1], [0, -110]);
+  const globeScale = useTransform(
+    scrollYProgress,
+    [0, 0.75, 1],
+    [1, 0.66, 0.55],
+  );
+  const globeOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.65, 1],
+    [1, 0.7, 0.15],
+  );
   const place = places.find((p) => p.id === selected)!;
   const work = place.projectIds.flatMap((id) => {
     const p = projects.find((p) => p.id === id);
     return p ? [p] : [];
   });
   return (
-    <main id="globe" className="globe-portal atlas-portal">
+    <section
+      ref={section}
+      id="globe"
+      className="globe-portal atlas-portal"
+      aria-label="An atlas of design and inquiry"
+    >
       <header className="atlas-header">
         <a href="#globe" className="atlas-wordmark">
           tim jia<span>.</span>
@@ -36,7 +63,14 @@ export default function Portal() {
           </a>
         </nav>
       </header>
-      <div className="atlas-globe">
+      <motion.div
+        className="atlas-globe"
+        style={
+          reduced
+            ? undefined
+            : { y: globeY, scale: globeScale, opacity: globeOpacity }
+        }
+      >
         <Suspense
           fallback={
             <div className="globe-loading">Bringing the world into view…</div>
@@ -44,9 +78,8 @@ export default function Portal() {
         >
           <Globe selected={selected} onSelect={setSelected} theme={null} />
         </Suspense>
-      </div>
+      </motion.div>
       <div className="atlas-intro">
-        <p className="eyebrow">An atlas of design & inquiry</p>
         <h1>
           A practice
           <br />
@@ -129,9 +162,10 @@ export default function Portal() {
         </AnimatePresence>
       </aside>
       <div className="atlas-bottom">
-        <p>Drag to explore · Hover to pause · Choose a place</p>
-        <span>Tianzhen (Tim) Jia</span>
+        <a className="atlas-scroll-link" href="#top">
+          Scroll to the work <span aria-hidden="true">↓</span>
+        </a>
       </div>
-    </main>
+    </section>
   );
 }

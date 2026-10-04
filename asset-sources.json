@@ -1,13 +1,14 @@
 [
   {
     "path": "/images/alumni/cover.webp",
-    "width": 1370,
-    "height": 852,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 20,
-    "crop": [0.51, 0.025, 0.97, 0.43],
+    "width": 1276,
+    "height": 528,
+    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "page": 27,
+    "crop": null,
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Complete embedded original Im0.jpg (image index 0), exported at its native pixel dimensions without portfolio headings, page whitespace, or upscaling."
   },
   {
     "path": "/images/alumni/plan.webp",
@@ -53,13 +54,14 @@
   },
   {
     "path": "/images/bamboo/cover.webp",
-    "width": 664,
-    "height": 410,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 19,
-    "crop": [0.513, 0.552, 0.736, 0.747],
+    "width": 575,
+    "height": 762,
+    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "page": 26,
+    "crop": null,
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Complete embedded original Im8.jpg (image index 11), exported at its native pixel dimensions without portfolio headings, page whitespace, or upscaling."
   },
   {
     "path": "/images/bamboo/drawing.webp",
@@ -461,33 +463,36 @@
   },
   {
     "path": "/images/sketchbook/cover.webp",
-    "width": 1132,
-    "height": 617,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 21,
-    "crop": [0.59, 0.115, 0.97, 0.408],
+    "width": 989,
+    "height": 620,
+    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "page": 31,
+    "crop": null,
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Complete embedded original Im7.jpg (image index 7), exported at its native pixel dimensions without portfolio headings, page whitespace, or upscaling."
   },
   {
     "path": "/images/sketchbook/florence.webp",
-    "width": 863,
-    "height": 695,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 21,
-    "crop": [0.355, 0.6, 0.645, 0.93],
+    "width": 691,
+    "height": 836,
+    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "page": 31,
+    "crop": null,
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Complete embedded original Im2.png (image index 2), exported at its native pixel dimensions without portfolio headings, page whitespace, or upscaling."
   },
   {
     "path": "/images/sketchbook/london.webp",
-    "width": 1370,
-    "height": 1727,
-    "source": "Tim's portfolio 6.15.pdf",
-    "page": 22,
-    "crop": [0.025, 0.1, 0.485, 0.92],
+    "width": 1277,
+    "height": 1809,
+    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "page": 32,
+    "crop": null,
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Complete embedded original Im1.jpg (image index 1), exported at its native pixel dimensions without portfolio headings, page whitespace, or upscaling."
   },
   {
     "path": "/images/weaving/cover.webp",
@@ -605,5 +610,27 @@
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null,
     "extraction": "Preview only: native-resolution close-up of the branching fungal filaments. The complete photograph remains in the project gallery."
+  },
+  {
+    "path": "/images/bamboo/layout.webp",
+    "width": 600,
+    "height": 469,
+    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "page": 26,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete embedded original Im6.png (image index 9), exported at its native pixel dimensions without portfolio headings, page whitespace, or upscaling."
+  },
+  {
+    "path": "/images/bamboo/alternate-sketch.webp",
+    "width": 497,
+    "height": 515,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 19,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete embedded second garden concept sketch Im6.jpg, image index 8, exported at native size without portfolio headings or upscaling."
   }
 ]

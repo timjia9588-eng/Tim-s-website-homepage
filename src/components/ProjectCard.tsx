@@ -12,10 +12,17 @@ export default function ProjectCard({
   return (
     <motion.article
       className="project-card"
-      initial={{ opacity: 0, y: reduced ? 0 : 24 }}
+      initial={reduced ? false : { opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
+      whileHover={
+        reduced ? undefined : { y: -4, transition: { duration: 0.3, delay: 0 } }
+      }
       viewport={{ once: true }}
-      transition={{ delay: (index % 2) * 0.06 }}
+      transition={{
+        duration: reduced ? 0 : 0.75,
+        delay: reduced ? 0 : (index % 2) * 0.06,
+        ease: [0.22, 1, 0.36, 1],
+      }}
     >
       <a
         href={`#project/${project.id}`}
@@ -49,7 +56,9 @@ export default function ProjectCard({
             {project.category === "Research"
               ? "Explore the research"
               : "View project"}{" "}
-            →
+            <span className="link-arrow" aria-hidden="true">
+              →
+            </span>
           </span>
         </div>
       </a>

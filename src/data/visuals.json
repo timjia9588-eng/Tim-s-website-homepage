@@ -102,7 +102,7 @@
       "alt": "Residents, visitors and heritage — overlapping needs",
       "caption": "Residents, visitors and heritage — overlapping needs",
       "credit": "Tianzhen (Tim) Jia",
-      "description": "The original diagram compares tourism's need for openness, daily life's need for privacy and conservation's need to protect the buildings. The simplified preview uses the same three ideas; this complete figure preserves the original wording."
+      "description": "The diagram compares tourism's need for openness, daily life's need for privacy and conservation's need to protect the buildings."
     },
     {
       "src": "/images/xiaozhou/community.webp",
@@ -125,7 +125,7 @@
       "alt": "Complete minirhizotron photograph showing branching fungal filaments and dense mycelium",
       "caption": "Fungal structures — visual identification in soil imagery",
       "credit": "Tianzhen (Tim) Jia",
-      "description": "The white branching filaments and dense fan-like structures are visible within the soil scan. This is the complete photograph extracted from the research portfolio; its title and explanation are website text."
+      "description": "White branching filaments and dense fan-like structures are visible within the soil scan."
     },
     {
       "src": "/images/salinity/microscopy.webp",
@@ -260,23 +260,41 @@
   "bamboo": [
     {
       "src": "/images/bamboo/cover.webp",
-      "alt": "Completed courtyard garden",
-      "caption": "Completed courtyard garden",
-      "credit": "Tianzhen (Tim) Jia"
+      "alt": "The completed bamboo garden, with grass, a stone path and timber gathering deck",
+      "caption": "A small garden, made tangible",
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "The planted edge, curving stone path, lawn and timber gathering deck form a small landscape for everyday use."
     },
     {
       "src": "/images/bamboo/drawing.webp",
       "alt": "Garden plan — planting, paths and gathering",
-      "caption": "Garden plan — planting, paths and gathering",
+      "caption": "Garden direction 01 — a planted edge and winding path",
       "credit": "Tianzhen (Tim) Jia",
-      "description": "The sketch connects a bamboo edge and planting with a deck, gathering spaces and a stone-and-grass path. It shows the complete garden rather than a fragment of the portfolio layout."
+      "description": "The sketch connects a bamboo edge and planting with a deck, gathering spaces and a stone-and-grass path.",
+      "group": "Two garden directions",
+      "groupDescription": "Two complete hand sketches explore different relationships between planting, stone paths and gathering space."
+    },
+    {
+      "src": "/images/bamboo/alternate-sketch.webp",
+      "alt": "Second complete hand-drawn bamboo garden concept plan",
+      "caption": "Garden direction 02 — an alternative layout",
+      "description": "A broad stone path links planting, a timber platform and several places to sit and gather.",
+      "credit": "Tianzhen (Tim) Jia",
+      "group": "Two garden directions"
+    },
+    {
+      "src": "/images/bamboo/layout.webp",
+      "alt": "Complete bamboo garden layout with deck, stone path, planting and dimensions",
+      "caption": "From garden sketch to construction layout",
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "The layout relates the stone path, gathering deck, pergola and bamboo edge to site dimensions. Original drawing labels remain intact."
     }
   ],
   "alumni": [
     {
       "src": "/images/alumni/cover.webp",
-      "alt": "Planting section — layered canopy and seasonal color",
-      "caption": "Planting section — layered canopy and seasonal color",
+      "alt": "Complete planting perspective showing height, texture and seasonal layers",
+      "caption": "Planting layers — height, texture and seasonal change",
       "credit": "Tianzhen (Tim) Jia"
     },
     {

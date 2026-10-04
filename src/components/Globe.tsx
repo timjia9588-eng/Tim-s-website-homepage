@@ -71,15 +71,15 @@ export default function Globe({
     const surface = new THREE.Mesh(
       new THREE.SphereGeometry(2.48, 48, 32),
       new THREE.MeshPhongMaterial({
-        color: 0x202223,
-        emissive: 0x070809,
-        specular: 0x42474a,
-        shininess: 20,
+        color: 0x152b22,
+        emissive: 0x07140e,
+        specular: 0x29443c,
+        shininess: 24,
       }),
     );
     globe.add(surface);
-    scene.add(new THREE.AmbientLight(0xdddddd, 1.25));
-    const light = new THREE.DirectionalLight(0xf1f1ef, 2);
+    scene.add(new THREE.AmbientLight(0xcbd6c7, 1.4));
+    const light = new THREE.DirectionalLight(0xe2f1df, 2.3);
     light.position.set(-4, 3, 6);
     scene.add(light);
     globe.add(
@@ -87,7 +87,7 @@ export default function Globe({
         new THREE.SphereGeometry(2.55, 64, 48),
         new THREE.ShaderMaterial({
           vertexShader: `varying vec3 vNormal; varying vec3 vView; void main(){ vec4 p=modelViewMatrix*vec4(position,1.0); vNormal=normalize(normalMatrix*normal); vView=-p.xyz; gl_Position=projectionMatrix*p; }`,
-          fragmentShader: `varying vec3 vNormal; varying vec3 vView; void main(){ float rim=pow(1.0-abs(dot(normalize(vNormal),normalize(vView))),3.0); gl_FragColor=vec4(0.65,0.67,0.68,rim*0.25); }`,
+          fragmentShader: `varying vec3 vNormal; varying vec3 vView; void main(){ float rim=pow(1.0-abs(dot(normalize(vNormal),normalize(vView))),3.0); gl_FragColor=vec4(0.58,0.73,0.63,rim*0.32); }`,
           transparent: true,
           depthWrite: false,
           blending: THREE.AdditiveBlending,
@@ -98,11 +98,13 @@ export default function Globe({
     controls.enableDamping = true;
     controls.dampingFactor = 0.055;
     controls.enablePan = false;
+    // Page scrolling owns the wheel and vertical touch gestures; horizontal dragging rotates the atlas.
+    controls.enableZoom = false;
+    renderer.domElement.style.touchAction = "pan-y";
     controls.minDistance = 6.3;
     controls.maxDistance = 23;
     controls.autoRotateSpeed = 0.28;
     controls.rotateSpeed = 0.65;
-    controls.zoomSpeed = 0.55;
     const dots = places.map((p) => {
       const position = spherePoint(p.lat, p.lon, 2.535);
       const mesh = new THREE.Mesh(
@@ -164,10 +166,10 @@ export default function Globe({
           new THREE.Points(
             geometry,
             new THREE.PointsMaterial({
-              color: 0xd2d4d4,
+              color: 0xc4d3b6,
               size: 0.017,
               transparent: true,
-              opacity: 0.68,
+              opacity: 0.8,
               sizeAttenuation: true,
             }),
           ),
@@ -215,7 +217,7 @@ export default function Globe({
             new THREE.LineSegments(
               outline,
               new THREE.LineBasicMaterial({
-                color: 0x9da2a3,
+                color: 0x94b399,
                 transparent: true,
                 opacity: 0.2,
               }),

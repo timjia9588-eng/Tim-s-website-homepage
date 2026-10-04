@@ -1,7 +1,7 @@
 {
   "/images/alumni/cover.webp": {
-    "width": 1370,
-    "height": 852
+    "width": 1276,
+    "height": 528
   },
   "/images/alumni/plan.webp": {
     "width": 2844,
@@ -20,8 +20,8 @@
     "height": 474
   },
   "/images/bamboo/cover.webp": {
-    "width": 664,
-    "height": 410
+    "width": 575,
+    "height": 762
   },
   "/images/bamboo/drawing.webp": {
     "width": 497,
@@ -164,16 +164,16 @@
     "height": 473
   },
   "/images/sketchbook/cover.webp": {
-    "width": 1132,
-    "height": 617
+    "width": 989,
+    "height": 620
   },
   "/images/sketchbook/florence.webp": {
-    "width": 863,
-    "height": 695
+    "width": 691,
+    "height": 836
   },
   "/images/sketchbook/london.webp": {
-    "width": 1370,
-    "height": 1727
+    "width": 1277,
+    "height": 1809
   },
   "/images/weaving/cover.webp": {
     "width": 1272,
@@ -218,5 +218,13 @@
   "/images/salinity/preview.webp": {
     "width": 680,
     "height": 425
+  },
+  "/images/bamboo/layout.webp": {
+    "width": 600,
+    "height": 469
+  },
+  "/images/bamboo/alternate-sketch.webp": {
+    "width": 497,
+    "height": 515
   }
 }

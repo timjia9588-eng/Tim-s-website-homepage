@@ -267,6 +267,10 @@ export const projects: Project[] = [
     connection:
       "At the scale of a courtyard, existing planting, construction details and daily rituals come together.",
     cover: "/images/bamboo/cover.webp",
+    preview: {
+      src: "/images/bamboo/drawing.webp",
+      alt: "Complete hand-drawn bamboo garden plan, relating planting, a deck and a stone path",
+    },
     coverAlt: "Completed bamboo garden with stone path and seating",
     description: [
       "A villa courtyard was converted into a setting for a tea club. Existing bamboo was retained for privacy and atmosphere, and two garden directions were developed with the client.",
