@@ -1,0 +1,716 @@
+[
+  {
+    "path": "/images/alumni/cover.webp",
+    "width": 1276,
+    "height": 528,
+    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "page": 27,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete embedded original Im0.jpg (image index 0), exported at its native pixel dimensions without portfolio headings, page whitespace, or upscaling."
+  },
+  {
+    "path": "/images/alumni/plan.webp",
+    "width": 2844,
+    "height": 425,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 20,
+    "crop": [0.022, 0.457, 0.977, 0.659],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete full-width vector planting plan rendered at 180 dpi; page heading excluded; plant codes retained."
+  },
+  {
+    "path": "/images/alumni/planting-layout.webp",
+    "width": 2844,
+    "height": 507,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 20,
+    "crop": [0.022, 0.716, 0.977, 0.957],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete full-width black-and-white vector planting layout with scale; portfolio heading excluded."
+  },
+  {
+    "path": "/images/bajo-la-sombra/board.webp",
+    "width": 1122,
+    "height": 1402,
+    "source": "Bajo la Sombra_Tianzhen Jia.pdf",
+    "page": 1,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/bajo-la-sombra/cover.webp",
+    "width": 791,
+    "height": 474,
+    "source": "Bajo la Sombra_Tianzhen Jia.pdf",
+    "page": 1,
+    "crop": [0.28, 0.5, 0.985, 0.838],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/bamboo/cover.webp",
+    "width": 575,
+    "height": 762,
+    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "page": 26,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete embedded original Im8.jpg (image index 11), exported at its native pixel dimensions without portfolio headings, page whitespace, or upscaling."
+  },
+  {
+    "path": "/images/bamboo/drawing.webp",
+    "width": 497,
+    "height": 509,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 19,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Whole embedded hand-drawn garden plan image 7, with no adjacent drawing or portfolio caption."
+  },
+  {
+    "path": "/images/carbon/biomass.webp",
+    "width": 438,
+    "height": 474,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 23,
+    "crop": [0.55, 0.118, 0.697, 0.343],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/carbon/cover.webp",
+    "width": 956,
+    "height": 1029,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 23,
+    "crop": [0.632, 0.411, 0.953, 0.9],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/carbon/forest.webp",
+    "width": 622,
+    "height": 550,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 23,
+    "crop": [0.74, 0.116, 0.949, 0.377],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/carbon/sections.webp",
+    "width": 619,
+    "height": 190,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 23,
+    "crop": [0.282, 0.355, 0.49, 0.445],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/gentilly/cover.webp",
+    "width": 1280,
+    "height": 718,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 13,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia Â· Waggonner & Ball internship",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/melissa/cover.webp",
+    "width": 1920,
+    "height": 1084,
+    "source": "https://urbanalchemycollective.com/projects/melissa-parks-recreation-trails-and-open-space-master-plan/",
+    "page": null,
+    "crop": null,
+    "credit": "Urban Alchemy Collective",
+    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/08/Presentation2-urban-alchemy-portfolio-1.jpg"
+  },
+  {
+    "path": "/images/melissa/engagement.webp",
+    "width": 1280,
+    "height": 1920,
+    "source": "https://urbanalchemycollective.com/projects/melissa-parks-recreation-trails-and-open-space-master-plan/",
+    "page": null,
+    "crop": null,
+    "credit": "Urban Alchemy Collective",
+    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/08/DSC01682-urban-alchemy-portfolio-1.jpg"
+  },
+  {
+    "path": "/images/melissa/nature-park.webp",
+    "width": 1920,
+    "height": 1084,
+    "source": "https://urbanalchemycollective.com/projects/melissa-parks-recreation-trails-and-open-space-master-plan/",
+    "page": null,
+    "crop": null,
+    "credit": "Urban Alchemy Collective",
+    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/08/Presentation4-urban-alchemy-portfolio-1.jpg"
+  },
+  {
+    "path": "/images/melissa/workshop.webp",
+    "width": 1393,
+    "height": 1920,
+    "source": "https://urbanalchemycollective.com/projects/melissa-parks-recreation-trails-and-open-space-master-plan/",
+    "page": null,
+    "crop": null,
+    "credit": "Urban Alchemy Collective",
+    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/08/E03A8895-urban-alchemy-portfolio-1.jpg"
+  },
+  {
+    "path": "/images/parking/cover.webp",
+    "width": 1965,
+    "height": 1926,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 9,
+    "crop": [0.315, 0.025, 0.975, 0.94],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/parking/cut-and-fill.webp",
+    "width": 2209,
+    "height": 484,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 10,
+    "crop": [0, 0, 1, 0.715],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete cut-and-fill diagram and ecological section, extracted from embedded image 2. Text table is separate."
+  },
+  {
+    "path": "/images/parking/model.webp",
+    "width": 592,
+    "height": 683,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 10,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Embedded photograph 0, rotated to match PDF orientation; portfolio heading excluded."
+  },
+  {
+    "path": "/images/parking/naturalized-autoport-2050.webp",
+    "width": 309,
+    "height": 212,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.0380952380952381, 0.6354319180087847, 0.3323809523809524,
+      0.9458272327964861
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
+  },
+  {
+    "path": "/images/parking/naturalized-autoport-2070.webp",
+    "width": 307,
+    "height": 212,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.35619047619047617, 0.6354319180087847, 0.6485714285714286,
+      0.9458272327964861
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
+  },
+  {
+    "path": "/images/parking/naturalized-autoport-2100.webp",
+    "width": 303,
+    "height": 212,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.6723809523809524, 0.6354319180087847, 0.960952380952381,
+      0.9458272327964861
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
+  },
+  {
+    "path": "/images/parking/phase-1.webp",
+    "width": 473,
+    "height": 284,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Whole embedded phase diagram 4; caption extracted as website text."
+  },
+  {
+    "path": "/images/parking/phase-2.webp",
+    "width": 478,
+    "height": 284,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Whole embedded phase diagram 3; caption extracted as website text."
+  },
+  {
+    "path": "/images/parking/phase-3.webp",
+    "width": 474,
+    "height": 284,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Whole embedded phase diagram 2; caption extracted as website text."
+  },
+  {
+    "path": "/images/parking/phase-4.webp",
+    "width": 478,
+    "height": 284,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Whole embedded phase diagram 1; caption extracted as website text."
+  },
+  {
+    "path": "/images/parking/plan.webp",
+    "width": 831,
+    "height": 598,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [0.603, 0.07, 0.979, 0.952],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete master plan from embedded image 0; neighboring detail figures and PDF headings excluded."
+  },
+  {
+    "path": "/images/parking/swamp-pocket-2050.webp",
+    "width": 309,
+    "height": 145,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.0380952380952381, 0.3923865300146413, 0.3323809523809524,
+      0.6046852122986823
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
+  },
+  {
+    "path": "/images/parking/swamp-pocket-2070.webp",
+    "width": 307,
+    "height": 145,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.35619047619047617, 0.3923865300146413, 0.6485714285714286,
+      0.6046852122986823
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
+  },
+  {
+    "path": "/images/parking/swamp-pocket-2100.webp",
+    "width": 303,
+    "height": 145,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.6723809523809524, 0.3923865300146413, 0.960952380952381,
+      0.6046852122986823
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
+  },
+  {
+    "path": "/images/parking/wetland-depression-2050.webp",
+    "width": 309,
+    "height": 141,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.0380952380952381, 0.0849194729136164, 0.3323809523809524,
+      0.2913616398243045
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
+  },
+  {
+    "path": "/images/parking/wetland-depression-2070.webp",
+    "width": 307,
+    "height": 141,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.35619047619047617, 0.0849194729136164, 0.6485714285714286,
+      0.2913616398243045
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
+  },
+  {
+    "path": "/images/parking/wetland-depression-2100.webp",
+    "width": 303,
+    "height": 141,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 11,
+    "crop": [
+      0.6723809523809524, 0.0849194729136164, 0.960952380952381,
+      0.2913616398243045
+    ],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "One complete perspective from embedded image 5, at source pixel resolution. Year and landscape label are separate PDF text."
+  },
+  {
+    "path": "/images/phillips/cover.webp",
+    "width": 1920,
+    "height": 1127,
+    "source": "https://urbanalchemycollective.com/projects/phillips-quarry-park/",
+    "page": null,
+    "crop": null,
+    "credit": "Urban Alchemy Collective",
+    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/09/phillips-quarry-park-6.jpg"
+  },
+  {
+    "path": "/images/phillips/masterplan.webp",
+    "width": 1582,
+    "height": 1122,
+    "source": "https://urbanalchemycollective.com/projects/phillips-quarry-park/",
+    "page": null,
+    "crop": null,
+    "credit": "Urban Alchemy Collective",
+    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/09/phillips-quarry-park-14.jpg"
+  },
+  {
+    "path": "/images/phillips/site.webp",
+    "width": 1920,
+    "height": 1440,
+    "source": "https://urbanalchemycollective.com/projects/phillips-quarry-park/",
+    "page": null,
+    "crop": null,
+    "credit": "Urban Alchemy Collective",
+    "originalUrl": "https://urbanalchemycollective.com/wp-content/uploads/2026/09/phillips-quarry-park-13.jpg"
+  },
+  {
+    "path": "/images/salamanca/bridge.webp",
+    "width": 2812,
+    "height": 1220,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 10,
+    "crop": [0, 0.347, 1, 0.961],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete main perspective within the raster page. Upper heading, bridge section and body paragraphs excluded."
+  },
+  {
+    "path": "/images/salamanca/cover.webp",
+    "width": 1965,
+    "height": 1200,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 9,
+    "crop": [0.03, 0.37, 0.69, 0.94],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/salamanca/masterplan.webp",
+    "width": 2679,
+    "height": 1578,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 8,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Whole embedded master plan image 1, preserving its scale. Portfolio heading and paragraphs are separate text."
+  },
+  {
+    "path": "/images/salinity/cover.webp",
+    "width": 680,
+    "height": 1285,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 25,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Whole embedded minirhizotron photograph at its native 680 × 1285 resolution. Portfolio text and vector annotation arrows are excluded; the website caption describes the image."
+  },
+  {
+    "path": "/images/salinity/microscopy.webp",
+    "width": 673,
+    "height": 473,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 25,
+    "crop": [933, 198, 1135, 340],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete individual research diagram with original vector labels rendered at 240 dpi; portfolio headings excluded. Coordinates are PDF points."
+  },
+  {
+    "path": "/images/sketchbook/cover.webp",
+    "width": 989,
+    "height": 620,
+    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "page": 31,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete embedded original Im7.jpg (image index 7), exported at its native pixel dimensions without portfolio headings, page whitespace, or upscaling."
+  },
+  {
+    "path": "/images/sketchbook/florence.webp",
+    "width": 691,
+    "height": 836,
+    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "page": 31,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete embedded original Im2.png (image index 2), exported at its native pixel dimensions without portfolio headings, page whitespace, or upscaling."
+  },
+  {
+    "path": "/images/sketchbook/london.webp",
+    "width": 1277,
+    "height": 1809,
+    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "page": 32,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete embedded original Im1.jpg (image index 1), exported at its native pixel dimensions without portfolio headings, page whitespace, or upscaling."
+  },
+  {
+    "path": "/images/weaving/cover.webp",
+    "width": 1272,
+    "height": 737,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 16,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia Â· Individual Cornell studio work",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/weaving/overlook.webp",
+    "width": 1276,
+    "height": 738,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 16,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia Â· Individual Cornell studio work",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/weaving/plan.webp",
+    "width": 2812,
+    "height": 1455,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 15,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Whole embedded master plan image 4; surrounding PDF text excluded."
+  },
+  {
+    "path": "/images/weaving/section.webp",
+    "width": 2685,
+    "height": 416,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 16,
+    "crop": [0, 0.53, 1, 1],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete lower landscape section in embedded image 0. The separate illustrated interview collage above is excluded."
+  },
+  {
+    "path": "/images/wetland-utopia/cover.webp",
+    "width": 1443,
+    "height": 1953,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 18,
+    "crop": [0.015, 0.035, 0.5, 0.963],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/wetland-utopia/restoration.webp",
+    "width": 1480,
+    "height": 1705,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 22,
+    "crop": [0.023, 0.13, 0.52, 0.94],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null
+  },
+  {
+    "path": "/images/wetland-utopia/routes.webp",
+    "width": 604,
+    "height": 831,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 20,
+    "crop": [0.523, 0.087, 0.738, 0.505],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Whole ship-route study map from the raster page; neighboring diagrams, headings and paragraphs excluded."
+  },
+  {
+    "path": "/images/xiaozhou/community.webp",
+    "width": 1776,
+    "height": 523,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 24,
+    "crop": [622, 94, 1155, 251],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete individual research diagram with original vector labels rendered at 240 dpi; portfolio headings excluded. Coordinates are PDF points."
+  },
+  {
+    "path": "/images/xiaozhou/cover.webp",
+    "width": 766,
+    "height": 750,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 24,
+    "crop": [621, 304, 851, 529],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete individual research diagram with original vector labels rendered at 240 dpi; portfolio headings excluded. Coordinates are PDF points."
+  },
+  {
+    "path": "/images/xiaozhou/strategy.webp",
+    "width": 1653,
+    "height": 573,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 24,
+    "crop": [630, 586, 1126, 758],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete individual research diagram with original vector labels rendered at 240 dpi; portfolio headings excluded. Coordinates are PDF points."
+  },
+  {
+    "path": "/images/salinity/preview.webp",
+    "width": 680,
+    "height": 425,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 25,
+    "crop": [0, 205, 680, 630],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Preview only: native-resolution close-up of the branching fungal filaments. The complete photograph remains in the project gallery."
+  },
+  {
+    "path": "/images/bamboo/layout.webp",
+    "width": 600,
+    "height": 469,
+    "source": "Portfolio 30 pages_Tianzhen.pdf",
+    "page": 26,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete embedded original Im6.png (image index 9), exported at its native pixel dimensions without portfolio headings, page whitespace, or upscaling."
+  },
+  {
+    "path": "/images/bamboo/alternate-sketch.webp",
+    "width": 497,
+    "height": 515,
+    "source": "Tim's portfolio 6.15.pdf",
+    "page": 19,
+    "crop": null,
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Complete embedded second garden concept sketch Im6.jpg, image index 8, exported at native size without portfolio headings or upscaling."
+  },
+  {
+    "path": "/images/envision-resilience/adaptation.webp",
+    "width": 2404,
+    "height": 750,
+    "source": "https://www.bslafieldbook.com/envision-resilience",
+    "page": null,
+    "crop": [
+      0.0192,
+      0.2869,
+      0.9808,
+      0.9016
+    ],
+    "credit": "Harvard GSD studio team · Published by BSLA",
+    "originalUrl": "https://images.squarespace-cdn.com/content/v1/6024c276c5a3e272893ed390/924418ed-18cf-4ecd-b8ad-46e62d58022c/300dpi_EnvisionResilience.jpg",
+    "extraction": "Native 2500×1220 published BSLA figure. Outer white border trimmed; the adaptation comparison also excludes its repeated project heading. Drawing labels and comparison years retained. No upscaling."
+  },
+  {
+    "path": "/images/envision-resilience/analysis.webp",
+    "width": 2404,
+    "height": 1124,
+    "source": "https://www.bslafieldbook.com/envision-resilience",
+    "page": null,
+    "crop": [
+      0.0192,
+      0.0393,
+      0.9808,
+      0.9607
+    ],
+    "credit": "Harvard GSD studio team · Published by BSLA",
+    "originalUrl": "https://images.squarespace-cdn.com/content/v1/6024c276c5a3e272893ed390/10dd7a5d-2984-41cc-bf83-78932b76a115/300dpi_EnvisionResilience2.jpg",
+    "extraction": "Native 2500×1220 published BSLA figure. Outer white border trimmed; the adaptation comparison also excludes its repeated project heading. Drawing labels and comparison years retained. No upscaling."
+  },
+  {
+    "path": "/images/envision-resilience/waterfront.webp",
+    "width": 2404,
+    "height": 1124,
+    "source": "https://www.bslafieldbook.com/envision-resilience",
+    "page": null,
+    "crop": [
+      0.0192,
+      0.0393,
+      0.9808,
+      0.9607
+    ],
+    "credit": "Harvard GSD studio team · Published by BSLA",
+    "originalUrl": "https://images.squarespace-cdn.com/content/v1/6024c276c5a3e272893ed390/09a5e0ec-fbdc-4ba8-8828-9ec5a71e0b6e/300dpi_EnvisionResilience3.jpg",
+    "extraction": "Native 2500×1220 published BSLA figure. Outer white border trimmed; the adaptation comparison also excludes its repeated project heading. Drawing labels and comparison years retained. No upscaling."
+  },
+  {
+    "path": "/images/envision-resilience/cover.webp",
+    "width": 2404,
+    "height": 1124,
+    "source": "https://www.bslafieldbook.com/envision-resilience",
+    "page": null,
+    "crop": [
+      0.0192,
+      0.0393,
+      0.9808,
+      0.9607
+    ],
+    "credit": "Harvard GSD studio team · Published by BSLA",
+    "originalUrl": "https://images.squarespace-cdn.com/content/v1/6024c276c5a3e272893ed390/11441691-ef51-4424-b5d6-bb5cc2feed33/300dpi_EnvisionResilience4.jpg",
+    "extraction": "Native 2500×1220 published BSLA figure. Outer white border trimmed; the adaptation comparison also excludes its repeated project heading. Drawing labels and comparison years retained. No upscaling."
+  },
+  {
+    "path": "/images/envision-resilience/aquaculture.webp",
+    "width": 2404,
+    "height": 1124,
+    "source": "https://www.bslafieldbook.com/envision-resilience",
+    "page": null,
+    "crop": [
+      0.0192,
+      0.0393,
+      0.9808,
+      0.9607
+    ],
+    "credit": "Harvard GSD studio team · Published by BSLA",
+    "originalUrl": "https://images.squarespace-cdn.com/content/v1/6024c276c5a3e272893ed390/4e4374a6-0c18-43ba-af10-3dde2d439e69/300dpi_EnvisionResilience5.jpg",
+    "extraction": "Native 2500×1220 published BSLA figure. Outer white border trimmed; the adaptation comparison also excludes its repeated project heading. Drawing labels and comparison years retained. No upscaling."
+  }
+]

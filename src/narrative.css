@@ -1,0 +1,659 @@
+.immersive-portal {
+  height: 100svh;
+  min-height: 650px;
+  overflow: hidden;
+  padding: 0;
+  background: #202020;
+  color: #deded8;
+}
+.portal-globe {
+  position: absolute;
+  inset: 34px 5% 74px;
+}
+.immersive-portal .globe-surface {
+  inset: 0;
+}
+.immersive-portal .globe-surface canvas {
+  touch-action: none;
+}
+.immersive-portal .portal-header {
+  position: absolute;
+  z-index: 4;
+  inset: 0 0 auto;
+  padding: 34px 40px;
+  margin: 0;
+  min-height: 0;
+  border: 0;
+  align-items: start;
+  pointer-events: none;
+}
+.portal-identity,
+.immersive-portal .portal-header nav {
+  pointer-events: auto;
+}
+.portal-identity > a {
+  font:
+    500 23px/1.4 "Courier New",
+    monospace;
+  letter-spacing: 0.28em;
+}
+.portal-identity > p {
+  color: #92928d;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  margin-top: 8px;
+}
+.portal-lenses {
+  display: flex;
+  margin-top: 14px;
+  gap: 0;
+}
+.portal-lenses button {
+  color: #999992;
+  background: none;
+  border: 0;
+  padding: 5px 0;
+  font:
+    11px "Courier New",
+    monospace;
+  letter-spacing: 0.055em;
+}
+.portal-lenses button + button::before {
+  content: "/";
+  margin: 0 10px;
+  color: #60605d;
+}
+.portal-lenses button[aria-pressed="true"],
+.portal-lenses button:hover {
+  color: #f2f1e7;
+}
+.immersive-portal .portal-header nav {
+  gap: 24px;
+  align-items: center;
+  font-size: 12px;
+}
+.places-toggle {
+  padding: 8px 12px;
+  border: 1px solid #ffffff35;
+  background: #202020aa;
+  color: inherit;
+}
+.immersive-portal .globe-marker {
+  background: #111111da;
+  color: #c8c8c1;
+  border: 0;
+  border-left: 1px solid #bdbdb5;
+  border-radius: 0;
+  font:
+    10px/1.4 "Courier New",
+    monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+  padding: 4px 8px;
+}
+.immersive-portal .globe-marker.active,
+.immersive-portal .globe-marker:hover {
+  color: #fff;
+  background: #55554d;
+}
+.portal-narrative {
+  position: absolute;
+  bottom: 116px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  pointer-events: none;
+  width: min(480px, 90%);
+  padding: 16px 20px;
+  background: radial-gradient(ellipse, #202020d9, #20202000);
+}
+.portal-narrative .portal-question {
+  color: #ecece5;
+  font-size: 23px;
+  letter-spacing: -0.035em;
+}
+.portal-narrative > p:nth-child(2) {
+  font-size: 12px;
+  color: #a1a19a;
+  margin: 5px 0 14px;
+}
+.portal-narrative a {
+  pointer-events: auto;
+  font-size: 11px;
+  padding: 8px;
+  color: #d6d6ce;
+}
+.portal-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 28px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(0deg, #202020, #20202000);
+  font:
+    10px "Courier New",
+    monospace;
+  color: #92928a;
+}
+.immersive-portal .simplistic-link {
+  position: static;
+  padding: 8px 0;
+  font: inherit;
+  text-transform: uppercase;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  backdrop-filter: none;
+  letter-spacing: 0.08em;
+}
+.immersive-portal .simplistic-link:hover {
+  color: white;
+}
+.immersive-portal .portal-signature {
+  position: static;
+  font: inherit;
+  color: inherit;
+}
+.places-menu {
+  position: absolute;
+  z-index: 6;
+  right: 40px;
+  top: 90px;
+  width: 270px;
+  padding: 24px;
+  background: #242422f5;
+  border: 1px solid #ffffff22;
+  max-height: calc(100% - 200px);
+  overflow: auto;
+  backdrop-filter: blur(20px);
+}
+.places-menu label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 12px;
+  color: #a9a99f;
+}
+.places-menu select {
+  width: 100%;
+  color: #e5e5dc;
+  background: #30302c;
+  border: 1px solid #66665b;
+  padding: 10px;
+}
+.place-menu-list {
+  margin-top: 14px;
+}
+.place-menu-list button {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: #c7c7bb;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 1px solid #ffffff12;
+  background: none;
+  text-align: left;
+  font-size: 12px;
+}
+.place-panel {
+  position: absolute;
+  z-index: 5;
+  right: 40px;
+  top: 150px;
+  width: min(360px, calc(100% - 80px));
+  max-height: calc(100% - 240px);
+  overflow: auto;
+  padding: 32px;
+  background: #252523ed;
+  border: 1px solid #ffffff20;
+  backdrop-filter: blur(18px);
+}
+.place-panel-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: 0;
+  background: none;
+  font-size: 25px;
+  color: #c7c7bc;
+}
+.place-panel .eyebrow {
+  font-size: 9px;
+  color: #98988e;
+}
+.place-panel h1 {
+  font-size: 32px;
+  margin: 12px 0;
+  line-height: 1.12;
+}
+.place-context {
+  color: #a2a295;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.place-narrative {
+  font-size: 14px;
+  line-height: 1.75;
+  margin-top: 22px;
+  color: #d3d3c7;
+}
+.place-panel .place-projects {
+  margin-top: 24px;
+}
+.place-panel .place-projects a {
+  padding: 14px 0;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-color: #ffffff1b;
+}
+.place-projects small {
+  display: block;
+  color: #88887e;
+  font-size: 9px;
+  margin-bottom: 4px;
+}
+.place-projects div > span {
+  display: block;
+}
+.portal-text-link {
+  display: inline-block;
+  margin-top: 22px;
+  font-size: 12px;
+  text-decoration: underline;
+}
+.story-section {
+  background: #ebece6;
+}
+.story-chapters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 38px;
+  margin-top: 65px;
+}
+.chapter-number {
+  font:
+    12px "Courier New",
+    monospace;
+  color: #53604e;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #bfc6ba;
+}
+.story-chapter .chapter-question {
+  color: #64705e;
+  font-size: 12px;
+  margin: 25px 0 10px;
+}
+.story-chapter h3 {
+  font-size: 30px;
+  line-height: 1.16;
+  max-width: 290px;
+  margin-bottom: 24px;
+}
+.story-chapter > p {
+  font-size: 15px;
+  color: #5d6258;
+}
+.chapter-route {
+  margin-top: 30px;
+}
+.chapter-route a {
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid #ccd0c5;
+}
+.chapter-route a:hover {
+  color: #38644e;
+}
+.story-transition {
+  font-size: 15px;
+  max-width: 650px;
+  color: #6e7467;
+  margin: 65px 0 0;
+}
+.collection-tabs {
+  display: flex;
+  gap: 20px;
+  border-bottom: 1px solid #d6d6d9;
+}
+.collection-tabs button {
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 18px 0;
+  margin-bottom: -1px;
+  color: #76767a;
+  font-size: 15px;
+}
+.collection-tabs button[aria-selected="true"] {
+  color: #1d1d1f;
+  border-bottom-color: #38644e;
+}
+.collection-intro {
+  padding: 52px 0 38px;
+}
+.collection-intro h2 {
+  font-size: clamp(32px, 4vw, 54px);
+  line-height: 1.12;
+  margin: 12px 0 20px;
+}
+.collection-intro > p:last-child {
+  max-width: 640px;
+  color: #737378;
+  font-size: 16px;
+}
+.publications {
+  padding: 25px 0 50px;
+}
+.publication {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 18px;
+  padding: 36px 0;
+  border-top: 1px solid #d6d6d9;
+}
+.publication-number {
+  font:
+    14px "Courier New",
+    monospace;
+  color: #9b9b9b;
+}
+.publication h4 {
+  font-size: 29px;
+  line-height: 1.25;
+  max-width: 800px;
+  margin: 12px 0 20px;
+}
+.publication > div > p {
+  max-width: 760px;
+  color: #747477;
+  font-size: 15px;
+}
+.publication .eyebrow {
+  font-size: 10px;
+}
+.publication-authors {
+  font-size: 12px !important;
+  margin-top: 16px;
+  color: #8a8a8c;
+}
+.publication-links {
+  display: flex;
+  gap: 24px;
+  margin-top: 22px;
+  font-size: 13px;
+  color: #38644e;
+}
+.resume-section {
+  background: white;
+}
+.resume-intro {
+  margin: 50px 0 65px;
+  max-width: 740px;
+}
+.resume-intro > p {
+  font-size: 24px;
+  line-height: 1.6;
+}
+.resume-intro > a {
+  display: inline-block;
+  margin-top: 24px;
+  color: #38644e;
+  font-size: 15px;
+}
+.resume-block {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 50px;
+  padding: 42px 0;
+  border-top: 1px solid #dededf;
+}
+.resume-block > h3 {
+  font-size: 21px;
+  letter-spacing: -0.025em;
+}
+.resume-entries {
+  display: grid;
+  gap: 36px;
+}
+.resume-entries article > span {
+  color: #8a8a8e;
+  font-size: 12px;
+  display: block;
+  margin-bottom: 10px;
+}
+.resume-entries h4 {
+  font-size: 21px;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+}
+.resume-entries article > p {
+  font-size: 14px;
+  color: #727276;
+  max-width: 700px;
+  margin-top: 8px;
+}
+.resume-entries .resume-role {
+  color: #38644e;
+  font-size: 12px;
+}
+.detail-connections {
+  padding: 35px 0 70px;
+  border-top: 1px solid #d7d7da;
+}
+.detail-connections h2 {
+  font-size: 36px;
+  margin: 15px 0 20px;
+}
+.detail-connections > p:not(.eyebrow) {
+  font-size: 18px;
+  color: #6e6e73;
+  max-width: 760px;
+}
+.detail-connections > div {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.detail-connections a {
+  display: grid;
+  gap: 8px;
+  border-top: 1px solid #d6d6d8;
+  padding-top: 18px;
+  font-size: 15px;
+}
+.detail-connections small {
+  color: #89898c;
+  font-size: 10px;
+}
+.source-link {
+  display: block;
+  margin-top: 18px;
+  width: fit-content;
+}
+.gallery-image > img,
+.detail-cover img {
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+}
+.hero-image-link img {
+  height: 100%;
+  top: 0;
+  will-change: auto;
+}
+@media (max-width: 900px) {
+  .immersive-portal .portal-header {
+    padding: 28px;
+  }
+  .immersive-portal .portal-header nav {
+    gap: 16px;
+  }
+  .story-chapters {
+    gap: 24px;
+  }
+  .story-chapter h3 {
+    font-size: 25px;
+  }
+  .resume-block {
+    grid-template-columns: 180px 1fr;
+    gap: 24px;
+  }
+  .place-panel {
+    right: 28px;
+  }
+  .portal-narrative.has-panel {
+    left: 30%;
+    width: 45%;
+  }
+}
+@media (max-width: 700px) {
+  .immersive-portal {
+    min-height: 620px;
+  }
+  .immersive-portal .portal-header {
+    display: block;
+    padding: 24px;
+  }
+  .portal-identity > a {
+    font-size: 21px;
+  }
+  .portal-identity > p {
+    display: none;
+  }
+  .portal-lenses {
+    margin-top: 9px;
+  }
+  .immersive-portal .portal-header nav {
+    margin-top: 18px;
+    font-size: 11px;
+    gap: 22px;
+  }
+  .places-toggle {
+    margin-left: auto;
+    padding: 5px 9px;
+  }
+  .portal-globe {
+    inset: 155px 0 110px;
+  }
+  .immersive-portal .globe-marker {
+    font-size: 9px;
+  }
+  .portal-narrative {
+    bottom: 98px;
+    padding: 12px 10px;
+  }
+  .portal-narrative .portal-question {
+    font-size: 20px;
+  }
+  .portal-narrative > p:nth-child(2) {
+    font-size: 10px;
+  }
+  .portal-bottom {
+    padding: 18px 24px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .portal-interaction-hint {
+    order: 3;
+    text-align: center;
+    width: 100%;
+    font-size: 9px;
+  }
+  .places-menu {
+    top: 145px;
+    right: 24px;
+    width: calc(100% - 48px);
+    max-height: calc(100% - 240px);
+  }
+  .place-panel {
+    top: 150px;
+    right: 24px;
+    width: calc(100% - 48px);
+    max-height: calc(100% - 235px);
+    padding: 26px;
+  }
+  .portal-narrative.has-panel {
+    display: none;
+  }
+  .story-chapters {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    margin-top: 40px;
+  }
+  .story-chapter h3 {
+    font-size: 30px;
+    max-width: none;
+  }
+  .story-transition {
+    margin-top: 42px;
+  }
+  .collection-tabs {
+    gap: 14px;
+  }
+  .collection-tabs button {
+    font-size: 11px;
+    line-height: 1.5;
+    text-align: left;
+    padding: 15px 0;
+    flex: 1;
+  }
+  .collection-intro {
+    padding-top: 35px;
+  }
+  .collection-intro > p:last-child {
+    font-size: 14px;
+  }
+  .publication {
+    grid-template-columns: 25px 1fr;
+    gap: 8px;
+    padding: 28px 0;
+  }
+  .publication h4 {
+    font-size: 24px;
+  }
+  .publication > div > p {
+    font-size: 14px;
+  }
+  .publication-links {
+    gap: 18px;
+    font-size: 11px;
+  }
+  .resume-intro {
+    margin: 35px 0 45px;
+  }
+  .resume-intro > p {
+    font-size: 20px;
+  }
+  .resume-block {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-block: 30px;
+  }
+  .resume-block > h3 {
+    color: #38644e;
+    font-size: 16px;
+  }
+  .resume-entries h4 {
+    font-size: 20px;
+  }
+  .detail-connections h2 {
+    font-size: 30px;
+  }
+  .detail-connections > p:not(.eyebrow) {
+    font-size: 16px;
+  }
+  .detail-connections > div {
+    grid-template-columns: 1fr;
+  }
+}
