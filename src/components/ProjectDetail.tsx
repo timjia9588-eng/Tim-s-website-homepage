@@ -346,7 +346,6 @@ export default function ProjectDetail({
           <p className="eyebrow">Continue exploring</p>
           <a href={`#project/${next.id}`}>
             <h2>{next.title}</h2>
-            <span>View next project</span>
           </a>
         </div>
       </motion.div>

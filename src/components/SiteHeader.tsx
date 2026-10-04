@@ -31,7 +31,7 @@ export default function SiteHeader({
     const resize = new ResizeObserver(() => {
       boundary.current = portal
         ? portal.dataset.pinned === "true"
-          ? (portal.offsetHeight - window.innerHeight) * 0.82
+          ? (portal.offsetHeight - window.innerHeight) * 0.78
           : portal.offsetHeight - 130
         : 0;
       const next = continuous && window.scrollY < boundary.current;

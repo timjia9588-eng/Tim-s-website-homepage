@@ -245,38 +245,6 @@ export default function Globe({
       }
     }
     addLand();
-    const atlasSection = host.closest<HTMLElement>("#globe");
-    let titleSafeArea: {
-      left: number;
-      top: number;
-      width: number;
-      height: number;
-    } | null = null;
-    const labelSizes = new Map<string, { width: number; height: number }>();
-    const measureLabels = () => {
-      if (cancelled) return;
-      const intro = atlasSection?.querySelector<HTMLElement>(".atlas-intro");
-      if (intro && window.innerWidth > 700) {
-        const bounds = host.getBoundingClientRect();
-        const text = intro.getBoundingClientRect();
-        titleSafeArea = {
-          left: text.left - bounds.left,
-          top: text.top - bounds.top,
-          width: text.width,
-          height: text.height,
-        };
-      } else titleSafeArea = null;
-      for (const [id, button] of markers.current) {
-        labelSizes.set(id, {
-          width: button.offsetWidth,
-          height: button.offsetHeight,
-        });
-      }
-    };
-    frame.read(measureLabels);
-    document.fonts.ready.then(() => {
-      if (!cancelled) frame.read(measureLabels);
-    });
     const resize = new ResizeObserver(() => {
       width = host.clientWidth;
       height = host.clientHeight;
@@ -286,7 +254,6 @@ export default function Globe({
       camera.position.normalize().multiplyScalar(distance);
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
-      frame.read(measureLabels);
     });
     resize.observe(host);
     const observer = new IntersectionObserver(
@@ -341,19 +308,6 @@ export default function Globe({
     });
     const projected = new THREE.Vector3(),
       normal = new THREE.Vector3();
-    const offsets: Record<string, [number, number]> = {
-      cambridge: [10, -30],
-      ithaca: [10, -8],
-      boston: [10, 18],
-      melissa: [10, -30],
-      kyle: [10, 0],
-      "san-antonio": [10, 28],
-      "new-orleans": [10, 12],
-      aspen: [10, -14],
-      beijing: [10, -16],
-      guangzhou: [10, 20],
-      nepal: [10, -14],
-    };
     const direction = new THREE.Vector3();
     const orderedDots = [...dots];
     let lastSelection = "";
@@ -396,15 +350,6 @@ export default function Globe({
       controls.update(dt);
       camera.updateMatrixWorld();
       normal.copy(camera.position).normalize();
-      const occupied: {
-        left: number;
-        top: number;
-        width: number;
-        height: number;
-      }[] =
-        titleSafeArea && atlasSection?.dataset.phase === "opening"
-          ? [titleSafeArea]
-          : [];
       const selectedDot = dots.find((dot) => dot.id === selection.current);
       if (selectedDot) {
         locator.position.copy(selectedDot.position).multiplyScalar(1.003);
@@ -437,37 +382,12 @@ export default function Globe({
         projected.copy(dot.position).project(camera);
         const x = (projected.x * 0.5 + 0.5) * width,
           y = (-projected.y * 0.5 + 0.5) * height;
-        const [ox, oy] = offsets[dot.id] || [10, -10];
         button.hidden = !facing || x < 0 || x > width || y < 0 || y > height;
         if (button.hidden) continue;
         button.style.opacity = relevant ? "1" : ".3";
-        // All layout measurements happen together in Motion's read phase, never between position writes.
-        const size = labelSizes.get(dot.id);
-        if (!size) continue;
-        const labelWidth = size.width,
-          labelHeight = size.height;
-        const left = Math.max(6, Math.min(width - labelWidth - 6, x + ox));
-        let top = Math.max(6, Math.min(height - labelHeight - 45, y + oy));
-        for (let attempt = 0; attempt < 10; attempt++) {
-          const collision = occupied.find(
-            (rect) =>
-              left < rect.left + rect.width + 5 &&
-              left + labelWidth + 5 > rect.left &&
-              top < rect.top + rect.height + 5 &&
-              top + labelHeight + 5 > rect.top,
-          );
-          if (!collision) break;
-          top = collision.top + collision.height + 5;
-        }
-        if (
-          top + labelHeight > height - 40 ||
-          (top - (y + oy) > 55 && dot.id !== selection.current)
-        ) {
-          button.hidden = true;
-          continue;
-        }
-        occupied.push({ left, top, width: labelWidth, height: labelHeight });
-        button.style.transform = `translate3d(${left.toFixed(2)}px,${top.toFixed(2)}px,0)`;
+        // Transparent 44px targets align with the visible geographic points.
+        // No text boxes or per-frame layout measurements are needed.
+        button.style.transform = `translate3d(${(x - 22).toFixed(2)}px,${(y - 22).toFixed(2)}px,0)`;
       }
       renderer.render(scene, camera);
     }
@@ -476,7 +396,6 @@ export default function Globe({
       cancelled = true;
       abort.abort();
       cancelFrame(animate);
-      cancelFrame(measureLabels);
       resize.disconnect();
       observer.disconnect();
       host.removeEventListener("pointermove", move);
@@ -526,7 +445,7 @@ export default function Globe({
               onClick={() => onSelect(place.id)}
               aria-pressed={selected === place.id}
             >
-              {place.label}
+              <span className="sr-only">{place.label}</span>
             </button>
           ))}
         </>

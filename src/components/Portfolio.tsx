@@ -84,17 +84,9 @@ function PaperCard({
         href={`#paper/${paper.id}`}
         aria-label={`Read introduction to ${paper.shortTitle}`}
       >
-        <div className="paper-card-top">
-          <span className="context-label">Research / Working paper</span>
-          <span>{paper.date}</span>
-        </div>
-        <p className="paper-card-lab">Harvard Project Zero</p>
+        <p className="paper-card-lab">Harvard Project Zero · Working paper</p>
         <h3>{paper.shortTitle}</h3>
         <p>{paper.question}</p>
-        <div className="paper-card-bottom">
-          <span>Co-author</span>
-          <strong>Explore the research →</strong>
-        </div>
       </a>
     </article>
   );
@@ -137,11 +129,6 @@ function Work() {
           <div>
             <h2>Work, in perspective.</h2>
           </div>
-          <p>
-            Different settings. Connected questions.
-            <br />
-            Explore the work that shapes my practice.
-          </p>
         </Reveal>
         <div className="work-browser">
           <div
@@ -175,19 +162,17 @@ function Work() {
             ))}
           </div>
           <label className="work-search">
-            <span>Find a project, place or paper</span>
             <input
               type="search"
               placeholder="Search the work"
+              aria-label="Find a project, place or paper"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
           </label>
         </div>
         <div className="work-result-line">
-          <p aria-live="polite">
-            Showing {work.length} of {entries.length} projects & papers
-          </p>
+          <p aria-live="polite">{work.length} projects & papers</p>
           {(filter !== "all" || query) && (
             <button
               onClick={() => {
@@ -350,18 +335,9 @@ export default function Portfolio() {
                 I study what sustains a place, how it connects us, and how
                 design makes those connections tangible.
               </p>
-              <a className="text-link" href="#work">
-                Explore all work →
-              </a>
             </div>
           </Reveal>
           <div className="page-width">
-            <Reveal className="selected-work-heading">
-              <h2>Selected work</h2>
-              <a className="text-link" href="#work">
-                See all projects <span aria-hidden="true">→</span>
-              </a>
-            </Reveal>
             <Reveal>
               <FeaturedProjects />
             </Reveal>

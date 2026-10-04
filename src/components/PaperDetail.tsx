@@ -141,7 +141,6 @@ export default function PaperDetail({
                   )}
                   <span>{p.title}</span>
                   <small>{p.subtitle}</small>
-                  <strong>View project →</strong>
                 </a>
               );
             })}

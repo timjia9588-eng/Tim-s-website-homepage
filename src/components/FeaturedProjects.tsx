@@ -139,11 +139,6 @@ export default function FeaturedProjects() {
           event.preventDefault();
           const next = event.key === "ArrowRight";
           step(next ? 1 : -1);
-          ref.current
-            ?.querySelector<HTMLButtonElement>(
-              `.featured-arrow--${next ? "next" : "previous"}`,
-            )
-            ?.focus();
         }
       }}
       onPointerDownCapture={() => setKeyboardFocused(false)}
@@ -203,45 +198,26 @@ export default function FeaturedProjects() {
           href={`#project/${p.id}`}
           aria-label={`View ${p.title}`}
         >
-          <div className="featured-shade" />
-          <motion.div
-            key={p.id}
-            className="featured-caption"
-            initial={reduced ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: reduced ? 0 : 0.95,
-              delay: reduced ? 0 : 0.2,
-              ease: easyEase,
-            }}
-          >
-            <p>
-              {context[p.category]} · {p.location}
-            </p>
-            <h2>{p.title}</h2>
-            <span>View project →</span>
-          </motion.div>
+          <div className="featured-hover-info">
+            <div className="featured-shade" />
+            <motion.div
+              key={p.id}
+              className="featured-caption"
+              initial={reduced ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: reduced ? 0 : 0.95,
+                delay: reduced ? 0 : 0.2,
+                ease: easyEase,
+              }}
+            >
+              <p>
+                {context[p.category]} · {p.location}
+              </p>
+              <h2>{p.title}</h2>
+            </motion.div>
+          </div>
         </a>
-        <div className="featured-arrows">
-          <button
-            className="featured-arrow featured-arrow--previous"
-            aria-label="Previous featured project"
-            onClick={() => step(-1)}
-          >
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="m14 6-6 6 6 6" />
-            </svg>
-          </button>
-          <button
-            className="featured-arrow featured-arrow--next"
-            aria-label="Next featured project"
-            onClick={() => step(1)}
-          >
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="m10 6 6 6-6 6" />
-            </svg>
-          </button>
-        </div>
         <div
           className="featured-timeline"
           aria-label="Choose a featured project"

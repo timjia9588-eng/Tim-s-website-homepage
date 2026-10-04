@@ -2,18 +2,15 @@ import type { Project } from "../types";
 import ProjectPreview from "./ProjectPreview";
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="project-card">
+    <article
+      className={`project-card ${project.cover ? "project-card--image" : "project-card--record"}`}
+    >
       <a
         href={`#project/${project.id}`}
         className="project-card-link"
         aria-label={`View ${project.title}`}
       >
         <ProjectPreview project={project} />
-        {project.cover && (
-          <span className="project-image-action" aria-hidden="true">
-            View project <span>↗</span>
-          </span>
-        )}
         <div className="card-copy">
           <div className="card-eyebrow">
             <span className="context-label">
@@ -27,13 +24,9 @@ export default function ProjectCard({ project }: { project: Project }) {
             </span>
           </div>
           <h3>{project.title}</h3>
-          <p>{project.subtitle}</p>
-          {!project.cover && (
-            <p className="record-summary">{project.description[0]}</p>
-          )}
+          {!project.cover && <p>{project.subtitle}</p>}
           <div className="card-meta">
             <span>{project.location}</span>
-            <span>{project.year}</span>
           </div>
         </div>
       </a>

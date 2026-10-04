@@ -139,9 +139,6 @@ export default function PlacePicker({
                 onClick={() => choose(i)}
               >
                 <span>{place.label}</span>
-                <span aria-hidden="true">
-                  {place.id === selected ? "✓" : "↗"}
-                </span>
               </div>
             ))}
           </motion.div>
