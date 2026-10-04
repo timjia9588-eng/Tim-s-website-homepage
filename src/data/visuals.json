@@ -101,33 +101,38 @@
       "src": "/images/xiaozhou/cover.webp",
       "alt": "Residents, visitors and heritage — overlapping needs",
       "caption": "Residents, visitors and heritage — overlapping needs",
-      "credit": "Tianzhen (Tim) Jia"
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "The original diagram compares tourism's need for openness, daily life's need for privacy and conservation's need to protect the buildings. The simplified preview uses the same three ideas; this complete figure preserves the original wording."
     },
     {
       "src": "/images/xiaozhou/community.webp",
-      "alt": "Relationships between residents, artists and visitors",
-      "caption": "Relationships between residents, artists and visitors",
-      "credit": "Tianzhen (Tim) Jia"
+      "alt": "Concept map linking environmental degradation with tourism, everyday life and cultural continuity",
+      "caption": "Environmental quality, local life and cultural continuity",
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "The research diagram connects declining environmental quality with the visitor experience, residents' quality of life and the capacity to maintain cultural heritage. It is a conceptual framework from the field study."
     },
     {
       "src": "/images/xiaozhou/strategy.webp",
       "alt": "Environmental improvement and zoning framework",
-      "caption": "Environmental improvement and zoning framework",
-      "credit": "Tianzhen (Tim) Jia"
+      "caption": "A shared framework for residents, artists and visitors",
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "Separate activity zones sit within shared landscape facilities, a coordinated architectural character and an overall framework for community life."
     }
   ],
   "salinity": [
     {
       "src": "/images/salinity/cover.webp",
-      "alt": "Annotated fungal structures in minirhizotron imagery",
+      "alt": "Complete minirhizotron photograph showing branching fungal filaments and dense mycelium",
       "caption": "Fungal structures — visual identification in soil imagery",
-      "credit": "Tianzhen (Tim) Jia"
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "The white branching filaments and dense fan-like structures are visible within the soil scan. This is the complete photograph extracted from the research portfolio; its title and explanation are website text."
     },
     {
       "src": "/images/salinity/microscopy.webp",
       "alt": "Rhizomorph abundance over time, 2018–2019",
       "caption": "Rhizomorph abundance — observations over time",
-      "credit": "Tianzhen (Tim) Jia"
+      "credit": "Tianzhen (Tim) Jia",
+      "description": "Observations over the 2018 and 2019 growing seasons. The complete original figure retains the Julian-day axis, abundance axis and error bars."
     }
   ],
   "parking": [

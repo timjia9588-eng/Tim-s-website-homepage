@@ -5,12 +5,7 @@
     "height": 852,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 20,
-    "crop": [
-      0.51,
-      0.025,
-      0.97,
-      0.43
-    ],
+    "crop": [0.51, 0.025, 0.97, 0.43],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null
   },
@@ -20,12 +15,7 @@
     "height": 425,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 20,
-    "crop": [
-      0.022,
-      0.457,
-      0.977,
-      0.659
-    ],
+    "crop": [0.022, 0.457, 0.977, 0.659],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null,
     "extraction": "Complete full-width vector planting plan rendered at 180 dpi; page heading excluded; plant codes retained."
@@ -36,12 +26,7 @@
     "height": 507,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 20,
-    "crop": [
-      0.022,
-      0.716,
-      0.977,
-      0.957
-    ],
+    "crop": [0.022, 0.716, 0.977, 0.957],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null,
     "extraction": "Complete full-width black-and-white vector planting layout with scale; portfolio heading excluded."
@@ -62,12 +47,7 @@
     "height": 474,
     "source": "Bajo la Sombra_Tianzhen Jia.pdf",
     "page": 1,
-    "crop": [
-      0.28,
-      0.5,
-      0.985,
-      0.838
-    ],
+    "crop": [0.28, 0.5, 0.985, 0.838],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null
   },
@@ -77,12 +57,7 @@
     "height": 410,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 19,
-    "crop": [
-      0.513,
-      0.552,
-      0.736,
-      0.747
-    ],
+    "crop": [0.513, 0.552, 0.736, 0.747],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null
   },
@@ -103,12 +78,7 @@
     "height": 474,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 23,
-    "crop": [
-      0.55,
-      0.118,
-      0.697,
-      0.343
-    ],
+    "crop": [0.55, 0.118, 0.697, 0.343],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null
   },
@@ -118,12 +88,7 @@
     "height": 1029,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 23,
-    "crop": [
-      0.632,
-      0.411,
-      0.953,
-      0.9
-    ],
+    "crop": [0.632, 0.411, 0.953, 0.9],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null
   },
@@ -133,12 +98,7 @@
     "height": 550,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 23,
-    "crop": [
-      0.74,
-      0.116,
-      0.949,
-      0.377
-    ],
+    "crop": [0.74, 0.116, 0.949, 0.377],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null
   },
@@ -148,12 +108,7 @@
     "height": 190,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 23,
-    "crop": [
-      0.282,
-      0.355,
-      0.49,
-      0.445
-    ],
+    "crop": [0.282, 0.355, 0.49, 0.445],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null
   },
@@ -213,12 +168,7 @@
     "height": 1926,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 9,
-    "crop": [
-      0.315,
-      0.025,
-      0.975,
-      0.94
-    ],
+    "crop": [0.315, 0.025, 0.975, 0.94],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null
   },
@@ -228,12 +178,7 @@
     "height": 484,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 10,
-    "crop": [
-      0,
-      0,
-      1,
-      0.715
-    ],
+    "crop": [0, 0, 1, 0.715],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null,
     "extraction": "Complete cut-and-fill diagram and ecological section, extracted from embedded image 2. Text table is separate."
@@ -256,9 +201,7 @@
     "source": "Tim's portfolio 6.15.pdf",
     "page": 11,
     "crop": [
-      0.0380952380952381,
-      0.6354319180087847,
-      0.3323809523809524,
+      0.0380952380952381, 0.6354319180087847, 0.3323809523809524,
       0.9458272327964861
     ],
     "credit": "Tianzhen (Tim) Jia",
@@ -272,9 +215,7 @@
     "source": "Tim's portfolio 6.15.pdf",
     "page": 11,
     "crop": [
-      0.35619047619047617,
-      0.6354319180087847,
-      0.6485714285714286,
+      0.35619047619047617, 0.6354319180087847, 0.6485714285714286,
       0.9458272327964861
     ],
     "credit": "Tianzhen (Tim) Jia",
@@ -288,9 +229,7 @@
     "source": "Tim's portfolio 6.15.pdf",
     "page": 11,
     "crop": [
-      0.6723809523809524,
-      0.6354319180087847,
-      0.960952380952381,
+      0.6723809523809524, 0.6354319180087847, 0.960952380952381,
       0.9458272327964861
     ],
     "credit": "Tianzhen (Tim) Jia",
@@ -347,12 +286,7 @@
     "height": 598,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 11,
-    "crop": [
-      0.603,
-      0.07,
-      0.979,
-      0.952
-    ],
+    "crop": [0.603, 0.07, 0.979, 0.952],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null,
     "extraction": "Complete master plan from embedded image 0; neighboring detail figures and PDF headings excluded."
@@ -364,9 +298,7 @@
     "source": "Tim's portfolio 6.15.pdf",
     "page": 11,
     "crop": [
-      0.0380952380952381,
-      0.3923865300146413,
-      0.3323809523809524,
+      0.0380952380952381, 0.3923865300146413, 0.3323809523809524,
       0.6046852122986823
     ],
     "credit": "Tianzhen (Tim) Jia",
@@ -380,9 +312,7 @@
     "source": "Tim's portfolio 6.15.pdf",
     "page": 11,
     "crop": [
-      0.35619047619047617,
-      0.3923865300146413,
-      0.6485714285714286,
+      0.35619047619047617, 0.3923865300146413, 0.6485714285714286,
       0.6046852122986823
     ],
     "credit": "Tianzhen (Tim) Jia",
@@ -396,9 +326,7 @@
     "source": "Tim's portfolio 6.15.pdf",
     "page": 11,
     "crop": [
-      0.6723809523809524,
-      0.3923865300146413,
-      0.960952380952381,
+      0.6723809523809524, 0.3923865300146413, 0.960952380952381,
       0.6046852122986823
     ],
     "credit": "Tianzhen (Tim) Jia",
@@ -412,9 +340,7 @@
     "source": "Tim's portfolio 6.15.pdf",
     "page": 11,
     "crop": [
-      0.0380952380952381,
-      0.0849194729136164,
-      0.3323809523809524,
+      0.0380952380952381, 0.0849194729136164, 0.3323809523809524,
       0.2913616398243045
     ],
     "credit": "Tianzhen (Tim) Jia",
@@ -428,9 +354,7 @@
     "source": "Tim's portfolio 6.15.pdf",
     "page": 11,
     "crop": [
-      0.35619047619047617,
-      0.0849194729136164,
-      0.6485714285714286,
+      0.35619047619047617, 0.0849194729136164, 0.6485714285714286,
       0.2913616398243045
     ],
     "credit": "Tianzhen (Tim) Jia",
@@ -444,9 +368,7 @@
     "source": "Tim's portfolio 6.15.pdf",
     "page": 11,
     "crop": [
-      0.6723809523809524,
-      0.0849194729136164,
-      0.960952380952381,
+      0.6723809523809524, 0.0849194729136164, 0.960952380952381,
       0.2913616398243045
     ],
     "credit": "Tianzhen (Tim) Jia",
@@ -489,12 +411,7 @@
     "height": 1220,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 10,
-    "crop": [
-      0,
-      0.347,
-      1,
-      0.961
-    ],
+    "crop": [0, 0.347, 1, 0.961],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null,
     "extraction": "Complete main perspective within the raster page. Upper heading, bridge section and body paragraphs excluded."
@@ -505,12 +422,7 @@
     "height": 1200,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 9,
-    "crop": [
-      0.03,
-      0.37,
-      0.69,
-      0.94
-    ],
+    "crop": [0.03, 0.37, 0.69, 0.94],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null
   },
@@ -527,33 +439,25 @@
   },
   {
     "path": "/images/salinity/cover.webp",
-    "width": 720,
-    "height": 1360,
+    "width": 680,
+    "height": 1285,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 25,
-    "crop": [
-      0.524,
-      0.109,
-      0.766,
-      0.755
-    ],
+    "crop": null,
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Whole embedded minirhizotron photograph at its native 680 × 1285 resolution. Portfolio text and vector annotation arrows are excluded; the website caption describes the image."
   },
   {
     "path": "/images/salinity/microscopy.webp",
-    "width": 497,
-    "height": 358,
+    "width": 673,
+    "height": 473,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 25,
-    "crop": [
-      0.785,
-      0.231,
-      0.952,
-      0.401
-    ],
+    "crop": [933, 198, 1135, 340],
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Complete individual research diagram with original vector labels rendered at 240 dpi; portfolio headings excluded. Coordinates are PDF points."
   },
   {
     "path": "/images/sketchbook/cover.webp",
@@ -561,12 +465,7 @@
     "height": 617,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 21,
-    "crop": [
-      0.59,
-      0.115,
-      0.97,
-      0.408
-    ],
+    "crop": [0.59, 0.115, 0.97, 0.408],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null
   },
@@ -576,12 +475,7 @@
     "height": 695,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 21,
-    "crop": [
-      0.355,
-      0.6,
-      0.645,
-      0.93
-    ],
+    "crop": [0.355, 0.6, 0.645, 0.93],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null
   },
@@ -591,12 +485,7 @@
     "height": 1727,
     "source": "Tim's portfolio 6.15.pdf",
     "page": 22,
-    "crop": [
-      0.025,
-      0.1,
-      0.485,
-      0.92
-    ],
+    "crop": [0.025, 0.1, 0.485, 0.92],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null
   },
@@ -637,12 +526,7 @@
     "height": 416,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 16,
-    "crop": [
-      0,
-      0.53,
-      1,
-      1
-    ],
+    "crop": [0, 0.53, 1, 1],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null,
     "extraction": "Complete lower landscape section in embedded image 0. The separate illustrated interview collage above is excluded."
@@ -653,12 +537,7 @@
     "height": 1953,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 18,
-    "crop": [
-      0.015,
-      0.035,
-      0.5,
-      0.963
-    ],
+    "crop": [0.015, 0.035, 0.5, 0.963],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null
   },
@@ -668,12 +547,7 @@
     "height": 1705,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 22,
-    "crop": [
-      0.023,
-      0.13,
-      0.52,
-      0.94
-    ],
+    "crop": [0.023, 0.13, 0.52, 0.94],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null
   },
@@ -683,59 +557,53 @@
     "height": 831,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 20,
-    "crop": [
-      0.523,
-      0.087,
-      0.738,
-      0.505
-    ],
+    "crop": [0.523, 0.087, 0.738, 0.505],
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null,
     "extraction": "Whole ship-route study map from the raster page; neighboring diagrams, headings and paragraphs excluded."
   },
   {
     "path": "/images/xiaozhou/community.webp",
-    "width": 1084,
-    "height": 366,
+    "width": 1776,
+    "height": 523,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 24,
-    "crop": [
-      0.557,
-      0.112,
-      0.921,
-      0.286
-    ],
+    "crop": [622, 94, 1155, 251],
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Complete individual research diagram with original vector labels rendered at 240 dpi; portfolio headings excluded. Coordinates are PDF points."
   },
   {
     "path": "/images/xiaozhou/cover.webp",
-    "width": 548,
-    "height": 535,
+    "width": 766,
+    "height": 750,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 24,
-    "crop": [
-      0.525,
-      0.364,
-      0.709,
-      0.618
-    ],
+    "crop": [621, 304, 851, 529],
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Complete individual research diagram with original vector labels rendered at 240 dpi; portfolio headings excluded. Coordinates are PDF points."
   },
   {
     "path": "/images/xiaozhou/strategy.webp",
-    "width": 1238,
-    "height": 418,
+    "width": 1653,
+    "height": 573,
     "source": "Portfolio 30 pages_Tianzhen(1).pdf",
     "page": 24,
-    "crop": [
-      0.533,
-      0.7,
-      0.949,
-      0.899
-    ],
+    "crop": [630, 586, 1126, 758],
     "credit": "Tianzhen (Tim) Jia",
-    "originalUrl": null
+    "originalUrl": null,
+    "extraction": "Complete individual research diagram with original vector labels rendered at 240 dpi; portfolio headings excluded. Coordinates are PDF points."
+  },
+  {
+    "path": "/images/salinity/preview.webp",
+    "width": 680,
+    "height": 425,
+    "source": "Portfolio 30 pages_Tianzhen(1).pdf",
+    "page": 25,
+    "crop": [0, 205, 680, 630],
+    "credit": "Tianzhen (Tim) Jia",
+    "originalUrl": null,
+    "extraction": "Preview only: native-resolution close-up of the branching fungal filaments. The complete photograph remains in the project gallery."
   }
 ]

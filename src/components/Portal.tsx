@@ -2,6 +2,8 @@ import { lazy, Suspense, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { places, projects } from "../data/projects";
 import { publications } from "../data/story";
+import PlacePicker from "./PlacePicker";
+import ProjectPreview from "./ProjectPreview";
 const Globe = lazy(() => import("./Globe"));
 
 export default function Portal() {
@@ -12,11 +14,6 @@ export default function Portal() {
     const p = projects.find((p) => p.id === id);
     return p ? [p] : [];
   });
-  const placeIndex = places.indexOf(place);
-  const chooseNext = (direction: number) =>
-    setSelected(
-      places[(placeIndex + direction + places.length) % places.length].id,
-    );
   return (
     <main id="globe" className="globe-portal atlas-portal">
       <header className="atlas-header">
@@ -71,29 +68,7 @@ export default function Portal() {
       </div>
       <aside className="atlas-browser" aria-label="Browse projects by place">
         <div className="atlas-place-selector">
-          <label htmlFor="atlas-place-select">Explore a place</label>
-          <select
-            id="atlas-place-select"
-            value={selected}
-            onChange={(e) => setSelected(e.target.value)}
-          >
-            {places.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.label}
-              </option>
-            ))}
-          </select>
-          <div className="atlas-place-step">
-            <button onClick={() => chooseNext(-1)} aria-label="Previous place">
-              Previous
-            </button>
-            <span>
-              {String(placeIndex + 1).padStart(2, "0")} / {places.length}
-            </span>
-            <button onClick={() => chooseNext(1)} aria-label="Next place">
-              Next
-            </button>
-          </div>
+          <PlacePicker selected={selected} onSelect={setSelected} />
         </div>
         <AnimatePresence mode="wait">
           <motion.div
@@ -109,14 +84,8 @@ export default function Portal() {
             <div className="atlas-project-list">
               {work.map((p) => (
                 <a href={`#project/${p.id}`} key={p.id}>
-                  {p.cover && (
-                    <img
-                      src={p.cover.replace(".webp", "-small.webp")}
-                      alt={p.coverAlt}
-                      loading="lazy"
-                    />
-                  )}
-                  <div>
+                  <ProjectPreview project={p} />
+                  <div className="atlas-project-copy">
                     <small>
                       {p.category === "Professional"
                         ? "Professional practice"
@@ -160,9 +129,6 @@ export default function Portal() {
         </AnimatePresence>
       </aside>
       <div className="atlas-bottom">
-        <a className="simplistic-link" href="#simple">
-          Simplistic version <span>→</span>
-        </a>
         <p>Drag to explore · Hover to pause · Choose a place</p>
         <span>Tianzhen (Tim) Jia</span>
       </div>

@@ -45,6 +45,10 @@ export const projects: Project[] = [
     connection:
       "Ecological observation becomes a design method: test how a waterfront can change with rising water rather than assume a fixed edge.",
     cover: "/images/parking/cover.webp",
+    preview: {
+      src: "/images/parking/plan.webp",
+      alt: "Complete waterfront master plan, connecting wetlands and public access",
+    },
     coverAlt:
       "Axonometric study of Boston Autoport and a proposed naturalized waterfront",
     description: [
@@ -234,7 +238,12 @@ export const projects: Project[] = [
     connection:
       "Studying life beneath the surface sharpened my attention to the relationships that sustain a landscape.",
     cover: "/images/salinity/cover.webp",
-    coverAlt: "Annotated fungal structures in minirhizotron imagery",
+    coverAlt:
+      "Branching fungal filaments and mycelium in a complete minirhizotron scan",
+    preview: {
+      src: "/images/salinity/preview.webp",
+      alt: "Close-up of branching white fungal filaments in soil; the complete scan is inside the research page",
+    },
     description: [
       "My honors research examined ectomycorrhizal rhizomorphs and mycelium along a soil-salinity gradient. Minirhizotron imagery was used to follow the occurrence, abundance, and turnover of fungal structures in non-saline and saline soils.",
       "The work involved visual identification, sample preparation, data management, and analysis. It was presented at the 8th International Symposium on Physiological Processes in Roots of Woody Plants and informs my interest in ecological relationships beneath the visible landscape.",

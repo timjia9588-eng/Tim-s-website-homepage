@@ -118,7 +118,23 @@ export default function FeaturedProjects() {
       onFocusCapture={(e) =>
         setKeyboardFocused(e.target.matches(":focus-visible"))
       }
-      onKeyDownCapture={() => setKeyboardFocused(true)}
+      onKeyDownCapture={(event) => {
+        setKeyboardFocused(true);
+        if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+          event.preventDefault();
+          setIndex(
+            (i) =>
+              (i + (event.key === "ArrowRight" ? 1 : -1) + featured.length) %
+              featured.length,
+          );
+          // Keep focus on a stable progress control when the image link changes.
+          ref.current
+            ?.querySelector<HTMLButtonElement>(
+              ".featured-timeline button[aria-current]",
+            )
+            ?.focus();
+        }
+      }}
       onPointerDownCapture={() => setKeyboardFocused(false)}
       onBlurCapture={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget))
@@ -134,63 +150,52 @@ export default function FeaturedProjects() {
             first={index === 0}
           />
         </AnimatePresence>
-        <div className="featured-progress" aria-hidden="true">
-          {autoActive && (
-            <motion.div
-              key={index}
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: duration / 1000, ease: "linear" }}
-            />
-          )}
-        </div>
-      </div>
-      <div className="featured-controls">
-        <span className="featured-label">
-          Selected perspectives
-          <small>
-            {reduced
-              ? "Choose a project"
-              : keyboardFocused
-                ? "Paused for reading"
-                : playing
-                  ? "Auto play · 9 projects"
-                  : "Paused"}
-          </small>
-        </span>
-        <div className="slide-selectors">
-          {featured.map((f, i) => (
+        <div
+          className="featured-timeline"
+          aria-label="Choose a featured project"
+        >
+          {featured.map((project, i) => (
             <button
-              key={f.id}
-              aria-label={`Show ${f.title}`}
-              aria-pressed={i === index}
+              key={project.id}
+              aria-label={`Show ${project.title}`}
+              aria-current={i === index ? "true" : undefined}
               onClick={() => setIndex(i)}
             >
-              {String(i + 1).padStart(2, "0")}
+              <span className="featured-track">
+                {i === index && (
+                  <motion.span
+                    key={`${index}-${autoActive}`}
+                    className="featured-track-fill"
+                    initial={{ scaleX: autoActive ? 0 : 1 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{
+                      duration: autoActive ? duration / 1000 : 0,
+                      ease: "linear",
+                    }}
+                  />
+                )}
+              </span>
             </button>
           ))}
         </div>
-        <div className="slideshow-actions">
-          <button
-            aria-label="Previous featured project"
-            onClick={() =>
-              setIndex((i) => (i - 1 + featured.length) % featured.length)
-            }
-          >
-            Previous
-          </button>
-          <button
-            aria-label="Next featured project"
-            onClick={() => setIndex((i) => (i + 1) % featured.length)}
-          >
-            Next
-          </button>
+        <div className="featured-status">
+          <span aria-label={`Project ${index + 1} of ${featured.length}`}>
+            {String(index + 1).padStart(2, "0")}{" "}
+            <span>/ {String(featured.length).padStart(2, "0")}</span>
+          </span>
           {!reduced && (
             <button
+              className="featured-play"
               onClick={() => setPlaying((v) => !v)}
               aria-label={playing ? "Pause slideshow" : "Play slideshow"}
             >
-              {playing ? "Pause" : "Play"}
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                {playing ? (
+                  <path d="M7 5v10M13 5v10" />
+                ) : (
+                  <path d="m7 5 8 5-8 5Z" />
+                )}
+              </svg>
             </button>
           )}
         </div>

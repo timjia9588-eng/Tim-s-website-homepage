@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import type { Project } from "../types";
-import imageSizes from "../data/image-sizes.json";
+import ProjectPreview from "./ProjectPreview";
 export default function ProjectCard({
   project,
   index,
@@ -9,10 +9,6 @@ export default function ProjectCard({
   index: number;
 }) {
   const reduced = useReducedMotion();
-  const size = imageSizes[project.cover as keyof typeof imageSizes];
-  const smallWidth = size
-    ? Math.round(size.width * Math.min(1, 800 / size.width, 800 / size.height))
-    : 0;
   return (
     <motion.article
       className="project-card"
@@ -26,26 +22,7 @@ export default function ProjectCard({
         className="project-card-link"
         aria-label={`View ${project.title}`}
       >
-        {project.cover ? (
-          <div
-            className={`card-image ${project.id === "parking" || project.id === "salinity" ? "card-image--drawing" : ""}`}
-          >
-            <img
-              src={project.cover}
-              srcSet={
-                size && size.width > 800
-                  ? `${project.cover?.replace(".webp", "-small.webp")} ${smallWidth}w, ${project.cover} ${size.width}w`
-                  : undefined
-              }
-              sizes="(max-width: 700px) 92vw, (max-width: 1200px) 46vw, 570px"
-              width={size?.width}
-              height={size?.height}
-              alt={project.coverAlt}
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        ) : null}
+        <ProjectPreview project={project} />
         <div className="card-copy">
           <div className="card-eyebrow">
             <span className="context-label">

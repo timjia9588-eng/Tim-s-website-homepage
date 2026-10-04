@@ -156,12 +156,12 @@
     "height": 1578
   },
   "/images/salinity/cover.webp": {
-    "width": 720,
-    "height": 1360
+    "width": 680,
+    "height": 1285
   },
   "/images/salinity/microscopy.webp": {
-    "width": 497,
-    "height": 358
+    "width": 673,
+    "height": 473
   },
   "/images/sketchbook/cover.webp": {
     "width": 1132,
@@ -204,15 +204,19 @@
     "height": 831
   },
   "/images/xiaozhou/community.webp": {
-    "width": 1084,
-    "height": 366
+    "width": 1776,
+    "height": 523
   },
   "/images/xiaozhou/cover.webp": {
-    "width": 548,
-    "height": 535
+    "width": 766,
+    "height": 750
   },
   "/images/xiaozhou/strategy.webp": {
-    "width": 1238,
-    "height": 418
+    "width": 1653,
+    "height": 573
+  },
+  "/images/salinity/preview.webp": {
+    "width": 680,
+    "height": 425
   }
 }
