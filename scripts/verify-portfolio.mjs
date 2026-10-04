@@ -45,9 +45,9 @@ const assignments = [
 const places = [
   ...placesText.split("export const places")[0].matchAll(/\bid: "([^"]+)"/g),
 ].map((match) => match[1]);
-assert.equal(assignments.length, 19);
-assert.equal(places.length, 13);
-assert.equal(new Set(places).size, 13);
+assert.equal(assignments.length, 20);
+assert.equal(places.length, 15);
+assert.equal(new Set(places).size, 15);
 for (const { id, place } of assignments)
   assert.ok(
     places.includes(place) || (id === "sketchbook" && place === "travel"),
@@ -60,6 +60,7 @@ for (const [id, place] of Object.entries({
   xiaozhou: "guangzhou",
   gentilly: "new-orleans",
   nepal: "nepal",
+  "envision-resilience": "portland",
 }))
   assert.equal(assignments.find((project) => project.id === id).place, place);
 assert.equal(
@@ -74,7 +75,7 @@ const tour = [
     /\{ place: "([^"]+)", (project|paper): "([^"]+)" \}/g,
   ),
 ].map(([, place, kind, id]) => ({ place, kind, id }));
-assert.equal(tour.length, 9);
+assert.equal(tour.length, 10);
 assert.equal(new Set(tour.map((stop) => stop.id)).size, tour.length);
 for (const stop of tour) {
   assert.ok(places.includes(stop.place), `Tour site: ${stop.place}`);
@@ -91,6 +92,25 @@ for (const stop of tour) {
       "The lab's research belongs at Cambridge; photographed case studies are not project sites.",
     );
 }
+const records = [
+  ...read("src/data/participation.ts").matchAll(/id: "([^"]+)"[\s\S]*?title: "([^"]+)"[\s\S]*?firm: "([^"]+)"[\s\S]*?year: "([^"]+)"[\s\S]*?place: "([^"]+)"/g),
+].map(([, id, title, firm, year, place]) => ({ id, title, firm, year, place }));
+assert.equal(records.length, 5);
+assert.equal(new Set(records.map((record) => record.id)).size, 5);
+for (const record of records) {
+  assert.ok(places.includes(record.place));
+  assert.equal(record.place, record.firm === "EDSA" ? "saudi-arabia" : "aspen");
+  assert.equal(record.year, record.firm === "EDSA" ? "2022" : "2024");
+  assert.ok(!tour.some((stop) => stop.place === record.place || stop.id === record.id), "Participation records must never appear in the automatic tour");
+  assert.ok(!assignments.some((project) => project.id === record.id), "Experience-only records are separate from the image gallery");
+}
+assert.ok(!read("src/data/participation.ts").includes("/images/"));
+const visuals = JSON.parse(read("src/data/visuals.json"))["envision-resilience"];
+assert.equal(visuals.length, 5);
+for (const image of visuals) {
+  assert.ok(image.credit.includes("studio team"));
+  assert.equal(image.source, "https://www.bslafieldbook.com/envision-resilience");
+}
 console.log(
-  "PASS: early entry policy for 8 URL forms; 19 canonical project locations; 9 unique tour stops match actual sites; research is anchored at its lab; office/study contexts have no duplicate project cards.",
+  "PASS: 8 entry URLs; 20 canonical project sites; 10 unique public tour stops; 5 image-free professional records at Aspen/Saudi Arabia excluded from the tour; 5 credited public Portland figures.",
 );

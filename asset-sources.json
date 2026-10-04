@@ -632,5 +632,85 @@
     "credit": "Tianzhen (Tim) Jia",
     "originalUrl": null,
     "extraction": "Complete embedded second garden concept sketch Im6.jpg, image index 8, exported at native size without portfolio headings or upscaling."
+  },
+  {
+    "path": "/images/envision-resilience/adaptation.webp",
+    "width": 2404,
+    "height": 750,
+    "source": "https://www.bslafieldbook.com/envision-resilience",
+    "page": null,
+    "crop": [
+      0.0192,
+      0.2869,
+      0.9808,
+      0.9016
+    ],
+    "credit": "Harvard GSD studio team · Published by BSLA",
+    "originalUrl": "https://images.squarespace-cdn.com/content/v1/6024c276c5a3e272893ed390/924418ed-18cf-4ecd-b8ad-46e62d58022c/300dpi_EnvisionResilience.jpg",
+    "extraction": "Native 2500×1220 published BSLA figure. Outer white border trimmed; the adaptation comparison also excludes its repeated project heading. Drawing labels and comparison years retained. No upscaling."
+  },
+  {
+    "path": "/images/envision-resilience/analysis.webp",
+    "width": 2404,
+    "height": 1124,
+    "source": "https://www.bslafieldbook.com/envision-resilience",
+    "page": null,
+    "crop": [
+      0.0192,
+      0.0393,
+      0.9808,
+      0.9607
+    ],
+    "credit": "Harvard GSD studio team · Published by BSLA",
+    "originalUrl": "https://images.squarespace-cdn.com/content/v1/6024c276c5a3e272893ed390/10dd7a5d-2984-41cc-bf83-78932b76a115/300dpi_EnvisionResilience2.jpg",
+    "extraction": "Native 2500×1220 published BSLA figure. Outer white border trimmed; the adaptation comparison also excludes its repeated project heading. Drawing labels and comparison years retained. No upscaling."
+  },
+  {
+    "path": "/images/envision-resilience/waterfront.webp",
+    "width": 2404,
+    "height": 1124,
+    "source": "https://www.bslafieldbook.com/envision-resilience",
+    "page": null,
+    "crop": [
+      0.0192,
+      0.0393,
+      0.9808,
+      0.9607
+    ],
+    "credit": "Harvard GSD studio team · Published by BSLA",
+    "originalUrl": "https://images.squarespace-cdn.com/content/v1/6024c276c5a3e272893ed390/09a5e0ec-fbdc-4ba8-8828-9ec5a71e0b6e/300dpi_EnvisionResilience3.jpg",
+    "extraction": "Native 2500×1220 published BSLA figure. Outer white border trimmed; the adaptation comparison also excludes its repeated project heading. Drawing labels and comparison years retained. No upscaling."
+  },
+  {
+    "path": "/images/envision-resilience/cover.webp",
+    "width": 2404,
+    "height": 1124,
+    "source": "https://www.bslafieldbook.com/envision-resilience",
+    "page": null,
+    "crop": [
+      0.0192,
+      0.0393,
+      0.9808,
+      0.9607
+    ],
+    "credit": "Harvard GSD studio team · Published by BSLA",
+    "originalUrl": "https://images.squarespace-cdn.com/content/v1/6024c276c5a3e272893ed390/11441691-ef51-4424-b5d6-bb5cc2feed33/300dpi_EnvisionResilience4.jpg",
+    "extraction": "Native 2500×1220 published BSLA figure. Outer white border trimmed; the adaptation comparison also excludes its repeated project heading. Drawing labels and comparison years retained. No upscaling."
+  },
+  {
+    "path": "/images/envision-resilience/aquaculture.webp",
+    "width": 2404,
+    "height": 1124,
+    "source": "https://www.bslafieldbook.com/envision-resilience",
+    "page": null,
+    "crop": [
+      0.0192,
+      0.0393,
+      0.9808,
+      0.9607
+    ],
+    "credit": "Harvard GSD studio team · Published by BSLA",
+    "originalUrl": "https://images.squarespace-cdn.com/content/v1/6024c276c5a3e272893ed390/4e4374a6-0c18-43ba-af10-3dde2d439e69/300dpi_EnvisionResilience5.jpg",
+    "extraction": "Native 2500×1220 published BSLA figure. Outer white border trimmed; the adaptation comparison also excludes its repeated project heading. Drawing labels and comparison years retained. No upscaling."
   }
 ]

@@ -29,6 +29,7 @@ const initialFilter = (): Filter =>
 const order = [
   "weaving",
   "phillips",
+  "envision-resilience",
   "bajo-la-sombra",
   "parking",
   "salamanca",

@@ -135,7 +135,7 @@ function ResumeContent() {
             <article>
               <span>2025</span>
               <h4>BSLA Honor Award · Student Work</h4>
-              <p>Envision Resilience</p>
+              <p><a href="#project/envision-resilience">Envision Resilience</a></p>
             </article>
             <article>
               <span>2026</span>

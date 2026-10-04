@@ -5,6 +5,7 @@ import { geoEquirectangular, geoPath } from "d3-geo";
 import { feature } from "topojson-client";
 import { cancelFrame, frame, useReducedMotion } from "framer-motion";
 import { atlasPlaces as places } from "../data/atlas-tour";
+import { participationPlaces } from "../data/participation";
 import { scrollEase } from "../motion";
 
 const spherePoint = (lat: number, lon: number, radius: number) => {
@@ -149,15 +150,20 @@ export default function Globe({
     controls.autoRotateSpeed = 0.16;
     controls.rotateSpeed = 0.65;
     const dots = places.map((p) => {
+      const participation = participationPlaces.has(p.id);
       const position = spherePoint(p.lat, p.lon, 2.535);
       const mesh = new THREE.Mesh(
-        new THREE.SphereGeometry(0.026, 8, 8),
-        new THREE.MeshBasicMaterial({ color: 0xe4e3df }),
+        new THREE.SphereGeometry(participation ? 0.023 : 0.026, 8, 8),
+        new THREE.MeshBasicMaterial({
+          color: participation ? 0x919a95 : 0xe4e3df,
+          transparent: participation,
+          opacity: participation ? 0.72 : 1,
+        }),
       );
       mesh.position.copy(position);
       globe.add(mesh);
       return {
-        id: p.id, position, mesh,
+        id: p.id, position, mesh, participation,
         labelWidth: Math.min(190, p.label.length * 7.6 + 16),
         x: 0, y: 0, visible: false,
       };
@@ -436,17 +442,19 @@ export default function Globe({
       normal.copy(camera.position).normalize();
       const selectedDot = dots.find((dot) => dot.id === selection.current);
       if (selectedDot) {
+        const quiet = pausedRef.current || selectedDot.participation;
+        locatorMaterial.color.setHex(selectedDot.participation ? 0x919a95 : 0xd8e3bf);
         locator.position.copy(selectedDot.position).multiplyScalar(1.003);
         locator.lookAt(direction.copy(selectedDot.position).multiplyScalar(2));
         locator.scale.setScalar(
-          pausedRef.current ? 1 : 1.15 + Math.sin(time * 0.0014) * 0.18,
+          quiet ? 1 : 1.15 + Math.sin(time * 0.0014) * 0.18,
         );
-        locatorMaterial.opacity = pausedRef.current
+        locatorMaterial.opacity = quiet
           ? 0.35
           : 0.28 + Math.sin(time * 0.0014) * 0.1;
       }
       for (const dot of dots) {
-        dot.mesh.scale.setScalar(dot.id === selection.current ? 1.8 : 1);
+        dot.mesh.scale.setScalar(dot.id === selection.current ? (dot.participation ? 1.4 : 1.8) : 1);
         const button = markers.current.get(dot.id);
         if (!button) continue;
         const facing =
@@ -472,8 +480,8 @@ export default function Globe({
             ? Math.max(20, Math.min(width - cardWidth - 20, x - cardWidth / 2))
             : Math.max(24, Math.min(width - cardWidth - 24, x + 48));
           const cardY = compact
-            ? Math.max(20, Math.min(height - 236, y + 28))
-            : Math.max(24, Math.min(height - 270, y - 128));
+            ? Math.max(20, Math.min(height - (dot.participation ? 320 : 236), y + 28))
+            : Math.max(24, Math.min(height - (dot.participation ? 320 : 270), y - 128));
           callout.current.style.transform = `translate3d(${cardX.toFixed(2)}px,${cardY.toFixed(2)}px,0)`;
           callout.current.hidden = button.hidden;
         }
@@ -516,9 +524,9 @@ export default function Globe({
           ? Math.max(20, Math.min(width - cardWidth - 20, x - cardWidth / 2))
           : Math.max(24, Math.min(width - cardWidth - 24, x + 48));
         const cardY = compact
-          ? Math.max(20, Math.min(height - 236, y + 28))
-          : Math.max(24, Math.min(height - 270, y - 128));
-        occupied.push({ x: cardX - 12, y: cardY - 12, w: cardWidth + 24, h: compact ? 248 : 282 });
+          ? Math.max(20, Math.min(height - (selectedDot.participation ? 320 : 236), y + 28))
+          : Math.max(24, Math.min(height - (selectedDot.participation ? 320 : 270), y - 128));
+        occupied.push({ x: cardX - 12, y: cardY - 12, w: cardWidth + 24, h: selectedDot.participation ? 332 : compact ? 248 : 282 });
         const endX = compact ? Math.max(cardX + 16, Math.min(cardX + cardWidth - 16, x)) : cardX - 10;
         const endY = compact ? cardY - 8 : cardY + 128;
         paths.push({ a: { x, y }, b: { x: endX, y: endY } });
@@ -537,6 +545,7 @@ export default function Globe({
         if (cardVisible && dot.id === selection.current) continue;
         if (labelCount >= (compact ? 2 : 3)) break;
         const explicit = dot.id === selection.current || dot.id === hoveredPlace || markers.current.get(dot.id) === activeElement;
+        if (dot.participation && !explicit) continue;
         if (!explicit && anchors.some((p) => (p.x - dot.x) ** 2 + (p.y - dot.y) ** 2 < 80 ** 2)) continue;
         const label = labels.current.get(dot.id);
         const leader = leaders.current.get(dot.id);
@@ -641,7 +650,7 @@ export default function Globe({
         <>
           <svg ref={connectorField} className="globe-leaders" aria-hidden="true">
             {places.map((place) => (
-              <path key={place.id} ref={(node) => {
+              <path key={place.id} data-kind={participationPlaces.has(place.id) ? "participation" : "public"} ref={(node) => {
                 if (node) leaders.current.set(place.id, node);
                 else leaders.current.delete(place.id);
               }} />
@@ -658,17 +667,18 @@ export default function Globe({
               hidden
               className={`globe-marker ${selected === place.id ? "active" : ""}`}
               data-place={place.id}
+              data-kind={participationPlaces.has(place.id) ? "participation" : "public"}
               onClick={(event) => choosePoint(place.id, event)}
               aria-pressed={selected === place.id}
             >
-              <span className="sr-only">{place.label}</span>
+              <span className="sr-only">{place.label}{participationPlaces.has(place.id) ? " · Project experience, no public imagery" : ""}</span>
               <span hidden aria-hidden="true" className="globe-marker-label" ref={(node) => {
                 if (node) labels.current.set(place.id, node);
                 else labels.current.delete(place.id);
               }}>{place.label}</span>
             </button>
           ))}
-          <div ref={callout} className="globe-callout" hidden inert={!settled}>
+          <div ref={callout} className="globe-callout" data-kind={participationPlaces.has(selected) ? "participation" : "public"} hidden inert={!settled}>
             {spotlight}
           </div>
         </>

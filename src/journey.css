@@ -1579,6 +1579,72 @@
   border: 1px solid #e3e8d330;
   border-radius: 3px;
 }
+.atlas-participation {
+  position: relative;
+  padding: 20px;
+  color: #e1e4df;
+  background: #202b26f5;
+  border: 1px solid #aab4ac40;
+  border-radius: 3px;
+  pointer-events: auto;
+}
+.atlas-participation-place {
+  display: block;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  padding-right: 28px;
+}
+.atlas-participation-close {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #b9c2ba;
+  font-size: 24px;
+  line-height: 1;
+}
+.atlas-participation-close:is(:hover, :focus-visible) { color: #f1f1e9; }
+.atlas-participation-role,
+.atlas-participation-note {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #b9c2ba;
+  margin: 8px 0 0;
+}
+.atlas-participation ul {
+  list-style: none;
+  padding: 12px 0;
+  margin: 12px 0 0;
+  border-block: 1px solid #aab4ac30;
+}
+.atlas-participation li {
+  font-size: 16px;
+  line-height: 1.5;
+}
+.atlas-participation li + li { margin-top: 8px; }
+.atlas-participation li a {
+  display: block;
+  width: fit-content;
+  color: #b9c2ba;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.atlas-participation li a:is(:hover, :focus-visible) { color: #f1f1e9; }
+.globe-marker[data-kind="participation"] .globe-marker-label {
+  color: #c0c8c1;
+  background: #26332bef;
+}
+.globe-leaders path[data-kind="participation"],
+.globe-surface:has(.globe-callout[data-kind="participation"]) .globe-spotlight-leader {
+  stroke: #aab4ac70;
+}
 .atlas-portal[data-pinned="true"]:not([data-phase="opening"]) .globe-callout {
   visibility: hidden;
 }
@@ -1614,7 +1680,8 @@
   }
   .atlas-portal--tour .atlas-scene {
     padding-top: 72px;
-    padding-bottom: 130px;
+    /* Keep the opening identity below the tallest manual experience card. */
+    padding-bottom: 210px;
   }
   .globe-callout {
     width: min(260px, calc(100% - 40px));

@@ -105,12 +105,13 @@ export const publications = [
 export type Publication = (typeof publications)[number];
 
 export const connections: Record<string, string[]> = {
+  "envision-resilience": ["parking", "gentilly", "carbon"],
   phillips: ["carbon", "parking", "bajo-la-sombra"],
   melissa: ["learning-places", "weaving", "nepal"],
   gentilly: ["parking", "wetland-utopia", "carbon"],
   kyle: ["bajo-la-sombra", "learning-places", "melissa"],
   carrollton: ["learning-places", "bamboo"],
-  parking: ["salinity", "gentilly", "salamanca"],
+  parking: ["envision-resilience", "gentilly", "salamanca"],
   salamanca: ["carbon", "wetland-utopia", "gentilly"],
   weaving: ["learning-places", "nepal", "melissa"],
   carbon: ["salinity", "parking", "phillips"],

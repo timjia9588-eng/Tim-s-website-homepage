@@ -460,5 +460,42 @@
       "caption": "Pontchartrain lakefront — my portfolio illustration",
       "credit": "Tianzhen (Tim) Jia · Waggonner & Ball internship"
     }
+  ],
+  "envision-resilience": [
+    {
+      "src": "/images/envision-resilience/adaptation.webp",
+      "alt": "Three successive Portland waterfront adaptation scenarios",
+      "caption": "2050 / 2100 / 2120 — Protect, integrate, embrace",
+      "credit": "Harvard GSD studio team · Published by BSLA",
+      "source": "https://www.bslafieldbook.com/envision-resilience"
+    },
+    {
+      "src": "/images/envision-resilience/analysis.webp",
+      "alt": "Six maps comparing Portland regional conditions and environmental risks",
+      "caption": "Regional analysis — people, infrastructure, ecology and flood risk",
+      "credit": "Harvard GSD studio team · Published by BSLA",
+      "source": "https://www.bslafieldbook.com/envision-resilience"
+    },
+    {
+      "src": "/images/envision-resilience/waterfront.webp",
+      "alt": "Portland waterfront proposal connecting rain gardens, forest labs, public space and working wharves",
+      "caption": "2100 — a working waterfront that adapts to rising water",
+      "credit": "Harvard GSD studio team · Published by BSLA",
+      "source": "https://www.bslafieldbook.com/envision-resilience"
+    },
+    {
+      "src": "/images/envision-resilience/cover.webp",
+      "alt": "Forest Lab proposal with tree nurseries, community gardens and gathering spaces at Portland’s working waterfront",
+      "caption": "Forest Lab — ecology, learning and everyday public life",
+      "credit": "Harvard GSD studio team · Published by BSLA",
+      "source": "https://www.bslafieldbook.com/envision-resilience"
+    },
+    {
+      "src": "/images/envision-resilience/aquaculture.webp",
+      "alt": "Aquaculture proposal combining oyster harvesting, kelp cultivation and waterfront livelihoods",
+      "caption": "Co-cropping aquaculture — oyster harvesting and kelp cultivation",
+      "credit": "Harvard GSD studio team · Published by BSLA",
+      "source": "https://www.bslafieldbook.com/envision-resilience"
+    }
   ]
 }

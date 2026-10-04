@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 const treatments: Record<string, { color: string; position?: string }> = {
   weaving: { color: "#30493a" },
   phillips: { color: "#514637" },
+  "envision-resilience": { color: "#374e5c" },
   melissa: { color: "#374b2e" },
   parking: { color: "#273f49", position: "48% 48%" },
   salamanca: { color: "#4f5b50" },

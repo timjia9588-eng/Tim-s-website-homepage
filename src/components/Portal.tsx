@@ -90,12 +90,31 @@ export default function Portal() {
   );
   const place = places.find((place) => place.id === selected)!;
   const work = atlasSpotlight(selected, atlasTour[tourIndex]);
+  const participation = work.participation;
+  const hasParticipation = Boolean(participation);
+  const focusKey = work.href || `participation/${selected}`;
+  const playing = tourEnabled && !participation;
+  const resumeTour = () => {
+    setArrived(null);
+    setSelected(atlasTour[tourIndex].place);
+  };
+  useEffect(() => {
+    if (!participation) return;
+    const escape = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && !document.getElementById("page-content")?.inert) {
+        setArrived(null);
+        setSelected(atlasTour[tourIndex].place);
+      }
+    };
+    window.addEventListener("keydown", escape);
+    return () => window.removeEventListener("keydown", escape);
+  }, [hasParticipation, tourIndex]);
   const ready = !work.src || imageState?.src === work.src;
   const showImage = Boolean(work.src && ready && imageState?.loaded);
   // A held image and a guided camera move are one tour stop. Pointer/focus, a dialog,
   // the scroll hand-off and hidden tabs suspend it; no per-frame React updates.
   useEffect(() => {
-    if (!available || arrived !== selected || !ready || reduced || !tourEnabled)
+    if (!available || arrived !== selected || !ready || reduced || !playing)
       return;
     const timer = window.setTimeout(() => {
       const next = (tourIndex + 1) % atlasTour.length;
@@ -104,7 +123,7 @@ export default function Portal() {
       setSelected(atlasTour[next].place);
     }, 5200);
     return () => window.clearTimeout(timer);
-  }, [available, arrived, selected, ready, tourIndex, reduced, tourEnabled]);
+  }, [available, arrived, selected, ready, tourIndex, reduced, playing]);
   useEffect(() => {
     if (!work.src) return;
     const src = work.src;
@@ -126,7 +145,43 @@ export default function Portal() {
   const spotlight = (
     <motion.div style={{ opacity: pinned ? calloutOpacity : 1 }}>
       <AnimatePresence mode="wait">
-        {arrived === selected && ready && (
+        {arrived === selected && ready && participation ? (
+          <motion.div
+            key={focusKey}
+            className="atlas-participation"
+            role="region"
+            aria-label={`Project experience in ${place.label}`}
+            initial={reduced ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: reduced ? 0 : -6,
+              transition: { duration: reduced ? 0 : 0.45, ease: easyEase } }}
+            transition={{ duration: reduced ? 0 : 1, ease: easyEase }}
+          >
+            <button className="atlas-participation-close" onClick={resumeTour} aria-label="Close project experience and resume atlas tour">
+              <span aria-hidden="true">×</span>
+            </button>
+            <span className="atlas-participation-place">{place.label}</span>
+            <p className="atlas-participation-role">
+              {participation[0].firm} · {work.context}
+            </p>
+            <ul>
+              {participation.map((record) => (
+                <li key={record.id}>
+                  <span>{record.title}</span>
+                  {record.publicContext && (
+                    <a href={record.publicContext.url} target="_blank" rel="noreferrer">
+                      Public announcement
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+            <p className="atlas-participation-note">
+              {selected === "saudi-arabia" ? "Country-level location. " : ""}
+              Internship design material is not publicly shown here.
+            </p>
+          </motion.div>
+        ) : arrived === selected && ready && (
           <motion.a
             key={`${selected}/${work.href}`}
             className={`atlas-callout-link ${work.paper ? "atlas-callout-link--paper" : showImage ? "" : "atlas-callout-link--record"}`}
@@ -202,11 +257,11 @@ export default function Portal() {
           >
             <Globe
               selected={selected}
-              focusKey={work.href}
+              focusKey={focusKey}
               onSelect={choosePlace}
               spotlight={spotlight}
               settled={arrived === selected && ready}
-              enabled={tourEnabled}
+              enabled={playing}
               onArrive={setArrived}
               onTourAvailable={setAvailable}
             />

@@ -7,6 +7,37 @@ const melissaSource = `${uac}/projects/melissa-parks-recreation-trails-and-open-
 
 export const projects: Project[] = [
   {
+    id: "envision-resilience",
+    title: "Envision Resilience",
+    subtitle: "Imagining a future waterfront for Portland, Maine.",
+    category: "Studio",
+    location: "Portland, Maine",
+    organization: "Harvard Graduate School of Design",
+    year: "2024 · BSLA Honor Award 2025",
+    role: "Studio team member",
+    place: "portland",
+    themes: ["Systems", "Landscapes", "Networks"],
+    connection:
+      "A working waterfront becomes a place to explore how ecology, public life and livelihoods can adapt together.",
+    cover: "/images/envision-resilience/cover.webp",
+    coverAlt:
+      "Forest Lab proposal with tree nurseries and community gardens at Portland’s working waterfront",
+    description: [
+      "Our Harvard GSD studio explored how Portland’s working waterfront can adapt to rising seas while sustaining its communities, ecology and livelihoods. Regional analysis and conversations with local stakeholders informed a phased proposal for a changing coast.",
+      "The published work moves through three horizons — protect, integrate and embrace — and connects waterfront adaptation with forest labs, public landscapes and aquaculture. I participated as a member of the studio team. Envision Resilience received the 2025 BSLA Honor Award in the Student category.",
+    ],
+    collaborators:
+      "Studio team: Qijia Chen, Garrett Craig-Lucas, Willa DeBoom, Shan He, Sakiko Isomichi, Tianzhen (Tim) Jia, Alexandra Kupi, Jein Park and Kati Wiese. Instructors: Pamela Conrad and Michael Blier. Collaborators: Envision Resilience and Gulf of Maine Research Institute.",
+    images: visuals["envision-resilience"] || [],
+    source: "https://www.bslafieldbook.com/envision-resilience",
+    links: [{
+      label: "Studio project and report",
+      url: "https://climatepositivedesign.org/design/envision-resilience-imagining-a-future-waterfront-for-portland-maine/",
+    }],
+    note: "These publicly released images document the collective studio proposal. They are credited to the Harvard GSD studio team and are not presented as individual drawings by me.",
+    tags: ["Coastal adaptation", "Working waterfront", "BSLA Honor Award"],
+  },
+  {
     id: "phillips",
     title: "Phillips Quarry Park",
     subtitle: "A quarry, a lake, a new public landscape.",
@@ -498,6 +529,24 @@ export const projects: Project[] = [
 
 const placeEntries: Omit<Place, "projectIds">[] = [
   {
+    id: "portland",
+    label: "Portland, Maine",
+    lat: 43.66,
+    lon: -70.25,
+    description: "Envision Resilience · Harvard GSD · 2024",
+    narrative: "A shared waterfront study connects coastal adaptation, community life and ecological systems. BSLA Honor Award, Student category, 2025.",
+    themes: ["Systems", "Landscapes", "Networks"],
+  },
+  {
+    id: "saudi-arabia",
+    label: "Saudi Arabia",
+    lat: 23.89,
+    lon: 45.08,
+    description: "EDSA · Design internship · 2022 · Country-level marker",
+    narrative: "A country-level marker for project participation. Exact project coordinates are not verified; internship design material is not shown publicly here.",
+    themes: ["Landscapes"],
+  },
+  {
     id: "ithaca",
     label: "Ithaca",
     lat: 42.44,
@@ -582,7 +631,7 @@ const placeEntries: Omit<Place, "projectIds">[] = [
     label: "Aspen",
     lat: 39.19,
     lon: -106.81,
-    description: "Design Workshop · Design internship · 2024",
+    description: "Aspen, Colorado · Design Workshop project sites · 2024",
     narrative:
       "Working through construction details and materials taught me how broad design ideas depend on precise decisions.",
     themes: ["Landscapes"],

@@ -226,5 +226,25 @@
   "/images/bamboo/alternate-sketch.webp": {
     "width": 497,
     "height": 515
+  },
+  "/images/envision-resilience/adaptation.webp": {
+    "width": 2404,
+    "height": 750
+  },
+  "/images/envision-resilience/analysis.webp": {
+    "width": 2404,
+    "height": 1124
+  },
+  "/images/envision-resilience/waterfront.webp": {
+    "width": 2404,
+    "height": 1124
+  },
+  "/images/envision-resilience/cover.webp": {
+    "width": 2404,
+    "height": 1124
+  },
+  "/images/envision-resilience/aquaculture.webp": {
+    "width": 2404,
+    "height": 1124
   }
 }

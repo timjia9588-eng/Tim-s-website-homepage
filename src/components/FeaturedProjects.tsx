@@ -15,6 +15,7 @@ import { projectTreatment } from "../data/presentation";
 const featured = [
   ["weaving", "/images/weaving/cover.webp", "Entrance"],
   ["phillips", "/images/phillips/cover.webp", "Quarry landscape"],
+  ["envision-resilience", "/images/envision-resilience/cover.webp", "Forest Lab"],
   ["salamanca", "/images/salamanca/cover.webp", "Restored wetland"],
   ["melissa", "/images/melissa/cover.webp", "Community park"],
   ["gentilly", "/images/gentilly/cover.webp", "Living with water"],
