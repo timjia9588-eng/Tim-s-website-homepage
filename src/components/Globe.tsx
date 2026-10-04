@@ -19,6 +19,7 @@ const spherePoint = (lat: number, lon: number, radius: number) => {
 
 export default function Globe({
   selected,
+  focusKey,
   onSelect,
   spotlight,
   settled,
@@ -27,6 +28,7 @@ export default function Globe({
   onTourAvailable,
 }: {
   selected: string;
+  focusKey: string;
   onSelect: (id: string) => void;
   spotlight: ReactNode;
   settled: boolean;
@@ -51,7 +53,7 @@ export default function Globe({
   useEffect(() => {
     const p = places.find((place) => place.id === selected);
     if (p) target.current = { id: p.id, goal: spherePoint(p.lat, p.lon, 1) };
-  }, [selected]);
+  }, [selected, focusKey]);
 
   useEffect(() => {
     const host = container.current!;
@@ -312,6 +314,8 @@ export default function Globe({
     controls.addEventListener("end", () => {
       dragging = false;
       resumeAt = performance.now() + 2400;
+      // Manual orbiting may interrupt an approach; release must also release the tour's arrival gate.
+      callbacks.current.onArrive(selection.current);
     });
     const projected = new THREE.Vector3(),
       normal = new THREE.Vector3();

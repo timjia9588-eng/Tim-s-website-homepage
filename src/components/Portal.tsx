@@ -80,12 +80,13 @@ export default function Portal() {
   });
   const choosePlace = useCallback(
     (id: string) => {
-      if (id !== selected) setArrived(null);
-      setSelected(id);
       const index = atlasTour.findIndex((stop) => stop.place === id);
+      if (id !== selected || (index !== -1 && index !== tourIndex))
+        setArrived(null);
+      setSelected(id);
       if (index !== -1) setTourIndex(index);
     },
-    [selected],
+    [selected, tourIndex],
   );
   const place = places.find((place) => place.id === selected)!;
   const work = atlasSpotlight(selected, atlasTour[tourIndex]);
@@ -200,6 +201,7 @@ export default function Portal() {
           >
             <Globe
               selected={selected}
+              focusKey={work.href}
               onSelect={choosePlace}
               spotlight={spotlight}
               settled={arrived === selected && ready}
